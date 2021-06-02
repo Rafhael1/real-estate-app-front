@@ -8,8 +8,8 @@ const App = () => {
   const [ data, setData ] = useState({})
 
 
-  const api = async() => {
-    //e.preventDefault();
+  const api = async(e: any) => {
+    e.preventDefault();
     try {
 
       const response = await axios.get('/search', {
@@ -27,14 +27,10 @@ const App = () => {
     }
   }
 
-
-  useEffect(() => {
-    api();
-  }, [])
-
   return (
     <div>
-      <Router>
+      <button onClick={(e) => api(e)} >Click</button>
+      {/*<Router>
         <>
          <Switch>
             <Route exact path="/"></Route>
@@ -42,7 +38,7 @@ const App = () => {
             <Route path="/results/:id" ></Route>
          </Switch>       
         </>
-      </Router>
+      </Router>*/}
     </div>
   );
 }
