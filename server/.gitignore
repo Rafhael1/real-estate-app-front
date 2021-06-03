@@ -1,5 +1,5 @@
-node_modules/
-build/
-logs/
+node_modules
 
-src/app/.notes
+yarn-error.log*
+
+.env
