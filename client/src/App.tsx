@@ -5,19 +5,20 @@ import axios from './components/api/axios'
 const App = () => {
 
 
-  const [ data, setData ] = useState({})
+  const [ file, setFile ]: any = useState(null);
 
 
   const api = async(e: any) => {
     e.preventDefault();
     try {
 
-      const response = await axios.get('/search', {
-        params: {
-          limit: 50,
-          term: 'burger',
-          location: 'miami'
-        }
+      const formData: any = new FormData();
+      formData.append('image', file, file.name);
+      const response = await axios.post('/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+       // body
       })
 
       console.log(response)
@@ -29,7 +30,10 @@ const App = () => {
 
   return (
     <div>
-      <button onClick={(e) => api(e)} >Click</button>
+      <form onSubmit={(e) => api(e)}>
+        <input type="file" name="image" onChange={(e: any) => setFile(e.target.files[0])} />
+        <button type="submit" >Upload</button>
+      </form>
       {/*<Router>
         <>
          <Switch>
