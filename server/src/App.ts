@@ -1,55 +1,83 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 const app = express();
-const pool = require("./db");
+const path = require('path');
+const bodyParser = require('body-parser')
+
 const upload = require('express-fileupload');
+const mongoose = require('mongoose')
 const port = process.env.PORT || 8000;
  
-
-
 // types .
+
 import { Istorage } from "./types/types";
 
-
 // Middlewares
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(cors());
 app.use(upload());
 
+// db
+
+mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});
+//mongoose.connect('mongodb+srv://RafhaelMarques_01:Rafafoda123@cluster0.tjd1c.mongodb.net/properties?retryWrites=true&w=majority', {useNewUrlParser: true});
+const Property = require('./models/property')
+
+
 // Routes
+
+app.post('/api/create', async(req, res) => {
+  try {
+    const record = {
+      title: 'A',
+      description: 'b',
+      address: 'c',
+      country: 'd', 
+      price: 1231,
+      status: 'f',
+      images: ['g']
+    } 
+  
+    
+    await Property.create(record)
+  } catch (error) {
+    
+  }
+})
 
 app.post('/api/upload', async(req, res) => {
   try {
     if(req.body){
       const { title, description, address, country, price, status } = await req.body.body;
-      console.log(title, description, address, country, price, status);
+      console.log(req.body.body)
+      if(req.files){
 
-      const newProperty = await pool.query(
-        "INSERT INTO properties( property_title, property_description, property_address, property_country, property_price, property_status) VALUES($1, $2, $3, $4, $5, $6)",
-        [title, description, address, country, price, status]
-        ); 
+        let files: any = await req.files.image;
 
-    }
-   /* if(req.files){
-      const file: any = req.files.image;
-      const fileName = file.name;
-      
-      const uploadPath = __dirname + '/uploads/' + Date.now() + fileName;
+        const uploadPath = __dirname + '/uploads/' + Date.now() + files.name;
+  
+        files.mv(uploadPath, (err: string) => {
+          if (err){
+            console.log(err)
+          } else {
+            console.log('Image Moved into the folder')
+          }
+        });
 
-      file.mv(uploadPath, (err: any) => {
-        if (err){
-          console.log(err)
-        } else {
-          console.log('Worked')
+        const data = {
+          title: title,
+          description: description,
+          address: address,
+          country: country, 
+          price: price,
+          status: status,
+          images: uploadPath
         }
-      });
 
-      const newImage = pool.query(
-        "INSERT INTO property_images(property_image_path) VALUES($1) RETURNING *",
-        [uploadPath]
-      ) 
-      console.log(fileName)
-    } */
+        await Property.create(data);
+
+      }
+    }
   } catch (error) {
     console.log(error)
   }

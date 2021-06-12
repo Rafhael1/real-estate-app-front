@@ -3,3 +3,4 @@ export interface Istorage {
     file: any,
     cb: any
 }
+
