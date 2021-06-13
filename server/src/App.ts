@@ -13,7 +13,7 @@ const port = process.env.PORT || 8000;
 import { Istorage } from "./types/types";
 
 // Middlewares
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 app.use(upload());
 
@@ -47,37 +47,35 @@ app.post('/api/create', async(req, res) => {
 
 app.post('/api/upload', async(req, res) => {
   try {
-    if(req.body){
-      const { title, description, address, country, price, status } = await req.body.body;
-      console.log(req.body.body)
-      if(req.files){
+    if(req.body && req.files){
 
-        let files: any = await req.files.image;
+      const {title, description, address, country, price, status} = JSON.parse(req.body.document)
+   
+      let files: any = await req.files.image;
 
-        const uploadPath = __dirname + '/uploads/' + Date.now() + files.name;
+      const uploadPath = __dirname + '/uploads/' + Date.now() + files.name;
   
-        files.mv(uploadPath, (err: string) => {
-          if (err){
-            console.log(err)
-          } else {
-            console.log('Image Moved into the folder')
-          }
+      files.mv(uploadPath, (err: string) => {
+        if (err){
+          console.log(err)
+        } else {
+          console.log('Image Moved into the folder')
+        }
         });
 
-        const data = {
-          title: title,
-          description: description,
-          address: address,
-          country: country, 
-          price: price,
-          status: status,
-          images: uploadPath
+      const data = await {
+        title: title,
+        description: description,
+        address: address,
+        country: country, 
+        price: price,
+        status: status,
+        images: uploadPath
         }
 
-        await Property.create(data);
-
-      }
-    }
+      await Property.create(data);
+      
+    } 
   } catch (error) {
     console.log(error)
   }
