@@ -5,3 +5,11 @@ yarn-error.log*
 .env
 
 ./src/uploads/
+
+/src/uploads/
+
+src/uploads/
+
+server/src/uploads
+
+uploads

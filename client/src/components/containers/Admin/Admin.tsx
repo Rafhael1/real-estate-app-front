@@ -6,8 +6,6 @@ import axios from '../../api/axios'
 
 import { Input } from './Admin.Style';
 
-import { Img } from '/home/rafhael/Desktop/Code/real-estate-listing-app/server/src/uploads/1623548710761external-content.duckduckgo.com.jpeg'
-
 const Admin = () => {
 
     // States
@@ -63,7 +61,7 @@ const Admin = () => {
             <Input type="file" name="image" multiple onChange={(e: any) => setFile1(e.target.files[0])} />
             <button type="submit" >Submit</button>
           </form>
-          <img src={Img} width="500" height="600" />
+          <img src="" width="500" height="600" />
         </div>
     )
 }
