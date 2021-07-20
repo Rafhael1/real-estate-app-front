@@ -40,16 +40,12 @@ mongoose.connect("mongodb+srv://RafhaelMarques_01:Rafafoda123@cluster0.tjd1c.mon
 // Routes
 
 
-app.get("/api/image", (req, res) => {
+app.get("/api/image", async (req, res) => {
 	
-	Property.find({})
-		.then((results: any) => {
-			console.log(results)
-		})
-		.catch((err: any) => {
-			console.log(err)
-		})
+	const data = await Property.find({})
+	
 
+	res.send(data)
 
 
 })

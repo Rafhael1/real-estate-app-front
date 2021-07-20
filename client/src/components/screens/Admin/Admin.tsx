@@ -46,7 +46,7 @@ const Admin = () => {
 				<Input type="file" name="image" multiple onChange={(e: any) => setFile1(e.target.files[0])} />
 				<button type="submit" >Submit</button>
 			</form>
-			<img src="http://localhost:8000/upload/1626304833754Screenshot%20from%202021-06-24%2010-38-48.png" width="500" height="600" />
+			<img src="http://localhost:8000/upload/1626345566760HD wallpaper_ silhouette tree, silhouette of tailed character facing sunrise illustration.jpeg" width="500" height="600" />
 		</div>
 	)
 }
