@@ -5,6 +5,7 @@ import axios from "../../utils/api/axios"
 // Styles
 
 import { Input } from "./Admin.Style"
+import NewPropertyForm from "./NewPropertyForm/NewPropertyForm"
 
 const Admin = () => {
 
@@ -19,7 +20,7 @@ const Admin = () => {
 	const [ price, setPrice ] = useState("1234124")
 	const [ status, setStatus ] = useState("Sold out")
     
-	const api = async(e: any) => {
+	const api = async (e: any) => {
 		e.preventDefault()
 		try {
 			const formData: any = new FormData()
@@ -42,11 +43,7 @@ const Admin = () => {
 
 	return (
 		<div>
-			<form onSubmit={(e: any) =>  api(e)}>
-				<Input type="file" name="image" multiple onChange={(e: any) => setFile1(e.target.files[0])} />
-				<button type="submit" >Submit</button>
-			</form>
-			<img src="http://localhost:8000/upload/1626345566760HD wallpaper_ silhouette tree, silhouette of tailed character facing sunrise illustration.jpeg" width="500" height="600" />
+			<NewPropertyForm />
 		</div>
 	)
 }

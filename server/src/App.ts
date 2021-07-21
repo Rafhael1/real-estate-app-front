@@ -28,6 +28,7 @@ import Property from "./models/property"
 
 // Middlewares
 app.use(express.json())
+app.use(express.urlencoded())
 app.use("/upload", express.static("upload"))
 app.use(cors())
 
@@ -50,9 +51,16 @@ app.get("/api/image", async (req, res) => {
 
 })
 
-app.post("/api/upload", upload.single("image"), (req, res) => {
+app.post("/api/upload", upload.array("images"), (req, res) => {
 
-	const filePath = req.file?.path
+
+	if(req.body && req.files){
+		const filePath = req.files
+		const body = req.body.body
+		const parse = JSON.parse(req.body.body)
+		console.log(filePath, parse)
+	
+	}
 
 	const record = {
 		title: "A",
@@ -61,12 +69,11 @@ app.post("/api/upload", upload.single("image"), (req, res) => {
 		country: "d", 
 		price: 1231,
 		status: "f",
-		images: filePath
+		
 	} 
 
-	Property.create(record)
-		.then(res => console.log(res, "success"))
-		.catch(err => console.log("shit here we go again", err))
+	res.send("Hey")
+
 	// try {
 	// 	if(req.body && req.files){
 

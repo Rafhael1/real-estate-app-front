@@ -4,15 +4,15 @@ yarn-error.log*
 
 .env
 
-./src/uploads/
+./src/upload/
 
-/src/uploads/
+/src/upload/
 
-src/uploads/
+src/upload/
 
-server/src/uploads
+server/src/upload
 
-/uploads
+/upload
 
 .png
 .jpeg

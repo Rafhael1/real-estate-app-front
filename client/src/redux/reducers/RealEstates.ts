@@ -14,7 +14,7 @@ const INITIAL_STATE: IState = {
 }
 
 export const RealEstates = (state: IState = INITIAL_STATE, action: any) => {
-	switch(action.type){
+	switch(action.type) {
 	case ACTIONS.GET_REAL_ESTATES_REQUEST:
 		return {
 			...state,
