@@ -5,9 +5,9 @@ const PropertySchema = new mongoose.Schema({
 	description: { type: String, required: true, default: "Not Sheeeeesh" },
 	adress: { type: String, required: false, },
 	country: { type: String, required: false, },
-	price: { type: Number, required: true, default: 0},
+	price: { type: String, required: true, default: 0},
 	status: { type: String, required: false, },
-	images: { type: String, required: true, },
+	images: { type: [String], required: true, },
     
 })
 

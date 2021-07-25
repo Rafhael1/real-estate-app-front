@@ -14,6 +14,8 @@ server/src/upload
 
 /upload
 
+/build
+
 .png
 .jpeg
 .jpg
