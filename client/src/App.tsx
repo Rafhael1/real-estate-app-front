@@ -5,6 +5,8 @@ import Admin from "./components/screens/Admin/Admin"
 
 import Menu from "./components/UI/Navbar/Navbar"
 
+import Register from "./components/screens/Register/Register"
+
 
 import { useSelector, useDispatch } from "react-redux"
 
@@ -35,7 +37,7 @@ const App = () => {
 		
 				States.realEstates?.map((data: any) => (
 					<div key={data.description}>{data.country}- {data.title}
-						<img src={`http://localhost:8000/${data.images}`} style={{width: "50px", height: "50px"}} />
+						<img src={`http://localhost:8000/${data.images[0]}`} style={{width: "50px", height: "50px"}} />
 					</div>
 				))
 			}
@@ -43,6 +45,7 @@ const App = () => {
 				<>
 					<Switch>
 						<Route exact path="/" render={()  => <Menu />  } ></Route>
+						<Route exact path="/register" render={()  => <Register />  } ></Route>
 						<Route exact path="/results" ></Route>
 						<Route exact path="/admin" render={()  => <Admin />  } ></Route>
 						<Route path="/results/:id" ></Route>
