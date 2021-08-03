@@ -11,6 +11,7 @@ interface IState  {
 
 const INITIAL_STATE: IState = {
 	isLoading: false,
+	realEstates: [{description: "hiiiiiiiii", country: "hey"}]
 }
 
 export const RealEstates = (state: IState = INITIAL_STATE, action: any) => {

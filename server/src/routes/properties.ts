@@ -33,6 +33,7 @@ router.get("/properties", verify, async (req: Request, res: Response) => {
 	
 	const data = await Property.find({})
 	
+	
 
 	res.send(data)
 

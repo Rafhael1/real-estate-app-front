@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 import { RootStore } from "../../../../redux/store"
 
-import axios from "../../../utils/api/axios"
+import axios from "../../../../utils/api/axios"
 
 const NewPropertyForm = () => {
 

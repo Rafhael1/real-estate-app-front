@@ -1,11 +1,11 @@
 import React, { useState } from "react"
 
-import axios from "../../utils/api/axios"
+import axios from "../../../utils/api/axios"
 
 // Styles
 
 import { Input } from "./Admin.Style"
-import NewPropertyForm from "./NewPropertyForm/NewPropertyForm"
+import NewPropertyForm from "./NewPropertyForm"
 
 const Admin = () => {
 

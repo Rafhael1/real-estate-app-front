@@ -1,8 +1,5 @@
 import  React, { useEffect } from "react"
 
-
-//import { ACTIONS } from "../../../redux/actions/RealEstates"
-
 import { useSelector } from "react-redux"
 
 import { RootStore } from "../../../redux/store"

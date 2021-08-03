@@ -7,6 +7,7 @@ import bcrypt from "bcryptjs"
 
 import jwt from "jsonwebtoken"
 
+import verify from "./verifyToken"
 
 import { body, validationResult } from "express-validator"
 
@@ -41,10 +42,11 @@ router.post("/register",
 			})
 			const savedUser = await user.save()
 			res.send(savedUser)
-		} catch (error) {
+		} catch(error) {
 			res.status(400).send(error)
 		}
-	})
+	}
+)
 
 router.post("/login", async(req, res) => {
 	const errors = validationResult(req)
@@ -73,13 +75,26 @@ router.post("/login", async(req, res) => {
 
 		res.header("auth-token", token).send("Logged in")
 
-		//res.send("Logged in")
-
 
 	} catch (error) {
 		res.status(400).send("Something went wrong!")
 	}
 })
 
+router.get("/verify-user", verify, async(req, res) => {
+	try {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		//@ts-ignore
+		const userId = req.user.id
+
+		const userData = await User.findOne({__id: userId})
+
+		console.log(userData)
+		res.send(userData)
+
+	} catch (error) {
+		res.status(500).send(error)
+	}
+})
 
 export default router

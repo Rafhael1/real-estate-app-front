@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react"
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom"
 
-import Admin from "./components/screens/Admin/Admin"
+import Admin from "./components/screens/Admin"
 
-import Menu from "./components/UI/Navbar/Navbar"
+import Menu from "./components/UI/Navbar"
 
-import Register from "./components/screens/Register/Register"
+import Register from "./components/screens/Register"
 
 
 import { useSelector, useDispatch } from "react-redux"
 
 import { RootStore } from "./redux/store"
 
-import { getRealEstates } from "./redux/actions/RealEstates"
+import { isLogged } from "./redux/actions/Auth"
 
 const App = () => {
 
@@ -21,7 +21,7 @@ const App = () => {
 	const States = useSelector((state : RootStore) => state.RealEstates )
 
 	const handleRequest = () => {
-		dispatch(getRealEstates())
+		dispatch(isLogged())
 		
 	}
 
@@ -37,7 +37,6 @@ const App = () => {
 		
 				States.realEstates?.map((data: any) => (
 					<div key={data.description}>{data.country}- {data.title}
-						<img src={`http://localhost:8000/${data.images[0]}`} style={{width: "50px", height: "50px"}} />
 					</div>
 				))
 			}
