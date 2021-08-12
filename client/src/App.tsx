@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react"
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom"
 
-import Admin from "./components/screens/Admin"
+import Admin from "./components/screens/User/Admin"
 
 import Menu from "./components/UI/Navbar"
 
-import Register from "./components/screens/Register"
+import Register from "./components/screens/User/Register"
 
 
 import { useSelector, useDispatch } from "react-redux"

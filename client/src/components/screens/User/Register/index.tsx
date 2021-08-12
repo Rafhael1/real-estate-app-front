@@ -1,11 +1,11 @@
 import React, { useState } from "react"
 import { Form, Field, reduxForm } from "redux-form"
 
-import axios from "../../../utils/api/axios"
+import axios from "../../../../utils/api/axios"
 
 import { useSelector, useDispatch } from "react-redux"
 
-import { createUser } from "../../../redux/actions/Auth"
+import { createUser } from "../../../../redux/actions/Auth"
 
 const Register = ({ handleSubmit }: any) => {
 
