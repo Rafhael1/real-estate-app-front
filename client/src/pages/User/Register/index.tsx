@@ -1,20 +1,15 @@
 import React, { useState } from "react"
 import { Form, Field, reduxForm } from "redux-form"
 
-import axios from "../../../../utils/api/axios"
+import axios from "../../../components/utils/api/axios"
 
 import { useSelector, useDispatch } from "react-redux"
 
-import { createUser } from "../../../../redux/actions/Auth"
+import { createUser } from "../../../redux/actions/Auth"
 
 const Register = ({ handleSubmit }: any) => {
 
 	const dispatch = useDispatch()
-
-	// const handleSubmit = (e: any, values: any) => {
-	// 	e.preventDefault()
-	// 	dispatch(createUser(values))
-	// }
 
 	return (
 		<Form onSubmit={handleSubmit((e: any) => dispatch(createUser(e)))}>

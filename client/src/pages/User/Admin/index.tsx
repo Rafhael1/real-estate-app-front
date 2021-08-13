@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-import axios from "../../../../utils/api/axios"
+import axios from "../../../components/utils/api/axios"
 
 // Styles
 
