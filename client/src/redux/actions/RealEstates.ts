@@ -1,8 +1,7 @@
-import axios from "../../utils/api/axios"
+import axios from "../../pages/common/utils/api/axios"
 
 import { Dispatch } from "redux"
 import { RealEstatesDispatchTypes, ACTIONS } from "../actionTypes/RealEstatesActionTypes"
-//import { ACTIONS } from "../actionTypes/RealEstatesActionTypes"
 
 export const getRealEstates = () => async (dispatch: Dispatch<RealEstatesDispatchTypes>) => {
 	dispatch({
@@ -29,7 +28,7 @@ export const addNewRealEstate = (values: any = {}) => async (dispatch: Dispatch<
 		type: ACTIONS.ADD_NEW_REAL_STATE_REQUEST
 	})
 
-	const body = {
+	const data = {
 		title: values.title,
 		description: values.description,
 		address: values.address,
@@ -47,7 +46,10 @@ export const addNewRealEstate = (values: any = {}) => async (dispatch: Dispatch<
 	formData.append("images", values.image5)
 
 	try {
-		const res = await axios.post("/upload", formData, body)
+		const res = await axios.post("/upload", formData, {
+			data: data
+		})
+		console.log(res)
 		dispatch({
 			type: ACTIONS.ADD_NEW_REAL_STATE_SUCCESS
 		})

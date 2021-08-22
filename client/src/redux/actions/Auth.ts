@@ -1,4 +1,4 @@
-import axios from "../../utils/api/axios"
+import axios from "../../pages/common/utils/api/axios"
 
 import { Dispatch } from "redux"
 

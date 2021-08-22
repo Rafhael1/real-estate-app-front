@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react"
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
+import { BrowserRouter as Router } from "react-router-dom"
 
-import Admin from "./pages/User/Admin"
-
-import Menu from "./pages/common/Navbar"
-
-import Register from "./pages/User/Register"
-
+import Routes from "./router"
 
 import { useSelector, useDispatch } from "react-redux"
 
@@ -29,27 +24,10 @@ const App = () => {
 		handleRequest()
 	}, [])
 
-	States.realEstates? console.log(States) : null
-
 	return (
 		<div>
-			{
-		
-				States.realEstates?.map((data: any) => (
-					<div key={data.description}>{data.country}- {data.title}
-					</div>
-				))
-			}
 			<Router>
-				<>
-					<Switch>
-						<Route exact path="/" render={()  => <Menu />  } ></Route>
-						<Route exact path="/register" render={()  => <Register />  } ></Route>
-						<Route exact path="/results" ></Route>
-						<Route exact path="/admin" render={()  => <Admin />  } ></Route>
-						<Route path="/results/:id" ></Route>
-					</Switch>      
-				</>
+				<Routes />
 			</Router>
 		</div>
 	)

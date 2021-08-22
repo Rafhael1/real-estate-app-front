@@ -9,8 +9,11 @@ export const ACTIONS = {
 }
 
 export type RealEstatesType = {
+	title: string,
 	description: string,
-	country: string
+	country: string,
+	price: string,
+	status: string
 }[]
 
 export interface RealEstatesRequest {

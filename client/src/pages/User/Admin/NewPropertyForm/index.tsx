@@ -1,12 +1,12 @@
-import React, { useState } from "react"
+import React from "react"
 
 import { useSelector, useDispatch } from "react-redux"
 
-import { RootStore } from "../../../../redux/store"
 
 import { Form, Field, reduxForm } from "redux-form"
 
-import axios from "../../../../utils/api/axios"
+import { addNewRealEstate } from "../../../../redux/actions/RealEstates"
+
 
 const NewPropertyForm = ({ handleSubmit }: any) => {
 
@@ -70,23 +70,23 @@ const NewPropertyForm = ({ handleSubmit }: any) => {
 
 	return (
 		<Form onSubmit={handleSubmit((e: any) => dispatch(addNewRealEstate(e)))} >
-			<Field name="title" type="text" />
-			<Field name="description" type="text" />
-			<Field name="address" type="text" />
-			<Field name="country" type="text" />
-			<Field name="price" type="text" />
-			<Field name="status" type="text" />
+			<Field name="title" component="input"  type="text" />
+			<Field name="description" component="input"  type="text" />
+			<Field name="address" component="input"  type="text" />
+			<Field name="country" component="input"  type="text" />
+			<Field name="price" component="input"  type="text" />
+			<Field name="status" component="input"  type="text" />
 
-			<Field name="image1" type="file" />
-			<Field name="image2" type="file" />
-			<Field name="image3" type="file" />
-			<Field name="image4" type="file" />
-			<Field name="image5" type="file" />
+			<Field name="image1" component="input"  type="file" />
+			<Field name="image2" component="input"  type="file" />
+			<Field name="image3" component="input"  type="file" />
+			<Field name="image4" component="input"  type="file" />
+			<Field name="image5" component="input"  type="file" />
 			<button type="submit" >Submit</button>
 		</Form>
 	)
 }
 
 export default reduxForm({
-	form: "NewPropertyForm"
+	form: "NewPropertyFormRedux"
 })(NewPropertyForm)
