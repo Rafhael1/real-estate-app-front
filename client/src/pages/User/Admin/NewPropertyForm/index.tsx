@@ -72,6 +72,9 @@ const NewPropertyForm = ({ handleSubmit }: any) => {
 		<Form onSubmit={handleSubmit((e: any) => dispatch(addNewRealEstate(e)))} >
 			<Field name="title" component="input"  type="text" />
 			<Field name="description" component="input"  type="text" />
+			<Field name="squareMeter" component="input"  type="number" />
+			<Field name="bathrooms" component="input"  type="number" />
+			<Field name="bedrooms" component="input"  type="number" />
 			<Field name="address" component="input"  type="text" />
 			<Field name="country" component="input"  type="text" />
 			<Field name="price" component="input"  type="text" />

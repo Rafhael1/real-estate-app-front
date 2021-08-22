@@ -3,7 +3,9 @@ import mongoose from "mongoose"
 const PropertySchema = new mongoose.Schema({
 	title: { type: String, required: true, },
 	description: { type: String, required: false, },
-	squareMeter: { type: String, required: false },
+	bathrooms: { type: Number, required: false, },
+	bedrooms: { type: Number, required: false, },
+	squareMeter: { type: Number, required: false },
 	adress: { type: String, required: false, },
 	country: { type: String, required: true, },
 	price: { type: String, required: true, },
@@ -14,11 +16,11 @@ const PropertySchema = new mongoose.Schema({
 		email: { type: String, required: true },
 		phone: { type: String, required: false }
 	},
-	date: {
+	postDate: {
 		type: Date,
 		default: Date.now
 	},
-	clicks: { type: Number, required: false, default: 0  }
+	views: { type: Number, required: false, default: 0  }
 })
 
 // Status: For sale, rent, under construction, Sold out
