@@ -51,6 +51,10 @@
         "space-before-function-paren": [
             "error", 
             "always"
+        ],
+        "object-curly-spacing": [
+            "error", 
+            "always"
         ]
     }
 }

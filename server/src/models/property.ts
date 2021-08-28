@@ -7,6 +7,7 @@ const PropertySchema = new mongoose.Schema({
 	bedrooms: { type: Number, required: false, },
 	squareMeter: { type: Number, required: false },
 	adress: { type: String, required: false, },
+	propertyType: { type: String, required: false, default:  "Residencial" },
 	country: { type: String, required: true, },
 	price: { type: String, required: true, },
 	status: { type: String, required: false, },

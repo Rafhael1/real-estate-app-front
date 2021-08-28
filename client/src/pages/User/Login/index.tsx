@@ -5,7 +5,7 @@ import { Form, Field, reduxForm } from "redux-form"
 import { useDispatch } from "react-redux"
 import { login } from "../../../redux/actions/Auth"
 
-const Login = ({handleSubmit}: any) => {
+const Login = ({ handleSubmit }: any) => {
 
 	const dispatch = useDispatch()
 

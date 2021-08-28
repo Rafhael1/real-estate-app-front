@@ -16,7 +16,7 @@ mongoose.connect( process.env.DB_CONNECT!, {
 // Middlewares
 app.use(express.json())
 app.use(cors())
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use("/upload", express.static("upload"))
 
 // Routes Imports

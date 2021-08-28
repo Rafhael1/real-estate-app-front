@@ -13,7 +13,7 @@ import { body, validationResult } from "express-validator"
 
 router.post("/register",
 	body("email").isEmail(), 
-	body("password").isLength({min: 6}),
+	body("password").isLength({ min: 6 }),
 	async(req, res) => {
 		const errors = validationResult(req)
 		try {
@@ -22,7 +22,7 @@ router.post("/register",
 			}
 
 			// Check if user already exists
-			const userExist = await User.findOne({email: req.body.email})
+			const userExist = await User.findOne({ email: req.body.email })
 
 			if(userExist){
 				return res.status(400).send("User already exists")
@@ -56,7 +56,7 @@ router.post("/login", async(req, res) => {
 		}
 
 		// Check if user exists
-		const user = await User.findOne({email: req.body.email})
+		const user = await User.findOne({ email: req.body.email })
 
 		if(!user){
 			return res.status(400).send("Email or password is wrong!")
@@ -71,7 +71,7 @@ router.post("/login", async(req, res) => {
 
 		// Create and assign a jwt token
 
-		const token = jwt.sign({__id: user.id}, process.env.TOKEN!)
+		const token = jwt.sign({ __id: user.id }, process.env.TOKEN!)
 
 		res.json({
 			"authToken": token,
@@ -88,12 +88,10 @@ router.post("/verify-user", verify, async(req, res) => {
 	try {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		//@ts-ignore
-		const userId = req.user.id
+		// const userId = req.user.id
 
-		const userData = await User.findOne({__id: userId})
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		//@ts-ignore
-		console.log(req.user)
+		// const userData = await User.findOne({__id: userId})
+
 		res.send(true)
 
 	} catch (error) {

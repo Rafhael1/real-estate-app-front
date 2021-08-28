@@ -1,4 +1,4 @@
-import axios from "../../pages/common/utils/api/axios"
+import axios from "../../pages/Common/utils/api/axios"
 
 import { Dispatch } from "redux"
 
@@ -56,7 +56,7 @@ export const login = (values = {}) => async (dispatch:Dispatch<LoginDispatchType
 }
 
 export const isLogged = () => async (dispatch: Dispatch<IsLoggedDispatchTypes>) => {
-	dispatch({ type: ACTIONS.IS_LOGGED_REQUEST})
+	dispatch({ type: ACTIONS.IS_LOGGED_REQUEST })
 	try {
 		const res = await axios.post("/user/verify-user", {
 			headers: {
@@ -65,9 +65,9 @@ export const isLogged = () => async (dispatch: Dispatch<IsLoggedDispatchTypes>) 
 		})
 		dispatch({
 			type: ACTIONS.IS_LOGGED_SUCCESS,
-			payload: res
+			payload: res.data
 		})
 	} catch (error) {
-		dispatch({type: ACTIONS.IS_LOGGED_ERROR})
+		dispatch({ type: ACTIONS.IS_LOGGED_ERROR })
 	}
 }
