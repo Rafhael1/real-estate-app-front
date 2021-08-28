@@ -9,6 +9,7 @@ const verify = (req: Request, res: Response, next: () => void) => {
 		return res.status(500).send("Access Denied")
 	}
 	try {
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const verified = jwt.verify(token, process.env.TOKEN!)
 		// @ts-ignore
 		req.user = verified

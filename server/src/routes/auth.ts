@@ -91,8 +91,9 @@ router.post("/verify-user", verify, async(req, res) => {
 		const userId = req.user.id
 
 		const userData = await User.findOne({__id: userId})
-
-		console.log(userData)
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		//@ts-ignore
+		console.log(req.user)
 		res.send(true)
 
 	} catch (error) {

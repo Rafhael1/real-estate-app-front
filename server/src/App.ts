@@ -7,6 +7,7 @@ import mongoose from "mongoose"
 
 dotenv.config()
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 mongoose.connect( process.env.DB_CONNECT!, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
