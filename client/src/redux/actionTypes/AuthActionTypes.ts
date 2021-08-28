@@ -3,6 +3,10 @@ export const ACTIONS = {
 	CREATE_USER_SUCCESS: "CREATE_USER_SUCCESS",
 	CREATE_USER_ERROR: "CREATE_USER_ERROR",
 
+	LOGIN_REQUEST: "LOGIN_REQUEST",
+	LOGIN_SUCCESS: "LOGIN_SUCCESS",
+	LOGIN_ERROR: "LOGIN_ERROR",
+
 	IS_LOGGED_REQUEST: "IS_LOGGED_REQUEST",
 	IS_LOGGED_SUCCESS: "IS_LOGGED_SUCCESS",
 	IS_LOGGED_ERROR: "IS_LOGGED_ERROR",
@@ -43,3 +47,17 @@ export interface IsLoggedError {
 }
 
 export type IsLoggedDispatchTypes = IsLoggedRequest | IsLoggedSuccess | IsLoggedError
+
+export interface LoginRequest {
+	type: typeof ACTIONS.LOGIN_REQUEST
+}
+
+export interface LoginSuccess {
+	type: typeof ACTIONS.LOGIN_SUCCESS
+}
+
+export interface LoginError {
+	type: typeof ACTIONS.LOGIN_ERROR
+}
+
+export type LoginDispatchTypes = LoginRequest | LoginSuccess | LoginError

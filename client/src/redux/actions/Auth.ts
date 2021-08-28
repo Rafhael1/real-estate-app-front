@@ -2,7 +2,12 @@ import axios from "../../pages/common/utils/api/axios"
 
 import { Dispatch } from "redux"
 
-import { CreateUserDispatchTypes, IsLoggedDispatchTypes, ACTIONS } from "../actionTypes/AuthActionTypes"
+import { 
+	LoginDispatchTypes,
+	CreateUserDispatchTypes, 
+	IsLoggedDispatchTypes, 
+	ACTIONS,
+} from "../actionTypes/AuthActionTypes"
 
 export const createUser = (values: any = {}) => async (dispatch: Dispatch<CreateUserDispatchTypes>) => {
 	const body = {
@@ -10,7 +15,6 @@ export const createUser = (values: any = {}) => async (dispatch: Dispatch<Create
 		email: values.email || "",
 		password: values.password || "",
 	}
-	console.log(values, body)
 	dispatch({
 		type: ACTIONS.CREATE_USER_REQUEST
 	})
@@ -30,14 +34,35 @@ export const createUser = (values: any = {}) => async (dispatch: Dispatch<Create
 	}
 }
 
-// export const login = () => async(dispatch:<Dispatch>) => {
-
-// }
+export const login = (values = {}) => async (dispatch:Dispatch<LoginDispatchTypes>) => {
+	dispatch({
+		type: ACTIONS.LOGIN_REQUEST
+	})
+	const body = values
+	try {
+		const res = await axios.post("/user/login", body)
+		console.log(res)
+		if(res.data.authToken) {
+			localStorage.setItem("authToken", res.data.authToken)
+		}
+		dispatch({
+			type: ACTIONS.LOGIN_SUCCESS
+		})
+	} catch (error) {
+		dispatch({
+			type: ACTIONS.LOGIN_ERROR
+		})
+	}
+}
 
 export const isLogged = () => async (dispatch: Dispatch<IsLoggedDispatchTypes>) => {
 	dispatch({ type: ACTIONS.IS_LOGGED_REQUEST})
 	try {
-		const res = await axios.get("/user/verify-user")
+		const res = await axios.post("/user/verify-user", {
+			headers: {
+				"authToken": localStorage.authToken
+			}
+		})
 		dispatch({
 			type: ACTIONS.IS_LOGGED_SUCCESS,
 			payload: res

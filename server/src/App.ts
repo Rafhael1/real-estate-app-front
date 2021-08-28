@@ -7,12 +7,15 @@ import mongoose from "mongoose"
 
 dotenv.config()
 
-mongoose.connect( process.env.DB_CONNECT!, {useNewUrlParser: true})
+mongoose.connect( process.env.DB_CONNECT!, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+})
 
 // Middlewares
 app.use(express.json())
 app.use(cors())
-app.use(express.urlencoded())
+app.use(express.urlencoded({extended: true}))
 app.use("/upload", express.static("upload"))
 
 // Routes Imports

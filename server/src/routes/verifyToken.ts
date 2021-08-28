@@ -4,7 +4,7 @@ import { Request, Response } from "express"
 import jwt from "jsonwebtoken"
 
 const verify = (req: Request, res: Response, next: () => void) => {
-	const token = req.header("auth-token")
+	const token = req.body.headers.authToken
 	if(!token) {
 		return res.status(500).send("Access Denied")
 	}

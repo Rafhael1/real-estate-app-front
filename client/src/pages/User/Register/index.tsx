@@ -1,8 +1,6 @@
 import React, { useState } from "react"
 import { Form, Field, reduxForm } from "redux-form"
 
-import axios from "../../common/utils/api/axios"
-
 import { useSelector, useDispatch } from "react-redux"
 
 import { createUser } from "../../../redux/actions/Auth"
@@ -16,7 +14,9 @@ const Register = ({ handleSubmit }: any) => {
 			<Field name="name" component="input" type="text" />
 			<Field name="email" component="input" type="email" />
 			<Field name="password" component="input" type="password" />
-			<button type="submit" >Send</button>
+			<Field name="submit" component="button" type="submit">
+				Submit
+			</Field>
 		</Form>
 	)
 }

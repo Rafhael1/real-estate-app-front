@@ -73,7 +73,10 @@ router.post("/login", async(req, res) => {
 
 		const token = jwt.sign({__id: user.id}, process.env.TOKEN!)
 
-		res.header("auth-token", token).send("Logged in")
+		res.json({
+			"authToken": token,
+			"message": "Logged In"
+		}).status(200)
 
 
 	} catch (error) {
@@ -81,7 +84,7 @@ router.post("/login", async(req, res) => {
 	}
 })
 
-router.get("/verify-user", verify, async(req, res) => {
+router.post("/verify-user", verify, async(req, res) => {
 	try {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		//@ts-ignore
@@ -90,7 +93,7 @@ router.get("/verify-user", verify, async(req, res) => {
 		const userData = await User.findOne({__id: userId})
 
 		console.log(userData)
-		res.send(userData)
+		res.send(true)
 
 	} catch (error) {
 		res.status(500).send(error)

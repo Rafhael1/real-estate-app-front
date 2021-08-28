@@ -1,11 +1,26 @@
-import React from "react"
+import React, { EventHandler } from "react"
 
-const Login = () => {
+import { Form, Field, reduxForm } from "redux-form"
+
+import { useDispatch } from "react-redux"
+import { login } from "../../../redux/actions/Auth"
+
+const Login = ({handleSubmit}: any) => {
+
+	const dispatch = useDispatch()
+
 	return (
-		<div>
-            Hey
-		</div>
+		<Form onSubmit={handleSubmit((e: undefined) => dispatch(login(e)))} >
+			<Field name="email" component="input" type="text" />
+			<Field name="password" component="input" type="password" />
+			<Field name="rememberMe" component="input" type="checkbox" />
+			<Field name="submit" component="button" type="submit">
+				Submit
+			</Field>
+		</Form>
 	)
 }
 
-export default Login
+export default reduxForm({
+	form: "LoginForm"
+})(Login)
