@@ -1,13 +1,13 @@
 import React from "react"
 import { Switch, Route } from "react-router"
 
-import Admin from "./pages/User/Admin"
+import Admin from "./User/Admin"
 
-import Login from "./pages/User/Login"
+import Login from "./User/Login"
 
-import Register from "./pages/User/Register"
+import Register from "./User/Register"
 
-const Router = () => {
+const Router = (): JSX.Element => {
 	return (
 		<Switch>
 			<Route path="/" exact />

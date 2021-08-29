@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { UserType } from "../actionTypes/AuthActionTypes"
 
 import { ACTIONS } from "../actionTypes/AuthActionTypes"

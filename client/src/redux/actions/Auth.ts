@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import axios from "../../pages/Common/utils/api/axios"
 
 import { Dispatch } from "redux"
@@ -39,6 +40,7 @@ export const login = (values = {}) => async (dispatch:Dispatch<LoginDispatchType
 		type: ACTIONS.LOGIN_REQUEST
 	})
 	const body = values
+	console.log(body)
 	try {
 		const res = await axios.post("/user/login", body)
 		console.log(res)

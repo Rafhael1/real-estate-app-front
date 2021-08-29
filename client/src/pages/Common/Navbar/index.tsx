@@ -4,12 +4,12 @@ import { useSelector } from "react-redux"
 
 import { RootStore } from "../../../redux/store"
 
-const Navbar = () => {
+const Navbar = (): JSX.Element => {
 	
 	const realEstates = useSelector((state : RootStore) => state.RealEstates )
 
 	useEffect(() => {
-		console.log("s")
+		console.log(realEstates)
 	}, [])
 
 	return (

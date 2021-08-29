@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 
 
 import { Form, Field, reduxForm } from "redux-form"
@@ -8,7 +8,7 @@ import { Form, Field, reduxForm } from "redux-form"
 import { addNewRealEstate } from "../../../../redux/actions/RealEstates"
 
 
-const NewPropertyForm = ({ handleSubmit }: any) => {
+const NewPropertyForm = ({ handleSubmit }: any): JSX.Element => {
 
 	// const [propertyInfo, setPropertyInfo] = useState({
 	// 	title: "",

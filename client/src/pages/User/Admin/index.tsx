@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React from "react"
 
 import NewPropertyForm from "./NewPropertyForm"
 
-const Admin = () => {
+const Admin = (): JSX.Element => {
 
 	// // States
 	// const [ file1, setFile1 ]: any = useState(null)

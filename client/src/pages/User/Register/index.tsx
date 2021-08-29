@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React from "react"
 import { Form, Field, reduxForm } from "redux-form"
 
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 
 import { createUser } from "../../../redux/actions/Auth"
 
-const Register = ({ handleSubmit }: any) => {
+const Register = ({ handleSubmit }: any): JSX.Element => {
 
 	const dispatch = useDispatch()
 
