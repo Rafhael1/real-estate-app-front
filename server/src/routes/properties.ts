@@ -15,7 +15,8 @@ import verify from "./verifyToken"
 
 const storage = multer.diskStorage({
 	destination: (req: Request, file, cb) => {
-		cb(null, "../upload/")
+		// If it goes wrong just change it back to ../upload/
+		cb(null, "../../upload/")
 	},
 	filename: (req, file, cb) => {
 		cb(null, Date.now() + file.originalname)
