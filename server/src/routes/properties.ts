@@ -16,7 +16,7 @@ import verify from "./verifyToken"
 const storage = multer.diskStorage({
 	destination: (req: Request, file, cb) => {
 		// If it goes wrong just change it back to ../upload/
-		cb(null, "../../upload/")
+		cb(null, "../upload/")
 	},
 	filename: (req, file, cb) => {
 		cb(null, Date.now() + file.originalname)
@@ -41,12 +41,14 @@ router.get("/properties", verify, async (req: Request, res: Response) => {
 
 })
 
-router.post("/api/upload", verify, upload.array("images"), async(req: Request, res: Response) => {
-	if(req.body && req.files){
+router.post("/upload", upload.array("images"), async(req: Request, res: Response) => {
+	try {
+		console.log("Hey upload") 
 		const filePath: any = req.files
 		const body = req.body.body
 		const parse = JSON.parse(req.body.body)
 		console.log(filePath, parse, body)
+		
 
 		// eslint-disable-next-line prefer-const
 		let imagePaths: string[] = []
@@ -72,8 +74,11 @@ router.post("/api/upload", verify, upload.array("images"), async(req: Request, r
 
 		res.send("Uploaded sucessfully")
 
-	}
+		
 
+	} catch (error) {
+		console.log(error)
+	}
 })
 
 export default router

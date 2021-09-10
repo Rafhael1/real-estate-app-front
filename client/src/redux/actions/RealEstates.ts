@@ -47,7 +47,10 @@ export const addNewRealEstate = (values: any = {}) => async (dispatch: Dispatch<
 	formData.append("images", values.image5)
 
 	try {
-		const res = await axios.post("/upload", formData, {
+		const res = await axios.post("realestates/upload", formData, {
+			headers: {
+				"authToken": localStorage.authToken
+			},
 			data: data
 		})
 		console.log(res)

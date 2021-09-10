@@ -3,7 +3,7 @@ import React from "react"
 import { Form, Field, reduxForm } from "redux-form"
 
 import { useDispatch } from "react-redux"
-import { login } from "../../../redux/actions/Auth"
+import { login } from "redux/actions/Auth"
 import { Button } from "@material-ui/core"
 import renderTextField from "../../Common/utils/fields/inputField"
   
