@@ -1,7 +1,7 @@
 import React from "react"
 import { Switch, Route } from "react-router"
 
-import Admin from "./User/Admin"
+import Dashboard from "./User/Dashboard"
 
 import Login from "./User/Login"
 
@@ -13,7 +13,7 @@ const Router = (): JSX.Element => {
 			<Route path="/" exact />
 			<Route path="/login" exact component={Login}  />
 			<Route path="/register" exact component={Register} />
-			<Route path="/admin" exact component={Admin} />
+			<Route path="/dashboard" exact component={Dashboard} />
 			<Route path="/results" exact />
 		</Switch>
 	)

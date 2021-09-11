@@ -5,7 +5,7 @@ import { Form, Field, reduxForm } from "redux-form"
 import { useDispatch } from "react-redux"
 import { login } from "redux/actions/Auth"
 import { Button } from "@material-ui/core"
-import renderTextField from "../../Common/utils/fields/inputField"
+import renderTextField from "../../../utils/fields/inputField"
   
 const Login = ({ handleSubmit }: any) => {
 
@@ -31,7 +31,11 @@ const Login = ({ handleSubmit }: any) => {
 				type="password" 
 				component={renderTextField} 
 			/>
-			{/* <Field name="rememberMe" component="input" type="checkbox" /> */}
+			<Field 
+				name="rememberMe" 
+				component="input" 
+				type="checkbox" 
+			/>
 			<Field 
 				component={Button} 
 				type="submit" 

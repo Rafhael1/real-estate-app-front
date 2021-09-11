@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import axios from "../../pages/Common/utils/api/axios"
+import axios from "../../utils/api/axios"
 
 import { Dispatch } from "redux"
 import { RealEstatesDispatchTypes, ACTIONS } from "../actionTypes/RealEstatesActionTypes"
@@ -48,9 +47,6 @@ export const addNewRealEstate = (values: any = {}) => async (dispatch: Dispatch<
 
 	try {
 		const res = await axios.post("realestates/upload", formData, {
-			headers: {
-				"authToken": localStorage.authToken
-			},
 			data: data
 		})
 		console.log(res)

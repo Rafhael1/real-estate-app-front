@@ -9,7 +9,7 @@ import Property from "../models/property"
 
 // Verification middleware
 
-import verify from "./verifyToken"
+import verify from "../middlewares/verifyToken"
 
 // Image Storage
 

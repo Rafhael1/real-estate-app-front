@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import axios from "../../pages/Common/utils/api/axios"
+import axios from "../../utils/api/axios"
 
 import { Dispatch } from "redux"
 
@@ -35,17 +34,20 @@ export const createUser = (values: any = {}) => async (dispatch: Dispatch<Create
 	}
 }
 
-export const login = (values = {}) => async (dispatch:Dispatch<LoginDispatchTypes>) => {
+export const login = (values) => async (dispatch:Dispatch<LoginDispatchTypes>) => {
 	dispatch({
 		type: ACTIONS.LOGIN_REQUEST
 	})
 	const body = values
-	console.log(body)
 	try {
 		const res = await axios.post("/user/login", body)
 		console.log(res)
 		if(res.data.authToken) {
-			localStorage.setItem("authToken", res.data.authToken)
+			if(values.rememberMe) {
+				localStorage.setItem("authToken", res.data.authToken)
+			} else {
+				sessionStorage.setItem("authToken", res.data.authToken)
+			}
 		}
 		dispatch({
 			type: ACTIONS.LOGIN_SUCCESS
@@ -61,9 +63,6 @@ export const isLogged = () => async (dispatch: Dispatch<IsLoggedDispatchTypes>) 
 	dispatch({ type: ACTIONS.IS_LOGGED_REQUEST })
 	try {
 		const res = await axios.post("/user/verify-user", {
-			headers: {
-				"authToken": localStorage.authToken
-			}
 		})
 		dispatch({
 			type: ACTIONS.IS_LOGGED_SUCCESS,

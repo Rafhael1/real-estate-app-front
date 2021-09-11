@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs"
 
 import jwt from "jsonwebtoken"
 
-import verify from "./verifyToken"
+import verify from "../middlewares/verifyToken"
 
 import { body, validationResult } from "express-validator"
 
