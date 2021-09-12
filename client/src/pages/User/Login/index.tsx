@@ -5,7 +5,7 @@ import { Form, Field, reduxForm } from "redux-form"
 import { useDispatch } from "react-redux"
 import { login } from "redux/actions/Auth"
 import { Button } from "@material-ui/core"
-import renderTextField from "../../../utils/fields/inputField"
+import renderTextField from "../../../components/fields/inputField"
   
 const Login = ({ handleSubmit }: any) => {
 
@@ -43,7 +43,7 @@ const Login = ({ handleSubmit }: any) => {
 					variant: "contained",
 					color: "primary"
 				}}
-			>Submit</Field>
+			>Sign In</Field>
 		</Form>
 	)
 }

@@ -3,6 +3,9 @@ import { Form, Field, reduxForm } from "redux-form"
 
 import { useDispatch } from "react-redux"
 
+import renderTextField from "../../../components/fields/inputField"
+import { Button } from "@material-ui/core"
+
 import { createUser } from "../../../redux/actions/Auth"
 
 const Register = ({ handleSubmit }: any): JSX.Element => {
@@ -10,13 +13,39 @@ const Register = ({ handleSubmit }: any): JSX.Element => {
 	const dispatch = useDispatch()
 
 	return (
-		<Form onSubmit={handleSubmit((e: any) => dispatch(createUser(e)))}>
-			<Field name="name" component="input" type="text" />
-			<Field name="email" component="input" type="email" />
-			<Field name="password" component="input" type="password" />
-			<Field name="submit" component="button" type="submit">
-				Submit
-			</Field>
+		<Form onSubmit={handleSubmit((values: any) => dispatch(createUser(values)))}>
+			<Field 
+				name="name" 
+				variant="outlined"
+				color="primary"
+				label="Name"
+				type="text" 
+				component={renderTextField} 
+			/>
+			<Field 
+				name="email" 
+				variant="outlined"
+				color="primary"
+				label="Email"
+				type="email" 
+				component={renderTextField} 
+			/>
+			<Field 
+				name="password" 
+				variant="outlined"
+				color="primary"
+				label="Password"
+				type="password" 
+				component={renderTextField} 
+			/>
+			<Field 
+				component={Button} 
+				type="submit" 
+				props={{
+					variant: "contained",
+					color: "primary"
+				}}
+			>Sign Up</Field>
 		</Form>
 	)
 }

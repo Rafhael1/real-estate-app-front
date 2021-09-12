@@ -1,15 +1,15 @@
 import mongoose from "mongoose"
 
 const PropertySchema = new mongoose.Schema({
-	title: { type: String, required: true, },
+	title: { type: String, required: false, },
 	description: { type: String, required: false, },
 	bathrooms: { type: Number, required: false, },
 	bedrooms: { type: Number, required: false, },
 	squareMeter: { type: Number, required: false },
 	adress: { type: String, required: false, },
 	propertyType: { type: String, required: false, default:  "Residencial" },
-	country: { type: String, required: true, },
-	price: { type: String, required: true, },
+	country: { type: String, required: false, },
+	price: { type: String, required: false, },
 	status: { type: String, required: false, },
 	images: { type: [String], required: true, },
 	user: {

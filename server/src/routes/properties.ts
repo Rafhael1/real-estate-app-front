@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import express, { Request, Response } from "express"
 const router = express.Router()
 
@@ -41,32 +42,41 @@ router.get("/properties", verify, async (req: Request, res: Response) => {
 
 })
 
-router.post("/upload", upload.array("images"), async(req: Request, res: Response) => {
+router.post("/upload", upload.array("images"), verify, async(req: Request, res: Response) => {
 	try {
-		console.log("Hey upload") 
 		const filePath: any = req.files
-		const body = req.body.body
-		const parse = JSON.parse(req.body.body)
-		console.log(filePath, parse, body)
-		
-
+		const data = JSON.parse(req.body.data)
+		const {
+			title,
+			description,
+			address,
+			country,
+			price
+		} = JSON.parse(req.body.data)
+		// console.log(JSON.parse(req.body.data))
+		console.log(title)
+		// @ts-ignore
+		console.log(req.user)
 		// eslint-disable-next-line prefer-const
 		let imagePaths: string[] = []
 
 		for(let i = 0; i < filePath.length; i++ ){
-			console.log(filePath[i].path, "doidera")
 			imagePaths.push(filePath[i].path)
 		}
 
-		console.log(imagePaths)
+		// console.log(imagePaths)
 	
 		const record = {
-			title: "julho",
-			description: "julho",
-			address: "julho",
-			country: "julho", 
-			price: "696969",
+			title: title,
+			description: description,
+			address: address,
+			country: country, 
+			price: price,
 			status: "sheeesh",
+			user: {
+				id: "123123",
+				email: "raf"
+			},
 			images: imagePaths
 		} 
 

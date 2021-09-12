@@ -9,9 +9,13 @@ yarn-error.log*
 
 src/upload/
 
-server/src/upload
+server/upload
 
 /upload
+
+../upload
+
+../upload/
 
 /build
 

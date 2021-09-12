@@ -7,6 +7,7 @@ import { Form, Field, reduxForm } from "redux-form"
 
 import { addNewRealEstate } from "../../../../redux/actions/RealEstates"
 
+import renderFileInput from "components/fields/inputFileField"
 
 const NewPropertyForm = ({ handleSubmit }: any): JSX.Element => {
 
@@ -69,7 +70,7 @@ const NewPropertyForm = ({ handleSubmit }: any): JSX.Element => {
 	const dispatch = useDispatch()
 
 	return (
-		<Form onSubmit={handleSubmit((e: any) => dispatch(addNewRealEstate(e)))} >
+		<Form onSubmit={handleSubmit((values: any) => dispatch(addNewRealEstate(values)))} >
 			<Field name="title" component="input"  type="text" />
 			<Field name="description" component="input"  type="text" />
 			<Field name="squareMeter" component="input"  type="number" />
@@ -79,8 +80,7 @@ const NewPropertyForm = ({ handleSubmit }: any): JSX.Element => {
 			<Field name="country" component="input"  type="text" />
 			<Field name="price" component="input"  type="text" />
 			<Field name="status" component="input"  type="text" />
-
-			<Field name="image1" component="input"  type="file" />
+			<Field name="image1" component={renderFileInput}  />
 			<Field name="image2" component="input"  type="file" />
 			<Field name="image3" component="input"  type="file" />
 			<Field name="image4" component="input"  type="file" />

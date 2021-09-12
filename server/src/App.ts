@@ -7,17 +7,18 @@ import mongoose from "mongoose"
 
 dotenv.config()
 
+// Middlewares
+app.use(express.json())
+app.use(cors())
+app.use(express.urlencoded({ extended: true }))
+app.use("api/realestates/upload", express.static("upload"))
+
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 mongoose.connect( process.env.DB_CONNECT!, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 })
 
-// Middlewares
-app.use(express.json())
-app.use(cors())
-app.use(express.urlencoded({ extended: true }))
-app.use("api/realestates/upload", express.static("upload"))
 
 // Routes Imports
 

@@ -37,6 +37,8 @@ export const addNewRealEstate = (values: any = {}) => async (dispatch: Dispatch<
 		status: values.status
 	}
 
+	console.log(data)
+
 	const formData: any = new FormData()
 
 	formData.append("images", values.image1)
@@ -44,10 +46,11 @@ export const addNewRealEstate = (values: any = {}) => async (dispatch: Dispatch<
 	formData.append("images", values.image3)
 	formData.append("images", values.image4)
 	formData.append("images", values.image5)
+	formData.append("data", JSON.stringify(data))
 
 	try {
 		const res = await axios.post("realestates/upload", formData, {
-			data: data
+			data: JSON.stringify(data)
 		})
 		console.log(res)
 		dispatch({

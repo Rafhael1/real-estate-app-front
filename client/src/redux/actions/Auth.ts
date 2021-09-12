@@ -34,7 +34,7 @@ export const createUser = (values: any = {}) => async (dispatch: Dispatch<Create
 	}
 }
 
-export const login = (values) => async (dispatch:Dispatch<LoginDispatchTypes>) => {
+export const login = (values: any) => async (dispatch:Dispatch<LoginDispatchTypes>) => {
 	dispatch({
 		type: ACTIONS.LOGIN_REQUEST
 	})
