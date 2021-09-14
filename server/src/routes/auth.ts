@@ -88,9 +88,12 @@ router.post("/verify-user", verify, async(req, res) => {
 	try {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		//@ts-ignore
-		// const userId = req.user.id
+		const userId = req.user
+		console.log(userId)
 
-		// const userData = await User.findOne({__id: userId})
+		const userData = await User.findOne({ _id: userId.__id })
+
+		console.log(userData)
 
 		res.send(true)
 

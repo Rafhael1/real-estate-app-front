@@ -7,6 +7,7 @@ import multer from "multer"
 // Schemas
 
 import Property from "../models/property"
+import User from "../models/user"
 
 // Verification middleware
 
@@ -42,21 +43,30 @@ router.get("/properties", verify, async (req: Request, res: Response) => {
 
 })
 
-router.post("/upload", upload.array("images"), verify, async(req: Request, res: Response) => {
+router.post("/create-real-estate", upload.array("images"), verify, async(req: Request, res: Response) => {
 	try {
 		const filePath: any = req.files
-		const data = JSON.parse(req.body.data)
+		// const data = JSON.parse(req.body.data)
 		const {
 			title,
 			description,
+			squareMeter,
+			bathrooms,
+			bedrooms,
 			address,
 			country,
-			price
+			price,
+			status,
 		} = JSON.parse(req.body.data)
-		// console.log(JSON.parse(req.body.data))
-		console.log(title)
+		
 		// @ts-ignore
-		console.log(req.user)
+		const userId = req.user
+		// @ts-ignore
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		const userData = await User.findOne({ _id: userId.__id })
+		console.log(userData)
+		console.log(userId)
+
 		// eslint-disable-next-line prefer-const
 		let imagePaths: string[] = []
 
@@ -69,22 +79,24 @@ router.post("/upload", upload.array("images"), verify, async(req: Request, res: 
 		const record = {
 			title: title,
 			description: description,
+			squareMeter: squareMeter,
+			bathrooms: bathrooms,
+			bedrooms: bedrooms,
 			address: address,
 			country: country, 
 			price: price,
-			status: "sheeesh",
+			status: status,
+			images: imagePaths,
 			user: {
-				id: "123123",
-				email: "raf"
+				id: userData._id,
+				name: userData.name,
+				email: userData.email,
 			},
-			images: imagePaths
 		} 
 
 		Property.create(record)
 
 		res.send("Uploaded sucessfully")
-
-		
 
 	} catch (error) {
 		console.log(error)

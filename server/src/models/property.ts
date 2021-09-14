@@ -15,6 +15,7 @@ const PropertySchema = new mongoose.Schema({
 	user: {
 		id: { type:  String, required: true },
 		email: { type: String, required: true },
+		name: { type: String, required: false },
 		phone: { type: String, required: false }
 	},
 	postDate: {
