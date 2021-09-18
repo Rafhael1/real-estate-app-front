@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from "react"
-import { TextField } from "@material-ui/core"
+import { TextField } from "@mui/material"
 
 
 const renderTextField = ({
@@ -9,6 +9,7 @@ const renderTextField = ({
 	variant,
 	type,
 	required,
+	width,
 	meta: { touched, error },
 	...custom
 }) => (
@@ -17,10 +18,17 @@ const renderTextField = ({
 		label={label}
 		variant={variant}
 		type={type}
+		style={{
+			width
+		}}
 		errorText={touched && error}
 		{...input}
 		{...custom}
 	/>
 )
+
+renderTextField.defaultProps = {
+	width: "300px"
+}
 
 export default renderTextField

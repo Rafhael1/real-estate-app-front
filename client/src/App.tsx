@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { RootStore } from "./redux/store"
 
 import { isLogged } from "./redux/actions/Auth"
-import styles from "./design/globalStyles"
+// import styles from "./design/globalStyles"
 
 const App = (): JSX.Element => {
 
@@ -22,18 +22,18 @@ const App = (): JSX.Element => {
 		
 	}
 
-	const style = styles()
+	// const style = styles()
 
 	useEffect(() => {
 		handleRequest()
 	}, [])
 
 	return (
-		<div className={style.root} >	
+		<>	
 			<Router>
 				<Routes />
 			</Router>
-		</div>
+		</>
 	)
 }
 

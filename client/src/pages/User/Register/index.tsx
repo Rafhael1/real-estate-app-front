@@ -4,7 +4,7 @@ import { Form, Field, reduxForm } from "redux-form"
 import { useDispatch } from "react-redux"
 
 import renderTextField from "../../../components/fields/inputField"
-import { Button } from "@material-ui/core"
+import { Button } from "@mui/material"
 
 import { createUser } from "../../../redux/actions/Auth"
 
