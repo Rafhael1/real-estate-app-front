@@ -1,12 +1,12 @@
-import React from "react"
-import { Form, Field, reduxForm } from "redux-form"
+import React from 'react'
+import { Form, Field, reduxForm } from 'redux-form'
 
-import { useDispatch } from "react-redux"
+import { useDispatch } from 'react-redux'
 
-import renderTextField from "../../../components/fields/inputField"
-import { Button } from "@mui/material"
+import renderTextField from '../../../components/fields/inputField'
+import { Button } from '@mui/material'
 
-import { createUser } from "../../../redux/actions/Auth"
+import { createUser } from '../../../redux/actions/Auth'
 
 const Register = ({ handleSubmit }: any): JSX.Element => {
 
@@ -42,8 +42,8 @@ const Register = ({ handleSubmit }: any): JSX.Element => {
 				component={Button} 
 				type="submit" 
 				props={{
-					variant: "contained",
-					color: "primary"
+					variant: 'contained',
+					color: 'primary'
 				}}
 			>Sign Up</Field>
 		</Form>
@@ -51,5 +51,5 @@ const Register = ({ handleSubmit }: any): JSX.Element => {
 }
 
 export default reduxForm({
-	form: "RegisterForm"
+	form: 'RegisterForm'
 })(Register)

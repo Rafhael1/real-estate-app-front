@@ -1,11 +1,11 @@
-import React from "react"
-import { Switch, Route } from "react-router"
+import React from 'react'
+import { Switch, Route } from 'react-router'
 
-import Dashboard from "./User/Dashboard"
+import Dashboard from './User/Dashboard'
 
-import Login from "./User/Login"
+import Login from './User/Login'
 
-import Register from "./User/Register"
+import Register from './User/Register'
 
 const Router = (): JSX.Element => {
 	return (

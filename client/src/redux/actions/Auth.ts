@@ -1,25 +1,25 @@
-import axios from "../../utils/api/axios"
+import axios from '../../utils/api/axios'
 
-import { Dispatch } from "redux"
+import { Dispatch } from 'redux'
 
 import { 
 	LoginDispatchTypes,
 	CreateUserDispatchTypes, 
 	IsLoggedDispatchTypes, 
 	ACTIONS,
-} from "../actionTypes/AuthActionTypes"
+} from '../actionTypes/AuthActionTypes'
 
 export const createUser = (values: any = {}) => async (dispatch: Dispatch<CreateUserDispatchTypes>) => {
 	const body = {
-		name: values.name || "",
-		email: values.email || "",
-		password: values.password || "",
+		name: values.name || '',
+		email: values.email || '',
+		password: values.password || '',
 	}
 	dispatch({
 		type: ACTIONS.CREATE_USER_REQUEST
 	})
 	try {
-		const res = await axios.post("/user/register",
+		const res = await axios.post('/user/register',
 			body
 		)
 
@@ -40,13 +40,13 @@ export const login = (values: any) => async (dispatch:Dispatch<LoginDispatchType
 	})
 	const body = values
 	try {
-		const res = await axios.post("/user/login", body)
+		const res = await axios.post('/user/login', body)
 		console.log(res)
 		if(res.data.authToken) {
 			if(values.rememberMe) {
-				localStorage.setItem("authToken", res.data.authToken)
+				localStorage.setItem('authToken', res.data.authToken)
 			} else {
-				sessionStorage.setItem("authToken", res.data.authToken)
+				sessionStorage.setItem('authToken', res.data.authToken)
 			}
 		}
 		dispatch({
@@ -62,7 +62,7 @@ export const login = (values: any) => async (dispatch:Dispatch<LoginDispatchType
 export const isLogged = () => async (dispatch: Dispatch<IsLoggedDispatchTypes>) => {
 	dispatch({ type: ACTIONS.IS_LOGGED_REQUEST })
 	try {
-		const res = await axios.post("/user/verify-user", {
+		const res = await axios.post('/user/verify-user', {
 		})
 		dispatch({
 			type: ACTIONS.IS_LOGGED_SUCCESS,

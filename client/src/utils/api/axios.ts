@@ -1,9 +1,9 @@
-import axios from "axios"
+import axios from 'axios'
 
 export default axios.create({
-	baseURL: "http://localhost:8000/api",
+	baseURL: 'http://localhost:8000/api',
 	headers: {
-		"Access-Control-Allow-Origin": "*",
-		"authToken": localStorage.authToken || sessionStorage.authToken
+		'Access-Control-Allow-Origin': '*',
+		'authToken': localStorage.authToken || sessionStorage.authToken
 	}
 })

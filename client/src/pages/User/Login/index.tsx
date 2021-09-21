@@ -1,18 +1,20 @@
-import React from "react"
+import React from 'react'
 
-import { Form, Field, reduxForm } from "redux-form"
-import { useDispatch } from "react-redux"
+import { Form, Field, reduxForm } from 'redux-form'
+import { useDispatch } from 'react-redux'
 
-import { login } from "redux/actions/Auth"
+import { login } from 'redux/actions/Auth'
 import {
 	Stack,
 	Container,
 	Button
-} from "@mui/material"
-import renderTextField from "../../../components/fields/inputField"
-import renderCheckboxField from "../../../components/fields/checkboxField"
+} from '@mui/material'
+import renderTextField from '../../../components/fields/inputField'
+import renderCheckboxField from '../../../components/fields/checkboxField'
 
-import useStyles from "./styles"
+import  Navbar  from 'pages/Common/Navbar'
+
+import useStyles from './styles'
   
 const Login = ({ handleSubmit }: any) => {
 
@@ -24,6 +26,7 @@ const Login = ({ handleSubmit }: any) => {
 		<Container>
 			<div className={classes.loginContainer}>
 				<Stack>
+					<Navbar />
 					<Form onSubmit={handleSubmit((values): any => dispatch(login(values)))} >
 						<Field 
 							name="email" 
@@ -58,5 +61,5 @@ const Login = ({ handleSubmit }: any) => {
 }
 
 export default reduxForm({
-	form: "LoginForm"
+	form: 'LoginForm'
 })(Login)

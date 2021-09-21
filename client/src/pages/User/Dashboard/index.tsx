@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 
-import NewPropertyForm from "./NewPropertyForm"
+import NewPropertyForm from './NewPropertyForm'
 
 const Admin = (): JSX.Element => {
 

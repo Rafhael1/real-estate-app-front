@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React from "react"
-import { TextField } from "@mui/material"
+import React from 'react'
+import { TextField } from '@mui/material'
 
 
 const renderTextField = ({
@@ -28,7 +28,7 @@ const renderTextField = ({
 )
 
 renderTextField.defaultProps = {
-	width: "300px"
+	width: '300px'
 }
 
 export default renderTextField

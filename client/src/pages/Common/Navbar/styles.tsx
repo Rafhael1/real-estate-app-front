@@ -1,10 +1,10 @@
 import { makeStyles } from '@mui/styles'
 
 const useStyles: any = makeStyles(() => ({
-	loginContainer: {
-		margin: '0 auto',
-		width: '300px'
-	},
+	// Auth Pages
+	authNavbar: {
+		minHeight: '400px'
+	}
 }))
 
 export default useStyles

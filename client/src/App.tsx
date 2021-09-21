@@ -1,13 +1,13 @@
-import React, {  useEffect } from "react"
-import { BrowserRouter as Router } from "react-router-dom"
+import React, {  useEffect } from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
 
-import Routes from "./pages/router"
+import Routes from './pages/router'
 
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector, useDispatch } from 'react-redux'
 
-import { RootStore } from "./redux/store"
+import { RootStore } from './redux/store'
 
-import { isLogged } from "./redux/actions/Auth"
+import { isLogged } from './redux/actions/Auth'
 // import styles from "./design/globalStyles"
 
 const App = (): JSX.Element => {

@@ -1,13 +1,13 @@
-import React from "react"
+import React from 'react'
 
-import { useDispatch } from "react-redux"
+import { useDispatch } from 'react-redux'
 
 
-import { Form, Field, reduxForm } from "redux-form"
+import { Form, Field, reduxForm } from 'redux-form'
 
-import { addNewRealEstate } from "../../../../redux/actions/RealEstates"
+import { addNewRealEstate } from '../../../../redux/actions/RealEstates'
 
-import renderFileInput from "components/fields/inputFileField"
+import renderFileInput from 'components/fields/inputFileField'
 
 const NewPropertyForm = ({ handleSubmit }: any): JSX.Element => {
 
@@ -91,5 +91,5 @@ const NewPropertyForm = ({ handleSubmit }: any): JSX.Element => {
 }
 
 export default reduxForm({
-	form: "NewPropertyFormRedux"
+	form: 'NewPropertyFormRedux'
 })(NewPropertyForm)

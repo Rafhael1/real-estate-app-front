@@ -1,22 +1,32 @@
-import  React, { useEffect } from "react"
+import  React, { useEffect } from 'react'
 
-import { useSelector } from "react-redux"
+import { useSelector } from 'react-redux'
 
-import { RootStore } from "../../../redux/store"
+import { RootStore } from '../../../redux/store'
 
-const Navbar = (): JSX.Element => {
-	
-	const realEstates = useSelector((state : RootStore) => state.RealEstates )
+import useStyles from './styles'
 
-	useEffect(() => {
-		console.log(realEstates)
-	}, [])
-
+const AuthNavBar = () => {
+	const classes = useStyles()
 	return (
-		<div>
-			<h1>Hello World</h1>
-			<h1></h1>
-		</div>
+		<nav style={classes.authNavBar}>
+			Test
+		</nav>
+	)
+}
+
+const Navbar = (
+	authPage,
+	homePage,
+	Dashboard,
+) => {
+	
+	return (
+		<>
+			{
+				authPage ? <AuthNavBar /> : null
+			}
+		</>
 	)
 }
 

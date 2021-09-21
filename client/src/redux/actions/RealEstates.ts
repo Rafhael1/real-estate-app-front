@@ -1,7 +1,7 @@
-import axios from "../../utils/api/axios"
+import axios from '../../utils/api/axios'
 
-import { Dispatch } from "redux"
-import { RealEstatesDispatchTypes, ACTIONS } from "../actionTypes/RealEstatesActionTypes"
+import { Dispatch } from 'redux'
+import { RealEstatesDispatchTypes, ACTIONS } from '../actionTypes/RealEstatesActionTypes'
 
 export const getRealEstates = () => async (dispatch: Dispatch<RealEstatesDispatchTypes>) => {
 	dispatch({
@@ -9,7 +9,7 @@ export const getRealEstates = () => async (dispatch: Dispatch<RealEstatesDispatc
 	})
 	try {
 
-		const res = await axios.get("/image")
+		const res = await axios.get('/image')
 
 		dispatch({
 			type: ACTIONS.GET_REAL_ESTATES_SUCCESS,
@@ -41,15 +41,15 @@ export const addNewRealEstate = (values: any = {}) => async (dispatch: Dispatch<
 
 	const formData: any = new FormData()
 
-	formData.append("images", values.image1)
-	formData.append("images", values.image2)
-	formData.append("images", values.image3)
-	formData.append("images", values.image4)
-	formData.append("images", values.image5)
-	formData.append("data", JSON.stringify(data))
+	formData.append('images', values.image1)
+	formData.append('images', values.image2)
+	formData.append('images', values.image3)
+	formData.append('images', values.image4)
+	formData.append('images', values.image5)
+	formData.append('data', JSON.stringify(data))
 
 	try {
-		const res = await axios.post("realestates/create-real-estate", formData, {
+		const res = await axios.post('realestates/create-real-estate', formData, {
 			data: JSON.stringify(data)
 		})
 		console.log(res)
