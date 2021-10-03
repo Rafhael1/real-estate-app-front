@@ -1,16 +1,15 @@
 import React from 'react'
 import { Switch, Route } from 'react-router'
 
+import Home from './Home'
+import Login from './User/Login'
+import Register from './User/Register'
 import Dashboard from './User/Dashboard'
 
-import Login from './User/Login'
-
-import Register from './User/Register'
-
-const Router = (): JSX.Element => {
+const Router = () => {
 	return (
 		<Switch>
-			<Route path="/" exact />
+			<Route path="/" exact component={Home} />
 			<Route path="/login" exact component={Login}  />
 			<Route path="/register" exact component={Register} />
 			<Route path="/dashboard" exact component={Dashboard} />
