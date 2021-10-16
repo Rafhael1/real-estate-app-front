@@ -21,6 +21,7 @@
     "@types/redux-form": "^8.3.2",
     "@types/redux-thunk": "^2.1.0",
     "axios": "^0.21.1",
+    "husky": "^7.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
@@ -41,7 +42,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "tsc": "tsc -w",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
