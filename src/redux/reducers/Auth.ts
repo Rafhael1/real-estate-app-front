@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { UserType } from '../actionTypes/AuthActionTypes'
+import { UserType } from '../Types/AuthActionTypes'
 
-import { ACTIONS } from '../actionTypes/AuthActionTypes'
+import { ACTIONS } from '../Types/AuthActionTypes'
 
 interface IState {
     isLoading: boolean,

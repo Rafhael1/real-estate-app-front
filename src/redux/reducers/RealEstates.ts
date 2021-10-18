@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { RealEstatesType } from '../actionTypes/RealEstatesActionTypes'
+import { RealEstatesType } from '../Types/RealEstatesActionTypes'
 
-import { ACTIONS } from '../actionTypes/RealEstatesActionTypes'
+import { ACTIONS } from '../Types/RealEstatesActionTypes'
 
 interface IState  {
     isLoading: boolean,

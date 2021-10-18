@@ -7,7 +7,7 @@ import {
 	CreateUserDispatchTypes, 
 	IsLoggedDispatchTypes, 
 	ACTIONS,
-} from '../actionTypes/AuthActionTypes'
+} from '../Types/AuthActionTypes'
 
 export const createUser = (values: any = {}) => async (dispatch: Dispatch<CreateUserDispatchTypes>) => {
 	const body = {
@@ -41,7 +41,6 @@ export const login = (values: any) => async (dispatch:Dispatch<LoginDispatchType
 	const body = values
 	try {
 		const res = await axios.post('/user/login', body)
-		console.log(res)
 		if(res.data.authToken) {
 			if(values.rememberMe) {
 				localStorage.setItem('authToken', res.data.authToken)
