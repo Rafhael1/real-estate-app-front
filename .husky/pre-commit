@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn lint --max-warnings=0 || (echo "Something went wrong, make sure your code follows the project's pre-determined pattern"; false)
+yarn lint-staged || (echo "Something went wrong, make sure your code follows the project's pre-determined pattern"; false)
 echo "Commit successful"
