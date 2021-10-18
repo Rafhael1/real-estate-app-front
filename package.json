@@ -77,7 +77,6 @@
   "lint-staged": {
     "**/*.{ts,tsx}": [
       "yarn lint --max-warnings=0",
-      "yarn prettier --write",
       "yarn test --watchAll=false --findRelatedTests --bail"
     ]
   }
