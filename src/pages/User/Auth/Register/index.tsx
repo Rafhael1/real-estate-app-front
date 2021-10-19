@@ -3,12 +3,12 @@ import { Form, Field, reduxForm } from 'redux-form'
 
 import { useDispatch } from 'react-redux'
 
-import renderTextField from '../../../components/fields/inputField'
+import renderTextField from '../../../../components/fields/inputField'
 import { Button } from '@mui/material'
 
-import { createUser } from '../../../redux/actions/Auth'
+import { createUser } from './redux/actions'
 
-const Register = ({ handleSubmit }: any): JSX.Element => {
+const Register = ({ handleSubmit }) => {
 
 	const dispatch = useDispatch()
 

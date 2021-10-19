@@ -1,35 +1,34 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import React, { /* useEffect */ } from "react"
+import { BrowserRouter as Router } from "react-router-dom"
 
-import Routes from "./pages/router";
+import Routes from "./pages/router"
 
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux"
 
-import { RootStore } from "./redux/store";
+// import { RootStore } from "./redux/store"
 
-import { isLogged } from "./redux/actions/Auth";
+// import { isLogged } from "./redux/actions/Auth"
 
 const App = () => {
-  const dispatch = useDispatch();
+	/* const dispatch = useDispatch()
 
-  const States = useSelector((state: RootStore) => state.RealEstates);
-  console.log(States);
+    const States = useSelector((state: RootStore) => state.RealEstates)
 
-  const handleRequest = () => {
-    dispatch(isLogged());
-  };
+	const handleRequest = () => {
+		dispatch(isLogged())
+	}
 
-  useEffect(() => {
-    handleRequest();
-  }, []);
+	useEffect(() => {
+		handleRequest()
+	}, []) */
 
-  return (
-    <>
-      <Router>
-        <Routes />
-      </Router>
-    </>
-  );
-};
+	return (
+		<>
+			<Router>
+				<Routes />
+			</Router>
+		</>
+	)
+}
 
-export default App;
+export default App
