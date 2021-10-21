@@ -76,8 +76,7 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
-      "yarn lint --max-warnings=0",
-      "yarn test --watchAll=false --findRelatedTests --bail"
+      "yarn lint --max-warnings=0"
     ]
   }
 }
