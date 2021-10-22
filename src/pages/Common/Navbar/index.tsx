@@ -8,27 +8,27 @@ import { RootStore } from '../../../redux/store'
 import useStyles from './styles'
 
 const AuthNavBar = () => {
-	const classes = useStyles()
-	return (
-		<nav style={classes.authNavBar}>
+  const classes = useStyles()
+  return (
+    <nav style={classes.authNavBar}>
 			Test
-		</nav>
-	)
+    </nav>
+  )
 }
 
 const Navbar = (
-	authPage,
-	homePage,
-	Dashboard,
+  authPage,
+  homePage,
+  Dashboard,
 ) => {
 	
-	return (
-		<>
-			{
-				authPage ? <AuthNavBar /> : null
-			}
-		</>
-	)
+  return (
+    <>
+      {
+        authPage ? <AuthNavBar /> : null
+      }
+    </>
+  )
 }
 
 export default Navbar

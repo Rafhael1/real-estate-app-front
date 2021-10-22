@@ -5,7 +5,7 @@ import { RealEstates } from './RealEstates'
 import { Auth } from './Auth'
 
 export const reducers = combineReducers({
-	form: formReducer,
-	Auth,
-	RealEstates
+  form: formReducer,
+  Auth,
+  RealEstates
 })

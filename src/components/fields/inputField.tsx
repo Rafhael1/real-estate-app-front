@@ -4,31 +4,31 @@ import { TextField } from '@mui/material'
 
 
 const renderTextField = ({
-	input,
-	label,
-	variant,
-	type,
-	required,
-	width,
-	meta: { touched, error },
-	...custom
+  input,
+  label,
+  variant,
+  type,
+  required,
+  width,
+  meta: { touched, error },
+  ...custom
 }) => (
-	<TextField
-		required={required}
-		label={label}
-		variant={variant}
-		type={type}
-		style={{
-			width
-		}}
-		errorText={touched && error}
-		{...input}
-		{...custom}
-	/>
+  <TextField
+    required={required}
+    label={label}
+    variant={variant}
+    type={type}
+    style={{
+      width
+    }}
+    errorText={touched && error}
+    {...input}
+    {...custom}
+  />
 )
 
 renderTextField.defaultProps = {
-	width: '300px'
+  width: '300px'
 }
 
 export default renderTextField

@@ -34,7 +34,7 @@
         "react/prop-types": 0,
         "indent": [
             "error",
-            "tab"
+            2
         ],
         "linebreak-style": [
             "error",

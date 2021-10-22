@@ -13,49 +13,53 @@ import Navbar from "pages/Common/Navbar"
 import useStyles from "./styles"
 
 const Login = ({ handleSubmit }) => {
-	const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-	const classes = useStyles()
+  const classes = useStyles()
 
-	return (
-		<Container>
-			<div className={classes.loginContainer}>
-				<Stack>
-					<Navbar />
-					<Form
-						onSubmit={handleSubmit((values): any => dispatch(login(values)))}
-					>
-						<Field
-							name="email"
-							color="primary"
-							label="Email"
-							type="email"
-							component={renderTextField}
-						/>
-						<Field
-							name="password"
-							color="primary"
-							label="Password"
-							type="password"
-							component={renderTextField}
-						/>
-						<Field
-							name="rememberMe"
-							type="checkbox"
-							label="Remember Me"
-							color="secondary"
-							component={renderCheckboxField}
-						/>
-						<Field component={Button} type="submit">
-              Sign In
-						</Field>
-					</Form>
-				</Stack>
-			</div>
-		</Container>
-	)
+  return (
+    <Container>
+      <div className={classes.loginContainer}>
+        <Stack>
+          <Navbar />
+          <Form
+            onSubmit={handleSubmit((values): any => dispatch(login(values)))}
+          >
+            <Field
+              name="email"
+              color="primary"
+              label="Email"
+              type="email"
+              component={renderTextField}
+            />
+            <Field
+              name="password"
+              color="primary"
+              label="Password"
+              type="password"
+              component={renderTextField}
+            />
+            <Field
+              name="rememberMe"
+              type="checkbox"
+              label="Remember Me"
+              color="secondary"
+              component={renderCheckboxField}
+            />
+            <Field 
+              component={Button} 
+              data-testid="sign-in-button" 
+              type="submit"
+            >
+    Sign In
+            </Field>
+          </Form>
+        </Stack>
+      </div>
+    </Container>
+  )
 }
 
 export default reduxForm({
-	form: "LoginForm",
+  form: "LoginForm",
 })(Login)

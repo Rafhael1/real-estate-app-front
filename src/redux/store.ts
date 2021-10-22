@@ -5,8 +5,8 @@ import { reducers } from './reducers/index'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 export const store = createStore(
-	reducers,
-	composeWithDevTools(applyMiddleware(thunk))
+  reducers,
+  composeWithDevTools(applyMiddleware(thunk))
 )
 
 export type RootStore = ReturnType<typeof reducers>

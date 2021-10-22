@@ -10,7 +10,7 @@ import Routes from "./pages/router"
 // import { isLogged } from "./redux/actions/Auth"
 
 const App = () => {
-	/* const dispatch = useDispatch()
+  /* const dispatch = useDispatch()
 
     const States = useSelector((state: RootStore) => state.RealEstates)
 
@@ -22,13 +22,13 @@ const App = () => {
 		handleRequest()
 	}, []) */
 
-	return (
-		<>
-			<Router>
-				<Routes />
-			</Router>
-		</>
-	)
+  return (
+    <>
+      <Router>
+        <Routes />
+      </Router>
+    </>
+  )
 }
 
 export default App
