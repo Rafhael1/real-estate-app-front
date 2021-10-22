@@ -3,7 +3,7 @@ import { Dispatch } from 'redux'
 import { 
   IsLoggedDispatchTypes, 
   ACTIONS,
-} from '../Types/AuthActionTypes'
+} from '../types'
 
 export const isLogged = () => async (dispatch: Dispatch<IsLoggedDispatchTypes>) => {
   dispatch({ type: ACTIONS.IS_LOGGED_REQUEST })

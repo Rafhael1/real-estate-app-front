@@ -4,7 +4,7 @@ export const ACTIONS = {
   LOGIN_ERROR: 'LOGIN_ERROR',
 }
 
-type UserType = {
+export type UserType = {
 	id: string,
 	name: string,
     email: string,

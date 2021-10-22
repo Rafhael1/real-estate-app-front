@@ -2,9 +2,11 @@ import React from "react"
 
 import { Form, Field, reduxForm } from "redux-form"
 import { useDispatch } from "react-redux"
+import { UserType } from "./types"
 
-import { login } from "redux/actions/Auth"
+import { login } from "./redux/actions"
 import { Stack, Container, Button } from "@mui/material"
+
 import renderTextField from "../../../../components/fields/inputField"
 import renderCheckboxField from "../../../../components/fields/checkboxField"
 
@@ -23,7 +25,7 @@ const Login = ({ handleSubmit }) => {
         <Stack>
           <Navbar />
           <Form
-            onSubmit={handleSubmit((values): any => dispatch(login(values)))}
+            onSubmit={handleSubmit((values: UserType) => dispatch(login(values)))}
           >
             <Field
               name="email"
