@@ -23,7 +23,7 @@ export const getRealEstates = () => async (dispatch: Dispatch<RealEstatesDispatc
 
 }
 
-export const addNewRealEstate = (values: any = {}) => async (dispatch: Dispatch<RealEstatesDispatchTypes>) => {
+export const addNewRealEstate = (values) => async (dispatch: Dispatch<RealEstatesDispatchTypes>) => {
   dispatch({
     type: ACTIONS.ADD_NEW_REAL_STATE_REQUEST
   })
@@ -38,13 +38,6 @@ export const addNewRealEstate = (values: any = {}) => async (dispatch: Dispatch<
   }
 
   const formData: any = new FormData()
-
-  // console.log(values.images)
-  // formData.append('images', values.image1)
-  // formData.append('images', values.image2)
-  // formData.append('images', values.image3)
-  // formData.append('images', values.image4)
-  // formData.append('images', values.image5)
 	
   values.images.forEach(element => {
     formData.append('images', element)
