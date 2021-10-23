@@ -5,7 +5,7 @@ import Login from '.'
 
 const funcMock = jest.fn()
 
-const props = {
+const props: any = {
   handleSubmit: funcMock,
 }
 

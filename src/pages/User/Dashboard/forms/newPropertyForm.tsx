@@ -38,7 +38,7 @@ const NewPropertyForm = ({ handleSubmit }: any) => {
         <Field name="price" component="input"  type="text" />
         <Field name="status" component="input"  type="text" />
         <FieldArray name="images" component={renderImages} />
-        <button type="submit" >Submit</button>
+        <button type="submit" >Add New Property</button>
       </Form>
     </>
   )
@@ -46,7 +46,4 @@ const NewPropertyForm = ({ handleSubmit }: any) => {
 
 export default reduxForm({
   form: 'NewPropertyFormRedux',
-  // initialValues: {
-  // 	images: ['1', '']
-  // }
 })(NewPropertyForm)
