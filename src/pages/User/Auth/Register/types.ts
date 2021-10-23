@@ -17,7 +17,7 @@ export type UserType = {
 	name: string,
     email: string,
     password: string
-}[]
+}
 
 export interface CreateUserRequest {
 	type: typeof ACTIONS.CREATE_USER_REQUEST
