@@ -5,7 +5,7 @@ import { Form, Field, FieldArray, reduxForm } from 'redux-form'
 
 import { addNewRealEstate } from '../redux/actions'
 
-import renderFileInput from 'components/fields/inputFileField'
+import renderFileInput from '../../../../components/fields/inputField'
 
 const renderImages = ({ fields }: any) => (
   <>

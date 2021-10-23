@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should render new property form 1`] = `
+exports[`New Property form Should render new property form correctly 1`] = `
 <Hoc
   destroyOnUnmount={true}
   enableReinitialize={false}
