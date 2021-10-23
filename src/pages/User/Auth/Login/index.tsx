@@ -10,7 +10,7 @@ import { Stack, Container, Button } from "@mui/material"
 import renderTextField from "../../../../components/fields/inputField"
 import renderCheckboxField from "../../../../components/fields/checkboxField"
 
-import Navbar from "pages/Common/Navbar"
+// import Navbar from "pages/Common/Navbar/index"
 
 import useStyles from "./styles"
 
@@ -23,7 +23,6 @@ const Login = ({ handleSubmit }) => {
     <Container>
       <div className={classes.loginContainer}>
         <Stack>
-          <Navbar />
           <Form
             onSubmit={handleSubmit((values: UserType) => dispatch(login(values)))}
           >

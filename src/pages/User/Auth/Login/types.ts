@@ -7,14 +7,15 @@ export const ACTIONS = {
 export type UserType = {
 	id: string,
 	name: string,
-    email: string,
-    password: string
-}[]
+  email: string,
+  password: string,
+  rememberMe: boolean
+}
 
 export interface IState {
-    isLoading: boolean,
-    hasError: boolean,
-    user?: UserType,
+  isLoading: boolean,
+  hasError: boolean,
+  user?: UserType,
 	isUserLogged: boolean
 }
 
