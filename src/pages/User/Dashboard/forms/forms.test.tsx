@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import thunk from "redux-thunk"
+import { Provider } from "react-redux"
 import * as ActionCreators from "../redux/actions"
 import React from 'react'
 import "../../../../setupTests"
 import expect from "expect"
 import moxios from "moxios"
 import configureMockStore from "redux-mock-store"
+import { render } from 'enzyme'
+import NewPropertyForm from './newPropertyForm'
+
 const middleware = [thunk]
 const mockStore = configureMockStore(middleware)
-import { shallow } from 'enzyme'
-import NewPropertyForm from './newPropertyForm'
 
 
 const props: any = {
@@ -41,7 +43,11 @@ describe('New Property form', () => {
   })
 
   it('Should render new property form correctly', () => {
-    expect(shallow(<NewPropertyForm {...props} />)).toMatchSnapshot()
+    expect(render(
+      <Provider store={store}>
+        <NewPropertyForm {...props} />
+      </Provider>
+    )).toMatchSnapshot()
   })
 
 
