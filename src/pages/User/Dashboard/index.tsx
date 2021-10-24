@@ -1,14 +1,14 @@
 import React from 'react'
 
-import NewPropertyForm from './NewPropertyForm'
+import NewPropertyForm from './forms/newPropertyForm'
 
 const Admin = () => {
 
-	return (
-		<div>
-			<NewPropertyForm />
-		</div>
-	)
+  return (
+    <div>
+      <NewPropertyForm />
+    </div>
+  )
 }
 
 export default Admin

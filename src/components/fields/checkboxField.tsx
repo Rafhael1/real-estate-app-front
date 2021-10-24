@@ -5,27 +5,25 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 
 
 const renderCheckboxField = ({
-	input,
-	label,
-	color,
-	icon,
-	size,
-	meta: { touched, error },
-	...custom
+  input,
+  label,
+  color,
+  icon,
+  size,
+  ...custom
 }) => (
-	<FormControlLabel
-		label={label}
-		control={
-			<Checkbox
-				icon={icon} 
-				color={color}
-				size={size}
-				{...input}
-				{...custom}
-				errorText={touched && error}
-			/>
-		}
-	/>
+  <FormControlLabel
+    label={label}
+    control={
+      <Checkbox
+        icon={icon} 
+        color={color}
+        size={size}
+        {...input}
+        {...custom}
+      />
+    }
+  />
 )
 
 export default renderCheckboxField

@@ -1,20 +1,21 @@
 export const ACTIONS = {
-	LOGIN_REQUEST: 'LOGIN_REQUEST',
-	LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-	LOGIN_ERROR: 'LOGIN_ERROR',
+  LOGIN_REQUEST: 'LOGIN_REQUEST',
+  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+  LOGIN_ERROR: 'LOGIN_ERROR',
 }
 
-type UserType = {
+export type UserType = {
 	id: string,
 	name: string,
-    email: string,
-    password: string
-}[]
+  email: string,
+  password: string,
+  rememberMe: boolean
+}
 
 export interface IState {
-    isLoading: boolean,
-    hasError: boolean,
-    user?: UserType,
+  isLoading: boolean,
+  hasError: boolean,
+  user?: UserType,
 	isUserLogged: boolean
 }
 
