@@ -47,13 +47,11 @@ const Login = ({ handleSubmit }) => {
               color="secondary"
               component={renderCheckboxField}
             />
-            <Field 
-              component={Button} 
-              data-testid="sign-in-button" 
+            <Button 
               type="submit"
             >
     Sign In
-            </Field>
+            </Button>
           </Form>
         </Stack>
       </div>

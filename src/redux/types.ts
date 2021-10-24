@@ -3,15 +3,11 @@ export const ACTIONS = {
   IS_LOGGED_SUCCESS: 'IS_LOGGED_SUCCESS',
   IS_LOGGED_ERROR: 'IS_LOGGED_ERROR',
 }
-  
-export type UserType = {
-      id: string,
-      name: string,
-      email: string,
-      password: string
-  }[]
-  
-  
+
+export interface IglobalReducers {
+  isLoading: boolean,
+  isAuthenticated: boolean
+}
   
 export interface IsLoggedRequest {
       type: typeof ACTIONS.IS_LOGGED_REQUEST

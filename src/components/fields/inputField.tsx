@@ -10,7 +10,6 @@ const renderTextField = ({
   type,
   required,
   width,
-  meta: { touched, error },
   ...custom
 }) => (
   <TextField
@@ -21,7 +20,6 @@ const renderTextField = ({
     style={{
       width
     }}
-    errorText={touched && error}
     {...input}
     {...custom}
   />

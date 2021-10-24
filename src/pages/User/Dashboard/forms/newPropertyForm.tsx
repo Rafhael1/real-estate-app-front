@@ -1,16 +1,17 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-
 import { Form, Field, FieldArray, reduxForm } from 'redux-form'
-
+import { RealEstatesType } from '../types'
 import { addNewRealEstate } from '../redux/actions'
 
-import renderFileInput from '../../../../components/fields/inputField'
+import renderFileInput from '../../../../components/fields/inputFileField'
+import renderInput from '../../../../components/fields/inputField'
+import { Stack, Container, Button } from "@mui/material"
 
 const renderImages = ({ fields }: any) => (
   <>
     <button type="button" onClick={() => fields.push()}>
-	Add Hobby
+	Add Image
     </button>
     {
       fields.map((image, index) => (
@@ -22,25 +23,27 @@ const renderImages = ({ fields }: any) => (
   </>
 )
 
-const NewPropertyForm = ({ handleSubmit }: any) => {
+const NewPropertyForm = ({ handleSubmit }) => {
   const dispatch = useDispatch()
 
   return (
-    <>
-      <Form onSubmit={handleSubmit((values: any) => dispatch(addNewRealEstate(values)))} >
-        <Field name="title" component="input"  type="text" />
-        <Field name="description" component="input"  type="text" />
-        <Field name="squareMeter" component="input"  type="number" />
-        <Field name="bathrooms" component="input"  type="number" />
-        <Field name="bedrooms" component="input"  type="number" />
-        <Field name="address" component="input"  type="text" />
-        <Field name="country" component="input"  type="text" />
-        <Field name="price" component="input"  type="text" />
-        <Field name="status" component="input"  type="text" />
-        <FieldArray name="images" component={renderImages} />
-        <button type="submit" >Add New Property</button>
-      </Form>
-    </>
+    <Container>
+      <Stack>
+        <Form onSubmit={handleSubmit((values: RealEstatesType) => dispatch(addNewRealEstate(values)))} >
+          <Field name="title" component={renderInput} type="text" />
+          <Field name="description" component={renderInput}  type="text" />
+          <Field name="squareMeter" component={renderInput}  type="number" />
+          <Field name="bathrooms" component={renderInput}  type="number" />
+          <Field name="bedrooms" component={renderInput}  type="number" />
+          <Field name="address" component={renderInput}  type="text" />
+          <Field name="country" component={renderInput}  type="text" />
+          <Field name="price" component={renderInput}  type="text" />
+          <Field name="status" component={renderInput}  type="text" />
+          <FieldArray name="images" component={renderImages} />
+          <Button type="submit" >Add New Property</Button>
+        </Form>
+      </Stack>
+    </Container>
   )
 }
 

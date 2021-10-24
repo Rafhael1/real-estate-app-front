@@ -10,7 +10,6 @@ const renderCheckboxField = ({
   color,
   icon,
   size,
-  meta: { touched, error },
   ...custom
 }) => (
   <FormControlLabel
@@ -22,7 +21,6 @@ const renderCheckboxField = ({
         size={size}
         {...input}
         {...custom}
-        errorText={touched && error}
       />
     }
   />

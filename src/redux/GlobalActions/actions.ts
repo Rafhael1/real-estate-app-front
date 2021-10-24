@@ -12,7 +12,9 @@ export const isLogged = () => async (dispatch: Dispatch<IsLoggedDispatchTypes>) 
     })
     dispatch({
       type: ACTIONS.IS_LOGGED_SUCCESS,
-      payload: res.data
+      payload: {
+        isLogged: res.data
+      }
     })
   } catch (error) {
     dispatch({ type: ACTIONS.IS_LOGGED_ERROR })
