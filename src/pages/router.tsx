@@ -21,9 +21,9 @@ const Router = () => {
   return (
     <Switch>
       <Route path="/" exact component={Home} />
-      <Route path="/login" exact component={Login}  />
+      <Route path="/login" exact render={() => !isAuthenticated ? <Login /> : <Redirect to="/dashboard" />}  />
       <Route path="/register" exact component={Register} />
-      <Route path="/dashboard" exact render={() => isAuthenticated ? Dashboard : <Redirect to="/login" />} />
+      <Route path="/dashboard" exact render={() => isAuthenticated ? <Dashboard /> : <Redirect to="/login" />} />
       <Route path="/results" exact />
     </Switch>
   )
