@@ -49,6 +49,7 @@ const Login = ({ handleSubmit }) => {
             />
             <Button 
               type="submit"
+              color="success"
             >
     Sign In
             </Button>

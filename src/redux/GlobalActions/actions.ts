@@ -8,8 +8,7 @@ import {
 export const isLogged = () => async (dispatch: Dispatch<IsLoggedDispatchTypes>) => {
   dispatch({ type: ACTIONS.IS_LOGGED_REQUEST })
   try {
-    const res = await axios.post('/user/verify-user', {
-    })
+    const res = await axios.post('/user/verify-user')
     dispatch({
       type: ACTIONS.IS_LOGGED_SUCCESS,
       payload: {

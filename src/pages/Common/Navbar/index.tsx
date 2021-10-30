@@ -16,6 +16,8 @@ const AuthNavBar = () => {
   )
 }
 
+// Unique navbar style
+
 const Navbar = (
   authPage,
   homePage,

@@ -13,11 +13,11 @@ export const login = (values: UserType) => async (dispatch:Dispatch<LoginDispatc
 
   try {
     const res = await axios.post('/user/login', values)
-    if(res.data.authToken) {
+    if(res.data.records.authToken) {
       if(values.rememberMe) {
-        localStorage.setItem('authToken', res.data.authToken)
+        localStorage.setItem('authToken', res.data.records.authToken)
       } else {
-        sessionStorage.setItem('authToken', res.data.authToken)
+        sessionStorage.setItem('authToken', res.data.records.authToken)
       }
     }
     dispatch({
