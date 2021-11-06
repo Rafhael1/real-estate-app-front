@@ -1,31 +1,23 @@
+import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from '../../../../../utils/api/axios'
-import { Dispatch } from 'redux'
+
 import { UserType } from '../types'
-import { 
-  LoginDispatchTypes,
-  ACTIONS,
-} from '../types'
 
-export const login = (values: UserType) => async (dispatch:Dispatch<LoginDispatchTypes>) => {
-  dispatch({
-    type: ACTIONS.LOGIN_REQUEST
-  })
-
-  try {
-    const res = await axios.post('/user/login', values)
-    if(res.data.records.authToken) {
-      if(values.rememberMe) {
-        localStorage.setItem('authToken', res.data.records.authToken)
-      } else {
-        sessionStorage.setItem('authToken', res.data.records.authToken)
+export const login: any = createAsyncThunk(
+  'login',
+  async (values: UserType) => {
+    try {
+      const res = (await axios.post('/user/login', values)).data.records
+      if(res.authToken) {
+        if(values.rememberMe) {
+          localStorage.setItem('authToken', res.authToken)
+        } else if (!values.rememberMe) {
+          sessionStorage.setItem('authToken', res.authToken)
+        }
       }
+      return res
+    } catch (error) {
+      return error
     }
-    dispatch({
-      type: ACTIONS.LOGIN_SUCCESS
-    })
-  } catch (error) {
-    dispatch({
-      type: ACTIONS.LOGIN_ERROR
-    })
   }
-}
+)

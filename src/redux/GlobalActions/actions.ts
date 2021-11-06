@@ -1,21 +1,14 @@
+import { createAsyncThunk, } from '@reduxjs/toolkit'
 import axios from '../../utils/api/axios'
-import { Dispatch } from 'redux'
-import { 
-  IsLoggedDispatchTypes, 
-  ACTIONS,
-} from '../types'
 
-export const isLogged = () => async (dispatch: Dispatch<IsLoggedDispatchTypes>) => {
-  dispatch({ type: ACTIONS.IS_LOGGED_REQUEST })
-  try {
-    const res = await axios.post('/user/verify-user')
-    dispatch({
-      type: ACTIONS.IS_LOGGED_SUCCESS,
-      payload: {
-        isLogged: res.data
-      }
-    })
-  } catch (error) {
-    dispatch({ type: ACTIONS.IS_LOGGED_ERROR })
+export const isLogged: any = createAsyncThunk(
+  'isLogged',
+  async () => {
+    try {
+      const res: boolean = (await axios.post('/user/verify-user')).data.records
+      return res
+    } catch (error) {
+      return error
+    }
   }
-}
+)

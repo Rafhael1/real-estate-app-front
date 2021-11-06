@@ -1,31 +1,32 @@
-import { ACTIONS, IglobalReducers } from '../types'
+import { IglobalReducers } from '../types'
+import {  createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { isLogged } from 'redux/GlobalActions/actions'
 
 export const INITIAL_STATE: IglobalReducers = {
   isLoading: false,
   isAuthenticated: false,
 }
 
-const reducer = (state: IglobalReducers = INITIAL_STATE, action: any) => {
-  switch(action.type) {
-  case ACTIONS.IS_LOGGED_REQUEST:
-    return {
-      ...state,
-      isLoading: true
-    }
-  case ACTIONS.IS_LOGGED_SUCCESS:
-    return {
-      ...state,
-      isLoading: false,
-      isAuthenticated: action.payload
-    }
-  case ACTIONS.IS_LOGGED_ERROR:
-    return {
-      ...state,
-      isLoading: false,
-    }
-  default: 
-    return state
-  }
+export const initialState = {
+  isLoading: false,
+  isAuthenticated: false,
 }
+// @ts-ignore
+const isLoggedSlices = createSlice({
+  name: "user",
+  initialState,
+  extraReducers:{
+    [isLogged.pending]: (state) => {
+      state.isLoading = true
+    },
+    [isLogged.fulfilled]: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = false,
+      state.isAuthenticated = action.payload
+    },
+    [isLogged.rejected]: (state) => {
+      state.isLoading = false
+    }
+  }
+})
 
-export default reducer
+export default isLoggedSlices.reducer

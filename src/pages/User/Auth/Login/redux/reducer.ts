@@ -1,32 +1,30 @@
-import { ACTIONS, IState } from '../types'
+import { IState } from '../types'
+import {  createSlice } from '@reduxjs/toolkit'
+import { login } from './actions'
 
-export const INITIAL_STATE: IState = {
+export const initialState: IState = {
   isLoading: false,
   hasError: false,
   isUserLogged: false
 }
 
-const reducer = (state: IState = INITIAL_STATE, action: any) => {
-  switch(action.type) {
-  case ACTIONS.LOGIN_REQUEST:
-    return {
-      ...state,
-      isLoading: true
-    }
-  case ACTIONS.LOGIN_SUCCESS:
-    return {
-      ...state,
-      isLoading: false
-    }
-  case ACTIONS.LOGIN_ERROR:
-    return {
-      ...state,
-      isLoading: false,
-      hasError: true
-    }
-  default: 
-    return state
+// @ts-ignore
+const loginSlices = createSlice({
+  name: "login",
+  initialState,
+  extraReducers: {
+    [login.pending]: (state) => {
+      state.isLoading = true
+    },
+    [login.fulfilled]: (state) => {
+      state.isLoading = false,
+      state.isUserLogged = true
+    },
+    [login.rejected]: (state) => {
+      state.hasError = true,
+      state.isLoading = false
+    } 
   }
-}
+})
 
-export default reducer
+export default loginSlices.reducer
