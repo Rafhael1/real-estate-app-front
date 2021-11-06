@@ -12,7 +12,7 @@ export const initialState = {
   isAuthenticated: false,
 }
 // @ts-ignore
-const isLoggedSlices = createSlice({
+export const isLoggedSlices = createSlice({
   name: "user",
   initialState,
   extraReducers:{

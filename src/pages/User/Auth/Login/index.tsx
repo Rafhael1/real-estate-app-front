@@ -1,9 +1,7 @@
 import React from "react"
-
 import { Form, Field, reduxForm } from "redux-form"
-import { useDispatch } from "react-redux"
 import { UserType } from "./types"
-
+import { useAppDispatch } from "../../../../redux/hooks"
 import { login } from "./redux/actions"
 import { Stack, Container, Button } from "@mui/material"
 
@@ -15,7 +13,7 @@ import renderCheckboxField from "../../../../components/fields/checkboxField"
 import useStyles from "./styles"
 
 const Login = ({ handleSubmit }) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const classes = useStyles()
 
