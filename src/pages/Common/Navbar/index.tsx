@@ -3,8 +3,6 @@ import  React, { useEffect } from 'react'
 
 import { useSelector } from 'react-redux'
 
-import { RootStore } from '../../../redux/store'
-
 import useStyles from './styles'
 
 const AuthNavBar = () => {

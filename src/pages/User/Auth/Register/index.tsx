@@ -1,19 +1,19 @@
 import React from 'react'
+import { UserType } from './types'
 import { Form, Field, reduxForm } from 'redux-form'
-
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../../../../redux/hooks'
 
 import renderTextField from '../../../../components/fields/inputField'
 import { Button } from '@mui/material'
 
-import { createUser } from './redux/actions'
+import { register } from './redux/actions'
 
 const Register = ({ handleSubmit }) => {
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   return (
-    <Form onSubmit={handleSubmit((values: any) => dispatch(createUser(values)))}>
+    <Form onSubmit={handleSubmit((values: UserType) => dispatch(register(values)))}>
       <Field 
         name="name" 
         variant="outlined"

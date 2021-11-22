@@ -39,18 +39,9 @@
     "lint": "eslint .",
     "prepare": "husky install"
   },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
-  },
-  "resolutions": {
-    "babel-jest": "^26.6.0"
-  },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
@@ -69,14 +60,13 @@
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-flow": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
-    "@testing-library/jest-dom": "^5.11.4",
+    "@cypress/react": "^5.10.3",
+    "@cypress/webpack-dev-server": "^1.7.0",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
-    "enzyme": "^3.11.0",
-    "enzyme-to-json": "^3.6.2",
+    "cypress": "^9.0.0",
     "eslint": "^7.30.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.23.4",
@@ -86,7 +76,6 @@
     "expect": "^27.3.1",
     "husky": "^7.0.0",
     "lint-staged": "^11.2.3",
-    "moxios": "^0.4.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-mock-store": "^1.5.4",
     "ts-node": "^10.4.0"
