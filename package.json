@@ -33,7 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "cypress open-ct",
     "eject": "react-scripts eject",
     "tsc": "tsc",
     "lint": "eslint .",
