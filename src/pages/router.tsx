@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { IglobalReducers } from '../redux/types'
 import {
   isLogged
-} from '../redux/GlobalActions/actions'
+} from 'redux/GlobalActions/actions'
 
 // Pages
 import Home from './Home'
-import Login from './User/Auth/Login'
-import Register from './User/Auth/Register'
+import Login from './Common/Auth/Login'
+import Register from './Common/Auth/Register'
 import Dashboard from './User/Dashboard'
 
 const Router = () => {
