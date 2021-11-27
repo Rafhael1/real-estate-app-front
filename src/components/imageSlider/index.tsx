@@ -26,6 +26,7 @@ const ImageSlider = ({ images }: any) => {
   return(
     // @ts-ignore
     <SlidersContainer>
+      {/* @ts-ignore */}
       <SlideArrow onClick={prevSlide} float="left" position="absolute"> 
         <KeyboardArrowLeftRounded fontSize="large" />
       </SlideArrow>
@@ -40,6 +41,7 @@ const ImageSlider = ({ images }: any) => {
           </div>
         ))
       }
+      {/* @ts-ignore */}
       <SlideArrow onClick={nextSlide} float="right" position="relative">
         <KeyboardArrowRightRounded fontSize="large" />
       </SlideArrow>
