@@ -1,9 +1,11 @@
 import  styled, { keyframes }  from 'styled-components'
 
-interface IslideArrow {
+interface IslideStyles {
     topDistance: string,
     float: string,
     position: string,
+    width: string,
+    height: string
 }
 
 const rotate = keyframes`
@@ -18,8 +20,8 @@ from {
 `
 
 export const SlidersContainer = styled.div`
-    width: ${props => props.width || '350px'};
-    height:  ${props => props.height || '250px'};
+    width: ${(props: IslideStyles) => props.width || '350px'};
+    height:  ${(props: IslideStyles) => props.height || '250px'};
 `
 
 export const Images = styled.img`
@@ -30,9 +32,9 @@ export const Images = styled.img`
 `
 
 export const SlideArrow = styled.button`
-    position: ${(props: IslideArrow) => props.position};
-    top: ${(props: IslideArrow) => props.topDistance ||  '100px'};
-    float: ${(props: IslideArrow) => props.float};
+    position: ${(props: IslideStyles) => props.position};
+    top: ${(props: IslideStyles) => props.topDistance ||  '100px'};
+    float: ${(props: IslideStyles) => props.float};
     border: none;
     background: none;
     color: whitesmoke;

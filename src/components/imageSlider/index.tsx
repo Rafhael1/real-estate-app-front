@@ -8,9 +8,7 @@ import {
   SlideArrow
 } from './style'
 
-const ImageSlider = (
-  { images },
-) => {
+const ImageSlider = ({ images }: any) => {
   const [current, setCurrent] = useState(0)
   const length = images.length
   
@@ -26,12 +24,9 @@ const ImageSlider = (
   // 	return null
   // }
   return(
+    // @ts-ignore
     <SlidersContainer>
-      <SlideArrow
-        onClick={prevSlide}
-        float="left"
-        position="absolute"
-      >
+      <SlideArrow onClick={prevSlide} float="left" position="absolute"> 
         <KeyboardArrowLeftRounded fontSize="large" />
       </SlideArrow>
       {
@@ -45,11 +40,7 @@ const ImageSlider = (
           </div>
         ))
       }
-      <SlideArrow 
-        onClick={nextSlide}
-        float="right"
-        position="relative"
-      >
+      <SlideArrow onClick={nextSlide} float="right" position="relative">
         <KeyboardArrowRightRounded fontSize="large" />
       </SlideArrow>
     </SlidersContainer>

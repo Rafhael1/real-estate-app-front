@@ -12,7 +12,7 @@ import renderCheckboxField from "../../../../components/fields/checkboxField"
 
 import useStyles from "./styles"
 
-const Login = ({ handleSubmit }) => {
+const Login = ({ handleSubmit }: any) => {
   const dispatch = useAppDispatch()
 
   const classes = useStyles()

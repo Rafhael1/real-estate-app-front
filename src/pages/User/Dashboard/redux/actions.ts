@@ -1,7 +1,7 @@
 import axios from '../../../../utils/api/axios'
 
 import { Dispatch } from 'redux'
-import { RealEstatesDispatchTypes, ACTIONS } from '../types'
+import { RealEstatesDispatchTypes, ACTIONS, IRFrealEstates } from '../types'
 
 export const getRealEstates = () => async (dispatch: Dispatch<RealEstatesDispatchTypes>) => {
   dispatch({
@@ -23,7 +23,7 @@ export const getRealEstates = () => async (dispatch: Dispatch<RealEstatesDispatc
 
 }
 
-export const addNewRealEstate = (values) => async (dispatch: Dispatch<RealEstatesDispatchTypes>) => {
+export const addNewRealEstate = (values: IRFrealEstates) => async (dispatch: Dispatch<RealEstatesDispatchTypes>) => {
   dispatch({
     type: ACTIONS.ADD_NEW_REAL_STATE_REQUEST
   })
@@ -39,7 +39,7 @@ export const addNewRealEstate = (values) => async (dispatch: Dispatch<RealEstate
 
   const formData: any = new FormData()
 	
-  values.images.forEach(element => {
+  values.images.forEach((element: any) => {
     formData.append('images', element)
   })
   formData.append('data', JSON.stringify(data))

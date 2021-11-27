@@ -16,10 +16,28 @@ export interface IState  {
 export type RealEstatesType = {
 	title: string,
 	description: string,
+	bathrooms: number,
+	bedrooms: number,
+	squareMeter: number,
+	address: string,
 	country: string,
 	price: string,
-	status: string
+	status: string,
+	images: any
 }[]
+
+export interface IRFrealEstates {
+	title: string,
+	description: string,
+	bathrooms: number,
+	bedrooms: number,
+	squareMeter: number,
+	address: string,
+	country: string,
+	price: string,
+	status: string,
+	images: any
+  }
 
 export interface RealEstatesRequest {
 	type: typeof ACTIONS.GET_REAL_ESTATES_REQUEST

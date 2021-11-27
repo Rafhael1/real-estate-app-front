@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react'
 import { Checkbox } from '@mui/material'
 import FormControlLabel from '@mui/material/FormControlLabel'
-
+import { FieldTypes } from './types/fieldTypes'
 
 const renderCheckboxField = ({
   input,
@@ -11,7 +10,7 @@ const renderCheckboxField = ({
   icon,
   size,
   ...custom
-}) => (
+}: FieldTypes) => (
   <FormControlLabel
     label={label}
     control={

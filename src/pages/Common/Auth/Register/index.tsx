@@ -8,7 +8,7 @@ import { Button } from '@mui/material'
 
 import { register } from './redux/actions'
 
-const Register = ({ handleSubmit }) => {
+const Register = ({ handleSubmit }: any) => {
 
   const dispatch = useAppDispatch()
 

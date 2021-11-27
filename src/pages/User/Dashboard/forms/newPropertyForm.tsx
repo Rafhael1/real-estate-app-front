@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Form, Field, FieldArray, reduxForm } from 'redux-form'
-import { RealEstatesType } from '../types'
+import { IRFrealEstates } from '../types'
 import { addNewRealEstate } from '../redux/actions'
 
 import renderFileInput from '../../../../components/fields/inputFileField'
@@ -14,7 +14,7 @@ const renderImages = ({ fields }: any) => (
 	Add Image
     </button>
     {
-      fields.map((image, index) => (
+      fields.map((image: any, index: number) => (
         <div key={index}>
           <Field name={`${image}`} component={renderFileInput}  />
         </div>
@@ -23,13 +23,13 @@ const renderImages = ({ fields }: any) => (
   </>
 )
 
-const NewPropertyForm = ({ handleSubmit }) => {
+const NewPropertyForm = ({ handleSubmit }: any) => {
   const dispatch = useDispatch()
 
   return (
     <Container>
       <Stack>
-        <Form onSubmit={handleSubmit((values: RealEstatesType) => dispatch(addNewRealEstate(values)))} >
+        <Form onSubmit={handleSubmit((values: IRFrealEstates) => dispatch(addNewRealEstate(values)))} >
           <Field name="title" component={renderInput} type="text" />
           <Field name="description" component={renderInput}  type="text" />
           <Field name="squareMeter" component={renderInput}  type="number" />

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react'
 import { TextField } from '@mui/material'
-
+import { FieldTypes } from './types/fieldTypes'
 
 const renderTextField = ({
   input,
@@ -9,24 +9,22 @@ const renderTextField = ({
   variant,
   type,
   required,
-  width,
-  ...custom
-}) => (
+  style,
+}: FieldTypes) => (
   <TextField
     required={required}
     label={label}
     variant={variant}
     type={type}
-    style={{
-      width
-    }}
+    style={style}
     {...input}
-    {...custom}
   />
 )
 
 renderTextField.defaultProps = {
-  width: '300px'
+  style: {
+    width: '300px',
+  }
 }
 
 export default renderTextField
