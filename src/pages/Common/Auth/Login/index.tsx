@@ -1,16 +1,18 @@
-import React from "react"
-import { Form, Field, reduxForm } from "redux-form"
-import { UserType } from "./types"
-import { useAppDispatch } from "../../../../redux/hooks"
-import { login } from "./redux/actions"
-import { Stack, Container, Button } from "@mui/material"
+/** @format */
 
-import renderTextField from "../../../../components/fields/inputField"
-import renderCheckboxField from "../../../../components/fields/checkboxField"
+import React from 'react'
+import { Form, Field, reduxForm } from 'redux-form'
+import { Stack, Container, Button } from '@mui/material'
+import { UserType } from './types'
+import { useAppDispatch } from '../../../../redux/hooks'
+import { login } from './redux/actions'
+
+import renderTextField from '../../../../components/fields/inputField'
+import renderCheckboxField from '../../../../components/fields/checkboxField'
 
 // import Navbar from "pages/Common/Navbar/index"
 
-import useStyles from "./styles"
+import useStyles from './styles'
 
 const Login = ({ handleSubmit }: any) => {
   const dispatch = useAppDispatch()
@@ -22,7 +24,9 @@ const Login = ({ handleSubmit }: any) => {
       <div className={classes.loginContainer}>
         <Stack>
           <Form
-            onSubmit={handleSubmit((values: UserType) => dispatch(login(values)))}
+            onSubmit={handleSubmit((values: UserType) =>
+              dispatch(login(values))
+            )}
           >
             <Field
               name="email"
@@ -45,10 +49,7 @@ const Login = ({ handleSubmit }: any) => {
               color="secondary"
               component={renderCheckboxField}
             />
-            <Button 
-              type="submit"
-              color="success"
-            >
+            <Button type="submit" color="success">
               Sign In
             </Button>
           </Form>
@@ -59,5 +60,5 @@ const Login = ({ handleSubmit }: any) => {
 }
 
 export default reduxForm({
-  form: "LoginForm",
+  form: 'LoginForm'
 })(Login)

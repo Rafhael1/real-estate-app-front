@@ -1,3 +1,5 @@
+/** @format */
+
 export const palette = {
   primary: {
     main: '#1B263B'
@@ -10,6 +12,6 @@ export const palette = {
   },
   text: {
     primary: '#0D1B2A',
-    secondary: '#A1BDCF',
-  },
+    secondary: '#A1BDCF'
+  }
 }

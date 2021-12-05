@@ -1,3 +1,5 @@
+/** @format */
+
 import { configureStore } from '@reduxjs/toolkit'
 import reducers from 'pages/reducers'
 

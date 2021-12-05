@@ -1,19 +1,17 @@
-import React from "react"
-import { BrowserRouter as Router } from "react-router-dom"
+/** @format */
 
-import Routes from "./pages/router"
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
 
+import Routes from './pages/router'
 
-const App = () => {
-
-  return (
-    <>
-      <Router>
-        <Routes />
-        <h1>Home</h1>
-      </Router>
-    </>
-  )
-}
+const App = () => (
+  <>
+    <Router>
+      <Routes />
+      <h1>Home</h1>
+    </Router>
+  </>
+)
 
 export default App

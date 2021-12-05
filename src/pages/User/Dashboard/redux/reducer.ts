@@ -1,4 +1,9 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/**
+ * /* eslint-disable @typescript-eslint/explicit-module-boundary-types
+ *
+ * @format
+ */
+
 import { ACTIONS, IState } from '../types'
 
 const INITIAL_STATE: IState = {
@@ -7,23 +12,23 @@ const INITIAL_STATE: IState = {
 }
 
 export const RealEstates = (state: IState = INITIAL_STATE, action: any) => {
-  switch(action.type) {
-  case ACTIONS.GET_REAL_ESTATES_REQUEST:
-    return {
-      ...state,
-      isLoading: true
-    }
-  case ACTIONS.GET_REAL_ESTATES_SUCCESS:
-    return {
-      ...state,
-      isLoading: false,
-      realEstates: action.payload
-    }
-  case ACTIONS.GET_REAL_ESTATES_ERROR:
-    return {
-      isLoading: false,
-    }
-  default:
-    return state
+  switch (action.type) {
+    case ACTIONS.GET_REAL_ESTATES_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case ACTIONS.GET_REAL_ESTATES_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        realEstates: action.payload
+      }
+    case ACTIONS.GET_REAL_ESTATES_ERROR:
+      return {
+        isLoading: false
+      }
+    default:
+      return state
   }
 }

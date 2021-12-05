@@ -1,3 +1,5 @@
+/** @format */
+
 import { makeStyles } from '@mui/styles'
 
 const useStyles: any = makeStyles(() => ({
@@ -8,4 +10,3 @@ const useStyles: any = makeStyles(() => ({
 }))
 
 export default useStyles
-

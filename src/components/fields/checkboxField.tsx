@@ -1,3 +1,5 @@
+/** @format */
+
 import React from 'react'
 import { Checkbox } from '@mui/material'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -14,13 +16,7 @@ const renderCheckboxField = ({
   <FormControlLabel
     label={label}
     control={
-      <Checkbox
-        icon={icon} 
-        color={color}
-        size={size}
-        {...input}
-        {...custom}
-      />
+      <Checkbox icon={icon} color={color} size={size} {...input} {...custom} />
     }
   />
 )

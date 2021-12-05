@@ -1,4 +1,6 @@
+/** @format */
+
 export interface InavbarProps {
-    homePage: boolean,
-    dashboard: boolean
+  homePage: boolean
+  dashboard: boolean
 }

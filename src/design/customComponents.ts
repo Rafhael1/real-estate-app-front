@@ -1,3 +1,5 @@
+/** @format */
+
 const background = '#E0E1DD'
 
 export default {
@@ -10,7 +12,7 @@ export default {
   },
   MuiCssBaseline: {
     styleOverrides: {
-      body:  {
+      body: {
         backgroundColor: background,
         minHeight: '100vh'
       }
@@ -32,7 +34,7 @@ export default {
   },
   MuiTextField: {
     defaultProps: {
-      variant: 'outlined', 
+      variant: 'outlined'
     },
     styleOverrides: {
       root: {

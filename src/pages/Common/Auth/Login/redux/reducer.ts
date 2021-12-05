@@ -1,5 +1,7 @@
+/** @format */
+
+import { createSlice } from '@reduxjs/toolkit'
 import { IState } from '../types'
-import {  createSlice } from '@reduxjs/toolkit'
 import { login } from './actions'
 
 export const initialState: IState = {
@@ -10,20 +12,18 @@ export const initialState: IState = {
 
 // @ts-ignore
 const loginSlices = createSlice({
-  name: "login",
+  name: 'login',
   initialState,
   extraReducers: {
     [login.pending]: (state) => {
       state.isLoading = true
     },
     [login.fulfilled]: (state) => {
-      state.isLoading = false,
-      state.isUserLogged = true
+      (state.isLoading = false), (state.isUserLogged = true)
     },
     [login.rejected]: (state) => {
-      state.hasError = true,
-      state.isLoading = false
-    } 
+      (state.hasError = true), (state.isLoading = false)
+    }
   }
 })
 
