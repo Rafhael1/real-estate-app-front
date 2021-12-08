@@ -1,5 +1,3 @@
-/** @format */
-
 const background = '#E0E1DD'
 
 export default {
@@ -20,7 +18,7 @@ export default {
   },
   MuiButton: {
     defaultProps: {
-      variant: 'contained'
+     variant: 'contained',
     },
     styleOverrides: {
       root: {

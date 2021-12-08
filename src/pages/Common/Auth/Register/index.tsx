@@ -1,5 +1,3 @@
-/** @format */
-
 import React from 'react'
 import { Form, Field, reduxForm } from 'redux-form'
 import { Button } from '@mui/material'

@@ -1,4 +1,4 @@
-/** @format */
+
 
 // ***********************************************************
 // This example support/index.js is processed and

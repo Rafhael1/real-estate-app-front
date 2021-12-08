@@ -1,5 +1,3 @@
-/** @format */
-
 import axios from 'utils/api/axios'
 
 import { Dispatch } from 'redux'

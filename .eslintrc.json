@@ -7,12 +7,17 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "prettier",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:cypress/recommended",
+        "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "prefer-arrow-callback": true,
+            "prefer-const": true,
+            "no-var": true
         },
         "ecmaVersion": 6,
         "sourceType": "module"
@@ -20,7 +25,8 @@
     "plugins": [
         "react",
         "prettier",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "cypress"
     ],
     "settings": {
         "react": {

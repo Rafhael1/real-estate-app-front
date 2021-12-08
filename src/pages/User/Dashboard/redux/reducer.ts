@@ -1,9 +1,3 @@
-/**
- * /* eslint-disable @typescript-eslint/explicit-module-boundary-types
- *
- * @format
- */
-
 import { ACTIONS, IState } from '../types'
 
 const INITIAL_STATE: IState = {

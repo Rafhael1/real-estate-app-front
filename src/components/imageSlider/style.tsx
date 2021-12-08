@@ -1,5 +1,3 @@
-/** @format */
-
 import styled, { keyframes } from 'styled-components'
 
 interface IslideStyles {

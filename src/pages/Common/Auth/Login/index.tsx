@@ -1,5 +1,3 @@
-/** @format */
-
 import React from 'react'
 import { Form, Field, reduxForm } from 'redux-form'
 import { Stack, Container, Button } from '@mui/material'
@@ -49,7 +47,7 @@ const Login = ({ handleSubmit }: any) => {
               color="secondary"
               component={renderCheckboxField}
             />
-            <Button type="submit" color="success">
+            <Button type="submit">
               Sign In
             </Button>
           </Form>

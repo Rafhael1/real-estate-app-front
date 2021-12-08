@@ -1,5 +1,3 @@
-/** @format */
-
 export const ACTIONS = {
   IS_LOGGED_REQUEST: 'IS_LOGGED_REQUEST',
   IS_LOGGED_SUCCESS: 'IS_LOGGED_SUCCESS',

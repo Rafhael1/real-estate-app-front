@@ -1,5 +1,3 @@
-/** @format */
-
 import { createSlice } from '@reduxjs/toolkit'
 import { IState } from '../types'
 import { login } from './actions'

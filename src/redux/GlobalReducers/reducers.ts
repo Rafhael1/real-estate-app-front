@@ -1,5 +1,3 @@
-/** @format */
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { isLogged } from 'redux/GlobalActions/actions'
 import { IglobalReducers } from '../types'

@@ -1,5 +1,3 @@
-/** @format */
-
 import { makeStyles } from '@mui/styles'
 
 const useStyles: any = makeStyles(() => ({

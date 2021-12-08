@@ -1,5 +1,3 @@
-/** @format */
-
 import { createTheme } from '@mui/material/styles'
 import { enUS } from '@mui/material/locale'
 
@@ -15,7 +13,7 @@ const theme = createTheme(
       fontFamily: 'Quicksand'
     },
     // @ts-ignore
-    customComponents
+    components: customComponents
   },
   enUS
 )

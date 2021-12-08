@@ -1,5 +1,3 @@
-/** @format */
-
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Form, Field, FieldArray, reduxForm } from 'redux-form'

@@ -1,9 +1,6 @@
-/** @format */
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// import "./index.css"
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 

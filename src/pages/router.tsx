@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useEffect } from 'react'
 import { Switch, Route, Redirect } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'

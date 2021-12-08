@@ -1,5 +1,3 @@
-/** @format */
-
 import { reducer as formReducer } from 'redux-form'
 
 import globalReducer from '../redux/GlobalReducers/reducers'
