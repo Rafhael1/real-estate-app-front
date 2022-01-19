@@ -1,18 +1,19 @@
 import React from 'react'
 import { Form, Field, reduxForm } from 'redux-form'
 import { Button } from '@mui/material'
-import { UserType } from './types'
+import { UserType } from './register.types'
 import { useAppDispatch } from '../../../../redux/hooks'
 
 import renderTextField from '../../../../components/fields/inputField'
 
-import { register } from './redux/actions'
+import { register } from './register.actions'
 
 const Register = ({ handleSubmit }: any) => {
   const dispatch = useAppDispatch()
 
   return (
     <Form
+    // @ts-ignore
       onSubmit={handleSubmit((values: UserType) => dispatch(register(values)))}
     >
       <Field

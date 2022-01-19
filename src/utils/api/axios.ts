@@ -1,5 +1,3 @@
-
-
 import axios, { AxiosResponse } from 'axios'
 
 declare module 'axios' {

@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
 import { Switch, Route, Redirect } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { isLogged } from '../redux/GlobalActions/actions'
-import { IglobalReducers } from '../redux/types'
+import { isLogged } from '../redux/globalActions/actions'
+import { IglobalReducersForSelectors } from '../redux/types'
 
 // Pages
-import Home from './Home'
-import Login from './Common/Auth/Login'
-import Register from './Common/Auth/Register'
-import Dashboard from './User/Dashboard'
+import Home from './home/home'
+import Login from './common/auth/login/login'
+import Register from './common/auth/register/register'
+import Dashboard from './user/dashboard/dashboard'
 
 const Router = () => {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector(
-    (state: IglobalReducers) => state.isAuthenticated
+    (state: IglobalReducersForSelectors) => state.globalReducer.isAuthenticated
   )
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Router = () => {
         path="/login"
         exact
         render={() =>
-          !isAuthenticated ? <Login /> : <Redirect to="/dashboard" />
+          isAuthenticated !== true ? <Login /> : <Redirect to="/dashboard" />
         }
       />
       <Route path="/register" exact component={Register} />

@@ -1,16 +1,16 @@
 import React from 'react'
 import { Form, Field, reduxForm } from 'redux-form'
 import { Stack, Container, Button } from '@mui/material'
-import { UserType } from './types'
+import { UserType } from './login.types'
 import { useAppDispatch } from '../../../../redux/hooks'
-import { login } from './redux/actions'
+import { login } from './login.actions'
 
 import renderTextField from '../../../../components/fields/inputField'
 import renderCheckboxField from '../../../../components/fields/checkboxField'
 
 // import Navbar from "pages/Common/Navbar/index"
 
-import useStyles from './styles'
+import useStyles from './login.styles'
 
 const Login = ({ handleSubmit }: any) => {
   const dispatch = useAppDispatch()

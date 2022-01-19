@@ -1,10 +1,9 @@
 import axios from 'utils/api/axios'
 
 import { Dispatch } from 'redux'
-import { RealEstatesDispatchTypes, ACTIONS, IRFrealEstates } from '../types'
+import { RealEstatesDispatchTypes, ACTIONS, IRFrealEstates } from './types'
 
-export const getRealEstates =
-  () => async (dispatch: Dispatch<RealEstatesDispatchTypes>) => {
+export const getRealEstates = () => async (dispatch: Dispatch<RealEstatesDispatchTypes>) => {
     dispatch({
       type: ACTIONS.GET_REAL_ESTATES_REQUEST
     })
@@ -22,8 +21,7 @@ export const getRealEstates =
     }
   }
 
-export const addNewRealEstate =
-  (values: IRFrealEstates) =>
+export const addNewRealEstate = (values: IRFrealEstates) =>
   async (dispatch: Dispatch<RealEstatesDispatchTypes>) => {
     dispatch({
       type: ACTIONS.ADD_NEW_REAL_STATE_REQUEST
@@ -46,7 +44,7 @@ export const addNewRealEstate =
     formData.append('data', JSON.stringify(data))
 
     try {
-      await axios.post('realestates/create-real-estate', formData, {
+      await axios.post('dashboard/create-real-estate', formData, {
         data: JSON.stringify(data)
       })
       dispatch({

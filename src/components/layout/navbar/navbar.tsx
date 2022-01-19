@@ -1,6 +1,6 @@
 import React from 'react'
 // import { useSelector } from 'react-redux'
-import { InavbarProps } from './NavBarTypes'
+import { InavbarProps } from './navbar.types'
 // import useStyles from './styles'
 
 // Unique navbar style

@@ -1,4 +1,4 @@
-import { ACTIONS, IState } from '../types'
+import { ACTIONS, IState } from './types'
 
 const INITIAL_STATE: IState = {
   isLoading: false,

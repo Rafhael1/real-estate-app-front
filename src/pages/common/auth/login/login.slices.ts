@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { IState } from '../types'
-import { login } from './actions'
+import { IState } from './login.types'
+import { login } from './login.actions'
 
 export const initialState: IState = {
   isLoading: false,

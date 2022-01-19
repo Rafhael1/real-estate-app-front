@@ -9,6 +9,9 @@ export interface IglobalReducers {
   isAuthenticated: boolean
 }
 
+export interface IglobalReducersForSelectors {
+  globalReducer: IglobalReducers
+}
 export interface IsLoggedRequest {
   type: typeof ACTIONS.IS_LOGGED_REQUEST
 }
