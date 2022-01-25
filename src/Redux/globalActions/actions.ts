@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from '../../utils/api/axios';
+import axios from '../../Config/api';
 
 export const isLogged: any = createAsyncThunk('isLogged', async () => {
   try {

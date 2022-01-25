@@ -3,8 +3,8 @@ import reducers from 'Pages/slices';
 
 export const store = configureStore({
   reducer: reducers,
-  // @ts-ignore
   middleware: (getDefaultMiddleware) =>
+    // @ts-ignore
     getDefaultMiddleware({ immutableCheck: { ignoredPaths: 'form' } })
 });
 
