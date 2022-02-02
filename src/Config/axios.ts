@@ -6,7 +6,7 @@ declare module 'axios' {
 }
 
 const client = axios.create({
-  baseURL: `http://${process.env.REACT_APP_API}:8000/api`,
+  baseURL: `http://${process.env.REACT_APP_API}:8000`,
   headers: {
     'Access-Control-Allow-Origin': '*',
     authToken: localStorage.authToken || sessionStorage.authToken

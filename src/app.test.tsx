@@ -10,7 +10,7 @@ const mockStore = configureStore(middlewares);
 
 it('renders App component', () => {
   mount(
-    <Provider store={mockStore({})}>
+    <Provider store={mockStore({ globalReducer: { isAuthenticated: true } })}>
       <App />
     </Provider>
   );
