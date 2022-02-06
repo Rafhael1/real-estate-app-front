@@ -1,4 +1,4 @@
-import axios from '../../../Config/api';
+import axios from '../../../Config/axios';
 
 import { Dispatch } from 'redux';
 import {

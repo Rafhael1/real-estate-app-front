@@ -8,7 +8,7 @@ import { IglobalReducersForSelectors } from '../Redux/types';
 import Home from './Home/home';
 import Login from './Auth/Login/login';
 import Register from './Auth/Register/register';
-import Dashboard from './User/dashboard/dashboard';
+import Dashboard from './User/Dashboard/dashboard';
 
 const Router = () => {
   const dispatch = useDispatch();

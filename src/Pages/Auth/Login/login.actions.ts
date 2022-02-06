@@ -7,7 +7,7 @@ export const login: any = createAsyncThunk(
   'login',
   async (values: UserType) => {
     try {
-      const res = (await axios.post('/user/login', values)).records;
+      const res = (await axios.post('/authentication/login', values)).records;
       if (res.authToken) {
         if (values.rememberMe) {
           localStorage.setItem('authToken', res.authToken);
