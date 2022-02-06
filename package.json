@@ -26,8 +26,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "docker:build": "docker build -t real-estate-app-image .",
-    "docker:start": "docker run --rm -it --name real-estate-app-container -p 3000:3000 -v $(pwd):/app real-estate-app-image",   
+    "docker:build": "docker build -f Dockerfile.dev -t real-estate-app-image-dev .",
+    "docker:start": "docker run --rm -it --name real-estate-app-container -p 3000:3000 -v $(pwd):/app real-estate-app-image-dev",   
     "docker:compose": "docker-compose up",
     "test": "cypress open-ct",
     "test:e2e": "cypress open",
