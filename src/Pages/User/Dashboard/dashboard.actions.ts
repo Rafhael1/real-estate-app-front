@@ -33,7 +33,7 @@ export const addNewRealEstate =
       type: ACTIONS.ADD_NEW_REAL_STATE_REQUEST
     });
 
-    const data = {
+    const body = {
       title: values.title,
       description: values.description,
       address: values.address,
@@ -47,11 +47,13 @@ export const addNewRealEstate =
     values.images.forEach((element: any) => {
       formData.append('images', element);
     });
-    formData.append('data', JSON.stringify(data));
+    formData.append('form', JSON.stringify(body));
 
     try {
       await axios.post('dashboard/create-real-estate', formData, {
-        data: JSON.stringify(data)
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
       });
       dispatch({
         type: ACTIONS.ADD_NEW_REAL_STATE_SUCCESS
