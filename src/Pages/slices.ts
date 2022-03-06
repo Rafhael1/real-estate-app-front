@@ -1,6 +1,6 @@
 import { reducer as formReducer } from 'redux-form';
 
-import globalReducer from '../Redux/globalSlices/reducers';
+import globalReducer from '../Redux/globalSlices/slices';
 import Login from './Auth/Login/login.slices';
 // import  Register  from './User/Auth/Register/redux/reducer'
 
