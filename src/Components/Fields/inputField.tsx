@@ -1,9 +1,3 @@
-/**
- * /* eslint-disable @typescript-eslint/explicit-module-boundary-types
- *
- * @format
- */
-
 import React from 'react';
 import { TextField } from '@mui/material';
 import { FieldTypes } from './types/fieldTypes';
@@ -13,6 +7,7 @@ const renderTextField = ({
   label,
   variant,
   type,
+  autoFocus,
   required,
   style
 }: FieldTypes) => (
@@ -21,15 +16,12 @@ const renderTextField = ({
     label={label}
     variant={variant}
     type={type}
+    autoFocus={autoFocus}
     style={style}
     {...input}
   />
 );
 
-renderTextField.defaultProps = {
-  style: {
-    width: '300px'
-  }
-};
+renderTextField.defaultProps = {};
 
 export default renderTextField;

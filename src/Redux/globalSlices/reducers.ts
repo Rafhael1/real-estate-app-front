@@ -11,7 +11,7 @@ export const initialState = {
   isLoading: false,
   isAuthenticated: false
 };
-// @ts-ignore
+
 export const isLoggedSlices = createSlice({
   name: 'user',
   initialState,
@@ -25,7 +25,8 @@ export const isLoggedSlices = createSlice({
     [isLogged.rejected]: (state) => {
       state.isLoading = false;
     }
-  }
+  },
+  reducers: undefined
 });
 
 export default isLoggedSlices.reducer;

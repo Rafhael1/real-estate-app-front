@@ -14,6 +14,7 @@ export interface FieldTypes {
   icon: Element;
   variant?: 'standard' | 'filled' | 'outlined';
   type: string;
+  autoFocus: boolean;
   required: boolean;
   style: never;
 }

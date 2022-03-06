@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
-import { Button } from '@mui/material';
+import { Stack, Button } from '@mui/material';
 import { UserType } from './register.types';
 import { useAppDispatch } from '../../../Redux/hooks';
 
@@ -13,43 +13,49 @@ const Register = ({ handleSubmit }: any) => {
 
   return (
     <Form
-      // @ts-ignore
       onSubmit={handleSubmit((values: UserType) => dispatch(register(values)))}
     >
-      <Field
-        name="name"
-        variant="outlined"
-        color="primary"
-        label="Name"
-        type="text"
-        component={renderTextField}
-      />
-      <Field
-        name="email"
-        variant="outlined"
-        color="primary"
-        label="Email"
-        type="email"
-        component={renderTextField}
-      />
-      <Field
-        name="password"
-        variant="outlined"
-        color="primary"
-        label="Password"
-        type="password"
-        component={renderTextField}
-      />
-      <Field
-        component={Button}
-        type="submit"
-        props={{
-          variant: 'contained',
-          color: 'primary'
-        }}
+      <Stack
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        spacing={0}
       >
-        Sign Up
-      </Field>
+        <Field
+          name="name"
+          variant="outlined"
+          color="primary"
+          label="Name"
+          type="text"
+          component={renderTextField}
+        />
+        <Field
+          name="email"
+          variant="outlined"
+          color="primary"
+          label="Email"
+          type="email"
+          component={renderTextField}
+        />
+        <Field
+          name="password"
+          variant="outlined"
+          color="primary"
+          label="Password"
+          type="password"
+          component={renderTextField}
+        />
+        <Field
+          component={Button}
+          type="submit"
+          props={{
+            variant: 'contained',
+            color: 'primary'
+          }}
+        >
+          Sign Up
+        </Field>
+      </Stack>
     </Form>
   );
 };

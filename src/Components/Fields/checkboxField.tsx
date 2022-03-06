@@ -9,12 +9,20 @@ const renderCheckboxField = ({
   color,
   icon,
   size,
+  style,
   ...custom
 }: FieldTypes) => (
   <FormControlLabel
     label={label}
     control={
-      <Checkbox icon={icon} color={color} size={size} {...input} {...custom} />
+      <Checkbox
+        icon={icon}
+        color={color}
+        size={size}
+        sx={style}
+        {...input}
+        {...custom}
+      />
     }
   />
 );

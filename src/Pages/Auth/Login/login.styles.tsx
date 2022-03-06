@@ -1,10 +1,5 @@
 import { makeStyles } from '@mui/styles';
 
-const useStyles: any = makeStyles(() => ({
-  loginContainer: {
-    margin: '0 auto',
-    width: '300px'
-  }
-}));
+const useStyles: any = makeStyles(() => ({}));
 
 export default useStyles;
