@@ -5,7 +5,7 @@ import {
   KeyboardArrowRightRounded
 } from '@mui/icons-material';
 
-import { SlidersContainer, Images, SlideArrow } from './style';
+import { SlidersContainer, Images, SlideArrow } from './Style';
 
 const ImageSlider = ({ images }: any) => {
   const [current, setCurrent] = useState(0);

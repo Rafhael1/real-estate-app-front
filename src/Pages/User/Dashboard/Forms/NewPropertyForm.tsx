@@ -2,11 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Field, FieldArray, reduxForm } from 'redux-form';
 import { Stack, Container, Button } from '@mui/material';
-import { IRFrealEstates } from '../dashboard.types';
+import { IRFrealEstates } from '../Dashboard.types';
 import { addNewRealEstate } from '../dashboard.actions';
 
-import renderFileInput from '../../../../Components/Fields/inputFileField';
-import renderInput from '../../../../Components/Fields/inputField';
+import renderFileInput from '../../../../Components/Fields/InputFileField';
+import renderInput from '../../../../Components/Fields/InputField';
 
 const renderImages = ({ fields }: any) => (
   <>

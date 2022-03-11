@@ -63,6 +63,13 @@ export default {
       }
     }
   },
+  MuiAppBar: {
+    styleOverrides: {
+      root: {
+        boxShadow: 'none'
+      }
+    }
+  },
   MuiCard: {
     defaultProps: {
       elevation: 0

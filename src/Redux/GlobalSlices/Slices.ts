@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { isLogged } from 'Redux/globalActions/actions';
-import { IglobalReducers } from '../types';
+import { IglobalReducers } from '../Types';
 
 export const initialState: IglobalReducers = {
   isLoading: false,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField } from '@mui/material';
-import { FieldTypes } from './types/fieldTypes';
+import { FieldTypes } from './Types/fieldTypes';
 
 const renderTextField = ({
   input,

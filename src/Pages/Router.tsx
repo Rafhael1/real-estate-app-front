@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { isLogged } from '../Redux/globalActions/actions';
-import { IglobalReducersForSelectors } from '../Redux/types';
+import { isLogged } from '../Redux/GlobalActions/actions';
+import { IglobalReducersForSelectors } from '../Redux/Types';
 
 // Pages
 import Home from './Home/home';
-import Login from './Auth/Login/login';
-import Register from './Auth/Register/register';
-import Dashboard from './User/Dashboard/dashboard';
+import Login from './Auth/Login/Login';
+import Register from './Auth/Register/Register';
+import Dashboard from './User/Dashboard/Dashboard';
 
 const Router = () => {
   const dispatch = useDispatch();

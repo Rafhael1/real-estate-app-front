@@ -1,8 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 import { enUS } from '@mui/material/locale';
 
-import { palette } from './colors';
-import customComponents from './customComponents';
+import { palette } from './Colors';
+import customComponents from './CustomComponents';
 
 declare module '@mui/material/styles';
 

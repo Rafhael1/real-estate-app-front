@@ -1,11 +1,11 @@
-import axios from '../../../Config/axios';
+import axios from '../../../Config/Axios';
 
 import { Dispatch } from 'redux';
 import {
   RealEstatesDispatchTypes,
   ACTIONS,
   IRFrealEstates
-} from './dashboard.types';
+} from './Dashboard.types';
 
 export const getRealEstates =
   () => async (dispatch: Dispatch<RealEstatesDispatchTypes>) => {

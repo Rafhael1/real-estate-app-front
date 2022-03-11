@@ -1,4 +1,4 @@
-import { ACTIONS, IState } from './dashboard.types';
+import { ACTIONS, IState } from './Dashboard.types';
 
 const INITIAL_STATE: IState = {
   isLoading: false,
