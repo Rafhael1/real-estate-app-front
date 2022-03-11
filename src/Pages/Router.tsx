@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { isLogged } from '../Redux/GlobalActions/actions';
+import { isLogged } from '../Redux/GlobalActions/Actions';
 import { IglobalReducersForSelectors } from '../Redux/Types';
 
 // Pages
-import Home from './Home/home';
+import Home from './Home/Home';
 import Login from './Auth/Login/Login';
 import Register from './Auth/Register/Register';
 import Dashboard from './User/Dashboard/Dashboard';

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Form, Field, FieldArray, reduxForm } from 'redux-form';
 import { Stack, Container, Button } from '@mui/material';
 import { IRFrealEstates } from '../Dashboard.types';
-import { addNewRealEstate } from '../dashboard.actions';
+import { addNewRealEstate } from '../Dashboard.actions';
 
 import renderFileInput from '../../../../Components/Fields/InputFileField';
 import renderInput from '../../../../Components/Fields/InputField';

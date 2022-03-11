@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { isLogged } from 'Redux/globalActions/actions';
+import { isLogged } from 'Redux/GlobalActions/Actions';
 import { IglobalReducers } from '../Types';
 
 export const initialState: IglobalReducers = {
