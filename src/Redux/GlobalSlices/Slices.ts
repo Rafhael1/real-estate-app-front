@@ -26,9 +26,9 @@ export const isLoggedSlices = createSlice({
         state.isLoading = false;
         state.isAuthenticated = action.payload.isLogged;
         state.user = {
-          _id: action.payload.user._id,
-          email: action.payload.user.email,
-          name: action.payload.user.name
+          _id: action.payload.user?._id,
+          email: action.payload.user?.email,
+          name: action.payload.user?.name
         };
       }
     );

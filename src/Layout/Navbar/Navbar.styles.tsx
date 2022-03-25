@@ -5,27 +5,27 @@ const useStyles: any = makeStyles(() => ({
   navLinks: {
     color: 'whitesmoke',
     margin: 'auto 20px',
-    fontWeight: 'bold',
-    fontSize: '1.1rem',
     textDecoration: 'none',
     transition: '0.3s',
-    '&:before': {
+    '&:after': {
       content: '""',
       width: '0',
       height: '0',
-      position: 'absolute',
+      position: 'relative',
+      bottom: 0,
+      left: '50%',
+      top: '1px',
+      display: 'flex',
       backgroundColor: '#a8c1ff',
-      margin: '26px 1.3%',
       transform: 'translateX(-50%)',
-      transition: '0.3s cubic-bezier(0.48, 0.55, 0.565, 1.55) all'
+      transition: ' width 0.3s ease 0s, left 0.3s ease 0s'
     },
     '&:hover': {
       color: '#a8c1ff',
-      '&:before': {
+      '&:after': {
         borderRadius: '25px',
-        width: '30px',
-        height: '3px',
-        alignSelf: 'center'
+        width: '50%',
+        height: '3px'
       }
     }
   },

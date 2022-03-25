@@ -111,18 +111,27 @@ const Navbar = () => {
             }}
           >
             {pages.map((page, index) => (
-              <Typography key={index}>
-                <Link className={styles.navLinks} to={`/${page.route}`}>
+              <Link
+                key={index}
+                className={styles.navLinks}
+                to={`/${page.route}`}
+              >
+                <Typography
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: '1.1rem'
+                  }}
+                >
                   {page.value}
-                </Link>
-              </Typography>
+                </Typography>
+              </Link>
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar sx={{ bgcolor: blue[900] }}>
-                  {globalReducer.user?.name[0]}
+                  {globalReducer.user.name?.charAt(0)}
                 </Avatar>
               </IconButton>
             </Tooltip>
