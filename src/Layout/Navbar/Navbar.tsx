@@ -19,7 +19,8 @@ import { blue } from '@mui/material/colors';
 
 const pages = [
   { value: 'Home', route: '' },
-  { value: 'Trending', route: 'trending' },
+  { value: 'Trending', route: 'search?search_type=trending' },
+  { value: 'New', route: 'search?search_type=newest' },
   { value: 'About', route: 'about' }
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -46,7 +47,7 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
   return (
-    <AppBar position="static">
+    <AppBar position="relative" sx={{ alignItems: 'center' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -105,11 +106,12 @@ const Navbar = () => {
           <Box
             sx={{
               flexGrow: 1,
+              marginLeft: '30%',
               display: { xs: 'none', md: 'flex' }
             }}
           >
             {pages.map((page, index) => (
-              <Typography key={index} variant="body1">
+              <Typography key={index}>
                 <Link className={styles.navLinks} to={`/${page.route}`}>
                   {page.value}
                 </Link>
