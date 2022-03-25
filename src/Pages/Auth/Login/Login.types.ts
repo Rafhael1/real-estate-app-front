@@ -5,11 +5,11 @@ export const ACTIONS = {
 };
 
 export type UserType = {
-  id: string;
+  _id: string;
   name: string;
   email: string;
-  password: string;
-  rememberMe: boolean;
+  password?: string;
+  rememberMe?: boolean;
 };
 
 export interface IState {

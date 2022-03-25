@@ -1,13 +1,6 @@
 const background = '#F5F5F5';
 
 export default {
-  MuiTypography: {
-    styleOverrides: {
-      root: {
-        color: 'primary'
-      }
-    }
-  },
   MuiCssBaseline: {
     styleOverrides: {
       body: {

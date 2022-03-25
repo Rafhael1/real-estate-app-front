@@ -2,14 +2,14 @@ import React from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
 import { Stack, Button } from '@mui/material';
 import { UserType } from './Register.types';
-import { useAppDispatch } from '../../../Redux/Hooks';
+import { useDispatch } from '../../../Redux/Hooks';
 
 import renderTextField from '../../../Components/Fields/InputField';
 
 import { register } from './Register.actions';
 
 const Register = ({ handleSubmit }: any) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   return (
     <Form

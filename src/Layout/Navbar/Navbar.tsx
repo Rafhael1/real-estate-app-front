@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'Redux/Hooks';
 import {
   AppBar,
   Box,
@@ -8,18 +10,26 @@ import {
   Menu,
   Container,
   Avatar,
-  Button,
   Tooltip,
   MenuItem
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import useStyles from './Navbar.styles';
+import { blue } from '@mui/material/colors';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = [
+  { value: 'Home', route: '' },
+  { value: 'Trending', route: 'trending' },
+  { value: 'About', route: 'about' }
+];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
+  const styles = useStyles();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const globalReducer = useSelector((state) => state.globalReducer);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -45,7 +55,7 @@ const Navbar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            Namai
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -77,9 +87,9 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' }
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map((page, index) => (
+                <MenuItem key={index} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page.value}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -90,24 +100,28 @@ const Navbar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            Namai
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'flex' }
+            }}
+          >
+            {pages.map((page, index) => (
+              <Typography key={index} variant="body1">
+                <Link className={styles.navLinks} to={`/${page.route}`}>
+                  {page.value}
+                </Link>
+              </Typography>
             ))}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar sx={{ bgcolor: blue[900] }}>
+                  {globalReducer.user?.name[0]}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -143,5 +157,5 @@ export default Navbar;
 
 Navbar.defaultProps = {
   homePage: true,
-  dashboard: false
+  authPage: false
 };

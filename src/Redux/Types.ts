@@ -1,3 +1,5 @@
+import { UserType } from 'Pages/Auth/Login/Login.types';
+
 export const ACTIONS = {
   IS_LOGGED_REQUEST: 'IS_LOGGED_REQUEST',
   IS_LOGGED_SUCCESS: 'IS_LOGGED_SUCCESS',
@@ -7,6 +9,7 @@ export const ACTIONS = {
 export interface IglobalReducers {
   isLoading: boolean;
   isAuthenticated: boolean;
+  user?: UserType;
 }
 
 export interface IglobalReducersForSelectors {
