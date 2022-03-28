@@ -5,10 +5,12 @@ export default {
     styleOverrides: {
       body: {
         backgroundColor: background,
-        minHeight: '100vh'
+        minHeight: '100vh',
+        fontFamily: 'Quicksand'
       }
     }
   },
+  // Inputs
   MuiButton: {
     defaultProps: {
       variant: 'contained'
@@ -20,8 +22,9 @@ export default {
         marginTop: '10px',
         marginBottom: '10px',
         height: '50px',
-        padding: '15px 55px',
-        boxShadow: 'none'
+        padding: '15px 25px',
+        boxShadow: 'none',
+        fontWeight: 900
       }
     }
   },
@@ -34,8 +37,8 @@ export default {
       },
       input: {
         '&:-webkit-autofill': {
-          '-webkit-box-shadow': '0 0 0 60px #e6e9ed inset !important',
-          '-webkit-background-clip': 'text'
+          WebkitBoxShadow: '0 0 0 60px #e6e9ed inset !important',
+          WebkitBackgroundClip: 'text'
         }
       }
     }
@@ -56,10 +59,12 @@ export default {
       }
     }
   },
+  // Layout
   MuiAppBar: {
     styleOverrides: {
       root: {
-        boxShadow: 'none'
+        boxShadow: 'none',
+        backgroundColor: '#1B2738'
       }
     }
   },
@@ -70,6 +75,21 @@ export default {
     styleOverrides: {
       root: {
         borderRadius: '25px'
+      }
+    }
+  },
+  MuiDialog: {
+    styleOverrides: {
+      root: {
+        margin: '0 auto'
+      }
+    }
+  },
+  MuiDialogTitle: {
+    styleOverrides: {
+      root: {
+        fontWeith: 900,
+        fontSize: '1.9rem'
       }
     }
   }

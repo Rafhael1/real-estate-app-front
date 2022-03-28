@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Field, FieldArray, reduxForm } from 'redux-form';
 import { Stack, Container, Button } from '@mui/material';
-import { IRFrealEstates } from '../Dashboard.types';
-import { addNewRealEstate } from '../Dashboard.actions';
+import { IRFrealEstates } from 'Types/Dashboard/Dashboard.types';
+import { addNewRealEstate } from 'Services/Dashboard/Dashboard.actions';
 
 import renderFileInput from '../../../../Components/Fields/InputFileField';
 import renderInput from '../../../../Components/Fields/InputField';

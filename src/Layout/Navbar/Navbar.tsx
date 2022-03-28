@@ -11,11 +11,15 @@ import {
   Container,
   Avatar,
   Tooltip,
-  MenuItem
+  MenuItem,
+  Button
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { ArrowRightAltRounded } from '@mui/icons-material';
 import useStyles from './Navbar.styles';
 import { blue } from '@mui/material/colors';
+import Login from 'Components/Auth/Login/Login';
+// import Register from 'Components/Auth/Register/Register';
 
 const pages = [
   { value: 'Home', route: '' },
@@ -30,7 +34,19 @@ const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const globalReducer = useSelector((state) => state.globalReducer);
+  const globalReducer = useSelector((state: any) => state.Auth);
+
+  const [isModalOpen, setIsModalOpen] = useState({
+    login: false,
+    register: false
+  });
+
+  const handleModalOpen = (modalType: string) => {
+    setIsModalOpen({
+      ...isModalOpen,
+      [modalType]: !isModalOpen[modalType]
+    });
+  };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -127,39 +143,56 @@ const Navbar = () => {
               </Link>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ bgcolor: blue[900] }}>
-                  {globalReducer.user.name?.charAt(0)}
-                </Avatar>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          {globalReducer.isAuthenticated ? (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar sx={{ bgcolor: blue[900] }}>
+                    {globalReducer.user.name?.charAt(0)}
+                  </Avatar>
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          ) : (
+            <Box sx={{ flexGrow: 0 }}>
+              <Button
+                onClick={() => handleModalOpen('login')}
+                className={styles.authButton}
+              >
+                Advertise with us
+                <ArrowRightAltRounded />
+              </Button>
+            </Box>
+          )}
         </Toolbar>
+        {/* <Register isModalOpen={isModalOpen} /> */}
       </Container>
+      <Login
+        isModalOpen={isModalOpen.login}
+        handleModalOpen={handleModalOpen}
+      />
     </AppBar>
   );
 };

@@ -1,19 +1,22 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { isLogged } from '../Redux/GlobalActions/Actions';
-import { IglobalReducersForSelectors } from '../Redux/Types';
-
+import { isLogged } from 'Services/Auth/Auth.actions';
+import { IState } from 'Types/Auth/Auth.types';
 // Pages
 import Home from './Home/Home';
-import Login from './Auth/Login/Login';
-import Register from './Auth/Register/Register';
+import Login from '../Components/Auth/Login/Login';
+import Register from '../Components/Auth/Register/Register';
 import Dashboard from './User/Dashboard/Dashboard';
+
+interface Iselector {
+  Auth: IState;
+}
 
 const Router = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
-    (state: IglobalReducersForSelectors) => state.globalReducer.isAuthenticated
+    (state: Iselector) => state.Auth.isAuthenticated
   );
 
   useEffect(() => {

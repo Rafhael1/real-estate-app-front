@@ -4,7 +4,7 @@ import { Stack, Button } from '@mui/material';
 import { UserType } from './Register.types';
 import { useDispatch } from '../../../Redux/Hooks';
 
-import renderTextField from '../../../Components/Fields/InputField';
+import renderTextField from '../../Fields/InputField';
 
 import { register } from './Register.actions';
 

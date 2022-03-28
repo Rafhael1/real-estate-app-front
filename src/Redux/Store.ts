@@ -4,8 +4,11 @@ import reducers from 'Pages/Slices';
 export const store = configureStore({
   reducer: reducers,
   middleware: (getDefaultMiddleware) =>
-    // @ts-ignore
-    getDefaultMiddleware({ immutableCheck: { ignoredPaths: 'form' } })
+    getDefaultMiddleware({
+      // @ts-ignore
+      immutableCheck: { ignoredPaths: 'form' },
+      serializableCheck: false
+    })
 });
 
 export type RootState = ReturnType<typeof store.getState>;

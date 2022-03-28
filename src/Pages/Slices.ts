@@ -1,12 +1,8 @@
 import { reducer as formReducer } from 'redux-form';
 
-import globalReducer from '../Redux/GlobalSlices/Slices';
-import Login from './Auth/Login/Login.slices';
-// import  Register  from './User/Auth/Register/redux/reducer'
+import Auth from 'Services/Auth/Auth.slices';
 
 export default {
   form: formReducer,
-  globalReducer,
-  Login
-  // Register
+  Auth
 };
