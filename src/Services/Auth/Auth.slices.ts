@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IState, UserType } from '../../Types/Auth/Auth.types';
-import { login, isLogged } from './Auth.actions';
+import { login, isLogged, logout } from './Auth.actions';
 
 export const initialState: IState = {
   isLoading: false,
@@ -54,8 +54,16 @@ const authSlices = createSlice({
     builder.addCase(isLogged.rejected, (state) => {
       state.isLoading = false;
     });
+    builder.addCase(logout, (state) => {
+      state.isAuthenticated = false;
+      state.user = {
+        email: '',
+        name: '',
+        _id: ''
+      };
+    });
   },
-  reducers: undefined
+  reducers: {}
 });
 
 export default authSlices.reducer;

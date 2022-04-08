@@ -2,13 +2,13 @@ import React from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
 import {
   Stack,
-  Button,
   Dialog,
   DialogTitle,
   DialogContent,
   Typography
 } from '@mui/material';
-import { useDispatch } from 'Redux/Hooks';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { useDispatch, useSelector } from 'Redux/Hooks';
 import { login } from 'Services/Auth/Auth.actions';
 import { LoginProps } from './Login.types';
 import { UserType } from 'Types/Auth/Auth.types';
@@ -20,6 +20,8 @@ import useStyles from './Login.styles';
 
 const Login = ({ handleSubmit, isModalOpen, handleModalOpen }: LoginProps) => {
   const dispatch = useDispatch();
+  const authState = useSelector((state) => state.Auth);
+
   const styles = useStyles();
 
   return (
@@ -60,12 +62,15 @@ const Login = ({ handleSubmit, isModalOpen, handleModalOpen }: LoginProps) => {
               color="secondary"
               component={renderCheckboxField}
             />
-            <Button className={styles.loginButton} type="submit">
+            <LoadingButton
+              loading={authState.isLoading}
+              className={styles.loginButton}
+              type="submit"
+            >
               Login
-            </Button>
+            </LoadingButton>
             <Typography
               onClick={() => {
-                handleModalOpen('login');
                 handleModalOpen('register');
               }}
               variant="body2"

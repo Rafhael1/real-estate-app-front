@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'Redux/Hooks';
+import { useSelector, useDispatch } from 'Redux/Hooks';
 import {
   AppBar,
   Box,
@@ -16,10 +16,12 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { ArrowRightAltRounded } from '@mui/icons-material';
-import useStyles from './Navbar.styles';
 import { blue } from '@mui/material/colors';
 import Login from 'Components/Auth/Login/Login';
-// import Register from 'Components/Auth/Register/Register';
+import Register from 'Components/Auth/Register/Register';
+import { logout } from 'Services/Auth/Auth.actions';
+import { IState } from 'Types/Auth/Auth.types';
+import useStyles from './Navbar.styles';
 
 const pages = [
   { value: 'Home', route: '' },
@@ -30,20 +32,28 @@ const pages = [
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const styles = useStyles();
+
+  const authReducer: IState = useSelector((state) => state.Auth);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-
-  const globalReducer = useSelector((state: any) => state.Auth);
-
   const [isModalOpen, setIsModalOpen] = useState({
     login: false,
     register: false
   });
 
+  const handleLogout = (key: string) => {
+    if (key === 'Logout') {
+      dispatch(logout());
+    }
+    handleCloseUserMenu();
+  };
+
   const handleModalOpen = (modalType: string) => {
     setIsModalOpen({
       ...isModalOpen,
+      [modalType === 'login' ? 'register' : 'login']: false,
       [modalType]: !isModalOpen[modalType]
     });
   };
@@ -143,12 +153,12 @@ const Navbar = () => {
               </Link>
             ))}
           </Box>
-          {globalReducer.isAuthenticated ? (
+          {authReducer.isAuthenticated ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar sx={{ bgcolor: blue[900] }}>
-                    {globalReducer.user.name?.charAt(0)}
+                    {authReducer.user.name?.charAt(0)}
                   </Avatar>
                 </IconButton>
               </Tooltip>
@@ -169,7 +179,7 @@ const Navbar = () => {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <MenuItem key={setting} onClick={() => handleLogout(setting)}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
@@ -187,8 +197,11 @@ const Navbar = () => {
             </Box>
           )}
         </Toolbar>
-        {/* <Register isModalOpen={isModalOpen} /> */}
       </Container>
+      <Register
+        isModalOpen={isModalOpen.register}
+        handleModalOpen={handleModalOpen}
+      />
       <Login
         isModalOpen={isModalOpen.login}
         handleModalOpen={handleModalOpen}

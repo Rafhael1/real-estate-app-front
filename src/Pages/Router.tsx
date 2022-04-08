@@ -5,9 +5,7 @@ import { isLogged } from 'Services/Auth/Auth.actions';
 import { IState } from 'Types/Auth/Auth.types';
 // Pages
 import Home from './Home/Home';
-import Login from '../Components/Auth/Login/Login';
-import Register from '../Components/Auth/Register/Register';
-import Dashboard from './User/Dashboard/Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 
 interface Iselector {
   Auth: IState;
@@ -27,21 +25,13 @@ const Router = () => {
     <Switch>
       <Route path="/" exact component={Home} />
       <Route
-        path="/login"
-        exact
-        render={() =>
-          isAuthenticated !== true ? <Login /> : <Redirect to="/dashboard" />
-        }
-      />
-      <Route path="/register" exact component={Register} />
-      <Route
         path="/dashboard"
         exact
-        render={() =>
-          isAuthenticated ? <Dashboard /> : <Redirect to="/login" />
-        }
+        render={() => (isAuthenticated ? <Dashboard /> : <Redirect to="/" />)}
       />
       <Route path="/results" exact />
+      {/* The not found(404) page has to be the last one */}
+      <Route render={() => <div>Porn is bad dawg...</div>} />
     </Switch>
   );
 };

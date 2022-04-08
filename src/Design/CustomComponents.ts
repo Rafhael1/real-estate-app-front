@@ -28,6 +28,24 @@ export default {
       }
     }
   },
+  MuiLoadingButton: {
+    defaultProps: {
+      variant: 'contained'
+    },
+    styleOverrides: {
+      root: {
+        fontSize: '1rem',
+        borderRadius: '25px',
+        marginTop: '10px',
+        marginBottom: '10px',
+        height: '50px',
+        padding: '15px 25px',
+        boxShadow: 'none',
+        fontWeight: 900,
+        color: 'white'
+      }
+    }
+  },
   MuiOutlinedInput: {
     styleOverrides: {
       root: {

@@ -5,8 +5,8 @@ import { Stack, Container, Button } from '@mui/material';
 import { IRFrealEstates } from 'Types/Dashboard/Dashboard.types';
 import { addNewRealEstate } from 'Services/Dashboard/Dashboard.actions';
 
-import renderFileInput from '../../../../Components/Fields/InputFileField';
-import renderInput from '../../../../Components/Fields/InputField';
+import renderFileInput from '../../Fields/InputFileField';
+import renderInput from '../../Fields/InputField';
 
 const renderImages = ({ fields }: any) => (
   <>
@@ -21,7 +21,7 @@ const renderImages = ({ fields }: any) => (
   </>
 );
 
-const NewPropertyForm = ({ handleSubmit }: any) => {
+const PropertyForm = ({ handleSubmit }: any) => {
   const dispatch = useDispatch();
 
   return (
@@ -50,5 +50,5 @@ const NewPropertyForm = ({ handleSubmit }: any) => {
 };
 
 export default reduxForm({
-  form: 'NewPropertyFormRedux'
-})(NewPropertyForm);
+  form: 'PropertyFormRedux'
+})(PropertyForm);
