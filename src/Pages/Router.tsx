@@ -18,7 +18,9 @@ const Router = () => {
   );
 
   useEffect(() => {
-    dispatch(isLogged());
+    if (localStorage.length || sessionStorage.length) {
+      dispatch(isLogged());
+    }
   }, []);
 
   return (

@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles';
 
-const useStyles: any = makeStyles(() => ({
+const useStyles: any = makeStyles((theme) => ({
   // General
   navLinks: {
     color: 'whitesmoke',
@@ -14,7 +14,6 @@ const useStyles: any = makeStyles(() => ({
       position: 'relative',
       bottom: 0,
       left: '50%',
-      top: '1px',
       display: 'flex',
       backgroundColor: '#a8c1ff',
       transform: 'translateX(-50%)',
@@ -22,12 +21,18 @@ const useStyles: any = makeStyles(() => ({
     },
     '&:hover': {
       color: '#a8c1ff',
+      marginTop: '2px',
       '&:after': {
         borderRadius: '25px',
-        width: '50%',
-        height: '3px'
+        width: '75%',
+        height: '2.5px'
       }
     }
+  },
+  buttonLink: {
+    // @ts-ignore
+    color: theme.palette.text.primary,
+    textDecoration: 'none'
   },
   // Auth Pages
   authNavbar: {

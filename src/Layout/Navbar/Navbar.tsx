@@ -12,10 +12,15 @@ import {
   Avatar,
   Tooltip,
   MenuItem,
+  Divider,
   Button
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { ArrowRightAltRounded } from '@mui/icons-material';
+import {
+  ArrowRightAltRounded,
+  LogoutRounded,
+  ManageAccountsRounded
+} from '@mui/icons-material';
 import { blue } from '@mui/material/colors';
 import Login from 'Components/Auth/Login/Login';
 import Register from 'Components/Auth/Register/Register';
@@ -29,7 +34,6 @@ const pages = [
   { value: 'New', route: 'search?search_type=newest' },
   { value: 'About', route: 'about' }
 ];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -43,10 +47,8 @@ const Navbar = () => {
     register: false
   });
 
-  const handleLogout = (key: string) => {
-    if (key === 'Logout') {
-      dispatch(logout());
-    }
+  const handleLogout = () => {
+    dispatch(logout());
     handleCloseUserMenu();
   };
 
@@ -178,11 +180,19 @@ const Navbar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={() => handleLogout(setting)}>
-                    <Typography textAlign="center">{setting}</Typography>
+                <Link className={styles.buttonLink} to="/dashboard">
+                  <MenuItem>
+                    <ManageAccountsRounded />
+                    <Typography textAlign="center">Dashboard</Typography>
                   </MenuItem>
-                ))}
+                </Link>
+                <Divider />
+                <MenuItem onClick={handleLogout}>
+                  <LogoutRounded color="error" />
+                  <Typography color="error" textAlign="center">
+                    Logout
+                  </Typography>
+                </MenuItem>
               </Menu>
             </Box>
           ) : (
