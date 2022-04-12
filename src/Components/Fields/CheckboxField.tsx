@@ -1,7 +1,7 @@
 import React from 'react';
 import { Checkbox } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { FieldTypes } from './Types/fieldTypes';
+import { FieldTypes } from '../../Types/Fields/Fields.types';
 
 const renderCheckboxField = ({
   input,

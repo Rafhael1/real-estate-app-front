@@ -22,8 +22,8 @@ import {
   ManageAccountsRounded
 } from '@mui/icons-material';
 import { blue } from '@mui/material/colors';
-import Login from 'Components/Auth/Login/Login';
-import Register from 'Components/Auth/Register/Register';
+import Login from 'Components/Forms/Login/Login';
+import Register from 'Components/Forms/Register/Register';
 import { logout } from 'Services/Auth/Auth.actions';
 import { IState } from 'Types/Auth/Auth.types';
 import useStyles from './Navbar.styles';

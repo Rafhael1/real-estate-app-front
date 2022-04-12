@@ -8,7 +8,7 @@ import {
   DialogContent
 } from '@mui/material';
 import { RegisterProps } from './Register.types';
-import { useDispatch } from '../../../Redux/Hooks';
+import { useDispatch } from '../../../Hooks/Redux';
 import { UserType } from 'Types/Auth/Auth.types';
 
 import renderTextField from '../../Fields/InputField';

@@ -8,7 +8,7 @@ import {
   Typography
 } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { useDispatch, useSelector } from 'Redux/Hooks';
+import { useDispatch, useSelector } from 'Hooks/Redux';
 import { login } from 'Services/Auth/Auth.actions';
 import { LoginProps } from './Login.types';
 import { UserType } from 'Types/Auth/Auth.types';
