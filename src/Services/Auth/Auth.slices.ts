@@ -24,7 +24,7 @@ const authSlices = createSlice({
       login.fulfilled,
       (state, action: PayloadAction<{ isLogged: boolean; user: UserType }>) => {
         state.isLoading = false;
-        state.isAuthenticated = true;
+        state.isAuthenticated = action.payload.isLogged;
         state.user = {
           _id: action.payload.user?._id,
           email: action.payload.user?.email,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'Redux/Hooks';
+import { useSelector, useDispatch } from 'Hooks/Redux';
 import {
   AppBar,
   Box,
