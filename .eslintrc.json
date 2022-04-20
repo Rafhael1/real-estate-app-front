@@ -6,19 +6,27 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "prettier",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:cypress/recommended",
+        "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "prefer-arrow-callback": true,
+            "prefer-const": true,
+            "no-var": true
         },
         "ecmaVersion": 6,
         "sourceType": "module"
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "prettier",
+        "@typescript-eslint",
+        "cypress"
     ],
     "settings": {
         "react": {
@@ -26,42 +34,19 @@
         }
     },
     "rules": {
+        "prettier/prettier": 1,
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/ban-ts-ignore": "off",
+        "@typescript-eslint/ban-types": "off",
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": ["warn"],
         "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
         "react/prop-types": 0,
-        "indent": [
-            "error",
-            2
-        ],
+        "semi": 1,
         "linebreak-style": [
             "error",
             "unix"
-        ],
-        "quotes": [
-            "off",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "never"
-        ],
-        "space-before-blocks": [
-            "error",
-            "always"
-        ],
-        "comma-spacing": [
-            "error",
-            {
-                "before": false,
-                "after": true
-            }
-        ],
-        "space-before-function-paren": [
-            "error", 
-            "always"
         ],
         "object-curly-spacing": [
             "error", 

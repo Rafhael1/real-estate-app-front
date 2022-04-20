@@ -1,22 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
-// import "./index.css"
-import { ThemeProvider } from '@mui/material/styles'
-import theme from './design/globalStyles'
-import CssBaseline from '@mui/material/CssBaseline'
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
+import { Provider } from 'react-redux';
+import theme from './Design/GlobalStyles';
+import App from './App';
+import { store } from './Redux/Store';
 
-import { Provider } from 'react-redux'
-import { store } from './redux/store'
-
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <App />
     </ThemeProvider>
-  </Provider>,
-  document.getElementById('root')
-)
+  </Provider>
+);

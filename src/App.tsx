@@ -1,18 +1,14 @@
-import React from "react"
-import { BrowserRouter as Router } from "react-router-dom"
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import Routes from "./pages/router"
+import Routes from './Pages/Router';
 
+const App = () => (
+  <>
+    <Router>
+      <Routes />
+    </Router>
+  </>
+);
 
-const App = () => {
-
-  return (
-    <>
-      <Router>
-        <Routes />
-      </Router>
-    </>
-  )
-}
-
-export default App
+export default App;
