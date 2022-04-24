@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'Config/Axios';
+import { showSnackbar } from 'Services/Snackbar/Snackbar.slices';
+import handleError from 'Utils/handleError';
 import { IRFrealEstates } from '../../Types/Dashboard/Dashboard.types';
 
 export const getRealEstates: any = createAsyncThunk(
@@ -16,7 +18,7 @@ export const getRealEstates: any = createAsyncThunk(
 
 export const addNewRealEstate = createAsyncThunk(
   'addNewRealEstate',
-  async (values: IRFrealEstates) => {
+  async (values: IRFrealEstates, { dispatch }) => {
     const body = {
       title: values.title,
       description: values.description,
@@ -41,7 +43,7 @@ export const addNewRealEstate = createAsyncThunk(
       });
       return 'worked';
     } catch (error) {
-      return error;
+      return dispatch(showSnackbar(handleError(error)));
     }
   }
 );

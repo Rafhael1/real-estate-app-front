@@ -221,8 +221,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-Navbar.defaultProps = {
-  homePage: true,
-  authPage: false
-};

@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from 'axios';
-
 declare module 'axios' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface AxiosResponse<T = any> extends Promise<T> {}
@@ -13,6 +12,11 @@ const client = axios.create({
   }
 });
 
-client.interceptors.response.use((response: AxiosResponse) => response.data);
+client.interceptors.response.use(
+  (response: AxiosResponse) => response.data,
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export default client;
