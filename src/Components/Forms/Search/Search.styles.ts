@@ -1,21 +1,14 @@
-import { Card, Box, Button, styled } from '@mui/material';
-import { CustomBoxProps } from './Search.types';
-
-export const SearchContainer = styled(Card)({
-  width: 'auto',
-  height: '80px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center'
-});
-
-export const CustomBox = styled(Box)((props: CustomBoxProps) => ({
-  padding: '10px',
-  borderRight: !props.hasBorderLeft ? '1px solid #ccc' : 'none'
-}));
+import {
+  Card,
+  ButtonGroup as MuiButtonGroup,
+  Button,
+  styled
+} from '@mui/material';
 
 export const CustomButton = styled(Button)(({ theme }) => ({
   background: 'none',
+  margin: '0px',
+  padding: '35px',
   color: theme.palette.primary.main,
   textTransform: 'none',
   '&:hover': {
@@ -25,3 +18,8 @@ export const CustomButton = styled(Button)(({ theme }) => ({
     color: theme.palette.primary.dark
   }
 }));
+
+export const ButtonGroup = styled(MuiButtonGroup)({
+  backgroundColor: 'white',
+  borderRadius: '25px'
+});

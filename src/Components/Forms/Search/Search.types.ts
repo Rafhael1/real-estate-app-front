@@ -1,3 +1,1 @@
-export interface CustomBoxProps {
-  hasBorderLeft?: boolean;
-}
+export {};

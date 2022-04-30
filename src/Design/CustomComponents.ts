@@ -51,7 +51,8 @@ export default {
       root: {
         width: '100%',
         borderRadius: '25px',
-        height: '60px'
+        height: '60px',
+        alignItems: 'center'
       },
       input: {
         '&:-webkit-autofill': {

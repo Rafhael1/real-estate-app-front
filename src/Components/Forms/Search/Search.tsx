@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
+import { Form, Field, reduxForm } from 'redux-form';
+import renderTextField from '../../Fields/InputField';
 import { Menu, MenuItem } from '@mui/material';
-import {
-  SearchContainer,
-  CustomBox as Box,
-  CustomButton as Button
-} from './Search.styles';
+import { CustomButton as Button, ButtonGroup } from './Search.styles';
 import { KeyboardArrowDown } from '@mui/icons-material';
+import useMediaQuery from 'Hooks/useMediaQuery';
 
 const Search = () => {
+  const { isTabletOrMobile } = useMediaQuery();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
   return (
-    <SearchContainer>
-      <Box>
+    <Form>
+      <ButtonGroup
+        orientation={isTabletOrMobile ? 'vertical' : 'horizontal'}
+        variant="text"
+        aria-label="text button group"
+      >
         <Button
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
@@ -28,8 +34,6 @@ const Search = () => {
         >
           Buy
         </Button>
-      </Box>
-      <Box>
         <Button
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
@@ -39,10 +43,7 @@ const Search = () => {
         >
           Rent
         </Button>
-      </Box>
-      <Box>
         <Button
-          disableRipple
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
           aria-haspopup="true"
@@ -65,10 +66,7 @@ const Search = () => {
           <MenuItem onClick={handleClose}>My account</MenuItem>
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Menu>
-      </Box>
-      <Box>
         <Button
-          disableRipple
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
           aria-haspopup="true"
@@ -91,10 +89,7 @@ const Search = () => {
           <MenuItem onClick={handleClose}>My account</MenuItem>
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Menu>
-      </Box>
-      <Box>
         <Button
-          disableRipple
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
           aria-haspopup="true"
@@ -117,16 +112,28 @@ const Search = () => {
           <MenuItem onClick={handleClose}>My account</MenuItem>
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Menu>
-      </Box>
-      <Box>
-        <input placeholder="City" />
-        <input placeholder="Country" />
-      </Box>
-      <Box hasBorderLeft>
+        <Field
+          component={renderTextField}
+          name="city"
+          type="text"
+          label="City"
+          color="secondary"
+          style={{ width: '170px' }}
+        />
+        <Field
+          component={renderTextField}
+          name="city"
+          type="text"
+          label="Country"
+          color="secondary"
+          style={{ width: '110px' }}
+        />
         <Button>Search</Button>
-      </Box>
-    </SearchContainer>
+      </ButtonGroup>
+    </Form>
   );
 };
 
-export default Search;
+export default reduxForm<{}>({
+  form: 'SearchForm'
+})(Search);
