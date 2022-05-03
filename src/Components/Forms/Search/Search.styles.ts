@@ -1,21 +1,19 @@
-import {
-  Card,
-  ButtonGroup as MuiButtonGroup,
-  Button,
-  styled
-} from '@mui/material';
+import { ButtonGroup as MuiButtonGroup, Button, styled } from '@mui/material';
+import { IButton } from './Search.types';
 
-export const CustomButton = styled(Button)(({ theme }) => ({
-  background: 'none',
+export const CustomButton = styled(Button)<IButton>((props) => ({
+  background: props.addBackground ? props.theme.palette.primary.main : 'none',
   margin: '0px',
   padding: '35px',
-  color: theme.palette.primary.main,
+  color: props.addBackground ? 'white' : props.theme.palette.primary.main,
   textTransform: 'none',
   '&:hover': {
-    background: 'none',
+    background: props.addBackground ? props.theme.palette.primary.main : 'none',
     padding: 'none',
     boxShadow: 'none',
-    color: theme.palette.primary.dark
+    color: props.addBackground
+      ? props.theme.palette.primary.light
+      : props.theme.palette.text.primary
   }
 }));
 

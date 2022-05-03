@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'Hooks/Redux';
+import { logout } from 'Services/Auth/Auth.actions';
 import {
   AppBar,
   Box,
@@ -24,7 +25,6 @@ import {
 import { blue } from '@mui/material/colors';
 import Login from 'Components/Forms/Login/Login';
 import Register from 'Components/Forms/Register/Register';
-import { logout } from 'Services/Auth/Auth.actions';
 import { IState } from 'Types/Auth/Auth.types';
 import useStyles from './Navbar.styles';
 

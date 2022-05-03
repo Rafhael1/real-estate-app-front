@@ -6,78 +6,45 @@ import {
   AutocompleteRenderInputParams
 } from '@mui/material';
 
-const AutocompleteField = ({
+const renderAutocompleteField = ({
   input,
-  options,
-  labelSelect,
-  valueSelect,
+  rows,
+  multiline,
   label,
+  type,
+  options,
+  optionValRespKey,
+  onTextChanged,
+  onFetchResult,
+  placeholder,
+  fieldRef,
+  onClick,
+  disabled,
   loading,
-  handleSearch,
-  prefixLabelSelect,
-  meta: { touched, error }
-}) => {
-  const onSearch = (event: any) => {
-    const { value } = event.target;
-
-    if (!value) {
-      input.onChange(undefined);
-    }
-
-    if (handleSearch) {
-      handleSearch(value);
-    }
-  };
-
-  const onClear = (event: any) => {
-    if (!event) {
-      return;
-    }
-
-    const {
-      target: { value }
-    } = event;
-    if (!value && typeof value !== 'number') {
-      handleSearch();
-    }
-  };
-
-  const onChange = (event: any, value: any) => {
-    if (value) {
-      return input.onChange(valueSelect ? value[valueSelect] : value);
-    }
-
-    return input.onChange(undefined);
-  };
-
+  filterOptions,
+  style,
+  meta: { touched, error, warning }
+}: any) => {
   return (
-    <Box>
+    <Box style={style}>
       <Autocomplete
         fullWidth
-        options={options || []}
-        onChange={onChange}
-        onInputChange={onClear}
-        openText="Expandir"
-        closeText="Fechar"
-        value={
-          (options || []).find(
-            (option) => option[valueSelect] === input.value
-          ) || null
-        }
-        noOptionsText="No options"
-        getOptionLabel={(option) => option[labelSelect]}
-        renderOption={(option) =>
-          prefixLabelSelect
-            ? `${option[prefixLabelSelect]} - ${option[labelSelect]}`
-            : option[prefixLabelSelect]
-        }
+        options={options.map((option) => option[optionValRespKey])}
+        filterOptions={filterOptions}
+        onChange={(e, val) => {
+          onFetchResult(val);
+        }}
+        onInputChange={(e, val) => {
+          onTextChanged(val);
+        }}
         renderInput={(params) => (
           <TextField
+            {...input}
             {...params}
-            onChange={onSearch}
             label={label}
             error={touched && !!error}
             helperText={touched && error}
+            style={style}
           />
         )}
       />
@@ -85,3 +52,5 @@ const AutocompleteField = ({
     </Box>
   );
 };
+
+export default renderAutocompleteField;

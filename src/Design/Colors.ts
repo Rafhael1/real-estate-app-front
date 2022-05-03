@@ -1,5 +1,6 @@
 export const palette = {
   primary: {
+    light: '#d4e0ff',
     main: '#2F3A56',
     dark: '#1c2233'
   },

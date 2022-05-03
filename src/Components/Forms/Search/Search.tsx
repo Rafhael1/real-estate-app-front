@@ -1,14 +1,29 @@
 import React, { useState } from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
-import renderTextField from '../../Fields/InputField';
+import { renderTextField, renderAutocomplete } from 'Components';
 import { Menu, MenuItem } from '@mui/material';
 import { CustomButton as Button, ButtonGroup } from './Search.styles';
-import { KeyboardArrowDown } from '@mui/icons-material';
+import { KeyboardArrowDown, SearchRounded } from '@mui/icons-material';
 import useMediaQuery from 'Hooks/useMediaQuery';
 
-const Search = () => {
+const Search = ({ handleSubmit }: any) => {
   const { isTabletOrMobile } = useMediaQuery();
 
+  const [searchText, setSearchText] = useState('');
+  const [autoCompleteOptions, setAutoCompleteOptions] = useState([
+    {
+      city: 'New York',
+      state: 'NY'
+    },
+    {
+      city: 'New Jersey',
+      state: 'NJ'
+    },
+    {
+      city: 'Miami',
+      state: 'FL'
+    }
+  ]);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -18,6 +33,30 @@ const Search = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const onTextChanged = (val) => {
+    if (val.length >= 3) {
+      console.log(val);
+    } else {
+      setAutoCompleteOptions([
+        {
+          city: 'New York',
+          state: 'NY'
+        },
+        {
+          city: 'New Jersey',
+          state: 'NJ'
+        },
+        {
+          city: 'Miami',
+          state: 'FL'
+        }
+      ]);
+      setSearchText(val);
+      // this.setState({ searchText: val, autoCompleteOptions: [] });
+    }
+  };
+
   return (
     <Form>
       <ButtonGroup
@@ -25,24 +64,8 @@ const Search = () => {
         variant="text"
         aria-label="text button group"
       >
-        <Button
-          id="basic-button"
-          aria-controls={open ? 'basic-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-          onClick={handleClick}
-        >
-          Buy
-        </Button>
-        <Button
-          id="basic-button"
-          aria-controls={open ? 'basic-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-          onClick={handleClick}
-        >
-          Rent
-        </Button>
+        <Button id="basic-button">Buy</Button>
+        <Button id="basic-button">Rent</Button>
         <Button
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
@@ -121,14 +144,22 @@ const Search = () => {
           style={{ width: '170px' }}
         />
         <Field
-          component={renderTextField}
-          name="city"
+          component={renderAutocomplete}
+          onTextChanged={onTextChanged}
+          options={autoCompleteOptions}
+          optionValRespKey="state"
+          name="country"
           type="text"
           label="Country"
           color="secondary"
-          style={{ width: '110px' }}
+          onFetchResult={(val: string) => {
+            console.log('val', val);
+          }}
+          style={{ width: '110px', marginRight: '10px' }}
         />
-        <Button>Search</Button>
+        <Button addBackground color="success" startIcon={<SearchRounded />}>
+          Search
+        </Button>
       </ButtonGroup>
     </Form>
   );
