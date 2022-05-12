@@ -42,7 +42,7 @@ export const register = createAsyncThunk(
   'register',
   async (values: UserType, { dispatch }) => {
     try {
-      await axios.post('/user/register', values);
+      await axios.post('/authentication/register', values);
     } catch (error) {
       return dispatch(showSnackbar(handleError(error)));
     }
