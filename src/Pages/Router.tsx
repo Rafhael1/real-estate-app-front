@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { Route, Navigate, Routes } from 'react-router-dom';
+import { useDispatch, useSelector } from 'Hooks/Redux';
 import { isLogged } from 'Services/Auth/Auth.actions';
 import { IState } from 'Types/Auth/Auth.types';
 // Pages
@@ -11,7 +11,7 @@ interface Iselector {
   Auth: IState;
 }
 
-const Router = () => {
+const MainRouter = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
     (state: Iselector) => state.Auth.isAuthenticated
@@ -24,18 +24,16 @@ const Router = () => {
   }, []);
 
   return (
-    <Switch>
-      <Route path="/" exact component={Home} />
+    <Routes location={''}>
+      <Route path="/" element={<Home />} />
       <Route
         path="/dashboard"
-        exact
-        render={() => (isAuthenticated ? <Dashboard /> : <Redirect to="/" />)}
+        element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
       />
-      <Route path="/results" exact />
       {/* The not found(404) page has to be the last one */}
-      <Route render={() => <div>Porn is bad dawg...</div>} />
-    </Switch>
+      <Route path="*" element={<div>Not found</div>} />
+    </Routes>
   );
 };
 
-export default Router;
+export default MainRouter;

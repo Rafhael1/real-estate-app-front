@@ -2,45 +2,48 @@ import React from 'react';
 import { useSelector, useDispatch } from 'Hooks/Redux';
 import {
   Snackbar as MuiSnackbar,
-  IconButton,
   Alert,
-  Slide
+  Slide,
+  SlideProps
 } from '@mui/material';
 import { hideSnackbar } from 'Services/Snackbar/Snackbar.slices';
-import { CloseRounded } from '@mui/icons-material';
+
+const SlideTransition = (props: SlideProps) => {
+  return <Slide {...props} direction="down" />;
+};
 
 const Snackbar = () => {
   const dispatch = useDispatch();
 
   const snackbar = useSelector((state) => state.Snackbar);
 
-  const handleClose = () => {
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
     dispatch(hideSnackbar());
   };
 
   return (
     <div>
-      <Slide in={snackbar.isShowing} direction="down">
-        <MuiSnackbar
-          open={snackbar.isShowing}
-          autoHideDuration={4000}
+      <MuiSnackbar
+        open={snackbar.isShowing}
+        autoHideDuration={4000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        TransitionComponent={SlideTransition}
+      >
+        <Alert
+          severity={snackbar.color}
+          sx={{ width: '100%' }}
           onClose={handleClose}
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-          action={
-            <IconButton color="inherit" onClick={handleClose}>
-              <CloseRounded />
-            </IconButton>
-          }
         >
-          <Alert
-            severity={snackbar.color}
-            sx={{ width: '100%' }}
-            onClose={handleClose}
-          >
-            {snackbar.message}
-          </Alert>
-        </MuiSnackbar>
-      </Slide>
+          {snackbar.message}
+        </Alert>
+      </MuiSnackbar>
     </div>
   );
 };

@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction } from '@reduxjs/toolkit';
 import { AlertColor } from '@mui/material/Alert';
 
 interface SnackbarState {
-  isShowing: boolean;
-  message: string;
-  color: AlertColor;
+  isShowing?: boolean;
+  message?: string;
+  color?: AlertColor;
 }
 
 export const initialState: SnackbarState = {
@@ -17,12 +18,13 @@ const snackbarSlice = createSlice({
   name: 'snackbar',
   initialState,
   reducers: {
-    showSnackbar: (state, action) => {
+    showSnackbar: (state, action: PayloadAction<SnackbarState>) => {
       state.message = action.payload.message;
       state.color = action.payload.color;
       state.isShowing = true;
     },
-    hideSnackbar: (state) => {
+    hideSnackbar: (state: SnackbarState) => {
+      state.color = 'info';
       state.isShowing = false;
     }
   }

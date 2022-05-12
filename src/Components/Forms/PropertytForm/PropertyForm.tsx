@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from 'Hooks/Redux';
 import { Form, Field, FieldArray, reduxForm } from 'redux-form';
 import { Stack, Container, Button } from '@mui/material';
 import { IRFrealEstates } from 'Types/Dashboard/Dashboard.types';

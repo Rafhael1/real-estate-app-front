@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
-import { renderTextField, renderAutocomplete } from 'Components';
+
+import { renderAutocomplete } from 'Components';
 import { Menu, MenuItem } from '@mui/material';
 import { CustomButton as Button, ButtonGroup } from './Search.styles';
 import { KeyboardArrowDown, SearchRounded } from '@mui/icons-material';
+
 import useMediaQuery from 'Hooks/useMediaQuery';
+import { useDispatch } from 'Hooks/Redux';
+import { getUserLocation } from 'Services/Auth/Auth.actions';
 
 const Search = ({ handleSubmit }: any) => {
+  const dispatch = useDispatch();
+
   const { isTabletOrMobile } = useMediaQuery();
 
+  const [searchType, setSearchType] = useState('buy');
   const [searchText, setSearchText] = useState('');
   const [autoCompleteOptions, setAutoCompleteOptions] = useState([
     {
@@ -57,18 +64,26 @@ const Search = ({ handleSubmit }: any) => {
     }
   };
 
+  const onSubmit = handleSubmit((values) => {
+    console.log(values);
+  });
+
+  useEffect(() => {
+    dispatch(getUserLocation());
+  }, []);
+
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <ButtonGroup
         orientation={isTabletOrMobile ? 'vertical' : 'horizontal'}
         variant="text"
         aria-label="text button group"
       >
-        <Button id="basic-button">Buy</Button>
-        <Button id="basic-button">Rent</Button>
+        <Button id="buy-button">Buy</Button>
+        <Button id="rent-button">Rent</Button>
         <Button
-          id="basic-button"
-          aria-controls={open ? 'basic-menu' : undefined}
+          id="buy-button-menu"
+          aria-controls={open ? 'buy-menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
@@ -77,12 +92,12 @@ const Search = ({ handleSubmit }: any) => {
           Looking for
         </Button>
         <Menu
-          id="basic-menu"
+          id="rent-menu"
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
           MenuListProps={{
-            'aria-labelledby': 'basic-button'
+            'aria-labelledby': 'rent-button'
           }}
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
@@ -90,8 +105,8 @@ const Search = ({ handleSubmit }: any) => {
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Menu>
         <Button
-          id="basic-button"
-          aria-controls={open ? 'basic-menu' : undefined}
+          id="property-button"
+          aria-controls={open ? 'property-menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
@@ -100,12 +115,12 @@ const Search = ({ handleSubmit }: any) => {
           Property Type
         </Button>
         <Menu
-          id="basic-menu"
+          id="property-menu"
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
           MenuListProps={{
-            'aria-labelledby': 'basic-button'
+            'aria-labelledby': 'property-button'
           }}
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
@@ -113,8 +128,8 @@ const Search = ({ handleSubmit }: any) => {
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Menu>
         <Button
-          id="basic-button"
-          aria-controls={open ? 'basic-menu' : undefined}
+          id="price-button"
+          aria-controls={open ? 'price-menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
@@ -123,12 +138,12 @@ const Search = ({ handleSubmit }: any) => {
           Price
         </Button>
         <Menu
-          id="basic-menu"
+          id="price-menu"
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
           MenuListProps={{
-            'aria-labelledby': 'basic-button'
+            'aria-labelledby': 'price-button'
           }}
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
@@ -136,11 +151,17 @@ const Search = ({ handleSubmit }: any) => {
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Menu>
         <Field
-          component={renderTextField}
+          component={renderAutocomplete}
+          onTextChanged={onTextChanged}
+          options={autoCompleteOptions}
+          optionValRespKey="state"
           name="city"
           type="text"
           label="City"
           color="secondary"
+          onFetchResult={(val: string) => {
+            console.log(val);
+          }}
           style={{ width: '170px' }}
         />
         <Field
@@ -157,7 +178,12 @@ const Search = ({ handleSubmit }: any) => {
           }}
           style={{ width: '110px', marginRight: '10px' }}
         />
-        <Button addBackground color="success" startIcon={<SearchRounded />}>
+        <Button
+          buttonbackground="true"
+          type="submit"
+          color="secondary"
+          startIcon={<SearchRounded />}
+        >
           Search
         </Button>
       </ButtonGroup>

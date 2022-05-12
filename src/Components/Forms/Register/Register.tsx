@@ -14,6 +14,7 @@ import { UserType } from 'Types/Auth/Auth.types';
 import renderTextField from '../../Fields/InputField';
 
 import { register } from 'Services/Auth/Auth.actions';
+import { LoadingButton } from '@mui/lab';
 
 const Register = ({
   handleSubmit,
@@ -67,16 +68,13 @@ const Register = ({
               type="password"
               component={renderTextField}
             />
-            <Field
-              component={Button}
+            <LoadingButton
+              //loading={authState.isLoading}
+              // className={styles.loginButton}
               type="submit"
-              props={{
-                variant: 'contained',
-                color: 'primary'
-              }}
             >
               Sign Up
-            </Field>
+            </LoadingButton>
           </Stack>
         </Form>
       </DialogContent>

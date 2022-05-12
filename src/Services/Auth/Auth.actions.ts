@@ -1,5 +1,6 @@
 import { createAsyncThunk, createAction, nanoid } from '@reduxjs/toolkit';
 import axios from 'Config/Axios';
+import axiosDefault from 'axios';
 import { showSnackbar } from 'Services/Snackbar/Snackbar.slices';
 import handleError from 'Utils/handleError';
 
@@ -26,8 +27,9 @@ export const login = createAsyncThunk(
 );
 
 export const logout = createAction('logout', () => {
-  localStorage.removeItem('authToken');
-  sessionStorage.removeItem('authToken');
+  localStorage.clear();
+  sessionStorage.clear();
+
   return {
     payload: {
       id: nanoid(),
@@ -55,5 +57,33 @@ export const isLogged = createAsyncThunk('isLogged', async <T>() => {
     return res;
   } catch (error) {
     return error;
+  }
+});
+
+export const getUserLocation = createAsyncThunk('getUserLocation', async () => {
+  const userIp = localStorage.getItem('userIP');
+  if (userIp !== null) {
+    return {
+      city: localStorage.getItem('city'),
+      country: localStorage.getItem('country')
+    };
+  } else if (userIp === null) {
+    try {
+      const res = (
+        await axiosDefault.get(
+          `https://ipinfo.io/json?token=${process.env.REACT_APP_IPINFO_TOKEN}`
+        )
+      ).data;
+
+      const { ip, city, country } = res;
+
+      localStorage.setItem('userIP', ip);
+      localStorage.setItem('userCity', city);
+      localStorage.setItem('userCountry', country);
+
+      return { city, country };
+    } catch (error) {
+      return error;
+    }
   }
 });

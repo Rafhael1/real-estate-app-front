@@ -11,6 +11,8 @@ export type UserType = {
   email: string;
   password?: string;
   rememberMe?: boolean;
+  city?: string;
+  country?: string;
 };
 
 export interface IState {

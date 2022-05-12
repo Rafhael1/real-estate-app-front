@@ -23,10 +23,12 @@ import {
   ManageAccountsRounded
 } from '@mui/icons-material';
 import { blue } from '@mui/material/colors';
-import Login from 'Components/Forms/Login/Login';
-import Register from 'Components/Forms/Register/Register';
-import { IState } from 'Types/Auth/Auth.types';
 import useStyles from './Navbar.styles';
+
+const Login = React.lazy(() => import('Components/Forms/Login/Login'));
+const Register = React.lazy(() => import('Components/Forms/Register/Register'));
+
+import { IState } from 'Types/Auth/Auth.types';
 
 const pages = [
   { value: 'Home', route: '' },
@@ -199,7 +201,7 @@ const Navbar = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Button
                 onClick={() => handleModalOpen('login')}
-                className={styles.authButton}
+                color="secondary"
               >
                 Advertise with us
                 <ArrowRightAltRounded />
