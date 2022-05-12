@@ -26,16 +26,24 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "test": "jest",
+    "test:watch": "jest -- --watch",
+    "test:cy": "cypress open-ct",
+    "test:e2e": "cypress open",
     "build": "react-scripts build",
     "docker:build": "docker build -f Dockerfile.dev -t real-estate-app-image-dev .",
     "docker:start": "docker run --rm -it --name real-estate-app-container -p 3000:3000 -v $(pwd):/app real-estate-app-image-dev",
     "docker:compose": "docker-compose up",
-    "test": "cypress open-ct",
-    "test:e2e": "cypress open",
     "eject": "react-scripts eject",
     "tsc": "tsc",
     "lint": "eslint .",
     "prepare": "husky install"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/cypress/*" 
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +66,7 @@
     "@babel/preset-env": "^7.17.10",
     "@babel/preset-flow": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
     "@cypress/react": "^5.12.4",
     "@cypress/webpack-dev-server": "^1.8.4",
     "@testing-library/react": "^13.2.0",
@@ -73,6 +82,7 @@
     "@types/styled-components": "^5.1.25",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
+    "babel-jest": "^28.1.0",
     "cypress": "^9.6.0",
     "eslint": "^8.14.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -85,6 +95,7 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "expect": "^28.0.2",
     "husky": "^7.0.4",
+    "jest": "^28.1.0",
     "lint-staged": "^12.4.1",
     "prettier": "^2.6.2",
     "react-error-overlay": "6.0.11",
@@ -94,7 +105,8 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
-      "yarn lint --max-warnings=0"
+      "yarn lint --max-warnings=0",
+      "jest --bail --findRelatedTests"
     ]
   }
 }

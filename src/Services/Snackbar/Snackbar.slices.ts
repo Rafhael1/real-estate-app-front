@@ -1,12 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { AlertColor } from '@mui/material/Alert';
-
-interface SnackbarState {
-  isShowing?: boolean;
-  message?: string;
-  color?: AlertColor;
-}
+import { SnackbarState } from 'Types/Snackbar/Snackbar.types';
 
 export const initialState: SnackbarState = {
   isShowing: false,
