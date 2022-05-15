@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
 
 import { renderAutocomplete } from 'Components';
@@ -15,7 +15,7 @@ const Search = ({ handleSubmit }: any) => {
 
   const { isTabletOrMobile } = useMediaQuery();
 
-  const [searchType, setSearchType] = useState('buy');
+  const [searchType, setSearchType] = useState('buy-button');
   const [searchText, setSearchText] = useState('');
   const [autoCompleteOptions, setAutoCompleteOptions] = useState([
     {
@@ -33,6 +33,11 @@ const Search = ({ handleSubmit }: any) => {
   ]);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  const handleSearchTypeChange = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setSearchType(e.currentTarget.id);
+  };
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -41,7 +46,11 @@ const Search = ({ handleSubmit }: any) => {
     setAnchorEl(null);
   };
 
-  const onTextChanged = (val) => {
+  const checkSearchType = useMemo(() => {
+    return searchType === 'buy-button' ? true : false;
+  }, [searchType]);
+
+  const onTextChanged = (val: string) => {
     if (val.length >= 3) {
       console.log(val);
     } else {
@@ -79,8 +88,20 @@ const Search = ({ handleSubmit }: any) => {
         variant="text"
         aria-label="text button group"
       >
-        <Button id="buy-button">Buy</Button>
-        <Button id="rent-button">Rent</Button>
+        <Button
+          id="buy-button"
+          onClick={handleSearchTypeChange}
+          buttonbackground={checkSearchType}
+        >
+          Buy
+        </Button>
+        <Button
+          id="rent-button"
+          onClick={handleSearchTypeChange}
+          buttonbackground={!checkSearchType}
+        >
+          Rent
+        </Button>
         <Button
           id="buy-button-menu"
           aria-controls={open ? 'buy-menu' : undefined}
@@ -181,7 +202,7 @@ const Search = ({ handleSubmit }: any) => {
         <Button
           buttonbackground="true"
           type="submit"
-          color="secondary"
+          color="inherit"
           startIcon={<SearchRounded />}
         >
           Search

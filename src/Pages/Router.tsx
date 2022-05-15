@@ -18,7 +18,7 @@ const MainRouter = () => {
   );
 
   useEffect(() => {
-    if (localStorage.length || sessionStorage.length) {
+    if (localStorage.authToken?.length || sessionStorage.authToken?.length) {
       dispatch(isLogged());
     }
   }, []);

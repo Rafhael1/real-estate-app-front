@@ -15,6 +15,11 @@ export default {
     defaultProps: {
       variant: 'contained'
     },
+    variants: [
+      {
+        props: { color: 'neutral' }
+      }
+    ],
     styleOverrides: {
       root: {
         fontSize: '1rem',
