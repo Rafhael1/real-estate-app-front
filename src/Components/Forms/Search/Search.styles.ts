@@ -1,5 +1,5 @@
 import { ButtonGroup as MuiButtonGroup, Button, styled } from '@mui/material';
-import { IButton } from './Search.types';
+import { IButton } from 'Types/Search/Search.types';
 
 export const CustomButton = styled(Button)<IButton>(
   ({ buttonbackground, ...props }) => ({

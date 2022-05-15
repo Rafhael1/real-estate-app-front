@@ -10,15 +10,14 @@ import {
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useDispatch, useSelector } from 'Hooks/Redux';
 import { login } from 'Services/Auth/Auth.actions';
-import { LoginProps } from './Login.types';
-import { UserType } from 'Types/Auth/Auth.types';
+import { UserType, AuthProps } from 'Types/Auth/Auth.types';
 
 import renderTextField from '../../Fields/InputField';
 import renderCheckboxField from '../../Fields/CheckboxField';
 
 import useStyles from './Login.styles';
 
-const Login = ({ handleSubmit, isModalOpen, handleModalOpen }: LoginProps) => {
+const Login = ({ handleSubmit, isModalOpen, handleModalOpen }: AuthProps) => {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.Auth);
 
@@ -87,6 +86,6 @@ const Login = ({ handleSubmit, isModalOpen, handleModalOpen }: LoginProps) => {
   );
 };
 
-export default reduxForm<{}, LoginProps>({
+export default reduxForm<{}, AuthProps>({
   form: 'LoginForm'
 })(Login);

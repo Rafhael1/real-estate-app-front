@@ -1,20 +1,24 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
+import { IFormValues } from 'Types/Search/Search.types';
+import { UserType } from 'Types/Auth/Auth.types';
 
 import { renderAutocomplete } from 'Components';
-import { Menu, MenuItem } from '@mui/material';
+import { Menu, MenuItem, Slider, Popover, Card, Grow } from '@mui/material';
 import { CustomButton as Button, ButtonGroup } from './Search.styles';
 import { KeyboardArrowDown, SearchRounded } from '@mui/icons-material';
 
 import useMediaQuery from 'Hooks/useMediaQuery';
-import { useDispatch } from 'Hooks/Redux';
+import { useDispatch, useSelector } from 'Hooks/Redux';
 import { getUserLocation } from 'Services/Auth/Auth.actions';
+import { getCountries } from 'Services/Search/Search.action';
 
 const Search = ({ handleSubmit }: any) => {
   const dispatch = useDispatch();
 
-  const { isTabletOrMobile } = useMediaQuery();
+  const user: UserType = useSelector((state) => state.Auth.user);
 
+  const { isTabletOrMobile } = useMediaQuery();
   const [searchType, setSearchType] = useState('buy-button');
   const [searchText, setSearchText] = useState('');
   const [autoCompleteOptions, setAutoCompleteOptions] = useState([
@@ -31,19 +35,31 @@ const Search = ({ handleSubmit }: any) => {
       state: 'FL'
     }
   ]);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
 
-  const handleSearchTypeChange = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setSearchType(e.currentTarget.id);
-  };
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
+  const [anchorEl3, setAnchorEl3] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+    if (event.currentTarget.id === 'looking-for-menu-button') {
+      return setAnchorEl(event.currentTarget);
+    } else if (event.currentTarget.id === 'price-button') {
+      return setAnchorEl2(event.currentTarget);
+    } else if (event.currentTarget.id === 'property-menu-button') {
+      return setAnchorEl3(event.currentTarget);
+    } else {
+      return;
+    }
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+    setAnchorEl2(null);
+    setAnchorEl3(null);
+  };
+
+  const handleSearchTypeChange = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setSearchType(e.currentTarget.id);
   };
 
   const checkSearchType = useMemo(() => {
@@ -73,9 +89,13 @@ const Search = ({ handleSubmit }: any) => {
     }
   };
 
-  const onSubmit = handleSubmit((values) => {
+  const onSubmit = handleSubmit((values: IFormValues) => {
     console.log(values);
   });
+
+  useEffect(() => {
+    dispatch(getCountries());
+  }, []);
 
   useEffect(() => {
     dispatch(getUserLocation());
@@ -103,50 +123,38 @@ const Search = ({ handleSubmit }: any) => {
           Rent
         </Button>
         <Button
-          id="buy-button-menu"
-          aria-controls={open ? 'buy-menu' : undefined}
+          id="buy-button"
+          onClick={handleSearchTypeChange}
+          buttonbackground={checkSearchType}
+        >
+          Buy
+        </Button>
+        <Button
+          id="rent-button"
+          onClick={handleSearchTypeChange}
+          buttonbackground={!checkSearchType}
+        >
+          Rent
+        </Button>
+        <Button
+          id="looking-for-menu-button"
+          aria-controls="looking-for-menu-button"
           aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
+          aria-label="open-looking-for-menu"
           endIcon={<KeyboardArrowDown />}
         >
           Looking for
         </Button>
         <Menu
-          id="rent-menu"
+          id="simple-menu"
           anchorEl={anchorEl}
-          open={open}
+          keepMounted
+          open={Boolean(anchorEl)}
           onClose={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'rent-button'
-          }}
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
           <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
-        </Menu>
-        <Button
-          id="property-button"
-          aria-controls={open ? 'property-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-          onClick={handleClick}
-          endIcon={<KeyboardArrowDown />}
-        >
-          Property Type
-        </Button>
-        <Menu
-          id="property-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'property-button'
-          }}
-        >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Menu>
         <Button
           id="price-button"
@@ -160,16 +168,36 @@ const Search = ({ handleSubmit }: any) => {
         </Button>
         <Menu
           id="price-menu"
-          anchorEl={anchorEl}
-          open={open}
+          anchorEl={anchorEl2}
+          open={Boolean(anchorEl2)}
           onClose={handleClose}
           MenuListProps={{
             'aria-labelledby': 'price-button'
           }}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
+          <MenuItem onClick={handleClose}>3</MenuItem>
+        </Menu>
+        <Button
+          id="property-menu-button"
+          aria-controls={open ? 'property-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          onClick={handleClick}
+          endIcon={<KeyboardArrowDown />}
+        >
+          Property Type
+        </Button>
+        <Menu
+          id="property-menu"
+          sx={{ width: '200px' }}
+          anchorEl={anchorEl3}
+          open={Boolean(anchorEl3)}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'property-menu-button'
+          }}
+        >
+          <MenuItem onClick={handleClose}>4</MenuItem>
         </Menu>
         <Field
           component={renderAutocomplete}

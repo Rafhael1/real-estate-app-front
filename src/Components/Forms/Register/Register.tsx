@@ -1,15 +1,8 @@
 import React from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
-import {
-  Stack,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent
-} from '@mui/material';
-import { RegisterProps } from './Register.types';
+import { Stack, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { useDispatch } from '../../../Hooks/Redux';
-import { UserType } from 'Types/Auth/Auth.types';
+import { UserType, AuthProps } from 'Types/Auth/Auth.types';
 
 import renderTextField from '../../Fields/InputField';
 
@@ -20,7 +13,7 @@ const Register = ({
   handleSubmit,
   isModalOpen,
   handleModalOpen
-}: RegisterProps) => {
+}: AuthProps) => {
   const dispatch = useDispatch();
 
   return (
@@ -82,6 +75,6 @@ const Register = ({
   );
 };
 
-export default reduxForm<{}, RegisterProps>({
+export default reduxForm<{}, AuthProps>({
   form: 'RegisterForm'
 })(Register);

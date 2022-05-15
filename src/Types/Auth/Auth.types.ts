@@ -1,5 +1,12 @@
 import { InjectedFormProps } from 'redux-form';
-export type LoginProps = {
+
+export type AuthProps = {
+  handleSubmit?: InjectedFormProps['handleSubmit'];
+  isModalOpen?: boolean;
+  handleModalOpen?: any;
+};
+
+export type RegisterProps = {
   handleSubmit?: InjectedFormProps['handleSubmit'];
   isModalOpen?: boolean;
   handleModalOpen?: any;
