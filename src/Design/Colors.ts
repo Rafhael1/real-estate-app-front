@@ -4,13 +4,13 @@ export const palette = {
     main: '#2F3A56',
     dark: '#1c2233'
   },
-  warning: {
-    light: '#ffeb3b',
-    main: '#fcb103',
-    dark: '#f9a000',
+  secondary: {
+    light: '#EEE1C6',
+    main: '#D3BC8D',
+    dark: '#c2ad82',
     contrastText: 'whitesmoke'
   },
-  secondary: {
+  warning: {
     light: '#ffeb3b',
     main: '#fcb103',
     dark: '#f9a000',
@@ -22,7 +22,7 @@ export const palette = {
     dark: '#6d6f7c'
   },
   text: {
-    primary: '#0D1B2A',
+    primary: '#060c12',
     secondary: '#898989'
   }
 };

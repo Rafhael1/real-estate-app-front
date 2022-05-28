@@ -15,9 +15,9 @@ export interface IFormValues {
 export interface ISearchSlices {
   isLoading: boolean;
   hasError: boolean;
-  countries: {
-    _id: string;
-    name: string;
-    cod: string;
+  countries?: {
+    _id?: string;
+    name?: string;
+    cod?: string;
   }[];
 }

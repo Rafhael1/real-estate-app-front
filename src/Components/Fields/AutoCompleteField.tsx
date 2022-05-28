@@ -1,56 +1,40 @@
-import React, { ReactNode } from 'react';
-import {
-  Autocomplete,
-  TextField,
-  Box,
-  AutocompleteRenderInputParams
-} from '@mui/material';
+import React from 'react';
+import { Autocomplete, TextField } from '@mui/material';
+import { Controller } from 'react-hook-form';
 
-const renderAutocompleteField = ({
-  input,
-  rows,
-  multiline,
+const AutocompleteField = ({
+  options = [],
+  name,
+  keySelect,
+  labelSelect,
   label,
-  type,
-  options,
-  optionValRespKey,
-  onTextChanged,
-  onFetchResult,
-  placeholder,
-  fieldRef,
-  onClick,
-  disabled,
-  loading,
-  filterOptions,
-  style,
-  meta: { touched, error, warning }
-}: any) => {
+  control,
+  ...rest
+}) => {
   return (
-    <Box style={style}>
-      <Autocomplete
-        fullWidth
-        options={options.map((option) => option[optionValRespKey])}
-        filterOptions={filterOptions}
-        onChange={(e, val) => {
-          onFetchResult(val);
-        }}
-        onInputChange={(e, val) => {
-          onTextChanged(val);
-        }}
-        renderInput={(params) => (
-          <TextField
-            {...input}
-            {...params}
-            label={label}
-            error={touched && !!error}
-            helperText={touched && error}
-            style={style}
+    <Controller
+      name={name}
+      control={control}
+      render={({ field: { onChange } }) => {
+        return (
+          <Autocomplete
+            {...rest}
+            options={options || []}
+            getOptionLabel={(option) => option[labelSelect]}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                {...rest}
+                label={label}
+                onChange={onChange}
+              />
+            )}
+            onChange={(event, values) => onChange(values[keySelect])}
           />
-        )}
-      />
-      {loading && 'Loading...'}
-    </Box>
+        );
+      }}
+    />
   );
 };
 
-export default renderAutocompleteField;
+export default AutocompleteField;

@@ -199,7 +199,10 @@ const Navbar = () => {
             </Box>
           ) : (
             <Box sx={{ flexGrow: 0 }}>
-              <Button onClick={() => handleModalOpen('login')} color="warning">
+              <Button
+                onClick={() => handleModalOpen('login')}
+                color="secondary"
+              >
                 Advertise with us
                 <ArrowRightAltRounded />
               </Button>

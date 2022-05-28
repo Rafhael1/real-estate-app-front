@@ -1,30 +1,22 @@
 import React from 'react';
 import { Checkbox } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { FieldTypes } from '../../Types/Fields/Fields.types';
+import { Controller } from 'react-hook-form';
 
-const renderCheckboxField = ({
-  input,
-  label,
-  color,
-  icon,
-  size,
-  style,
-  ...custom
-}: FieldTypes) => (
-  <FormControlLabel
-    label={label}
-    control={
-      <Checkbox
-        icon={icon}
-        color={color}
-        size={size}
-        sx={style}
-        {...input}
-        {...custom}
-      />
-    }
-  />
-);
+const CheckboxField = ({ name, label, control, ...rest }) => {
+  return (
+    <Controller
+      control={control}
+      name={name}
+      render={({ field: { onChange } }) => (
+        <FormControlLabel
+          label={label}
+          control={<Checkbox {...rest} />}
+          onChange={onChange}
+        />
+      )}
+    />
+  );
+};
 
-export default renderCheckboxField;
+export default CheckboxField;

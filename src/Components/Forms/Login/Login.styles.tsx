@@ -5,7 +5,6 @@ const useStyles = makeStyles(() => ({
     fontWeight: 900
   },
   loginButton: {
-    padding: '0 25px',
     width: '200px'
   },
   signUpLink: {

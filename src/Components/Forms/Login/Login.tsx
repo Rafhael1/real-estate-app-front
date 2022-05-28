@@ -7,6 +7,7 @@ import {
   DialogContent,
   Typography
 } from '@mui/material';
+import { useForm } from 'react-hook-form';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useDispatch, useSelector } from 'Hooks/Redux';
 import { login } from 'Services/Auth/Auth.actions';
@@ -14,12 +15,14 @@ import { UserType, AuthProps } from 'Types/Auth/Auth.types';
 
 import renderTextField from '../../Fields/InputField';
 import renderCheckboxField from '../../Fields/CheckboxField';
+import { TextField, CheckboxField } from 'Components';
 
 import useStyles from './Login.styles';
 
-const Login = ({ handleSubmit, isModalOpen, handleModalOpen }: AuthProps) => {
+const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.Auth);
+  const { control, handleSubmit } = useForm();
 
   const styles = useStyles();
 
@@ -32,34 +35,34 @@ const Login = ({ handleSubmit, isModalOpen, handleModalOpen }: AuthProps) => {
     >
       <DialogTitle sx={{ alignSelf: 'center' }}>Login</DialogTitle>
       <DialogContent>
-        <Form
+        <form
           onSubmit={handleSubmit(async (values: UserType) => {
             await dispatch(login(values));
             handleModalOpen('login');
           })}
         >
           <Stack direction="column" alignItems="center" spacing={0}>
-            <Field
+            <TextField
               name="email"
               color="primary"
               label="Email"
               type="email"
               autoFocus
-              component={renderTextField}
+              control={control}
             />
-            <Field
+            <TextField
               name="password"
               color="primary"
               label="Password"
               type="password"
-              component={renderTextField}
+              control={control}
             />
-            <Field
+            <CheckboxField
               name="rememberMe"
               type="checkbox"
               label="Remember Me"
-              color="secondary"
-              component={renderCheckboxField}
+              color="primary"
+              control={control}
             />
             <LoadingButton
               loading={authState.isLoading}
@@ -80,7 +83,7 @@ const Login = ({ handleSubmit, isModalOpen, handleModalOpen }: AuthProps) => {
               <b>Sign Up</b>
             </Typography>
           </Stack>
-        </Form>
+        </form>
       </DialogContent>
     </Dialog>
   );

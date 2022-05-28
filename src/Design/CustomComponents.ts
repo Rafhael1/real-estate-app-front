@@ -23,11 +23,11 @@ export default {
     styleOverrides: {
       root: {
         fontSize: '1rem',
-        borderRadius: '25px',
+        borderRadius: '10px',
         marginTop: '10px',
         marginBottom: '10px',
         height: '50px',
-        padding: '15px 25px',
+        padding: '8px 16px',
         boxShadow: 'none',
         fontWeight: 900
       }
@@ -35,16 +35,17 @@ export default {
   },
   MuiLoadingButton: {
     defaultProps: {
-      variant: 'contained'
+      variant: 'contained',
+      color: 'secondary'
     },
     styleOverrides: {
       root: {
         fontSize: '1rem',
-        borderRadius: '25px',
+        borderRadius: '10px',
         marginTop: '10px',
         marginBottom: '10px',
         height: '50px',
-        padding: '15px 25px',
+        padding: '8px 16px',
         boxShadow: 'none',
         fontWeight: 900,
         color: 'white'
@@ -55,7 +56,7 @@ export default {
     styleOverrides: {
       root: {
         width: '100%',
-        borderRadius: '25px',
+        borderRadius: '10px',
         height: '60px',
         alignItems: 'center'
       },
@@ -75,10 +76,10 @@ export default {
         height: '60px',
         alignItems: 'center',
         backgroundColor: '#FAFAFA',
-        borderRadius: '25px',
+        borderRadius: '10px',
         [`& fieldset`]: {
           border: 0,
-          borderRadius: '25px'
+          borderRadius: '10px'
         }
       }
     }

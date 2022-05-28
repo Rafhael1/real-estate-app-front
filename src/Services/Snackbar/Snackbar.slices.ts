@@ -18,7 +18,6 @@ const snackbarSlice = createSlice({
       state.isShowing = true;
     },
     hideSnackbar: (state: SnackbarState) => {
-      state.color = 'info';
       state.isShowing = false;
     }
   }
