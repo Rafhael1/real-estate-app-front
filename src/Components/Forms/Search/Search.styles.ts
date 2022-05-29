@@ -18,5 +18,5 @@ export const CustomButton = styled(Button)<IButton>(
 
 export const ButtonGroup = styled(MuiButtonGroup)({
   backgroundColor: 'white',
-  borderRadius: '10px'
+  borderRadius: '12px'
 });

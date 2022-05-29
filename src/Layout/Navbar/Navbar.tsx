@@ -203,7 +203,7 @@ const Navbar = () => {
                 onClick={() => handleModalOpen('login')}
                 color="secondary"
               >
-                Advertise with us
+                Advertise
                 <ArrowRightAltRounded />
               </Button>
             </Box>

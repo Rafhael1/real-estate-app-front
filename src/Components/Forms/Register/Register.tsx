@@ -1,20 +1,18 @@
 import React from 'react';
-import { Form, Field, reduxForm } from 'redux-form';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from '../../../Hooks/Redux';
 import { Stack, Dialog, DialogTitle, DialogContent } from '@mui/material';
-import { useDispatch } from '../../../Hooks/Redux';
 import { UserType, AuthProps } from 'Types/Auth/Auth.types';
 
-import renderTextField from '../../Fields/InputField';
+import { TextField, CheckboxField } from 'Components';
 
 import { register } from 'Services/Auth/Auth.actions';
 import { LoadingButton } from '@mui/lab';
 
-const Register = ({
-  handleSubmit,
-  isModalOpen,
-  handleModalOpen
-}: AuthProps) => {
+const Register = ({ isModalOpen, handleModalOpen }: AuthProps) => {
   const dispatch = useDispatch();
+  const authState = useSelector((state) => state.Auth);
+  const { control, handleSubmit } = useForm();
 
   return (
     <Dialog
@@ -25,7 +23,7 @@ const Register = ({
     >
       <DialogTitle sx={{ alignSelf: 'center' }}>Create Account</DialogTitle>
       <DialogContent>
-        <Form
+        <form
           onSubmit={handleSubmit(async (values: UserType) => {
             await dispatch(register(values));
             handleModalOpen('register');
@@ -37,44 +35,41 @@ const Register = ({
             alignItems="center"
             spacing={0}
           >
-            <Field
+            <TextField
               name="name"
-              variant="outlined"
               color="primary"
               label="Name"
               type="text"
-              component={renderTextField}
+              control={control}
             />
-            <Field
+            <TextField
+              required
               name="email"
-              variant="outlined"
               color="primary"
               label="Email"
               type="email"
-              component={renderTextField}
+              control={control}
             />
-            <Field
+            <TextField
+              required
               name="password"
-              variant="outlined"
               color="primary"
               label="Password"
               type="password"
-              component={renderTextField}
+              control={control}
             />
             <LoadingButton
-              //loading={authState.isLoading}
-              // className={styles.loginButton}
+              loading={authState.isLoading}
+              sx={{ width: '200px' }}
               type="submit"
             >
               Sign Up
             </LoadingButton>
           </Stack>
-        </Form>
+        </form>
       </DialogContent>
     </Dialog>
   );
 };
 
-export default reduxForm<{}, AuthProps>({
-  form: 'RegisterForm'
-})(Register);
+export default Register;

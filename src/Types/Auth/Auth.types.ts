@@ -24,6 +24,7 @@ export type UserType = {
 
 export interface IState {
   isLoading: boolean;
+  isLoadingLocation: boolean;
   hasError: boolean;
   user?: UserType;
   isAuthenticated: boolean;

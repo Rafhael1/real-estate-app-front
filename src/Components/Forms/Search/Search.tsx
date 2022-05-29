@@ -1,10 +1,10 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { IFormValues } from 'Types/Search/Search.types';
+import { ICountries, IFormValues } from 'Types/Search/Search.types';
 import { UserType } from 'Types/Auth/Auth.types';
 import { useForm } from 'react-hook-form';
 
-import { AutocompleteField } from 'Components';
-import { Menu, MenuItem, TextField } from '@mui/material';
+import { AutocompleteField, TextField } from 'Components';
+import { Menu, MenuItem } from '@mui/material';
 import { CustomButton as Button, ButtonGroup } from './Search.styles';
 import { KeyboardArrowDown, SearchRounded } from '@mui/icons-material';
 
@@ -12,11 +12,13 @@ import useMediaQuery from 'Hooks/useMediaQuery';
 import { useDispatch, useSelector } from 'Hooks/Redux';
 import { getUserLocation } from 'Services/Auth/Auth.actions';
 import { getCountries } from 'Services/Search/Search.action';
+import maskMoney from 'Utils/masks/maskMoney';
+import revertMaskMoney from 'Utils/masks/revertMaskMoney';
 
 const Search = () => {
   const dispatch = useDispatch();
-  const countries = useSelector((state: any) => state.Search.countries);
 
+  const countries = useSelector((state) => state.Search.countries);
   const user: UserType = useSelector((state) => state.Auth.user);
 
   const { isTabletOrMobile } = useMediaQuery();
@@ -26,7 +28,15 @@ const Search = () => {
   const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
   const [anchorEl3, setAnchorEl3] = React.useState<null | HTMLElement>(null);
 
-  const { handleSubmit, control } = useForm();
+  const { handleSubmit, control, setValue } = useForm({
+    defaultValues: useMemo(() => {
+      return {
+        country: { name: '', cod: '' },
+        minprice: searchType === 'buy-button' ? 50000 : 100,
+        maxprice: searchType === 'buy-button' ? 450000 : 2000
+      };
+    }, [setSearchType])
+  });
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (event.currentTarget.id === 'looking-for-menu-button') {
@@ -62,9 +72,23 @@ const Search = () => {
     dispatch(getUserLocation());
   }, []);
 
+  useEffect(() => {
+    const countryName = countries.find((i) => i.cod === user.country);
+    if (user.country) {
+      setValue('country', {
+        name: countryName?.name || '',
+        cod: countryName?.cod || ''
+      });
+    }
+  }, [user.country, countries]);
+
   return (
     <>
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
+      <form
+        onSubmit={handleSubmit((data) => {
+          console.log(data);
+        })}
+      >
         <ButtonGroup
           orientation={isTabletOrMobile ? 'vertical' : 'horizontal'}
           variant="text"
@@ -132,20 +156,19 @@ const Search = () => {
                 padding: '20px 20px 20px 20px',
                 zIndex: '111'
               }}
-              disableRipple
               // onClick={handleClose}
             >
-              {/* <Field name="minprice" type="number">
-                {(props) => (
-                  <TextField
-                    name={props.input.name}
-                    value={props.input.value}
-                    type="number"
-                    onChange={props.input.onChange}
-                    placeholder="Min. Price"
-                  />
-                )}
-              </Field> */}
+              <TextField
+                transform={{
+                  input: (value) => maskMoney(value),
+                  output: (e) => maskMoney(e.target.value)
+                }}
+                name="minprice"
+                color="primary"
+                label="Min. Price"
+                startAdornment="€"
+                control={control}
+              />
             </MenuItem>
             <MenuItem
               dense
@@ -155,19 +178,17 @@ const Search = () => {
                 marginBottom: '-5px',
                 padding: '20px 20px 20px 20px'
               }}
-              // onClick={handleClose}
             >
-              {/* <Field name="maxprice">
-                {(props) => (
-                  <TextField
-                    name={props.input.name}
-                    value={props.input.value}
-                    type="number"
-                    onChange={props.input.onChange}
-                    placeholder="Max. Price"
-                  />
-                )}
-              </Field> */}
+              <TextField
+                transform={{
+                  input: (value) => maskMoney(value),
+                  output: (e) => maskMoney(e.target.value)
+                }}
+                name="maxprice"
+                color="primary"
+                label="Max. Price"
+                control={control}
+              />
             </MenuItem>
           </Menu>
           <Button
@@ -193,15 +214,21 @@ const Search = () => {
             <MenuItem onClick={handleClose}>4</MenuItem>
           </Menu>
           <AutocompleteField
-            name="country"
-            label="Country"
-            keySelect="cod"
+            name="city"
+            label="City"
             labelSelect="name"
-            disableClearable
-            autoSelect
             options={countries}
             control={control}
-            style={{ width: '130px' }}
+            sx={{ width: isTabletOrMobile ? null : '230px' }}
+          />
+          <AutocompleteField
+            required
+            name="country"
+            label="Country"
+            labelSelect="name"
+            options={countries}
+            control={control}
+            sx={{ width: isTabletOrMobile ? null : '130px' }}
           />
           <Button
             buttonbackground="true"

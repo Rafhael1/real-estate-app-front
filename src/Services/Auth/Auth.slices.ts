@@ -1,9 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IState, UserType } from '../../Types/Auth/Auth.types';
-import { login, isLogged, logout, getUserLocation } from './Auth.actions';
+import {
+  login,
+  register,
+  isLogged,
+  logout,
+  getUserLocation,
+  setUserLocation
+} from './Auth.actions';
 
 export const initialState: IState = {
   isLoading: false,
+  isLoadingLocation: false,
   hasError: false,
   isAuthenticated: false,
   user: {
@@ -19,6 +27,7 @@ const authSlices = createSlice({
   name: 'auth',
   initialState,
   extraReducers: (builder) => {
+    // Login
     builder.addCase(login.pending, (state) => {
       state.isLoading = true;
     });
@@ -38,6 +47,27 @@ const authSlices = createSlice({
       state.isLoading = false;
       state.hasError = true;
     });
+    // Register
+    builder.addCase(register.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(
+      register.fulfilled,
+      (state, action: PayloadAction<{ isLogged: boolean; user: UserType }>) => {
+        state.isLoading = false;
+        state.isAuthenticated = action.payload.isLogged;
+        state.user = {
+          _id: action.payload.user?._id,
+          email: action.payload.user?.email,
+          name: action.payload.user?.name
+        };
+      }
+    );
+    builder.addCase(register.rejected, (state) => {
+      state.isLoading = false;
+      state.hasError = true;
+    });
+    // Is logged
     builder.addCase(isLogged.pending, (state) => {
       state.isLoading = true;
     });
@@ -56,6 +86,7 @@ const authSlices = createSlice({
     builder.addCase(isLogged.rejected, (state) => {
       state.isLoading = false;
     });
+    // Logout
     builder.addCase(logout, (state) => {
       state.isAuthenticated = false;
       state.user = {
@@ -65,13 +96,14 @@ const authSlices = createSlice({
         _id: ''
       };
     });
+    // Get user location
     builder.addCase(getUserLocation.pending, (state) => {
-      state.isLoading = true;
+      state.isLoadingLocation = true;
     });
     builder.addCase(
       getUserLocation.fulfilled,
       (state, action: PayloadAction<{ city: string; country: string }>) => {
-        state.isLoading = false;
+        state.isLoadingLocation = false;
         state.user = {
           ...state.user,
           city: action.payload.city,
@@ -80,12 +112,10 @@ const authSlices = createSlice({
       }
     );
     builder.addCase(getUserLocation.rejected, (state) => {
-      state.isLoading = false;
+      state.isLoadingLocation = false;
     });
   },
   reducers: {}
 });
-
-// export const { logout } = authSlices.actions;
 
 export default authSlices.reducer;

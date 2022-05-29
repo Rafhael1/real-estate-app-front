@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Field, reduxForm } from 'redux-form';
+import { useForm } from 'react-hook-form';
 import {
   Stack,
   Dialog,
@@ -7,15 +7,11 @@ import {
   DialogContent,
   Typography
 } from '@mui/material';
-import { useForm } from 'react-hook-form';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { TextField, CheckboxField } from 'Components';
 import { useDispatch, useSelector } from 'Hooks/Redux';
 import { login } from 'Services/Auth/Auth.actions';
 import { UserType, AuthProps } from 'Types/Auth/Auth.types';
-
-import renderTextField from '../../Fields/InputField';
-import renderCheckboxField from '../../Fields/CheckboxField';
-import { TextField, CheckboxField } from 'Components';
 
 import useStyles from './Login.styles';
 
@@ -43,6 +39,7 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
         >
           <Stack direction="column" alignItems="center" spacing={0}>
             <TextField
+              required
               name="email"
               color="primary"
               label="Email"
@@ -51,6 +48,7 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
               control={control}
             />
             <TextField
+              required
               name="password"
               color="primary"
               label="Password"
@@ -61,12 +59,12 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
               name="rememberMe"
               type="checkbox"
               label="Remember Me"
-              color="primary"
+              color="secondary"
               control={control}
             />
             <LoadingButton
               loading={authState.isLoading}
-              className={styles.loginButton}
+              sx={{ width: '200px' }}
               type="submit"
             >
               Login
@@ -75,7 +73,7 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
               onClick={() => {
                 handleModalOpen('register');
               }}
-              variant="body2"
+              variant="body1"
               color="textSecondary"
               className={styles.signUpLink}
             >
@@ -89,6 +87,4 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
   );
 };
 
-export default reduxForm<{}, AuthProps>({
-  form: 'LoginForm'
-})(Login);
+export default Login;

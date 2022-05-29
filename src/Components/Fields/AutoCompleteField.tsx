@@ -5,7 +5,6 @@ import { Controller } from 'react-hook-form';
 const AutocompleteField = ({
   options = [],
   name,
-  keySelect,
   labelSelect,
   label,
   control,
@@ -15,24 +14,21 @@ const AutocompleteField = ({
     <Controller
       name={name}
       control={control}
-      render={({ field: { onChange } }) => {
-        return (
-          <Autocomplete
-            {...rest}
-            options={options || []}
-            getOptionLabel={(option) => option[labelSelect]}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                {...rest}
-                label={label}
-                onChange={onChange}
-              />
-            )}
-            onChange={(event, values) => onChange(values[keySelect])}
-          />
-        );
-      }}
+      render={(props) => (
+        <Autocomplete
+          {...props}
+          {...props.field}
+          {...rest}
+          options={options}
+          autoComplete
+          disableClearable
+          getOptionLabel={(option) => option[labelSelect]}
+          renderInput={(params) => (
+            <TextField {...params} {...rest} label={label} />
+          )}
+          onChange={(_, values) => props.field.onChange(values)}
+        />
+      )}
     />
   );
 };

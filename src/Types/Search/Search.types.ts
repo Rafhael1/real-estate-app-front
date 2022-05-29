@@ -21,3 +21,9 @@ export interface ISearchSlices {
     cod?: string;
   }[];
 }
+
+export interface ICountries {
+  _id?: string;
+  name?: string;
+  cod?: string;
+}

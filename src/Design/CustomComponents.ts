@@ -23,7 +23,7 @@ export default {
     styleOverrides: {
       root: {
         fontSize: '1rem',
-        borderRadius: '10px',
+        borderRadius: '12px',
         marginTop: '10px',
         marginBottom: '10px',
         height: '50px',
@@ -41,7 +41,7 @@ export default {
     styleOverrides: {
       root: {
         fontSize: '1rem',
-        borderRadius: '10px',
+        borderRadius: '12px',
         marginTop: '10px',
         marginBottom: '10px',
         height: '50px',
@@ -76,10 +76,10 @@ export default {
         height: '60px',
         alignItems: 'center',
         backgroundColor: '#FAFAFA',
-        borderRadius: '10px',
+        borderRadius: '12px',
         [`& fieldset`]: {
           border: 0,
-          borderRadius: '10px'
+          borderRadius: '12px'
         }
       }
     }
@@ -99,7 +99,7 @@ export default {
     },
     styleOverrides: {
       root: {
-        borderRadius: '25px'
+        borderRadius: '12px'
       }
     }
   },
