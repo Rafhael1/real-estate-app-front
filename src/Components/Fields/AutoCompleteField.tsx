@@ -19,10 +19,9 @@ const AutocompleteField = ({
           {...props}
           {...props.field}
           {...rest}
-          options={options}
+          options={options || []}
           autoComplete
-          disableClearable
-          getOptionLabel={(option) => option[labelSelect]}
+          getOptionLabel={(option) => option && option[labelSelect]}
           renderInput={(params) => (
             <TextField {...params} {...rest} label={label} />
           )}

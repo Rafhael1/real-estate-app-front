@@ -12,13 +12,20 @@ export interface IFormValues {
   country: string;
 }
 
+export interface Countries {
+  _id: string;
+  name: string;
+  cod: string;
+}
+
 export interface ISearchSlices {
   isLoading: boolean;
   hasError: boolean;
-  countries?: {
+  countries?: Countries[];
+  cities?: {
     _id?: string;
-    name?: string;
-    cod?: string;
+    country?: string;
+    city?: string;
   }[];
 }
 

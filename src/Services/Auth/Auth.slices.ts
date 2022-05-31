@@ -5,8 +5,7 @@ import {
   register,
   isLogged,
   logout,
-  getUserLocation,
-  setUserLocation
+  getUserLocation
 } from './Auth.actions';
 
 export const initialState: IState = {

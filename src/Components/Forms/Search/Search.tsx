@@ -11,7 +11,7 @@ import { KeyboardArrowDown, SearchRounded } from '@mui/icons-material';
 import useMediaQuery from 'Hooks/useMediaQuery';
 import { useDispatch, useSelector } from 'Hooks/Redux';
 import { getUserLocation } from 'Services/Auth/Auth.actions';
-import { getCountries } from 'Services/Search/Search.action';
+import { getCountries, getCities } from 'Services/Search/Search.action';
 import maskMoney from 'Utils/masks/maskMoney';
 import revertMaskMoney from 'Utils/masks/revertMaskMoney';
 
@@ -19,6 +19,7 @@ const Search = () => {
   const dispatch = useDispatch();
 
   const countries = useSelector((state) => state.Search.countries);
+  const cities = useSelector((state) => state.Search.cities);
   const user: UserType = useSelector((state) => state.Auth.user);
 
   const { isTabletOrMobile } = useMediaQuery();
@@ -32,6 +33,7 @@ const Search = () => {
     defaultValues: useMemo(() => {
       return {
         country: { name: '', cod: '' },
+        city: { city: '' },
         minprice: searchType === 'buy-button' ? 50000 : 100,
         maxprice: searchType === 'buy-button' ? 450000 : 2000
       };
@@ -66,6 +68,7 @@ const Search = () => {
 
   useEffect(() => {
     dispatch(getCountries());
+    dispatch(getCities());
   }, []);
 
   useEffect(() => {
@@ -73,8 +76,8 @@ const Search = () => {
   }, []);
 
   useEffect(() => {
-    const countryName = countries.find((i) => i.cod === user.country);
-    if (user.country) {
+    const countryName = countries?.find((i) => i.cod === user.country);
+    if (countryName) {
       setValue('country', {
         name: countryName?.name || '',
         cod: countryName?.cod || ''
@@ -82,11 +85,21 @@ const Search = () => {
     }
   }, [user.country, countries]);
 
+  useEffect(() => {
+    const userCity = cities?.find((i) => i.city === user.city);
+    if (userCity) {
+      setValue('city', {
+        city: userCity?.city || ''
+      });
+    }
+  }, [user.city, cities]);
+
   return (
     <>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log(data);
+          console.log(data.country.name);
+          // console.log(getValues().country.name);
         })}
       >
         <ButtonGroup
@@ -216,8 +229,8 @@ const Search = () => {
           <AutocompleteField
             name="city"
             label="City"
-            labelSelect="name"
-            options={countries}
+            labelSelect="city"
+            options={cities}
             control={control}
             sx={{ width: isTabletOrMobile ? null : '230px' }}
           />
@@ -226,6 +239,8 @@ const Search = () => {
             name="country"
             label="Country"
             labelSelect="name"
+            // onInputChange={(e) => a()}
+            disableClearable
             options={countries}
             control={control}
             sx={{ width: isTabletOrMobile ? null : '130px' }}
