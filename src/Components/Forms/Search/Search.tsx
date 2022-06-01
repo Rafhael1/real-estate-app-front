@@ -76,7 +76,8 @@ const Search = () => {
   }, []);
 
   useEffect(() => {
-    const countryName = countries?.find((i) => i.cod === user.country);
+    const countryName =
+      countries.length && countries?.find((i) => i.cod === user.country);
     if (countryName) {
       setValue('country', {
         name: countryName?.name || '',
@@ -86,7 +87,7 @@ const Search = () => {
   }, [user.country, countries]);
 
   useEffect(() => {
-    const userCity = cities?.find((i) => i.city === user.city);
+    const userCity = cities.length && cities?.find((i) => i.city === user.city);
     if (userCity) {
       setValue('city', {
         city: userCity?.city || ''
@@ -142,9 +143,9 @@ const Search = () => {
           </Menu>
           <Button
             id="price-button"
-            aria-controls={open ? 'price-menu' : undefined}
+            aria-label="open-price-menu"
+            aria-controls={'price-menu'}
             aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
             endIcon={<KeyboardArrowDown />}
           >
@@ -156,7 +157,7 @@ const Search = () => {
             open={Boolean(anchorEl2)}
             onClose={handleClose}
             MenuListProps={{
-              'aria-labelledby': 'price-button'
+              'aria-labelledby': 'price-input'
             }}
           >
             <MenuItem
@@ -209,6 +210,7 @@ const Search = () => {
             aria-controls={open ? 'property-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
+            aria-label="open-property-menu"
             onClick={handleClick}
             endIcon={<KeyboardArrowDown />}
           >
@@ -231,6 +233,7 @@ const Search = () => {
             label="City"
             labelSelect="city"
             options={cities}
+            //disabled={!!cities}
             control={control}
             sx={{ width: isTabletOrMobile ? null : '230px' }}
           />
@@ -240,6 +243,7 @@ const Search = () => {
             label="Country"
             labelSelect="name"
             // onInputChange={(e) => a()}
+            //disabled={!!countries}
             disableClearable
             options={countries}
             control={control}

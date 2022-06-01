@@ -1,26 +1,17 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  Stack,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Typography
-} from '@mui/material';
+import { Stack, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { SignUpLink } from './Login.styles';
 import { TextField, CheckboxField } from 'Components';
 import { useDispatch, useSelector } from 'Hooks/Redux';
 import { login } from 'Services/Auth/Auth.actions';
 import { UserType, AuthProps } from 'Types/Auth/Auth.types';
 
-import useStyles from './Login.styles';
-
 const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.Auth);
   const { control, handleSubmit } = useForm();
-
-  const styles = useStyles();
 
   return (
     <Dialog
@@ -29,7 +20,9 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
       transitionDuration={1}
       PaperProps={{ sx: { borderRadius: '25px', height: '450px' } }}
     >
-      <DialogTitle sx={{ alignSelf: 'center' }}>Login</DialogTitle>
+      <DialogTitle sx={{ alignSelf: 'center', fontStyle: 'bold' }}>
+        Login
+      </DialogTitle>
       <DialogContent>
         <form
           onSubmit={handleSubmit(async (values: UserType) => {
@@ -69,17 +62,16 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
             >
               Login
             </LoadingButton>
-            <Typography
+            <SignUpLink
               onClick={() => {
                 handleModalOpen('register');
               }}
               variant="body1"
               color="textSecondary"
-              className={styles.signUpLink}
             >
               {"Don't have an account yet? "}
               <b>Sign Up</b>
-            </Typography>
+            </SignUpLink>
           </Stack>
         </form>
       </DialogContent>

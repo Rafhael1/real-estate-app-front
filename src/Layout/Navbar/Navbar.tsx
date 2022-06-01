@@ -23,7 +23,7 @@ import {
   ManageAccountsRounded
 } from '@mui/icons-material';
 import { blue } from '@mui/material/colors';
-import useStyles from './Navbar.styles';
+import { NavLink } from './Navbar.styles';
 
 const Login = React.lazy(() => import('Components/Forms/Login/Login'));
 const Register = React.lazy(() => import('Components/Forms/Register/Register'));
@@ -39,7 +39,6 @@ const pages = [
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const styles = useStyles();
 
   const authReducer: IState = useSelector((state) => state.Auth);
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -137,23 +136,18 @@ const Navbar = () => {
             sx={{
               flexGrow: 1,
               marginLeft: '30%',
+              marginTop: '20px',
+              maxHeight: '50px',
               display: { xs: 'none', md: 'flex' }
             }}
           >
             {pages.map((page, index) => (
               <Link
                 key={index}
-                className={styles.navLinks}
                 to={`/${page.route}`}
+                style={{ textDecoration: 'none' }}
               >
-                <Typography
-                  style={{
-                    fontWeight: 'bold',
-                    fontSize: '1.1rem'
-                  }}
-                >
-                  {page.value}
-                </Typography>
+                <NavLink>{page.value}</NavLink>
               </Link>
             ))}
           </Box>
@@ -182,7 +176,7 @@ const Navbar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                <Link className={styles.buttonLink} to="/dashboard">
+                <Link to="/dashboard">
                   <MenuItem>
                     <ManageAccountsRounded />
                     <Typography textAlign="center">Dashboard</Typography>
