@@ -1,6 +1,6 @@
 import { styled } from '@mui/styles';
 
-export const NavLink = styled('a')({
+export const NavLink = styled('span')({
   color: 'whitesmoke',
   margin: 'auto 20px',
   fontSize: '1.2rem',

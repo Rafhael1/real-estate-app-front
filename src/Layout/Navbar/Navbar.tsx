@@ -20,7 +20,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {
   ArrowRightAltRounded,
   LogoutRounded,
-  ManageAccountsRounded
+  ManageAccountsRounded,
+  DomainAddRounded
 } from '@mui/icons-material';
 import { blue } from '@mui/material/colors';
 import { NavLink } from './Navbar.styles';
@@ -36,6 +37,8 @@ const pages = [
   { value: 'New', route: 'search?search_type=newest' },
   { value: 'About', route: 'about' }
 ];
+
+const linkMenuStyle = { textDecoration: 'none', color: 'inherit' };
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -133,13 +136,11 @@ const Navbar = () => {
             Namai
           </Typography>
           <Box
-            sx={{
-              flexGrow: 1,
-              marginLeft: '30%',
-              marginTop: '20px',
-              maxHeight: '50px',
-              display: { xs: 'none', md: 'flex' }
-            }}
+            flexGrow={1}
+            maxHeight="50px"
+            marginLeft={'30%'}
+            marginTop={'20px'}
+            display={{ xs: 'none', md: 'flex' }}
           >
             {pages.map((page, index) => (
               <Link
@@ -176,10 +177,16 @@ const Navbar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                <Link to="/dashboard">
+                <Link to="/dashboard" style={linkMenuStyle}>
                   <MenuItem>
                     <ManageAccountsRounded />
                     <Typography textAlign="center">Dashboard</Typography>
+                  </MenuItem>
+                </Link>
+                <Link to="/dashboard" style={linkMenuStyle}>
+                  <MenuItem>
+                    <DomainAddRounded />
+                    <Typography textAlign="center">Place Ad</Typography>
                   </MenuItem>
                 </Link>
                 <Divider />
@@ -192,12 +199,20 @@ const Navbar = () => {
               </Menu>
             </Box>
           ) : (
-            <Box sx={{ flexGrow: 0 }}>
+            <Box flexGrow={0}>
+              <Button
+                onClick={() => handleModalOpen('login')}
+                color="secondary"
+                variant="outlined"
+                sx={{ marginRight: '10px' }}
+              >
+                Login
+              </Button>
               <Button
                 onClick={() => handleModalOpen('login')}
                 color="secondary"
               >
-                Advertise
+                Place Ad
                 <ArrowRightAltRounded />
               </Button>
             </Box>

@@ -27,7 +27,6 @@ const Search = () => {
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
-  const [anchorEl3, setAnchorEl3] = React.useState<null | HTMLElement>(null);
 
   const { handleSubmit, control, setValue } = useForm({
     defaultValues: useMemo(() => {
@@ -45,8 +44,6 @@ const Search = () => {
       return setAnchorEl(event.currentTarget);
     } else if (event.currentTarget.id === 'price-button') {
       return setAnchorEl2(event.currentTarget);
-    } else if (event.currentTarget.id === 'property-menu-button') {
-      return setAnchorEl3(event.currentTarget);
     } else {
       return;
     }
@@ -55,7 +52,6 @@ const Search = () => {
   const handleClose = () => {
     setAnchorEl(null);
     setAnchorEl2(null);
-    setAnchorEl3(null);
   };
 
   const handleSearchTypeChange = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -100,7 +96,6 @@ const Search = () => {
       <form
         onSubmit={handleSubmit((data) => {
           console.log(data.country.name);
-          // console.log(getValues().country.name);
         })}
       >
         <ButtonGroup
@@ -149,7 +144,7 @@ const Search = () => {
             onClick={handleClick}
             endIcon={<KeyboardArrowDown />}
           >
-            Price
+            Price Range
           </Button>
           <Menu
             id="price-menu"
@@ -174,13 +169,12 @@ const Search = () => {
             >
               <TextField
                 transform={{
-                  input: (value) => maskMoney(value),
+                  input: (value: string) => maskMoney(value),
                   output: (e) => maskMoney(e.target.value)
                 }}
                 name="minprice"
                 color="primary"
                 label="Min. Price"
-                startAdornment="€"
                 control={control}
               />
             </MenuItem>
@@ -195,8 +189,9 @@ const Search = () => {
             >
               <TextField
                 transform={{
-                  input: (value) => maskMoney(value),
-                  output: (e) => maskMoney(e.target.value)
+                  input: (value: any) => maskMoney(value),
+                  output: (e: { target: { value: any } }) =>
+                    maskMoney(e.target.value)
                 }}
                 name="maxprice"
                 color="primary"
@@ -205,35 +200,11 @@ const Search = () => {
               />
             </MenuItem>
           </Menu>
-          <Button
-            id="property-menu-button"
-            aria-controls={open ? 'property-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            aria-label="open-property-menu"
-            onClick={handleClick}
-            endIcon={<KeyboardArrowDown />}
-          >
-            Property Type
-          </Button>
-          <Menu
-            id="property-menu"
-            sx={{ width: '200px' }}
-            anchorEl={anchorEl3}
-            open={Boolean(anchorEl3)}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'property-menu-button'
-            }}
-          >
-            <MenuItem onClick={handleClose}>4</MenuItem>
-          </Menu>
           <AutocompleteField
             name="city"
             label="City"
             labelSelect="city"
             options={cities}
-            //disabled={!!cities}
             control={control}
             sx={{ width: isTabletOrMobile ? null : '230px' }}
           />
@@ -242,8 +213,6 @@ const Search = () => {
             name="country"
             label="Country"
             labelSelect="name"
-            // onInputChange={(e) => a()}
-            //disabled={!!countries}
             disableClearable
             options={countries}
             control={control}
