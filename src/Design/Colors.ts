@@ -1,13 +1,16 @@
 export const palette = {
+  background: {
+    default: '#F5F5F5'
+  },
   primary: {
     light: '#d4e0ff',
     main: '#2F3A56',
     dark: '#1c2233'
   },
   secondary: {
-    light: '#EEE1C6',
-    main: '#D3BC8D',
-    dark: '#c2ad82',
+    light: '#fad655',
+    main: '#FFCF24',
+    dark: '#facb23',
     contrastText: 'whitesmoke'
   },
   warning: {

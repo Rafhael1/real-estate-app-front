@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PropertyForm from '../../Components/Forms/PropertytForm/PropertyForm';
+import PropertyForm from '../../Components/PropertytForm/PropertyForm';
 
 const Admin = () => (
   <div>

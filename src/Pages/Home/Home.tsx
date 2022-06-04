@@ -1,7 +1,7 @@
 import React from 'react';
 
 import NavBar from '../../Layout/Navbar/Navbar';
-import SearchContainer from 'Components/Forms/Search/Search';
+import SearchContainer from 'Components/Search/Search';
 
 const Home = () => {
   return (

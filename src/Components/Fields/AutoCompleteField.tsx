@@ -6,6 +6,7 @@ const AutocompleteField = ({
   options = [],
   name,
   labelSelect,
+  keySelect,
   label,
   control,
   sx,
@@ -19,14 +20,22 @@ const AutocompleteField = ({
         <Autocomplete
           {...props.field}
           {...rest}
+          key={name}
           options={options.length ? options : []}
           autoComplete
           isOptionEqualToValue={(option, value) =>
-            option[labelSelect] === value
+            option[keySelect] === value[keySelect]
           }
           getOptionLabel={(option) => (option ? option[labelSelect] : '')}
+          renderOption={(props, option) => {
+            return (
+              <li {...props} key={option[keySelect]}>
+                {option[labelSelect]}
+              </li>
+            );
+          }}
           renderInput={(params) => (
-            <TextField key={1} sx={sx} {...params} label={label} />
+            <TextField key={name} sx={sx} {...params} label={label} />
           )}
           onChange={(_, values) => props.field.onChange(values)}
         />

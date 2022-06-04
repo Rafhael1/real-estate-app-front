@@ -9,12 +9,19 @@ export const getCountries = createAsyncThunk('getCountries', async () => {
     return error;
   }
 });
-export const getCities = createAsyncThunk('getCities', async (values) => {
-  try {
-    const res = (await axios.get('/public/auto-complete-locations?country=DK'))
-      .data;
-    return res;
-  } catch (error) {
-    return error;
+export const getCities = createAsyncThunk(
+  'getCities',
+  async (location: string) => {
+    try {
+      const res = (
+        await axios.get(`/public/auto-complete-locations`, {
+          params: { country: location || 'PT' }
+        })
+      ).data;
+
+      return res;
+    } catch (error) {
+      return error;
+    }
   }
-});
+);

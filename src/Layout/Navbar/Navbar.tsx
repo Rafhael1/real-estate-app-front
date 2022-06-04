@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'Hooks/Redux';
 import { logout } from 'Services/Auth/Auth.actions';
 import {
@@ -14,20 +14,23 @@ import {
   Tooltip,
   MenuItem,
   Divider,
-  Button
+  Button,
+  Drawer
 } from '@mui/material';
+import useMediaQuery from 'Hooks/useMediaQuery';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
   ArrowRightAltRounded,
   LogoutRounded,
   ManageAccountsRounded,
-  DomainAddRounded
+  DomainAddRounded,
+  ArrowBackRounded
 } from '@mui/icons-material';
 import { blue } from '@mui/material/colors';
 import { NavLink } from './Navbar.styles';
 
-const Login = React.lazy(() => import('Components/Forms/Login/Login'));
-const Register = React.lazy(() => import('Components/Forms/Register/Register'));
+const Login = React.lazy(() => import('Components/Login/Login'));
+const Register = React.lazy(() => import('Components/Register/Register'));
 
 import { IState } from 'Types/Auth/Auth.types';
 
@@ -42,9 +45,12 @@ const linkMenuStyle = { textDecoration: 'none', color: 'inherit' };
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isMobile } = useMediaQuery();
 
   const authReducer: IState = useSelector((state) => state.Auth);
-  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorDrawer, setAnchorDrawer] = useState(false);
+  // const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState({
     login: false,
@@ -56,6 +62,19 @@ const Navbar = () => {
     handleCloseUserMenu();
   };
 
+  const toggleDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === 'keydown' &&
+        ((event as React.KeyboardEvent).key === 'Tab' ||
+          (event as React.KeyboardEvent).key === 'Shift')
+      ) {
+        return;
+      }
+
+      setAnchorDrawer(open);
+    };
+
   const handleModalOpen = (modalType: string) => {
     setIsModalOpen({
       ...isModalOpen,
@@ -64,16 +83,16 @@ const Navbar = () => {
     });
   };
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  // const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  //   setAnchorElNav(event.currentTarget);
+  // };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  // const handleCloseNavMenu = () => {
+  //   setAnchorElNav(null);
+  // };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -97,35 +116,52 @@ const Navbar = () => {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={toggleDrawer(true)}
               color="inherit"
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left'
+            <Drawer
+              open={anchorDrawer}
+              onClose={toggleDrawer(false)}
+              elevation={2}
+              PaperProps={{
+                sx: { backgroundColor: 'background.default' }
               }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left'
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' }
+              transitionDuration={{
+                enter: 200,
+                exit: 200
               }}
             >
               {pages.map((page, index) => (
-                <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.value}</Typography>
+                <MenuItem
+                  key={index}
+                  onClick={() => {
+                    toggleDrawer(false);
+                    navigate(page.route);
+                  }}
+                  sx={{
+                    width: '250px',
+                    justifyContent: 'center'
+                  }}
+                  divider
+                >
+                  <Typography variant="body1">{page.value}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
+              <IconButton
+                onClick={toggleDrawer(false)}
+                aria-label="close-drawer"
+                size="large"
+                sx={{
+                  position: 'fixed',
+                  top: '93vh',
+                  left: '200px'
+                }}
+              >
+                <ArrowBackRounded />
+              </IconButton>
+            </Drawer>
           </Box>
           <Typography
             variant="h6"
@@ -200,15 +236,19 @@ const Navbar = () => {
             </Box>
           ) : (
             <Box flexGrow={0}>
+              {!isMobile && (
+                <Button
+                  aria-label="login"
+                  onClick={() => handleModalOpen('login')}
+                  color="secondary"
+                  variant="outlined"
+                  sx={{ marginRight: '10px' }}
+                >
+                  Login
+                </Button>
+              )}
               <Button
-                onClick={() => handleModalOpen('login')}
-                color="secondary"
-                variant="outlined"
-                sx={{ marginRight: '10px' }}
-              >
-                Login
-              </Button>
-              <Button
+                aria-label="place-ad"
                 onClick={() => handleModalOpen('login')}
                 color="secondary"
               >

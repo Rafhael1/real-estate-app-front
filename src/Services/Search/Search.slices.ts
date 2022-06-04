@@ -28,6 +28,7 @@ const searchSlices = createSlice({
     // Cities
     builder.addCase(getCities.pending, (state) => {
       state.isLoading = true;
+      state.cities = [];
     });
     builder.addCase(getCities.fulfilled, (state, action) => {
       state.isLoading = false;

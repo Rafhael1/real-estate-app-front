@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from '../../../Hooks/Redux';
+import { useDispatch, useSelector } from '../../Hooks/Redux';
 import { Stack, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { UserType, AuthProps } from 'Types/Auth/Auth.types';
 

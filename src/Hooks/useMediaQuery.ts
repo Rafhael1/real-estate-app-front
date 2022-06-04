@@ -6,13 +6,15 @@ const useMediaQueryHook = () => {
   const isTabletOrMobile = useMediaQuery('(max-width: 1224px)');
   const isPortrait = useMediaQuery('(orientation: portrait)');
   const isRetina = useMediaQuery('(min-resolution: 2dppx)');
+  const isMobile = useMediaQuery('(max-width: 920px)');
 
   return {
     isDesktopOrLaptop,
     isBigScreen,
     isTabletOrMobile,
     isPortrait,
-    isRetina
+    isRetina,
+    isMobile
   };
 };
 

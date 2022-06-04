@@ -5,8 +5,8 @@ import { Stack, Container, Button } from '@mui/material';
 import { IRFrealEstates } from 'Types/Dashboard/Dashboard.types';
 import { addNewRealEstate } from 'Services/Dashboard/Dashboard.actions';
 
-import renderFileInput from '../../Fields/InputFileField';
-import renderInput from '../../Fields/InputField';
+import renderFileInput from '../Fields/InputFileField';
+import renderInput from '../Fields/InputField';
 
 const renderImages = ({ fields }: any) => (
   <>

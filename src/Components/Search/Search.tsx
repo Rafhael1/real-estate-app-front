@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { ICountries, IFormValues } from 'Types/Search/Search.types';
 import { UserType } from 'Types/Auth/Auth.types';
 import { useForm } from 'react-hook-form';
 
@@ -13,7 +12,6 @@ import { useDispatch, useSelector } from 'Hooks/Redux';
 import { getUserLocation } from 'Services/Auth/Auth.actions';
 import { getCountries, getCities } from 'Services/Search/Search.action';
 import maskMoney from 'Utils/masks/maskMoney';
-import revertMaskMoney from 'Utils/masks/revertMaskMoney';
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -28,16 +26,15 @@ const Search = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
 
-  const { handleSubmit, control, setValue } = useForm({
-    defaultValues: useMemo(() => {
-      return {
-        country: { name: '', cod: '' },
-        city: { city: '' },
-        minprice: searchType === 'buy-button' ? 50000 : 100,
-        maxprice: searchType === 'buy-button' ? 450000 : 2000
-      };
-    }, [setSearchType])
+  const { handleSubmit, control, watch, setValue } = useForm({
+    defaultValues: {
+      country: { name: 'Portugal', cod: 'PT' },
+      city: { city: '', country: '' },
+      minprice: '0',
+      maxprice: '0'
+    }
   });
+  const watchCountry = watch('country');
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (event.currentTarget.id === 'looking-for-menu-button') {
@@ -63,11 +60,12 @@ const Search = () => {
   }, [searchType]);
 
   useEffect(() => {
-    dispatch(getCountries());
-    dispatch(getCities());
-  }, []);
+    const country = countries?.find((country) => country.cod === user.country);
+    dispatch(getCities(watchCountry.cod || country?.cod));
+  }, [watchCountry.cod, user.country]);
 
   useEffect(() => {
+    dispatch(getCountries());
     dispatch(getUserLocation());
   }, []);
 
@@ -86,7 +84,8 @@ const Search = () => {
     const userCity = cities.length && cities?.find((i) => i.city === user.city);
     if (userCity) {
       setValue('city', {
-        city: userCity?.city || ''
+        city: userCity?.city,
+        country: watchCountry.cod || userCity?.country
       });
     }
   }, [user.city, cities]);
@@ -95,7 +94,7 @@ const Search = () => {
     <>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log(data.country.name);
+          console.log(data);
         })}
       >
         <ButtonGroup
@@ -201,15 +200,18 @@ const Search = () => {
             </MenuItem>
           </Menu>
           <AutocompleteField
+            keySelect="_id"
             name="city"
             label="City"
             labelSelect="city"
             options={cities}
+            disabled={!watchCountry.cod}
             control={control}
             sx={{ width: isTabletOrMobile ? null : '230px' }}
           />
           <AutocompleteField
             required
+            keySelect="_id"
             name="country"
             label="Country"
             labelSelect="name"
