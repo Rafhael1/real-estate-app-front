@@ -1,9 +1,4 @@
-import {
-  ButtonGroup as MuiButtonGroup,
-  Button,
-  styled,
-  Accordion
-} from '@mui/material';
+import { ButtonGroup as MuiButtonGroup, Button, styled } from '@mui/material';
 import { IButton } from 'Types/Search/Search.types';
 
 export const CustomButton = styled(Button)<IButton>(
@@ -25,9 +20,3 @@ export const ButtonGroup = styled(MuiButtonGroup)({
   backgroundColor: 'white',
   borderRadius: '12px'
 });
-
-export const StyledAccordion = styled(Accordion)(() => ({
-  '& .MuiPaper-root	': {
-    borderRadius: '50px'
-  }
-}));

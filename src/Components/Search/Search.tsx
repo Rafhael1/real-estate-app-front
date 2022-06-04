@@ -1,20 +1,17 @@
-import React, { useState, useMemo, useEffect, Suspense } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { UserType } from 'Types/Auth/Auth.types';
 import { useForm } from 'react-hook-form';
 
 import { AutocompleteField, TextField } from 'Components';
 import {
+  Accordion,
   AccordionSummary,
   Box,
   Menu,
   MenuItem,
   Typography
 } from '@mui/material';
-import {
-  CustomButton as Button,
-  ButtonGroup,
-  StyledAccordion
-} from './Search.styles';
+import { CustomButton as Button, ButtonGroup } from './Search.styles';
 import { KeyboardArrowDown, SearchRounded } from '@mui/icons-material';
 
 import useMediaQuery from 'Hooks/useMediaQuery';
@@ -246,11 +243,12 @@ const SearchComponent = () => {
 
 const SearchMainContainer = () => {
   const { isMobile } = useMediaQuery();
+
   return (
     <>
       {isMobile ? (
         <Box sx={{ width: '310px', margin: '0 auto' }}>
-          <StyledAccordion elevation={0}>
+          <Accordion elevation={0}>
             <AccordionSummary
               expandIcon={<SearchRounded />}
               aria-controls="search-bar"
@@ -260,7 +258,7 @@ const SearchMainContainer = () => {
             <>
               <SearchComponent />
             </>
-          </StyledAccordion>
+          </Accordion>
         </Box>
       ) : (
         <SearchComponent />

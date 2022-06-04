@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '../../Hooks/Redux';
 import { Stack, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { UserType, AuthProps } from 'Types/Auth/Auth.types';
 
-import { TextField, CheckboxField } from 'Components';
+import { TextField } from 'Components';
 
 import { register } from 'Services/Auth/Auth.actions';
 import { LoadingButton } from '@mui/lab';

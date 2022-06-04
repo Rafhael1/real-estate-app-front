@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ISearchSlices, Countries } from 'Types/Search/Search.types';
+import { createSlice } from '@reduxjs/toolkit';
+import { ISearchSlices } from 'Types/Search/Search.types';
 import { getCountries, getCities } from './Search.action';
 
 export const initialState: ISearchSlices = {

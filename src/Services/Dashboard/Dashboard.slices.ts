@@ -8,7 +8,7 @@ export const initialState: IState = {
   realEstates: []
 };
 
-const dashboardSlices = createSlice({ 
+const dashboardSlices = createSlice({
   name: 'dashboard',
   initialState,
   extraReducers: (builder) => {
