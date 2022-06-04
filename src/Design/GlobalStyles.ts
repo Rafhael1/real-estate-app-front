@@ -10,6 +10,9 @@ const theme = createTheme(
     typography: {
       fontFamily: 'Quicksand'
     },
+    shape: {
+      borderRadius: 12
+    },
     // @ts-ignore
     components: customComponents
   },

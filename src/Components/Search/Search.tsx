@@ -1,10 +1,20 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import { UserType } from 'Types/Auth/Auth.types';
 import { useForm } from 'react-hook-form';
 
 import { AutocompleteField, TextField } from 'Components';
-import { Menu, MenuItem } from '@mui/material';
-import { CustomButton as Button, ButtonGroup } from './Search.styles';
+import {
+  AccordionSummary,
+  Box,
+  Menu,
+  MenuItem,
+  Typography
+} from '@mui/material';
+import {
+  CustomButton as Button,
+  ButtonGroup,
+  StyledAccordion
+} from './Search.styles';
 import { KeyboardArrowDown, SearchRounded } from '@mui/icons-material';
 
 import useMediaQuery from 'Hooks/useMediaQuery';
@@ -13,7 +23,7 @@ import { getUserLocation } from 'Services/Auth/Auth.actions';
 import { getCountries, getCities } from 'Services/Search/Search.action';
 import maskMoney from 'Utils/masks/maskMoney';
 
-const Search = () => {
+const SearchComponent = () => {
   const dispatch = useDispatch();
 
   const countries = useSelector((state) => state.Search.countries);
@@ -234,4 +244,29 @@ const Search = () => {
   );
 };
 
-export default Search;
+const SearchMainContainer = () => {
+  const { isMobile } = useMediaQuery();
+  return (
+    <>
+      {isMobile ? (
+        <Box sx={{ width: '310px', margin: '0 auto' }}>
+          <StyledAccordion elevation={0}>
+            <AccordionSummary
+              expandIcon={<SearchRounded />}
+              aria-controls="search-bar"
+            >
+              <Typography variant="h6">Search</Typography>
+            </AccordionSummary>
+            <>
+              <SearchComponent />
+            </>
+          </StyledAccordion>
+        </Box>
+      ) : (
+        <SearchComponent />
+      )}
+    </>
+  );
+};
+
+export default SearchMainContainer;
