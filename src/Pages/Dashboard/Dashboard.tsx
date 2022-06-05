@@ -1,11 +1,12 @@
 import React from 'react';
 
-import PropertyForm from '../../Components/PropertytForm/PropertyForm';
+import { Navbar, PropertyForm } from 'Components';
 
 const Admin = () => (
-  <div>
+  <>
+    <Navbar />
     <PropertyForm />
-  </div>
+  </>
 );
 
 export default Admin;

@@ -86,10 +86,13 @@ export default {
   },
   // Layout
   MuiAppBar: {
+    shape: {
+      borderRadius: 25
+    },
     styleOverrides: {
       root: {
-        boxShadow: 'none',
-        backgroundColor: '#1B2738'
+        boxShadow: 'none'
+        //backgroundColor: '#1B2738'
       }
     }
   },
