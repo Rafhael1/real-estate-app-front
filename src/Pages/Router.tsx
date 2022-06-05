@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'Hooks/Redux';
 import { isLogged } from 'Services/Auth/Auth.actions';
 import { IState } from 'Types/Auth/Auth.types';
 // Pages
-// const Home = React.lazy(() => import('./Home/Home'));
-import Home from './Home/Home';
+const Home = React.lazy(() => import('./Home/Home'));
 const Dashboard = React.lazy(() => import('./Dashboard/Dashboard'));
 
 interface Iselector {

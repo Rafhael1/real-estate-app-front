@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Navbar, PropertyForm } from 'Components';
 
-const Admin = () => (
+const Dashboard = () => (
   <>
     <Navbar />
     <PropertyForm />
   </>
 );
 
-export default Admin;
+export default Dashboard;

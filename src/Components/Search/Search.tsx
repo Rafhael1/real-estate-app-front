@@ -2,16 +2,17 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { UserType } from 'Types/Auth/Auth.types';
 import { useForm } from 'react-hook-form';
 
-import { AutocompleteField, TextField } from 'Components';
+import { AutocompleteField, CheckboxField, TextField } from 'Components';
 import {
   Accordion,
   AccordionSummary,
   Box,
   Menu,
   MenuItem,
-  Typography
+  Typography,
+  ButtonGroup
 } from '@mui/material';
-import { CustomButton as Button, ButtonGroup } from './Search.styles';
+import { CustomButton as Button } from './Search.styles';
 import { KeyboardArrowDown, SearchRounded } from '@mui/icons-material';
 
 import useMediaQuery from 'Hooks/useMediaQuery';
@@ -38,7 +39,10 @@ const SearchComponent = () => {
       country: { name: 'Portugal', cod: 'PT' },
       city: { city: '', country: '' },
       minprice: '0',
-      maxprice: '0'
+      maxprice: '0',
+      apartment: true,
+      house: true,
+      terrain: true
     }
   });
   const watchCountry = watch('country');
@@ -105,6 +109,7 @@ const SearchComponent = () => {
         })}
       >
         <ButtonGroup
+          sx={{ backgroundColor: 'white' }}
           orientation={isTabletOrMobile ? 'vertical' : 'horizontal'}
           variant="text"
           aria-label="text button group"
@@ -140,7 +145,30 @@ const SearchComponent = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            a
+            <MenuItem>
+              <CheckboxField
+                name="apartment"
+                type="checkbox"
+                label="Apartments"
+                control={control}
+              />
+            </MenuItem>
+            <MenuItem>
+              <CheckboxField
+                name="house"
+                type="checkbox"
+                label="Houses"
+                control={control}
+              />
+            </MenuItem>
+            <MenuItem>
+              <CheckboxField
+                name="terrain"
+                type="checkbox"
+                label="Terrains"
+                control={control}
+              />
+            </MenuItem>
           </Menu>
           <Button
             id="price-button"
@@ -171,7 +199,6 @@ const SearchComponent = () => {
                 padding: '20px 20px 20px 20px',
                 zIndex: '111'
               }}
-              // onClick={handleClose}
             >
               <TextField
                 transform={{

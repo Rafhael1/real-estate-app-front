@@ -7,7 +7,7 @@ export { default as renderTextField } from './Fields/InputField';
 // Components
 export { default as ImageSlider } from './ImageSlider/ImageSlider';
 export { default as PropertyForm } from './PropertyForm/PropertyForm';
-export { default as Search } from './Search/Search';
+export { default as SearchBar } from './Search/Search';
 export { default as Snackbar } from './Snackbar/Snackbar';
 
 // Auth

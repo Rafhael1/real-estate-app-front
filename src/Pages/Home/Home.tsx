@@ -1,15 +1,14 @@
 import React from 'react';
 
-import NavBar from '../../Components/Layout/Navbar/Navbar';
-import SearchContainer from 'Components/Search/Search';
 import { Box } from '@mui/material';
+import { Navbar, SearchBar } from 'Components';
 
 const Home = () => {
   return (
     <>
-      <NavBar />
-      <Box>
-        <SearchContainer />
+      <Navbar />
+      <Box marginTop={5} textAlign="center">
+        <SearchBar />
       </Box>
     </>
   );
