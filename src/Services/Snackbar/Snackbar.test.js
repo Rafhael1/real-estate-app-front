@@ -26,7 +26,6 @@ test('should handle showSnackbar', () => {
 test('should handle hideSnackbar', () => {
   const previousState = {};
   expect(reducer(previousState, hideSnackbar())).toEqual({
-    isShowing: false,
-    color: 'info'
+    isShowing: false
   });
 });
