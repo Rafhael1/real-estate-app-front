@@ -5,32 +5,26 @@ export interface IButton extends ButtonProps {
 }
 
 export interface IFormValues {
-  countries: any;
+  countries: ICountries;
   _id: string;
   searchType: string;
   city?: string;
   country: string;
 }
 
-export interface Countries {
-  _id: string;
-  name: string;
-  cod: string;
+export interface ICountries {
+  _id?: string;
+  name?: string;
+  cod?: string;
 }
 
 export interface ISearchSlices {
   isLoading: boolean;
   hasError: boolean;
-  countries?: Countries[];
+  countries?: ICountries[];
   cities?: {
     _id?: string;
     country?: string;
     city?: string;
   }[];
-}
-
-export interface ICountries {
-  _id?: string;
-  name?: string;
-  cod?: string;
 }

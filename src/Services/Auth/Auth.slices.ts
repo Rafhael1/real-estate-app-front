@@ -27,25 +27,29 @@ const authSlices = createSlice({
   initialState,
   extraReducers: (builder) => {
     // Login
-    builder.addCase(login.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(
-      login.fulfilled,
-      (state, action: PayloadAction<{ isLogged: boolean; user: UserType }>) => {
+    builder
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        login.fulfilled,
+        (
+          state,
+          action: PayloadAction<{ isLogged: boolean; user: UserType }>
+        ) => {
+          state.isLoading = false;
+          state.isAuthenticated = action.payload.isLogged;
+          state.user = {
+            _id: action.payload.user?._id,
+            email: action.payload.user?.email,
+            name: action.payload.user?.name
+          };
+        }
+      )
+      .addCase(login.rejected, (state) => {
         state.isLoading = false;
-        state.isAuthenticated = action.payload.isLogged;
-        state.user = {
-          _id: action.payload.user?._id,
-          email: action.payload.user?.email,
-          name: action.payload.user?.name
-        };
-      }
-    );
-    builder.addCase(login.rejected, (state) => {
-      state.isLoading = false;
-      state.hasError = true;
-    });
+        state.hasError = true;
+      });
     // Register
     builder.addCase(register.pending, (state) => {
       state.isLoading = true;

@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { Navbar, PropertyForm } from 'Components';
+import { Navbar, PropertyForm, ImagesForm } from 'Components';
 
 const Dashboard = () => (
   <>
     <Navbar />
     <PropertyForm />
+    <ImagesForm />
   </>
 );
 

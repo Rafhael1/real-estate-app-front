@@ -12,7 +12,10 @@ const snackbarSlice = createSlice({
   name: 'snackbar',
   initialState,
   reducers: {
-    showSnackbar: (state, action: PayloadAction<SnackbarState>) => {
+    showSnackbar: (
+      state: SnackbarState,
+      action: PayloadAction<SnackbarState>
+    ) => {
       state.message = action.payload.message;
       state.color = action.payload.color;
       state.isShowing = true;
