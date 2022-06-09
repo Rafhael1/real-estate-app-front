@@ -8,11 +8,13 @@ import { TextField } from 'Components';
 
 import { register } from 'Services/Auth/Auth.actions';
 import { LoadingButton } from '@mui/lab';
+import useMediaQuery from 'Hooks/useMediaQuery';
 
 const Register = ({ isModalOpen, handleModalOpen }: AuthProps) => {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.Auth);
   const { control, handleSubmit } = useForm();
+  const { isMobile } = useMediaQuery();
 
   return (
     <Dialog
@@ -41,6 +43,7 @@ const Register = ({ isModalOpen, handleModalOpen }: AuthProps) => {
               label="Name"
               type="text"
               control={control}
+              sx={{ width: isMobile ? '250px' : null }}
             />
             <TextField
               required
@@ -49,6 +52,7 @@ const Register = ({ isModalOpen, handleModalOpen }: AuthProps) => {
               label="Email"
               type="email"
               control={control}
+              sx={{ width: isMobile ? '250px' : null }}
             />
             <TextField
               required
@@ -57,6 +61,7 @@ const Register = ({ isModalOpen, handleModalOpen }: AuthProps) => {
               label="Password"
               type="password"
               control={control}
+              sx={{ width: isMobile ? '250px' : null }}
             />
             <LoadingButton
               loading={authState.isLoading}

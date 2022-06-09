@@ -13,9 +13,7 @@ interface Iselector {
 
 const MainRouter = () => {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector(
-    (state: Iselector) => state.Auth.isAuthenticated
-  );
+  const Auth = useSelector((state: Iselector) => state.Auth);
 
   useEffect(() => {
     if (localStorage.authToken?.length || sessionStorage.authToken?.length) {
@@ -29,7 +27,7 @@ const MainRouter = () => {
         <Route path="/" element={<Home />} />
         <Route
           path="/dashboard"
-          element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
+          element={Auth.isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
         />
         {/* The not found(404) page has to be the last one */}
         <Route path="*" element={<div>Not found</div>} />

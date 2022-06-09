@@ -81,9 +81,8 @@ const SearchComponent = () => {
   }, []);
 
   useEffect(() => {
-    const countryName =
-      countries.length && countries?.find((i) => i.cod === user.country);
-    if (countryName) {
+    if (countries.length) {
+      const countryName = countries.find((i) => i.cod === user.country);
       setValue('country', {
         name: countryName?.name || '',
         cod: countryName?.cod || ''

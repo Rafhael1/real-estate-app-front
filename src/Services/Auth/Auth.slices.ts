@@ -12,7 +12,7 @@ export const initialState: IState = {
   isLoading: false,
   isLoadingLocation: false,
   hasError: false,
-  isAuthenticated: false,
+  isAuthenticated: true,
   user: {
     email: '',
     name: '',
@@ -87,6 +87,7 @@ const authSlices = createSlice({
       }
     );
     builder.addCase(isLogged.rejected, (state) => {
+      state.isAuthenticated = false;
       state.isLoading = false;
     });
     // Logout

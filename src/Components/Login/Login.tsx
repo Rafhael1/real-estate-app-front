@@ -7,11 +7,21 @@ import { TextField, CheckboxField } from 'Components';
 import { useDispatch, useSelector } from 'Hooks/Redux';
 import { login } from 'Services/Auth/Auth.actions';
 import { UserType, AuthProps } from 'Types/Auth/Auth.types';
+import useMediaQuery from 'Hooks/useMediaQuery';
+
+type UserLogin = Pick<UserType, 'email' | 'password' | 'rememberMe'>;
 
 const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.Auth);
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: true
+    }
+  });
+  const { isMobile } = useMediaQuery();
 
   return (
     <Dialog
@@ -25,8 +35,8 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
       </DialogTitle>
       <DialogContent>
         <form
-          onSubmit={handleSubmit(async (values: UserType) => {
-            await dispatch(login(values));
+          onSubmit={handleSubmit(async (body: UserLogin) => {
+            await dispatch(login(body));
             handleModalOpen('login');
           })}
         >
@@ -39,6 +49,7 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
               type="email"
               autoFocus
               control={control}
+              sx={{ width: isMobile ? '250px' : null }}
             />
             <TextField
               required
@@ -47,6 +58,7 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
               label="Password"
               type="password"
               control={control}
+              sx={{ width: isMobile ? '250px' : null }}
             />
             <CheckboxField
               name="rememberMe"

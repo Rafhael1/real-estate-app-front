@@ -9,12 +9,11 @@ const CheckboxField = ({ name, label, control, ...rest }) => {
       label={label}
       control={
         <Controller
-          name={name}
           control={control}
+          name={name}
           render={({ field }) => (
             <Checkbox
               {...rest}
-              {...field}
               checked={field.value}
               onChange={(e) => field.onChange(e.target.checked)}
             />
