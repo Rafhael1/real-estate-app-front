@@ -13,7 +13,7 @@ export const NavLink = styled('span')({
     height: '0',
     position: 'relative',
     bottom: '2px',
-    left: '60%',
+    left: '50%',
     display: 'flex',
     backgroundColor: '#a8c1ff',
     transform: 'translateX(-50%)',

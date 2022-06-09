@@ -8,9 +8,9 @@ export const palette = {
     dark: '#1c2233'
   },
   secondary: {
-    light: '#fad655',
-    main: '#FFCF24',
-    dark: '#facb23',
+    light: '#ffea00',
+    main: '#ffd500',
+    dark: '#ffbf00',
     contrastText: 'whitesmoke'
   },
   warning: {

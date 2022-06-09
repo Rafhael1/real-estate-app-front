@@ -5,8 +5,6 @@ export const store = configureStore({
   reducer: reducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      // @ts-ignore
-      immutableCheck: { ignoredPaths: 'form' },
       serializableCheck: false
     })
 });

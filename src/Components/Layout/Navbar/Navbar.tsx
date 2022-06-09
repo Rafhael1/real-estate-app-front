@@ -91,7 +91,10 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
   return (
-    <AppBar position="relative" sx={{ alignItems: 'center' }}>
+    <AppBar
+      position="relative"
+      sx={{ alignItems: 'center', backgroundColor: 'primary.dark' }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
