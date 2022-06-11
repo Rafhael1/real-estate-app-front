@@ -17,3 +17,4 @@ export { default as Register } from './Register/Register';
 // Layout
 export { default as Navbar } from './Layout/Navbar/Navbar';
 export { default as Footer } from './Layout/Footer/Footer';
+export { default as TransitionDialog } from './TransitionDialog/TransitionDialog';
