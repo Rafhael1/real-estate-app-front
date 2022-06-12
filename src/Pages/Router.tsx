@@ -27,7 +27,13 @@ const MainRouter = () => {
         <Route path="/" element={<Home />} />
         <Route
           path="/dashboard"
-          element={Auth.isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
+          element={
+            Auth.isAuthenticated && Auth.user ? (
+              <Dashboard />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
         />
         {/* The not found(404) page has to be the last one */}
         <Route path="*" element={<div>Not found</div>} />

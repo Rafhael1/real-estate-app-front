@@ -19,6 +19,7 @@ import {
   ArrowBackIosNewRounded,
   ArrowForwardIosRounded
 } from '@mui/icons-material';
+import convertToBase64 from 'Utils/convertFileToBase64';
 
 interface PropertyFormModalProps {
   open: boolean;
@@ -41,7 +42,7 @@ const PropertyFormModal = ({
       case 0:
         return <PropertyForm control={control} />;
       case 1:
-        return <ImagesForm />;
+        return <ImagesForm control={control} />;
       default:
         return null;
     }
@@ -68,7 +69,12 @@ const PropertyFormModal = ({
         onClose={handleClose}
         TransitionComponent={TransitionDialog}
       >
-        <form onSubmit={handleSubmit((values) => console.log(values))}>
+        <form
+          onSubmit={handleSubmit(async (values) => {
+            console.log(values);
+            // console.log(await convertToBase64(values.images[0].value[0]));
+          })}
+        >
           <AppBar
             sx={{ position: 'relative', backgroundColor: 'primary.dark' }}
           >
@@ -106,8 +112,8 @@ const PropertyFormModal = ({
               position: 'fixed',
               top: '93vh',
               right: 0,
-              mr: 3,
-              mb: 5
+              mr: 3
+              //mb: 8
             }}
           >
             <Button

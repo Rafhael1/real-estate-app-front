@@ -7,9 +7,3 @@ const convertToBase64 = (file: any) =>
   });
 
 export default convertToBase64;
-
-// const reader = new FileReader();
-// reader.readAsDataURL(file as Blob);
-// reader.onload = () => {
-//   return reader.result as string;
-// };

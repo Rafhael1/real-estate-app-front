@@ -1,48 +1,98 @@
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'Hooks/Redux';
-import React, { useState } from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray, useWatch } from 'react-hook-form';
+
+import { Button } from '@mui/material';
+import { InputFileField } from 'Components';
+import { CameraAltRounded } from '@mui/icons-material';
+
 import { addNewRealEstate } from 'Services/Dashboard/Dashboard.actions';
+
+import compressBase64Image from 'Utils/compressBase64Image';
 import convertToBase64 from 'Utils/convertFileToBase64';
 
-const ImagesForm = () => {
+const Image = ({ image }) => {
+  const [imageBase64, setImageBase64] = useState('');
+
+  useEffect(() => {
+    if (image) {
+      const getImage = async () => {
+        const base64: any = await convertToBase64(image);
+        setImageBase64(base64);
+      };
+      getImage();
+    }
+  }, [image]);
+
+  return <img src={imageBase64 || ''} height="200px" width="200px" />;
+};
+
+const ImagesForm = ({ control }) => {
   const dispatch = useDispatch();
+  const { register } = useForm();
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'images'
+  });
+  const watchImages = useWatch({ control, name: 'images' });
 
-  const { control, register, handleSubmit } = useForm();
-  const { fields, append, remove } = useFieldArray({ control, name: 'test' });
-  const [baseImage, setBaseImage] = useState('');
+  // const onSubmit = async (data: any) => {
+  //   const file = data.images[0].value[0];
+  //   console.log(data.images[0].value[0].name);
+  //   const base64: any = await convertToBase64(file);
 
-  const uploadImage = async (e) => {
-    const file = e.target.files[0];
-    console.log(file);
-    const base64: any = await convertToBase64(file);
-    // console.log(base64);
-    setBaseImage(base64);
-  };
+  //   const base64Compressed: string = await compressBase64Image(base64);
+  // };
+
+  // const getImage = () => {
+  //   if (watchImages && watchImages[0].value) {
+  //     const image: any = async () => {
+  //       console.log(watchImages[0].value[0]);
+  //       return await convertToBase64(watchImages[0]?.value[0]);
+  //     };
+  //     console.log(image);
+  //     return image;
+  //   }
+  //   return '';
+  // };
+
+  // useEffect(() => {
+  //   if (watchImages && watchImages[0].value) {
+  //     console.log(watchImages[0]?.value[0]);
+  //   }
+  // }, [watchImages]);
 
   return (
-    <form
-      onSubmit={handleSubmit(async (values: any) => {
-        const base: any = await convertToBase64(values.images[0].value[0]);
-        console.log(values.images[0].value[0]);
-        setBaseImage(base);
-      })}
-    >
-      <button type="button" onClick={() => append({ test: 'test' })}>
+    <>
+      <Button type="button" onClick={() => append({})}>
         Add
-      </button>
+      </Button>
       {fields.map((field, index) => (
-        <input
-          key={field.id}
-          {...register(`images.${index}.value`)}
-          type="file"
-          // onChange={(e) => {
-          //   uploadImage(e);
-          // }}
-        />
+        <>
+          <p>
+            {watchImages && watchImages[index]?.value
+              ? watchImages[index]?.value[0].name
+              : ''}
+          </p>
+          {watchImages && watchImages[index]?.value && (
+            <Image image={watchImages[index]?.value[0]} />
+          )}
+          <InputFileField
+            key={field.id}
+            name={`images.${index}.value`}
+            control={control}
+            endIcon={<CameraAltRounded />}
+          />
+          <Button
+            onClick={() => {
+              remove(index);
+            }}
+          >
+            Remove
+          </Button>
+        </>
       ))}
-      <img src={baseImage} height="200px" width="200px" />
-      <button type="submit">Submit</button>
-    </form>
+    </>
   );
 };
 

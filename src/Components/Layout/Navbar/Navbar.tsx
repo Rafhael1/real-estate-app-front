@@ -184,7 +184,7 @@ const Navbar = () => {
               </Link>
             ))}
           </Box>
-          {authReducer.isAuthenticated ? (
+          {authReducer.isAuthenticated && authReducer.user._id ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
