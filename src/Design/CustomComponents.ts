@@ -6,7 +6,8 @@ export default {
       body: {
         backgroundColor: background,
         minHeight: '100vh',
-        fontFamily: 'Quicksand'
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: 600
       }
     }
   },
