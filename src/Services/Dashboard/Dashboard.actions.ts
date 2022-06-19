@@ -2,8 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'Config/Axios';
 import { showSnackbar } from 'Services/Snackbar/Snackbar.slices';
 import handleError from 'Utils/handleError';
-import { IRFrealEstates } from '../../Types/Dashboard/Dashboard.types';
-import convertToBase64 from 'Utils/convertFileToBase64';
+import { IrealEstates } from '../../Types/Dashboard/Dashboard.types';
 
 export const getRealEstates: any = createAsyncThunk(
   'getRealEstates',
@@ -19,30 +18,10 @@ export const getRealEstates: any = createAsyncThunk(
 
 export const addNewRealEstate = createAsyncThunk(
   'addNewRealEstate',
-  async (values: IRFrealEstates, { dispatch }) => {
-    // const body = {
-    //   title: values.title,
-    //   description: values.description,
-    //   address: values.address,
-    //   country: values.country,
-    //   price: values.price,
-    //   status: values.status
-    // };
-
-    // const formData: any = new FormData();
-
-    // values.images.forEach((element: any) => {
-    //   formData.append('images', element);
-    // });
-    // formData.append('form', JSON.stringify(body));
-
+  async (values: IrealEstates, { dispatch }) => {
     try {
-      // await axios.post('dashboard/create-real-estate', formData, {
-      //   headers: {
-      //     'content-type': 'multipart/form-data'
-      //   }
-      // });
-      return 'worked';
+      await axios.post('dashboard/create-real-estate', values, {});
+      return dispatch(showSnackbar({ message: 'Post created!' }));
     } catch (error) {
       return dispatch(showSnackbar(handleError(error)));
     }

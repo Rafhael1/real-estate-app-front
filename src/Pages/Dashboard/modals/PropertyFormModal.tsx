@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { useDispatch } from 'Hooks/Redux';
 import {
   Box,
   Button,
@@ -20,6 +20,9 @@ import {
   ArrowForwardIosRounded
 } from '@mui/icons-material';
 import convertToBase64 from 'Utils/convertFileToBase64';
+import { addNewRealEstate } from 'Services/Dashboard/Dashboard.actions';
+import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
+import compressBase64Image from 'Utils/compressBase64Image';
 
 interface PropertyFormModalProps {
   open: boolean;
@@ -34,7 +37,9 @@ const PropertyFormModal = ({
 }: PropertyFormModalProps) => {
   const { control, handleSubmit } = useForm();
   const [activeStep, setActiveStep] = useState(0);
+  const dispatch = useDispatch();
 
+  // Steps titles
   const steps: string[] = ['Add property information', 'Add images'];
 
   const renderForm = () => {
@@ -61,6 +66,19 @@ const PropertyFormModal = ({
     );
   };
 
+  const onSubmit = handleSubmit(async (values: IrealEstates) => {
+    const images: unknown[] = await Promise.all(
+      values.images.map(async (image: any) => {
+        const base64Image = await convertToBase64(image.value[0]);
+        return await compressBase64Image(base64Image as string);
+      })
+    );
+
+    return await dispatch(
+      addNewRealEstate({ ...values, images } as IrealEstates)
+    );
+  });
+
   return (
     <Box>
       <Dialog
@@ -69,12 +87,7 @@ const PropertyFormModal = ({
         onClose={handleClose}
         TransitionComponent={TransitionDialog}
       >
-        <form
-          onSubmit={handleSubmit(async (values) => {
-            console.log(values);
-            // console.log(await convertToBase64(values.images[0].value[0]));
-          })}
-        >
+        <form onSubmit={onSubmit}>
           <AppBar
             sx={{ position: 'relative', backgroundColor: 'primary.dark' }}
           >

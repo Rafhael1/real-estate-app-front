@@ -36,39 +36,13 @@ const ImagesForm = ({ control }) => {
   });
   const watchImages = useWatch({ control, name: 'images' });
 
-  // const onSubmit = async (data: any) => {
-  //   const file = data.images[0].value[0];
-  //   console.log(data.images[0].value[0].name);
-  //   const base64: any = await convertToBase64(file);
-
-  //   const base64Compressed: string = await compressBase64Image(base64);
-  // };
-
-  // const getImage = () => {
-  //   if (watchImages && watchImages[0].value) {
-  //     const image: any = async () => {
-  //       console.log(watchImages[0].value[0]);
-  //       return await convertToBase64(watchImages[0]?.value[0]);
-  //     };
-  //     console.log(image);
-  //     return image;
-  //   }
-  //   return '';
-  // };
-
-  // useEffect(() => {
-  //   if (watchImages && watchImages[0].value) {
-  //     console.log(watchImages[0]?.value[0]);
-  //   }
-  // }, [watchImages]);
-
   return (
     <>
       <Button type="button" onClick={() => append({})}>
         Add
       </Button>
       {fields.map((field, index) => (
-        <>
+        <span key={field.id}>
           <p>
             {watchImages && watchImages[index]?.value
               ? watchImages[index]?.value[0].name
@@ -78,7 +52,6 @@ const ImagesForm = ({ control }) => {
             <Image image={watchImages[index]?.value[0]} />
           )}
           <InputFileField
-            key={field.id}
             name={`images.${index}.value`}
             control={control}
             endIcon={<CameraAltRounded />}
@@ -90,7 +63,7 @@ const ImagesForm = ({ control }) => {
           >
             Remove
           </Button>
-        </>
+        </span>
       ))}
     </>
   );
