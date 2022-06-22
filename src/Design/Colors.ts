@@ -13,6 +13,16 @@ export const palette = {
     dark: '#f9a000',
     contrastText: 'whitesmoke'
   },
+  success: {
+    light: '#76ED82',
+    main: '#00e676'
+  },
+  info: {
+    main: '#64D0FF'
+  },
+  error: {
+    main: '#F96666'
+  },
   warning: {
     light: '#ffeb3b',
     main: '#fcb103',

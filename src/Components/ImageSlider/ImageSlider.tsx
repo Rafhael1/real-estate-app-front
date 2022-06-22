@@ -5,11 +5,19 @@ import {
   KeyboardArrowRightRounded
 } from '@mui/icons-material';
 
-import { SlidersContainer, Images, SlideArrow } from './Style';
+import { SliderContainer, Images, SlideArrow } from './Style';
 
-const ImageSlider = ({ images }: any) => {
+interface ImageSliderProps {
+  images?: string[];
+  imageDimension?: {
+    width?: string;
+    height?: string;
+  };
+}
+
+const ImageSlider = ({ images, imageDimension }: ImageSliderProps) => {
   const [current, setCurrent] = useState(0);
-  const { length } = images;
+  const length = images?.length;
 
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1);
@@ -19,24 +27,22 @@ const ImageSlider = ({ images }: any) => {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
 
-  // if (!Array.isArray(images) || images.length <= 0) {
-  // 	return null
-  // }
   return (
-    // @ts-ignore
-    <SlidersContainer>
-      {/* @ts-ignore */}
-      <SlideArrow onClick={prevSlide} float="left" position="absolute">
+    <SliderContainer>
+      {images?.map((image: string, index: number) => (
+        <div key={index}>
+          {index === current && (
+            <Images imageDimension={imageDimension} src={image} />
+          )}
+        </div>
+      ))}
+      <SlideArrow onClick={prevSlide} float="left" top="-150px">
         <KeyboardArrowLeftRounded fontSize="large" />
       </SlideArrow>
-      {images.map((image: { img: string }, index: number) => (
-        <div key={index}>{index === current && <Images src={image.img} />}</div>
-      ))}
-      {/* @ts-ignore */}
-      <SlideArrow onClick={nextSlide} float="right" position="relative">
+      <SlideArrow onClick={nextSlide} float="right" top="-150px">
         <KeyboardArrowRightRounded fontSize="large" />
       </SlideArrow>
-    </SlidersContainer>
+    </SliderContainer>
   );
 };
 

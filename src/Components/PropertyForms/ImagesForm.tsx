@@ -1,14 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'Hooks/Redux';
-import { useForm, useFieldArray, useWatch } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
+import { useFieldArray, useWatch } from 'react-hook-form';
 
 import { Button } from '@mui/material';
 import { InputFileField } from 'Components';
 import { CameraAltRounded } from '@mui/icons-material';
 
-import { addNewRealEstate } from 'Services/Dashboard/Dashboard.actions';
-
-import compressBase64Image from 'Utils/compressBase64Image';
 import convertToBase64 from 'Utils/convertFileToBase64';
 
 const Image = ({ image }) => {
@@ -28,8 +24,6 @@ const Image = ({ image }) => {
 };
 
 const ImagesForm = ({ control }) => {
-  const dispatch = useDispatch();
-  const { register } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'images'

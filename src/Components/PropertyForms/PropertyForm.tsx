@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'Hooks/Redux';
-import { useForm, useFieldArray } from 'react-hook-form';
+import React from 'react';
 import { TextField } from 'Components';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 
 const PropertyForm = ({ control }) => {
   return (

@@ -50,7 +50,6 @@ const Navbar = () => {
 
   const authReducer: IState = useSelector((state) => state.Auth);
   const [anchorDrawer, setAnchorDrawer] = useState(false);
-  // const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState({
     login: false,

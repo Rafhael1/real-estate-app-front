@@ -1,50 +1,51 @@
 import styled, { keyframes } from 'styled-components';
 
 interface IslideStyles {
-  topDistance: string;
-  float: string;
-  position: string;
-  width: string;
-  height: string;
+  top?: string;
+  float?: string;
+  position?: string;
+  imageDimension?: {
+    width?: string;
+    height?: string;
+  };
 }
 
 const rotate = keyframes`
-from {
-      
-        opacity: 70%;
-    }
-    to {
- 
-        opacity: 100%;
-    }
+  from {
+    opacity: 75%;
+  }
+  to {
+    opacity: 100%;
+  }
 `;
 
-export const SlidersContainer = styled.div`
-  width: ${(props: IslideStyles) => props.width || '350px'};
-  height: ${(props: IslideStyles) => props.height || '250px'};
+export const SliderContainer = styled.div<IslideStyles>`
+  padding: 0;
 `;
 
-export const Images = styled.img`
-  width: 350px;
-  height: 250px;
-  position: absolute;
-  animation: ${rotate} 0.5s ease-in-out 1;
+export const Images = styled.img<IslideStyles>`
+  width: ${(props) => props.imageDimension?.width || '350px'};
+  height: ${(props) => props.imageDimension?.height || '250px'};
+  position: relative;
+  margin: 0;
+  padding: 0;
+  z-index: 0;
+  animation: ${rotate} 0.4s linear 1;
 `;
 
-export const SlideArrow = styled.button`
-  position: ${(props: IslideStyles) => props.position};
-  top: ${(props: IslideStyles) => props.topDistance || '100px'};
-  float: ${(props: IslideStyles) => props.float};
+export const SlideArrow = styled.button<IslideStyles>`
+  position: relative;
+  float: ${(props) => props.float};
   border: none;
   background: none;
-  color: whitesmoke;
+  color: #e9e9e9;
+  border-radius: 25px;
   cursor: pointer;
-  padding: 2px;
-  justify-content: center;
+  margin: ${(props) => `${props.top} 8px`};
   transition: 0.5s;
-  z-index: 5;
+  z-index: 1;
   :hover {
-    filter: drop-shadow(2px 2px 2px black);
-    color: white;
+    filter: drop-shadow(0px 0px 6px #313131);
+    color: #ffffff;
   }
 `;
