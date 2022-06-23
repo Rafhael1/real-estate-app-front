@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-
+import React, { useState, useRef, useEffect } from 'react';
 import {
   KeyboardArrowLeftRounded,
   KeyboardArrowRightRounded
 } from '@mui/icons-material';
 
 import { SliderContainer, Images, SlideArrow } from './Style';
+import { Skeleton } from '@mui/material';
 
 interface ImageSliderProps {
+  altText?: string;
   images?: string[];
   imageDimension?: {
     width?: string;
@@ -15,8 +16,25 @@ interface ImageSliderProps {
   };
 }
 
-const ImageSlider = ({ images, imageDimension }: ImageSliderProps) => {
+const ImageSlider = ({ images, imageDimension, altText }: ImageSliderProps) => {
   const [current, setCurrent] = useState(0);
+  // To handle image loading
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const placeholderRef = useRef(null);
+
+  useEffect(() => {
+    if (!shouldLoad && placeholderRef.current) {
+      const observer = new IntersectionObserver(([{ intersectionRatio }]) => {
+        if (intersectionRatio > 0) {
+          setShouldLoad(true);
+        }
+      });
+      observer.observe(placeholderRef.current);
+      return () => observer.disconnect();
+    }
+  }, [shouldLoad, placeholderRef]);
+  //
+
   const length = images?.length;
 
   const nextSlide = () => {
@@ -29,13 +47,27 @@ const ImageSlider = ({ images, imageDimension }: ImageSliderProps) => {
 
   return (
     <SliderContainer>
-      {images?.map((image: string, index: number) => (
-        <div key={index}>
-          {index === current && (
-            <Images imageDimension={imageDimension} src={image} />
-          )}
-        </div>
-      ))}
+      {shouldLoad ? (
+        images?.map((image: string, index: number) => (
+          <div key={index}>
+            {index === current && (
+              <Images
+                imageDimension={imageDimension}
+                src={image}
+                loading="lazy"
+                alt={altText || 'image'}
+              />
+            )}
+          </div>
+        ))
+      ) : (
+        <Skeleton
+          ref={placeholderRef}
+          sx={{ margin: '0 auto' }}
+          height={imageDimension?.height || '200px'}
+          width="90%"
+        />
+      )}
       <SlideArrow onClick={prevSlide} float="left" top="-150px">
         <KeyboardArrowLeftRounded fontSize="large" />
       </SlideArrow>
