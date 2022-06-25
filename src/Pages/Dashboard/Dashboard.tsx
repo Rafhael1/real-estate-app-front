@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'Hooks/Redux';
 
 import { Box, Button, Container, Grid } from '@mui/material';
-import { Navbar, PostDashboard } from 'Components';
+import { Navbar, PostDashboard, PostDashboardSkeleton } from 'Components';
 import { AddBoxRounded } from '@mui/icons-material';
 import PropertyFormModal from './modals/PropertyFormModal';
 
@@ -13,9 +13,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   const [openPropertyModal, setOpenPropertyModal] = useState(false);
-  const realEstates: IrealEstates[] = useSelector(
-    (state) => state.Dashboard.realEstates
-  );
+  const dashboardSlice = useSelector((state) => state.Dashboard);
 
   const handleOpenModal = () => {
     setOpenPropertyModal(true);
@@ -27,7 +25,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getRealEstates());
-    console.log(realEstates);
   }, []);
 
   return (
@@ -48,16 +45,22 @@ const Dashboard = () => {
               </Button>
             </Grid>
             {/*  */}
-            {realEstates.map((item) => (
-              <Grid key={item._id} item xs={4}>
-                <PostDashboard
-                  content={{
-                    ...item,
-                    images: item.images.filter((i: string) => i !== null)
-                  }}
-                />
-              </Grid>
-            ))}
+            {dashboardSlice.isLoading
+              ? [0, 1, 2, 3, 4, 5].map((el) => (
+                  <span key={el}>
+                    <PostDashboardSkeleton />
+                  </span>
+                ))
+              : dashboardSlice.realEstates?.map((item) => (
+                  <Grid key={item._id} item xs={4}>
+                    <PostDashboard
+                      content={{
+                        ...item,
+                        images: item.images.filter((i: string) => i !== null)
+                      }}
+                    />
+                  </Grid>
+                ))}
           </Grid>
         </Box>
       </Container>

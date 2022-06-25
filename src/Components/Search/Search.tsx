@@ -18,7 +18,11 @@ import { KeyboardArrowDown, SearchRounded } from '@mui/icons-material';
 import useMediaQuery from 'Hooks/useMediaQuery';
 import { useDispatch, useSelector } from 'Hooks/Redux';
 import { getUserLocation } from 'Services/Auth/Auth.actions';
-import { getCountries, getCities } from 'Services/Search/Search.action';
+import {
+  getCountries,
+  getCities,
+  getSearchResults
+} from 'Services/Search/Search.action';
 import maskMoney from 'Utils/masks/maskMoney';
 
 const SearchComponent = () => {
@@ -29,7 +33,7 @@ const SearchComponent = () => {
   const user: UserType = useSelector((state) => state.Auth.user);
 
   const { isTabletOrMobile } = useMediaQuery();
-  const [searchType, setSearchType] = useState('buy-button');
+  const [searchType, setSearchType] = useState('buy');
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
@@ -38,8 +42,6 @@ const SearchComponent = () => {
     defaultValues: {
       country: { name: 'Portugal', cod: 'PT' },
       city: { city: '', country: '' },
-      minprice: '0',
-      maxprice: '0',
       apartment: true,
       house: true,
       terrain: true
@@ -67,7 +69,7 @@ const SearchComponent = () => {
   };
 
   const checkSearchType = useMemo(() => {
-    return searchType === 'buy-button' ? true : false;
+    return searchType === 'buy' ? true : false;
   }, [searchType]);
 
   useEffect(() => {
@@ -106,7 +108,14 @@ const SearchComponent = () => {
     <>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log(data);
+          return dispatch(
+            getSearchResults({
+              ...data,
+              searchType,
+              country: data.country.cod,
+              city: data.city.city
+            })
+          );
         })}
       >
         <ButtonGroup
@@ -116,14 +125,14 @@ const SearchComponent = () => {
           aria-label="text button group"
         >
           <Button
-            id="buy-button"
+            id="buy"
             onClick={handleSearchTypeChange}
             buttonbackground={checkSearchType}
           >
             Buy
           </Button>
           <Button
-            id="rent-button"
+            id="rent"
             onClick={handleSearchTypeChange}
             buttonbackground={!checkSearchType}
           >
@@ -206,7 +215,7 @@ const SearchComponent = () => {
                   input: (value: string) => maskMoney(value),
                   output: (e) => maskMoney(e.target.value)
                 }}
-                name="minprice"
+                name="minPrice"
                 color="primary"
                 label="Min. Price"
                 control={control}
@@ -227,7 +236,7 @@ const SearchComponent = () => {
                   output: (e: { target: { value: any } }) =>
                     maskMoney(e.target.value)
                 }}
-                name="maxprice"
+                name="maxPrice"
                 color="primary"
                 label="Max. Price"
                 control={control}

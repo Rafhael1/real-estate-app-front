@@ -9,7 +9,6 @@ export const getRealEstates: any = createAsyncThunk(
   async () => {
     try {
       const res = (await axios.get('dashboard/all-user-posts')).data;
-      console.log(res);
       return res;
     } catch (error) {
       return error;

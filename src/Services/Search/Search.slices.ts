@@ -1,21 +1,39 @@
+import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
 import { ICountries } from './../../Types/Search/Search.types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ISearchSlices } from 'Types/Search/Search.types';
-import { getCountries, getCities } from './Search.action';
+import { getSearchResults, getCountries, getCities } from './Search.action';
 
 const initialState = {
   isLoading: false,
   hasError: false,
   countries: [],
-  cities: []
+  cities: [],
+  posts: []
 } as ISearchSlices;
 
 const searchSlices = createSlice({
   name: 'search',
   initialState,
   reducers: {},
-  // Countries
+
   extraReducers: (builder) => {
+    // Search Results
+    builder.addCase(getSearchResults.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(
+      getSearchResults.fulfilled,
+      (state, action: PayloadAction<IrealEstates[]>) => {
+        state.isLoading = false;
+        state.posts = action.payload;
+      }
+    );
+    builder.addCase(getSearchResults.rejected, (state) => {
+      state.isLoading = false;
+      state.hasError = true;
+    });
+    // Countries
     builder
       .addCase(getCountries.pending, (state) => {
         state.isLoading = true;
