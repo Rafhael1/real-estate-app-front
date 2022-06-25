@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IState } from '../../Types/Dashboard/Dashboard.types';
-import { addNewRealEstate } from './Dashboard.actions';
+import { getRealEstates, addNewRealEstate } from './Dashboard.actions';
 
 export const initialState: IState = {
   isLoading: false,
@@ -12,9 +12,18 @@ const dashboardSlices = createSlice({
   name: 'dashboard',
   initialState,
   extraReducers: (builder) => {
-    // builder.addCase(getRealEstates.pending, (state) => {
-    //   state.isLoading = true;
-    // });
+    builder.addCase(getRealEstates.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getRealEstates.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.realEstates = action.payload;
+    });
+    builder.addCase(getRealEstates.rejected, (state) => {
+      state.isLoading = false;
+      state.hasError = true;
+    });
+    // Add new real estate
     builder.addCase(addNewRealEstate.pending, (state) => {
       state.isLoading = true;
     });

@@ -3,9 +3,9 @@ import {
   KeyboardArrowLeftRounded,
   KeyboardArrowRightRounded
 } from '@mui/icons-material';
-
-import { SliderContainer, Images, SlideArrow } from './Style';
 import { Skeleton } from '@mui/material';
+import { SliderContainer, Images, SlideArrow } from './Style';
+import ImagePlaceholder from 'Assets/Images/image_placeholder.jpg';
 
 interface ImageSliderProps {
   altText?: string;
@@ -45,6 +45,13 @@ const ImageSlider = ({ images, imageDimension, altText }: ImageSliderProps) => {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
 
+  const showArrowsCondition = () => {
+    if (length > 1) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <SliderContainer>
       {shouldLoad ? (
@@ -53,7 +60,10 @@ const ImageSlider = ({ images, imageDimension, altText }: ImageSliderProps) => {
             {index === current && (
               <Images
                 imageDimension={imageDimension}
-                src={image}
+                src={
+                  `${process.env.REACT_APP_IMAGES_URL}/${image}` ||
+                  ImagePlaceholder
+                }
                 loading="lazy"
                 alt={altText || 'image'}
               />
@@ -68,12 +78,16 @@ const ImageSlider = ({ images, imageDimension, altText }: ImageSliderProps) => {
           width="90%"
         />
       )}
-      <SlideArrow onClick={prevSlide} float="left" top="-150px">
-        <KeyboardArrowLeftRounded fontSize="large" />
-      </SlideArrow>
-      <SlideArrow onClick={nextSlide} float="right" top="-150px">
-        <KeyboardArrowRightRounded fontSize="large" />
-      </SlideArrow>
+      {showArrowsCondition() ? (
+        <>
+          <SlideArrow onClick={prevSlide} float="left" top="-150px">
+            <KeyboardArrowLeftRounded fontSize="large" />
+          </SlideArrow>
+          <SlideArrow onClick={nextSlide} float="right" top="-150px">
+            <KeyboardArrowRightRounded fontSize="large" />
+          </SlideArrow>
+        </>
+      ) : null}
     </SliderContainer>
   );
 };

@@ -5,6 +5,7 @@ export interface IState {
 }
 
 export interface IrealEstates {
+  _id?: string;
   title?: string;
   description?: string;
   bathrooms?: number;

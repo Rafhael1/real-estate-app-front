@@ -8,7 +8,8 @@ export const getRealEstates: any = createAsyncThunk(
   'getRealEstates',
   async () => {
     try {
-      const res = (await axios.get('/real-estate')).data;
+      const res = (await axios.get('dashboard/all-user-posts')).data;
+      console.log(res);
       return res;
     } catch (error) {
       return error;

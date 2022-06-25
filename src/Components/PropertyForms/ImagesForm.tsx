@@ -77,14 +77,14 @@ const ImagesForm = ({ control }) => {
                     control={control}
                     endIcon={<CameraAltRounded />}
                   />
-                  <Button
+                  {/* <Button
                     disabled={fields.length <= 1}
                     onClick={() => remove(index)}
                     color="error"
                     endIcon={<DeleteRounded />}
                   >
                     Remove
-                  </Button>
+                  </Button> */}
                 </CardActions>
               </Card>
             </Grid>

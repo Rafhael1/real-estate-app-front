@@ -11,6 +11,9 @@ export { default as ImagesForm } from './PropertyForms/ImagesForm';
 export { default as SearchBar } from './Search/Search';
 export { default as Snackbar } from './Snackbar/Snackbar';
 
+// Feature components
+export { default as PostDashboard } from './PostDashboard/PostDashboard';
+
 // Auth
 export { default as Login } from './Login/Login';
 export { default as Register } from './Register/Register';
