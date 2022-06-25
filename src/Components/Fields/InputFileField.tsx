@@ -13,7 +13,12 @@ interface InputFileFieldProps {
   [x: string]: any;
 }
 
-const InputFileField = ({ name, control, ...rest }: InputFileFieldProps) => {
+const InputFileField = ({
+  name,
+  control,
+  onChange,
+  ...rest
+}: InputFileFieldProps) => {
   return (
     <Controller
       name={name}
@@ -29,7 +34,7 @@ const InputFileField = ({ name, control, ...rest }: InputFileFieldProps) => {
             }}
           />
           <Button component="span" {...rest}>
-            Upload
+            Select File
           </Button>
         </label>
       )}

@@ -4,6 +4,7 @@ import PropertyFormModal from './modals/PropertyFormModal';
 import { Navbar } from 'Components';
 import { Box, Button, Container, Grid } from '@mui/material';
 import PostDashboard from 'Components/PostDashboard/PostDashboard';
+import { AddBoxRounded } from '@mui/icons-material';
 
 const imageArr = [
   'https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Zm9jdXN8ZW58MHx8MHx8&w=1000&q=80',
@@ -28,13 +29,20 @@ const Dashboard = () => {
     <>
       <Navbar />
       <Container>
+        <PropertyFormModal
+          open={openPropertyModal}
+          closeModal={handleCloseModal}
+        />
         <Box>
-          <PropertyFormModal
-            open={openPropertyModal}
-            handleClose={handleCloseModal}
-          />
-          <Button onClick={handleOpenModal}>Open</Button>
           <Grid container spacing={1}>
+            {/* Create Button */}
+            <Grid item xs={10} />
+            <Grid item xs={2}>
+              <Button onClick={handleOpenModal} endIcon={<AddBoxRounded />}>
+                Create Post
+              </Button>
+            </Grid>
+            {/*  */}
             <Grid item xs={4}>
               <PostDashboard
                 content={{

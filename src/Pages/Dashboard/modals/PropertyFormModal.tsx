@@ -17,7 +17,8 @@ import { PropertyForm, ImagesForm, TransitionDialog } from 'Components';
 import {
   Close,
   ArrowBackIosNewRounded,
-  ArrowForwardIosRounded
+  ArrowForwardIosRounded,
+  SaveRounded
 } from '@mui/icons-material';
 import convertToBase64 from 'Utils/convertFileToBase64';
 import { addNewRealEstate } from 'Services/Dashboard/Dashboard.actions';
@@ -26,16 +27,20 @@ import compressBase64Image from 'Utils/compressBase64Image';
 
 interface PropertyFormModalProps {
   open: boolean;
-  handleClose: () => void;
+  closeModal: () => void;
   edit?: boolean;
 }
 
 const PropertyFormModal = ({
   open,
-  handleClose,
+  closeModal,
   edit
 }: PropertyFormModalProps) => {
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, reset } = useForm({
+    defaultValues: {
+      images: [{}, {}, {}, {}, {}, {}]
+    }
+  });
   const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch();
 
@@ -69,8 +74,14 @@ const PropertyFormModal = ({
   const onSubmit = handleSubmit(async (values: IrealEstates) => {
     const images: unknown[] = await Promise.all(
       values.images.map(async (image: any) => {
-        const base64Image = await convertToBase64(image.value[0]);
-        return await compressBase64Image(base64Image as string);
+        if (image?.value) {
+          const base64Image = await convertToBase64(image?.value[0]);
+          const compressedImage = await compressBase64Image(
+            base64Image as string
+          );
+          return compressedImage;
+        }
+        return [];
       })
     );
 
@@ -78,6 +89,11 @@ const PropertyFormModal = ({
       addNewRealEstate({ ...values, images } as IrealEstates)
     );
   });
+
+  const handleClose = () => {
+    reset();
+    closeModal();
+  };
 
   return (
     <Box>
@@ -103,7 +119,7 @@ const PropertyFormModal = ({
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                 {edit ? 'Edit Property' : 'Add Property'}
               </Typography>
-              <Button color="secondary" type="submit">
+              <Button color="secondary" type="submit" endIcon={<SaveRounded />}>
                 Save
               </Button>
             </Toolbar>
@@ -126,7 +142,6 @@ const PropertyFormModal = ({
               top: '93vh',
               right: 0,
               mr: 3
-              //mb: 8
             }}
           >
             <Button

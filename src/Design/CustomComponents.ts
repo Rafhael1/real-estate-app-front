@@ -76,7 +76,7 @@ export default {
         margin: '5px',
         height: '60px',
         alignItems: 'center',
-        backgroundColor: '#FAFAFA',
+        backgroundColor: '#ebeced',
         borderRadius: '12px',
         [`& fieldset`]: {
           border: 0,
@@ -104,6 +104,13 @@ export default {
     styleOverrides: {
       root: {
         borderRadius: '12px'
+      }
+    }
+  },
+  MuiPaper: {
+    styleOverrides: {
+      root: {
+        backgroundColor: '#FAFAFA'
       }
     }
   },

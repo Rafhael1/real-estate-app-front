@@ -15,5 +15,5 @@ export interface IrealEstates {
   country?: string;
   price?: string;
   status?: string;
-  images?: string[];
+  images?: string[] | any;
 }

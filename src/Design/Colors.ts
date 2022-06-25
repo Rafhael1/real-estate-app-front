@@ -15,13 +15,16 @@ export const palette = {
   },
   success: {
     light: '#76ED82',
-    main: '#00e676'
+    main: '#00e676',
+    contrastText: 'whitesmoke'
   },
   info: {
-    main: '#64D0FF'
+    main: '#64D0FF',
+    contrastText: 'whitesmoke'
   },
   error: {
-    main: '#F96666'
+    main: '#F96666',
+    contrastText: 'whitesmoke'
   },
   warning: {
     light: '#ffeb3b',

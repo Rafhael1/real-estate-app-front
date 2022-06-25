@@ -18,18 +18,21 @@ const PropertyForm = ({ control }) => {
         control={control}
       />
       <TextField
+        required
         name="squareMeter"
         label="Square meters"
         placeholder="55"
         control={control}
       />
       <TextField
+        required
         name="bathrooms"
         placeholder="3"
         label="Bathrooms"
         control={control}
       />
       <TextField
+        required
         name="bedrooms"
         placeholder="4"
         type="number"
@@ -43,6 +46,7 @@ const PropertyForm = ({ control }) => {
         control={control}
       />
       <TextField
+        required
         name="country"
         placeholder="Bulgaria"
         label="Country"
