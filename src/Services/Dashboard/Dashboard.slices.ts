@@ -5,6 +5,7 @@ import { getRealEstates, addNewRealEstate } from './Dashboard.actions';
 export const initialState: IState = {
   isLoading: false,
   hasError: false,
+  noData: false,
   realEstates: []
 };
 
@@ -18,6 +19,7 @@ const dashboardSlices = createSlice({
     builder.addCase(getRealEstates.fulfilled, (state, action) => {
       state.isLoading = false;
       state.realEstates = action.payload;
+      state.noData = action.payload?.length === 0;
     });
     builder.addCase(getRealEstates.rejected, (state) => {
       state.isLoading = false;

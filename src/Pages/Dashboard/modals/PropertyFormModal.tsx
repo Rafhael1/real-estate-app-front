@@ -24,6 +24,7 @@ import convertToBase64 from 'Utils/convertFileToBase64';
 import { addNewRealEstate } from 'Services/Dashboard/Dashboard.actions';
 import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
 import compressBase64Image from 'Utils/compressBase64Image';
+import useMediaQuery from 'Hooks/useMediaQuery';
 
 interface PropertyFormModalProps {
   open: boolean;
@@ -43,6 +44,7 @@ const PropertyFormModal = ({
   });
   const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch();
+  const { isMobile } = useMediaQuery();
 
   // Steps titles
   const steps: string[] = ['Add property information', 'Add images'];
@@ -50,9 +52,17 @@ const PropertyFormModal = ({
   const renderForm = () => {
     switch (activeStep) {
       case 0:
-        return <PropertyForm control={control} />;
+        return (
+          <Box textAlign={'center'}>
+            <PropertyForm control={control} />
+          </Box>
+        );
       case 1:
-        return <ImagesForm control={control} />;
+        return (
+          <Box textAlign={'center'}>
+            <ImagesForm control={control} />
+          </Box>
+        );
       default:
         return null;
     }
@@ -126,7 +136,7 @@ const PropertyFormModal = ({
           </AppBar>
           <Stepper
             activeStep={activeStep}
-            sx={{ width: '600px', m: '20px auto' }}
+            sx={{ width: isMobile ? '300px' : '600px', m: '20px auto' }}
           >
             {steps.map((label) => (
               <Step key={label}>
@@ -137,9 +147,9 @@ const PropertyFormModal = ({
           {renderForm()}
           <Box
             sx={{
-              justifyContent: 'flex-end',
-              position: 'fixed',
-              top: '93vh',
+              float: 'right',
+              top: '93%',
+              position: !isMobile ? 'fixed' : null,
               right: 0,
               mr: 3
             }}

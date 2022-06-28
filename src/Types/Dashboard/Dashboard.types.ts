@@ -1,6 +1,7 @@
 export interface IState {
   isLoading: boolean;
   hasError: boolean;
+  noData: boolean;
   realEstates?: IrealEstates[];
 }
 

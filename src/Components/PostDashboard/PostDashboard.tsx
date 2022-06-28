@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'Hooks/Redux';
 import {
   Box,
   Card,
   CardHeader,
   IconButton,
   Typography,
-  Grid
+  Grid,
+  DialogContent,
+  Dialog,
+  DialogTitle,
+  DialogContentText,
+  DialogActions,
+  Button
 } from '@mui/material';
 import { ImageSlider } from 'Components';
 import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
@@ -17,14 +24,40 @@ import {
   BathtubRounded,
   HotelRounded
 } from '@mui/icons-material';
+import { deleteRealEstate } from 'Services/Dashboard/Dashboard.actions';
+import useMediaQuery from 'Hooks/useMediaQuery';
 
 interface PostDashboardProps {
   content: IrealEstates;
 }
 
+interface DeleteDialogProps {
+  open: boolean;
+  handleClose: () => void;
+  postId: string;
+}
+
 const PostDashboard = ({ content }: PostDashboardProps) => {
+  const dispatch = useDispatch();
+  const { isMobile } = useMediaQuery();
+
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+  const handleOpenDeleteDialog = () => {
+    setOpenDeleteDialog(true);
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setOpenDeleteDialog(false);
+  };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: isMobile ? 320 : 345 }}>
+      <DeleteDialog
+        open={openDeleteDialog}
+        handleClose={handleCloseDeleteDialog}
+        postId={content._id}
+      />
       <CardHeader
         title={content?.title}
         action={
@@ -32,7 +65,12 @@ const PostDashboard = ({ content }: PostDashboardProps) => {
             <IconButton color="info">
               <EditRounded />
             </IconButton>
-            <IconButton color="error">
+            <IconButton
+              color="error"
+              onClick={() => {
+                return handleOpenDeleteDialog();
+              }}
+            >
               <DeleteRounded />
             </IconButton>
           </Box>
@@ -119,6 +157,42 @@ const PostDashboard = ({ content }: PostDashboardProps) => {
         </Grid>
       </>
     </Card>
+  );
+};
+
+const DeleteDialog = ({ open, handleClose, postId }: DeleteDialogProps) => {
+  const dispatch = useDispatch();
+
+  const handleConfirmDelete = () => {
+    handleClose();
+    return dispatch(deleteRealEstate(postId));
+  };
+  return (
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="delete-dialog-title"
+      aria-describedby="delete-dialog-description"
+    >
+      <DialogTitle id="delete-dialog-title">Delete Post</DialogTitle>
+      <DialogContent>
+        <DialogContentText id="delete-dialog-description">
+          Are you sure you want to delete this post?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} variant="outlined" color="error">
+          Cancel
+        </Button>
+        <Button
+          onClick={handleConfirmDelete}
+          color="error"
+          endIcon={<DeleteRounded />}
+        >
+          Confirm
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

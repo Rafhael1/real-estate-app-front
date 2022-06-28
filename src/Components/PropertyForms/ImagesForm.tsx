@@ -22,6 +22,7 @@ import {
 import ImagePlaceHolder from 'Assets/Images/image_placeholder.jpg';
 
 import convertToBase64 from 'Utils/convertFileToBase64';
+import useMediaQuery from 'Hooks/useMediaQuery';
 
 const Image = ({ image }) => {
   const [imageBase64, setImageBase64] = useState('');
@@ -36,7 +37,9 @@ const Image = ({ image }) => {
     }
   }, [image]);
 
-  return <img src={imageBase64 || image} height="200px" width="320px" />;
+  return (
+    <img src={imageBase64 || ImagePlaceHolder} height="200px" width="320px" />
+  );
 };
 
 const ImagesForm = ({ control }) => {
@@ -45,23 +48,24 @@ const ImagesForm = ({ control }) => {
     name: 'images'
   });
   const watchImages = useWatch({ control, name: 'images' });
+  const { isMobile } = useMediaQuery();
 
   return (
-    <Box display="flex">
+    <Box display={'flex'}>
       <Container>
         <Grid container spacing={2}>
           {fields.map((field, index) => (
-            <Grid xs={4} item key={index}>
+            <Grid xs={isMobile ? 12 : 4} item key={index}>
               <Card
                 sx={{ width: 320, height: 350, background: 'background' }}
-                elevation={1}
+                elevation={0}
                 key={field.id}
               >
                 <Image
                   image={
-                    watchImages && watchImages[index]?.value
-                      ? watchImages[index]?.value[0]
-                      : ImagePlaceHolder
+                    watchImages &&
+                    watchImages[index]?.value &&
+                    watchImages[index]?.value[0]
                   }
                 />
                 <CardContent>
@@ -77,14 +81,6 @@ const ImagesForm = ({ control }) => {
                     control={control}
                     endIcon={<CameraAltRounded />}
                   />
-                  {/* <Button
-                    disabled={fields.length <= 1}
-                    onClick={() => remove(index)}
-                    color="error"
-                    endIcon={<DeleteRounded />}
-                  >
-                    Remove
-                  </Button> */}
                 </CardActions>
               </Card>
             </Grid>

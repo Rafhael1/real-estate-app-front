@@ -27,3 +27,15 @@ export const addNewRealEstate = createAsyncThunk(
     }
   }
 );
+
+export const deleteRealEstate = createAsyncThunk(
+  'deleteRealEstate',
+  async (id: string, { dispatch }) => {
+    try {
+      await axios.delete(`dashboard/delete-user-post/${id}`);
+      return dispatch(showSnackbar({ message: 'Post deleted!' }));
+    } catch (error) {
+      return dispatch(showSnackbar(handleError(error)));
+    }
+  }
+);
