@@ -51,7 +51,7 @@ const Dashboard = () => {
                   <PostDashboardSkeleton />
                 </span>
               ))
-            ) : dashboardSlice.noData ? (
+            ) : dashboardSlice?.noData ? (
               <Grid item xs={12} textAlign="center">
                 <img
                   src={NoData}
@@ -61,7 +61,7 @@ const Dashboard = () => {
                 />
               </Grid>
             ) : (
-              dashboardSlice.realEstates?.map((item) => (
+              dashboardSlice?.realEstates?.map((item) => (
                 <Grid key={item._id} item xs={4}>
                   <PostDashboard
                     content={{

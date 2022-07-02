@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, SyntheticEvent } from 'react';
 import { UserType } from 'Types/Auth/Auth.types';
 import { useForm } from 'react-hook-form';
 
@@ -213,7 +213,8 @@ const SearchComponent = () => {
               <TextField
                 transform={{
                   input: (value: string) => maskMoney(value),
-                  output: (e) => maskMoney(e.target.value)
+                  output: (e: React.ChangeEvent<HTMLInputElement>) =>
+                    maskMoney(e.target.value)
                 }}
                 name="minPrice"
                 color="primary"
