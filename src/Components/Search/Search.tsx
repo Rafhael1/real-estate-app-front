@@ -10,7 +10,8 @@ import {
   Menu,
   MenuItem,
   Typography,
-  ButtonGroup
+  ButtonGroup,
+  Card
 } from '@mui/material';
 import { CustomButton as Button } from './Search.styles';
 import { KeyboardArrowDown, SearchRounded } from '@mui/icons-material';
@@ -105,177 +106,175 @@ const SearchComponent = () => {
   }, [user.city, cities]);
 
   return (
-    <>
-      <form
-        onSubmit={handleSubmit((data) => {
-          return dispatch(
-            getSearchResults({
-              ...data,
-              searchType,
-              country: data.country.cod,
-              city: data.city.city
-            })
-          );
-        })}
+    <form
+      onSubmit={handleSubmit((data) => {
+        return dispatch(
+          getSearchResults({
+            ...data,
+            searchType,
+            country: data.country.cod,
+            city: data.city.city
+          })
+        );
+      })}
+    >
+      <ButtonGroup
+        sx={{ backgroundColor: 'white' }}
+        orientation={isTabletOrMobile ? 'vertical' : 'horizontal'}
+        variant="text"
+        aria-label="text button group"
       >
-        <ButtonGroup
-          sx={{ backgroundColor: 'white' }}
-          orientation={isTabletOrMobile ? 'vertical' : 'horizontal'}
-          variant="text"
-          aria-label="text button group"
+        <Button
+          id="buy"
+          onClick={handleSearchTypeChange}
+          buttonbackground={checkSearchType}
         >
-          <Button
-            id="buy"
-            onClick={handleSearchTypeChange}
-            buttonbackground={checkSearchType}
-          >
-            Buy
-          </Button>
-          <Button
-            id="rent"
-            onClick={handleSearchTypeChange}
-            buttonbackground={!checkSearchType}
-          >
-            Rent
-          </Button>
-          <Button
-            id="looking-for-menu-button"
-            aria-controls="looking-for-menu-button"
-            aria-haspopup="true"
-            onClick={handleClick}
-            aria-label="open-looking-for-menu"
-            endIcon={<KeyboardArrowDown />}
-          >
-            Looking for
-          </Button>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem>
-              <CheckboxField
-                name="apartment"
-                type="checkbox"
-                label="Apartments"
-                control={control}
-              />
-            </MenuItem>
-            <MenuItem>
-              <CheckboxField
-                name="house"
-                type="checkbox"
-                label="Houses"
-                control={control}
-              />
-            </MenuItem>
-            <MenuItem>
-              <CheckboxField
-                name="terrain"
-                type="checkbox"
-                label="Terrains"
-                control={control}
-              />
-            </MenuItem>
-          </Menu>
-          <Button
-            id="price-button"
-            aria-label="open-price-menu"
-            aria-controls={'price-menu'}
-            aria-haspopup="true"
-            onClick={handleClick}
-            endIcon={<KeyboardArrowDown />}
-          >
-            Price Range
-          </Button>
-          <Menu
-            id="price-menu"
-            anchorEl={anchorEl2}
-            open={Boolean(anchorEl2)}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'price-input'
+          Buy
+        </Button>
+        <Button
+          id="rent"
+          onClick={handleSearchTypeChange}
+          buttonbackground={!checkSearchType}
+        >
+          Rent
+        </Button>
+        <Button
+          id="looking-for-menu-button"
+          aria-controls="looking-for-menu-button"
+          aria-haspopup="true"
+          onClick={handleClick}
+          aria-label="open-looking-for-menu"
+          endIcon={<KeyboardArrowDown />}
+        >
+          Looking for
+        </Button>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem>
+            <CheckboxField
+              name="apartment"
+              type="checkbox"
+              label="Apartments"
+              control={control}
+            />
+          </MenuItem>
+          <MenuItem>
+            <CheckboxField
+              name="house"
+              type="checkbox"
+              label="Houses"
+              control={control}
+            />
+          </MenuItem>
+          <MenuItem>
+            <CheckboxField
+              name="terrain"
+              type="checkbox"
+              label="Terrains"
+              control={control}
+            />
+          </MenuItem>
+        </Menu>
+        <Button
+          id="price-button"
+          aria-label="open-price-menu"
+          aria-controls={'price-menu'}
+          aria-haspopup="true"
+          onClick={handleClick}
+          endIcon={<KeyboardArrowDown />}
+        >
+          Price Range
+        </Button>
+        <Menu
+          id="price-menu"
+          anchorEl={anchorEl2}
+          open={Boolean(anchorEl2)}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'price-input'
+          }}
+        >
+          <MenuItem
+            dense
+            divider
+            sx={{
+              width: '300px',
+              textAlign: 'center',
+              marginTop: '5px',
+              padding: '20px 20px 20px 20px',
+              zIndex: '111'
             }}
           >
-            <MenuItem
-              dense
-              divider
-              sx={{
-                width: '300px',
-                textAlign: 'center',
-                marginTop: '5px',
-                padding: '20px 20px 20px 20px',
-                zIndex: '111'
+            <TextField
+              transform={{
+                input: (value: string) => maskMoney(value),
+                output: (e: React.ChangeEvent<HTMLInputElement>) =>
+                  maskMoney(e.target.value)
               }}
-            >
-              <TextField
-                transform={{
-                  input: (value: string) => maskMoney(value),
-                  output: (e: React.ChangeEvent<HTMLInputElement>) =>
-                    maskMoney(e.target.value)
-                }}
-                name="minPrice"
-                color="primary"
-                label="Min. Price"
-                control={control}
-              />
-            </MenuItem>
-            <MenuItem
-              dense
-              sx={{
-                width: '300px',
-                textAlign: 'center',
-                marginBottom: '-5px',
-                padding: '20px 20px 20px 20px'
-              }}
-            >
-              <TextField
-                transform={{
-                  input: (value: any) => maskMoney(value),
-                  output: (e: { target: { value: any } }) =>
-                    maskMoney(e.target.value)
-                }}
-                name="maxPrice"
-                color="primary"
-                label="Max. Price"
-                control={control}
-              />
-            </MenuItem>
-          </Menu>
-          <AutocompleteField
-            keySelect="_id"
-            name="city"
-            label="City"
-            labelSelect="city"
-            options={cities}
-            disabled={!watchCountry.cod}
-            control={control}
-            sx={{ width: isTabletOrMobile ? null : '230px' }}
-          />
-          <AutocompleteField
-            required
-            keySelect="_id"
-            name="country"
-            label="Country"
-            labelSelect="name"
-            disableClearable
-            options={countries}
-            control={control}
-            sx={{ width: isTabletOrMobile ? null : '130px' }}
-          />
-          <Button
-            buttonbackground="true"
-            type="submit"
-            color="inherit"
-            startIcon={<SearchRounded />}
+              name="minPrice"
+              color="primary"
+              label="Min. Price"
+              control={control}
+            />
+          </MenuItem>
+          <MenuItem
+            dense
+            sx={{
+              width: '300px',
+              textAlign: 'center',
+              marginBottom: '-5px',
+              padding: '20px 20px 20px 20px'
+            }}
           >
-            Search
-          </Button>
-        </ButtonGroup>
-      </form>
-    </>
+            <TextField
+              transform={{
+                input: (value: any) => maskMoney(value),
+                output: (e: { target: { value: any } }) =>
+                  maskMoney(e.target.value)
+              }}
+              name="maxPrice"
+              color="primary"
+              label="Max. Price"
+              control={control}
+            />
+          </MenuItem>
+        </Menu>
+        <AutocompleteField
+          keySelect="_id"
+          name="city"
+          label="City"
+          labelSelect="city"
+          options={cities}
+          disabled={!watchCountry.cod}
+          control={control}
+          sx={{ width: isTabletOrMobile ? null : '230px' }}
+        />
+        <AutocompleteField
+          required
+          keySelect="_id"
+          name="country"
+          label="Country"
+          labelSelect="name"
+          disableClearable
+          options={countries}
+          control={control}
+          sx={{ width: isTabletOrMobile ? null : '130px' }}
+        />
+        <Button
+          buttonbackground="true"
+          type="submit"
+          color="inherit"
+          startIcon={<SearchRounded />}
+        >
+          Search
+        </Button>
+      </ButtonGroup>
+    </form>
   );
 };
 
@@ -286,7 +285,7 @@ const SearchMainContainer = () => {
     <>
       {isMobile ? (
         <Box sx={{ width: '310px', margin: '0 auto' }}>
-          <Accordion elevation={0}>
+          <Accordion elevation={2}>
             <AccordionSummary
               expandIcon={<SearchRounded />}
               aria-controls="search-bar"
