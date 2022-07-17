@@ -8,7 +8,6 @@ import PropertyFormModal from './modals/PropertyFormModal';
 import NoData from 'Assets/Svg/no_data.svg';
 
 import { getRealEstates } from 'Services/Dashboard/Dashboard.actions';
-import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
 
 const Dashboard = () => {
   const dispatch = useDispatch();

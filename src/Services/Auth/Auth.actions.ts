@@ -1,5 +1,5 @@
 import { createAsyncThunk, createAction, nanoid } from '@reduxjs/toolkit';
-import axios from 'Config/Axios';
+import axios from 'Utils/requestConfig/AxiosConfig';
 import axiosDefault from 'axios';
 import { showSnackbar } from 'Services/Snackbar/Snackbar.slices';
 import handleError from 'Utils/handleError';

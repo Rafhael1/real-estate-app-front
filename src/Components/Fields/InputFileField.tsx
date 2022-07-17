@@ -13,12 +13,7 @@ interface InputFileFieldProps {
   [x: string]: any;
 }
 
-const InputFileField = ({
-  name,
-  control,
-  onChange,
-  ...rest
-}: InputFileFieldProps) => {
+const InputFileField = ({ name, control, ...rest }: InputFileFieldProps) => {
   return (
     <Controller
       name={name}

@@ -1,7 +1,7 @@
 import { ICountries, IFormValues } from './../../Types/Search/Search.types';
 import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'Config/Axios';
+import axios from 'Utils/requestConfig/AxiosConfig';
 
 export const getSearchResults = createAsyncThunk(
   'getSearchResults',

@@ -21,7 +21,9 @@ const Results = () => {
     <Box>
       <Navbar />
       <Container>
-        <SearchBar />
+        <Box marginTop={5} textAlign="center">
+          <SearchBar />
+        </Box>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             {/* <PostPublic content={searchSlice.posts[0]} /> */}

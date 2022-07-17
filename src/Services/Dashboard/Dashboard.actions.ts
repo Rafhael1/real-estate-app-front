@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'Config/Axios';
+import axios from 'Utils/requestConfig/AxiosConfig';
 import { showSnackbar } from 'Services/Snackbar/Snackbar.slices';
 import handleError from 'Utils/handleError';
 import { IrealEstates } from '../../Types/Dashboard/Dashboard.types';

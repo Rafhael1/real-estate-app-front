@@ -3,22 +3,15 @@ import { useFieldArray, useWatch } from 'react-hook-form';
 
 import {
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
-  CardHeader,
   Container,
   Grid,
-  IconButton,
   Typography
 } from '@mui/material';
 import { InputFileField } from 'Components';
-import {
-  CameraAltRounded,
-  DeleteRounded,
-  AddAPhoto
-} from '@mui/icons-material';
+import { CameraAltRounded } from '@mui/icons-material';
 import ImagePlaceHolder from 'Assets/Images/image_placeholder.jpg';
 
 import convertToBase64 from 'Utils/convertFileToBase64';
@@ -48,7 +41,7 @@ const Image = ({ image }) => {
 };
 
 const ImagesForm = ({ control }) => {
-  const { fields, remove } = useFieldArray({
+  const { fields } = useFieldArray({
     control,
     name: 'images'
   });
