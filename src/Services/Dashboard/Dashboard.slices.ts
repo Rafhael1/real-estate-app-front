@@ -1,6 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import { IState } from '../../Types/Dashboard/Dashboard.types';
-import { getRealEstates, addNewRealEstate } from './Dashboard.actions';
+import {
+  getRealEstates,
+  addNewRealEstate,
+  deleteRealEstate
+} from './Dashboard.actions';
 
 export const initialState: IState = {
   isLoading: false,
@@ -35,6 +39,16 @@ const dashboardSlices = createSlice({
     builder.addCase(addNewRealEstate.rejected, (state) => {
       state.isLoading = false;
       state.hasError = true;
+    });
+    // Delete real estate
+    builder.addCase(deleteRealEstate.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteRealEstate.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.realEstates = current(state.realEstates).filter(
+        (item) => item._id !== action.payload
+      );
     });
   },
   reducers: undefined

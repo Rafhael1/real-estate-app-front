@@ -5,6 +5,8 @@ import { ISearchSlices } from 'Types/Search/Search.types';
 import { getSearchResults, getCountries, getCities } from './Search.action';
 
 const initialState = {
+  hasResults: false,
+  hasRequested: false,
   isLoading: false,
   hasError: false,
   countries: [],
@@ -16,7 +18,6 @@ const searchSlices = createSlice({
   name: 'search',
   initialState,
   reducers: {},
-
   extraReducers: (builder) => {
     // Search Results
     builder.addCase(getSearchResults.pending, (state) => {
@@ -26,6 +27,8 @@ const searchSlices = createSlice({
       getSearchResults.fulfilled,
       (state, action: PayloadAction<IrealEstates[]>) => {
         state.isLoading = false;
+        state.hasRequested = true;
+        state.hasResults = action.payload.length > 0;
         state.posts = action.payload;
       }
     );

@@ -28,6 +28,7 @@ export const getCountries = createAsyncThunk('getCountries', async () => {
     return error;
   }
 });
+
 export const getCities = createAsyncThunk(
   'getCities',
   async (location: string) => {

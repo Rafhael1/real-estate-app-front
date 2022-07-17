@@ -3,6 +3,7 @@ import { Route, Navigate, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'Hooks/Redux';
 import { isLogged } from 'Services/Auth/Auth.actions';
 import { IState } from 'Types/Auth/Auth.types';
+import Results from './Results/Results';
 // Pages
 const Home = React.lazy(() => import('./Home/Home'));
 const Dashboard = React.lazy(() => import('./Dashboard/Dashboard'));
@@ -25,6 +26,7 @@ const MainRouter = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<Results />} />
         <Route
           path="/dashboard"
           element={

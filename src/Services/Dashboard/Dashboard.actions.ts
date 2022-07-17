@@ -33,7 +33,10 @@ export const deleteRealEstate = createAsyncThunk(
   async (id: string, { dispatch }) => {
     try {
       await axios.delete(`dashboard/delete-user-post/${id}`);
-      return dispatch(showSnackbar({ message: 'Post deleted!' }));
+
+      dispatch(showSnackbar({ message: 'Post deleted!' }));
+
+      return id;
     } catch (error) {
       return dispatch(showSnackbar(handleError(error)));
     }

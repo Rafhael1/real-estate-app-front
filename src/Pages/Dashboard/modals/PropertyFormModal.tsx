@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'Hooks/Redux';
 import {
@@ -47,7 +47,11 @@ const PropertyFormModal = ({
   const { isMobile } = useMediaQuery();
 
   // Steps titles
-  const steps: string[] = ['Add property information', 'Add images'];
+  const steps: string[] = useMemo(() => {
+    return edit
+      ? ['Edit/Add property information', 'Edit/Add images']
+      : ['Add property information', 'Add images'];
+  }, [edit]);
 
   const renderForm = () => {
     switch (activeStep) {
@@ -82,8 +86,8 @@ const PropertyFormModal = ({
   };
 
   const onSubmit = handleSubmit(async (values: IrealEstates) => {
-    const images: unknown[] = await Promise.all(
-      values.images.map(async (image: any) => {
+    const images: string[] = await Promise.all(
+      values.images.map(async (image: { value: File }) => {
         if (image?.value) {
           const base64Image = await convertToBase64(image?.value[0]);
           const compressedImage = await compressBase64Image(

@@ -13,6 +13,7 @@ export { default as Snackbar } from './Snackbar/Snackbar';
 
 // Feature components
 export { default as PostDashboard } from './PostDashboard/PostDashboard';
+export { default as PostPublic } from './PostPublic/PostPublic';
 export { default as PostDashboardSkeleton } from './PostDashboard/PostDashboardSkeleton';
 
 // Auth

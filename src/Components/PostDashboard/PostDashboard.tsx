@@ -29,6 +29,7 @@ import useMediaQuery from 'Hooks/useMediaQuery';
 
 interface PostDashboardProps {
   content: IrealEstates;
+  handleOpenEditForm: () => void;
 }
 
 interface DeleteDialogProps {
@@ -37,8 +38,7 @@ interface DeleteDialogProps {
   postId: string;
 }
 
-const PostDashboard = ({ content }: PostDashboardProps) => {
-  const dispatch = useDispatch();
+const PostDashboard = ({ content, handleOpenEditForm }: PostDashboardProps) => {
   const { isMobile } = useMediaQuery();
 
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
@@ -62,7 +62,13 @@ const PostDashboard = ({ content }: PostDashboardProps) => {
         title={content?.title}
         action={
           <Box>
-            <IconButton color="info">
+            <IconButton
+              color="info"
+              onClick={() => {
+                handleOpenEditForm();
+                console.log('edit');
+              }}
+            >
               <EditRounded />
             </IconButton>
             <IconButton

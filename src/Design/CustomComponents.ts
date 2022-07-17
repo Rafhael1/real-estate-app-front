@@ -1,4 +1,4 @@
-const background = '#F5F5F5';
+const background = '#F2F2F2';
 
 export default {
   MuiCssBaseline: {

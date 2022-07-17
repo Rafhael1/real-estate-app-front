@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useEffect, SyntheticEvent } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import { UserType } from 'Types/Auth/Auth.types';
 import { useForm } from 'react-hook-form';
 
@@ -10,8 +11,7 @@ import {
   Menu,
   MenuItem,
   Typography,
-  ButtonGroup,
-  Card
+  ButtonGroup
 } from '@mui/material';
 import { CustomButton as Button } from './Search.styles';
 import { KeyboardArrowDown, SearchRounded } from '@mui/icons-material';
@@ -28,6 +28,7 @@ import maskMoney from 'Utils/masks/maskMoney';
 
 const SearchComponent = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const countries = useSelector((state) => state.Search.countries);
   const cities = useSelector((state) => state.Search.cities);
@@ -41,7 +42,7 @@ const SearchComponent = () => {
 
   const { handleSubmit, control, watch, setValue } = useForm({
     defaultValues: {
-      country: { name: 'Portugal', cod: 'PT' },
+      country: { name: '', cod: '' },
       city: { city: '', country: '' },
       apartment: true,
       house: true,
@@ -77,7 +78,9 @@ const SearchComponent = () => {
     const country =
       countries.length &&
       countries.find((country) => country.cod === user.country);
-    dispatch(getCities(watchCountry?.cod || country?.cod));
+    if (country?.cod || watchCountry?.cod) {
+      dispatch(getCities(watchCountry?.cod || country?.cod));
+    }
   }, [watchCountry.cod, user.country]);
 
   useEffect(() => {
@@ -105,19 +108,20 @@ const SearchComponent = () => {
     }
   }, [user.city, cities]);
 
+  const handleOnSubmit = handleSubmit((data) => {
+    navigate('/search');
+    return dispatch(
+      getSearchResults({
+        ...data,
+        searchType,
+        country: data.country.cod,
+        city: data.city.city
+      })
+    );
+  });
+
   return (
-    <form
-      onSubmit={handleSubmit((data) => {
-        return dispatch(
-          getSearchResults({
-            ...data,
-            searchType,
-            country: data.country.cod,
-            city: data.city.city
-          })
-        );
-      })}
-    >
+    <form onSubmit={handleOnSubmit}>
       <ButtonGroup
         sx={{ backgroundColor: 'white' }}
         orientation={isTabletOrMobile ? 'vertical' : 'horizontal'}
@@ -266,7 +270,7 @@ const SearchComponent = () => {
           sx={{ width: isTabletOrMobile ? null : '130px' }}
         />
         <Button
-          buttonbackground="true"
+          buttonbackground
           type="submit"
           color="inherit"
           startIcon={<SearchRounded />}

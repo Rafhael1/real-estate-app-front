@@ -15,9 +15,16 @@ const Dashboard = () => {
 
   const [openPropertyModal, setOpenPropertyModal] = useState(false);
   const dashboardSlice = useSelector((state) => state.Dashboard);
+  const [editMode, setEditMode] = useState<boolean>(false);
+
+  const handleOpenEditModal = () => {
+    setOpenPropertyModal(true);
+    setEditMode(true);
+  };
 
   const handleOpenModal = () => {
     setOpenPropertyModal(true);
+    setEditMode(false);
   };
 
   const handleCloseModal = () => {
@@ -26,7 +33,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getRealEstates());
-  }, []);
+  }, [openPropertyModal]);
 
   return (
     <>
@@ -35,6 +42,7 @@ const Dashboard = () => {
         <PropertyFormModal
           open={openPropertyModal}
           closeModal={handleCloseModal}
+          edit={editMode}
         />
         <Box>
           <Grid container spacing={1} margin="0 auto">
@@ -64,6 +72,7 @@ const Dashboard = () => {
               dashboardSlice?.realEstates?.map((item) => (
                 <Grid key={item._id} item xs={4}>
                   <PostDashboard
+                    handleOpenEditForm={handleOpenEditModal}
                     content={{
                       ...item,
                       images: item.images.filter((i: string) => i !== null)

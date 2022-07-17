@@ -1,9 +1,4 @@
-import { ButtonProps } from '@mui/material';
 import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
-
-export interface IButton extends ButtonProps {
-  buttonbackground?: boolean | string;
-}
 
 export interface IFormValues {
   countries?: ICountries;
@@ -22,6 +17,8 @@ export interface ICountries {
 }
 
 export interface ISearchSlices {
+  hasResults: boolean;
+  hasRequested: boolean;
   isLoading: boolean;
   hasError: boolean;
   posts: IrealEstates[];

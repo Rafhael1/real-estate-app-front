@@ -63,7 +63,6 @@ const ImagesForm = ({ control }) => {
             <Grid xs={isMobile ? 12 : 4} item key={index}>
               <Card
                 sx={{ width: 350, height: 360, background: 'background' }}
-                elevation={0}
                 key={field.id}
               >
                 <Box marginTop={2}>
