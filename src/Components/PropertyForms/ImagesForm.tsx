@@ -15,7 +15,7 @@ import { CameraAltRounded } from '@mui/icons-material';
 import ImagePlaceHolder from 'Assets/Images/image_placeholder.jpg';
 
 import convertToBase64 from 'Utils/convertFileToBase64';
-import useMediaQuery from 'Hooks/useMediaQuery';
+import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 
 const Image = ({ image }) => {
   const [imageBase64, setImageBase64] = useState('');

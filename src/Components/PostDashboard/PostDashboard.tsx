@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'Hooks/Redux';
+import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 import {
   Box,
   Card,
@@ -25,7 +25,7 @@ import {
   HotelRounded
 } from '@mui/icons-material';
 import { deleteRealEstate } from 'Services/Dashboard/Dashboard.actions';
-import useMediaQuery from 'Hooks/useMediaQuery';
+import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 
 interface PostDashboardProps {
   content: IrealEstates;

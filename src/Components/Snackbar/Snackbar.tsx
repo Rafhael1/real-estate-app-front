@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'Hooks/Redux';
+import { useSelector, useDispatch } from 'Utils/Hooks/Redux';
 import {
   Snackbar as MuiSnackbar,
   Alert,

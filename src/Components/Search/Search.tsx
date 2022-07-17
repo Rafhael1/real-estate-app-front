@@ -16,8 +16,8 @@ import {
 import { CustomButton as Button } from './Search.styles';
 import { KeyboardArrowDown, SearchRounded } from '@mui/icons-material';
 
-import useMediaQuery from 'Hooks/useMediaQuery';
-import { useDispatch, useSelector } from 'Hooks/Redux';
+import useMediaQuery from 'Utils/Hooks/useMediaQuery';
+import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 import { getUserLocation } from 'Services/Auth/Auth.actions';
 import {
   getCountries,

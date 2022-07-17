@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'Hooks/Redux';
+import { useSelector, useDispatch } from 'Utils/Hooks/Redux';
 import { logout } from 'Services/Auth/Auth.actions';
 import {
   AppBar,
@@ -17,7 +17,7 @@ import {
   Button,
   Drawer
 } from '@mui/material';
-import useMediaQuery from 'Hooks/useMediaQuery';
+import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
   ArrowRightAltRounded,

@@ -4,10 +4,10 @@ import { Stack, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { SignUpLink } from './Login.styles';
 import { TextField, CheckboxField } from 'Components';
-import { useDispatch, useSelector } from 'Hooks/Redux';
+import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 import { login } from 'Services/Auth/Auth.actions';
 import { UserType, AuthProps } from 'Types/Auth/Auth.types';
-import useMediaQuery from 'Hooks/useMediaQuery';
+import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 
 type UserLogin = Pick<UserType, 'email' | 'password' | 'rememberMe'>;
 

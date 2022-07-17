@@ -8,7 +8,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import theme from './Design/GlobalStyles';
 import App from './App';
-import { store } from './Redux/Store';
+import { store } from 'Utils/Redux/Store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

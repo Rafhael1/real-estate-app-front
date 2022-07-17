@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'Hooks/Redux';
+import { useDispatch } from 'Utils/Hooks/Redux';
 import {
   Box,
   Button,
@@ -24,7 +24,7 @@ import convertToBase64 from 'Utils/convertFileToBase64';
 import { addNewRealEstate } from 'Services/Dashboard/Dashboard.actions';
 import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
 import compressBase64Image from 'Utils/compressBase64Image';
-import useMediaQuery from 'Hooks/useMediaQuery';
+import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 
 interface PropertyFormModalProps {
   open: boolean;

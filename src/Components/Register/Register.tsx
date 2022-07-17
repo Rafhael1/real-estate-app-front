@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from '../../Hooks/Redux';
+import { useDispatch, useSelector } from '../../Utils/Hooks/Redux';
 import { Stack, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { UserType, AuthProps } from 'Types/Auth/Auth.types';
 
@@ -8,7 +8,7 @@ import { TextField } from 'Components';
 
 import { register } from 'Services/Auth/Auth.actions';
 import { LoadingButton } from '@mui/lab';
-import useMediaQuery from 'Hooks/useMediaQuery';
+import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 
 const Register = ({ isModalOpen, handleModalOpen }: AuthProps) => {
   const dispatch = useDispatch();

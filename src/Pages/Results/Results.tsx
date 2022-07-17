@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'Hooks/Redux';
+import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 
 import { Container, Box, Grid } from '@mui/material';
 import { Navbar, SearchBar, PostPublic } from 'Components';

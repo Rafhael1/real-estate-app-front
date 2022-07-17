@@ -1,6 +1,6 @@
 import React, { useEffect, Suspense } from 'react';
 import { Route, Navigate, Routes } from 'react-router-dom';
-import { useDispatch, useSelector } from 'Hooks/Redux';
+import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 import { isLogged } from 'Services/Auth/Auth.actions';
 import { IState } from 'Types/Auth/Auth.types';
 import Results from './Results/Results';
