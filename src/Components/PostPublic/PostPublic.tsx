@@ -16,33 +16,43 @@ interface PostPublicProps {
 
 const PostPublic = ({ content }: PostPublicProps) => {
   return (
-    <Card>
-      <Box>
-        <ImageSlider />
-      </Box>
-      <Box>
-        <Stack>
-          <Typography variant="h2">{content.title}</Typography>
-          <Typography variant="h6">{content.address}</Typography>
-          <Typography variant="body2">{content.description}</Typography>
-          <Grid container spacing={1} sx={{ textAlign: 'center' }}>
-            <Grid item xs={4}>
-              <CustomTypography noWrap variant="subtitle2">
-                <HotelRounded /> {content.squareMeter}
-              </CustomTypography>
-            </Grid>
-            <Grid item xs={4}>
-              <CustomTypography noWrap variant="subtitle2">
-                <BathtubRounded /> {content.squareMeter}
-              </CustomTypography>
-            </Grid>
-            <Grid item xs={4}>
-              <CustomTypography noWrap variant="subtitle2">
-                <SquareFootRounded /> {content.squareMeter}
-              </CustomTypography>
-            </Grid>
-          </Grid>
-        </Stack>
+    <Card sx={{ width: '75%', margin: '0 auto' }}>
+      <Box display="flex">
+        <Box>
+          <ImageSlider images={content?.images} />
+        </Box>
+        <Box>
+          <Stack>
+            <Typography variant="h2">{content?.title}</Typography>
+            <Typography variant="h6">{content?.address}</Typography>
+            <Typography variant="body2">{content?.description}</Typography>
+            <Box display={'flex'}>
+              <Grid container spacing={1} sx={{ textAlign: 'center' }}>
+                <Grid item xs={12} sx={{ display: 'flex' }}>
+                  <Grid item xs={4}>
+                    <CustomTypography noWrap variant="subtitle2">
+                      <HotelRounded /> {content?.squareMeter}
+                    </CustomTypography>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <CustomTypography noWrap variant="subtitle2">
+                      <BathtubRounded /> {content?.squareMeter}
+                    </CustomTypography>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <CustomTypography
+                      noWrap
+                      hideBorderRight
+                      variant="subtitle2"
+                    >
+                      <SquareFootRounded /> {content?.squareMeter}
+                    </CustomTypography>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Box>
+          </Stack>
+        </Box>
       </Box>
     </Card>
   );

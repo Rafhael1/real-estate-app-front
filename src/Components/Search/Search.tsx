@@ -84,8 +84,10 @@ const SearchComponent = () => {
   }, [watchCountry.cod, user.country]);
 
   useEffect(() => {
-    dispatch(getCountries());
-    dispatch(getUserLocation());
+    if (!countries.length) {
+      dispatch(getCountries());
+      dispatch(getUserLocation());
+    }
   }, []);
 
   useEffect(() => {

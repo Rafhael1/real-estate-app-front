@@ -10,13 +10,19 @@ import ImagePlaceholder from 'Assets/Images/image_placeholder.jpg';
 interface ImageSliderProps {
   altText?: string;
   images?: string[];
+  arrowPosition?: string;
   imageDimension?: {
     width?: string;
     height?: string;
   };
 }
 
-const ImageSlider = ({ images, imageDimension, altText }: ImageSliderProps) => {
+const ImageSlider = ({
+  images,
+  imageDimension,
+  altText,
+  arrowPosition = '10px'
+}: ImageSliderProps) => {
   const [current, setCurrent] = useState(0);
   // To handle image loading
   const [shouldLoad, setShouldLoad] = useState(false);
@@ -56,7 +62,7 @@ const ImageSlider = ({ images, imageDimension, altText }: ImageSliderProps) => {
     <SliderContainer>
       {shouldLoad ? (
         images?.map((image: string, index: number) => (
-          <div key={index}>
+          <span key={index}>
             {index === current && (
               <Images
                 imageDimension={imageDimension}
@@ -68,7 +74,7 @@ const ImageSlider = ({ images, imageDimension, altText }: ImageSliderProps) => {
                 alt={altText || 'image'}
               />
             )}
-          </div>
+          </span>
         ))
       ) : (
         <Skeleton
@@ -80,10 +86,18 @@ const ImageSlider = ({ images, imageDimension, altText }: ImageSliderProps) => {
       )}
       {showArrowsCondition() ? (
         <>
-          <SlideArrow onClick={prevSlide} float="left" top="-150px">
+          <SlideArrow
+            onClick={prevSlide}
+            float="left"
+            // arrowPosition={arrowPosition}
+          >
             <KeyboardArrowLeftRounded fontSize="large" />
           </SlideArrow>
-          <SlideArrow onClick={nextSlide} float="right" top="-150px">
+          <SlideArrow
+            onClick={nextSlide}
+            float="right"
+            // arrowPosition={arrowPosition}
+          >
             <KeyboardArrowRightRounded fontSize="large" />
           </SlideArrow>
         </>

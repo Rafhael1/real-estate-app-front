@@ -2,13 +2,13 @@ import { styled } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 interface ITypographyProps {
-  borderRight?: boolean;
+  hideBorderRight?: boolean;
 }
 
 export const CustomTypography = styled(Typography)<ITypographyProps>(
-  ({ borderRight }) => ({
-    borderRight: '1px solid',
-    borderRightColor: borderRight ? 'neutral.light' : 'none',
+  ({ hideBorderRight }) => ({
+    borderRight: hideBorderRight ? 'none' : '1px solid',
+    borderRightColor: !hideBorderRight ? 'neutral.light' : 'none',
     padding: '10px',
     display: 'flex',
     alignItems: 'center',

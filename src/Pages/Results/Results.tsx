@@ -24,9 +24,9 @@ const Results = () => {
         <Box marginTop={5} textAlign="center">
           <SearchBar />
         </Box>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} sx={{ margin: '5px auto' }}>
           <Grid item xs={12}>
-            {/* <PostPublic content={searchSlice.posts[0]} /> */}
+            <PostPublic content={searchSlice.posts[0]} />
           </Grid>
         </Grid>
       </Container>
