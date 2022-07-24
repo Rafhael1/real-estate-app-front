@@ -1,13 +1,15 @@
 import React from 'react';
 
-import { Button } from '@mui/material';
-import NavBar from '../../Layout/Navbar/Navbar';
+import { Box } from '@mui/material';
+import { Navbar, SearchBar } from 'Components';
 
 const Home = () => {
   return (
     <>
-      <NavBar />
-      <Button>Home Page</Button>
+      <Navbar />
+      <Box marginTop={5} textAlign="center">
+        <SearchBar />
+      </Box>
     </>
   );
 };

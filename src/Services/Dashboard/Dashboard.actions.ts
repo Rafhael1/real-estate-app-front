@@ -1,12 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'Config/Axios';
-import { IRFrealEstates } from '../../Types/Dashboard/Dashboard.types';
+import axios from 'Utils/requestConfig/AxiosConfig';
+import { showSnackbar } from 'Services/Snackbar/Snackbar.slices';
+import handleError from 'Utils/handleError';
+import { IrealEstates } from '../../Types/Dashboard/Dashboard.types';
 
 export const getRealEstates: any = createAsyncThunk(
   'getRealEstates',
   async () => {
     try {
-      const res = (await axios.get('/real-estate')).data;
+      const res = (await axios.get('dashboard/all-user-posts')).data;
       return res;
     } catch (error) {
       return error;
@@ -16,71 +18,27 @@ export const getRealEstates: any = createAsyncThunk(
 
 export const addNewRealEstate = createAsyncThunk(
   'addNewRealEstate',
-  async (values: IRFrealEstates) => {
-    const body = {
-      title: values.title,
-      description: values.description,
-      address: values.address,
-      country: values.country,
-      price: values.price,
-      status: values.status
-    };
-
-    const formData: any = new FormData();
-
-    values.images.forEach((element: any) => {
-      formData.append('images', element);
-    });
-    formData.append('form', JSON.stringify(body));
-
+  async (values: IrealEstates, { dispatch }) => {
     try {
-      await axios.post('dashboard/create-real-estate', formData, {
-        headers: {
-          'content-type': 'multipart/form-data'
-        }
-      });
-      return 'worked';
+      await axios.post('dashboard/create-real-estate', values, {});
+      return dispatch(showSnackbar({ message: 'Post created!' }));
     } catch (error) {
-      return error;
+      return dispatch(showSnackbar(handleError(error)));
     }
   }
 );
 
-// export const addNewRealEstate =
-//   (values: IRFrealEstates) =>
-//   async (dispatch: Dispatch<RealEstatesDispatchTypes>) => {
-//     dispatch({
-//       type: ACTIONS.ADD_NEW_REAL_STATE_REQUEST
-//     });
+export const deleteRealEstate = createAsyncThunk(
+  'deleteRealEstate',
+  async (id: string, { dispatch }) => {
+    try {
+      await axios.delete(`dashboard/delete-user-post/${id}`);
 
-//     const body = {
-//       title: values.title,
-//       description: values.description,
-//       address: values.address,
-//       country: values.country,
-//       price: values.price,
-//       status: values.status
-//     };
+      dispatch(showSnackbar({ message: 'Post deleted!' }));
 
-//     const formData: any = new FormData();
-
-//     values.images.forEach((element: any) => {
-//       formData.append('images', element);
-//     });
-//     formData.append('form', JSON.stringify(body));
-
-//     try {
-//       await axios.post('dashboard/create-real-estate', formData, {
-//         headers: {
-//           'content-type': 'multipart/form-data'
-//         }
-//       });
-//       dispatch({
-//         type: ACTIONS.ADD_NEW_REAL_STATE_SUCCESS
-//       });
-//     } catch (error) {
-//       dispatch({
-//         type: ACTIONS.ADD_NEW_REAL_STATE_ERROR
-//       });
-//     }
-//   };
+      return id;
+    } catch (error) {
+      return dispatch(showSnackbar(handleError(error)));
+    }
+  }
+);

@@ -1,20 +1,40 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
+import { Controller } from 'react-hook-form';
 
-// @ts-ignore
-const adaptFileEventToValue = (delegate) => (e) => delegate(e.target.files[0]);
-const FileInput = ({
-  input: { value: omitValue, onChange, onBlur, ...inputProps },
-  meta: omitMeta,
-  ...props
-}) => (
-  <input
-    onChange={adaptFileEventToValue(onChange)}
-    onBlur={adaptFileEventToValue(onBlur)}
-    type="file"
-    {...inputProps}
-    {...props}
-  />
-);
+import { styled, Button } from '@mui/material';
 
-export default FileInput;
+const Input = styled('input')({
+  display: 'none'
+});
+
+interface InputFileFieldProps {
+  name: string;
+  control: any;
+  [x: string]: any;
+}
+
+const InputFileField = ({ name, control, ...rest }: InputFileFieldProps) => {
+  return (
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <label htmlFor={name}>
+          <Input
+            id={name}
+            accept="image/*"
+            type="file"
+            onChange={(e) => {
+              field.onChange(e.target.files);
+            }}
+          />
+          <Button component="span" {...rest}>
+            Select File
+          </Button>
+        </label>
+      )}
+    />
+  );
+};
+
+export default InputFileField;

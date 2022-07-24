@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 export interface FieldTypes {
   input: unknown;
   label?: string;
@@ -11,7 +12,7 @@ export interface FieldTypes {
     | 'default'
     | undefined;
   size?: 'small' | 'medium' | undefined;
-  icon: Element;
+  icon: ReactElement;
   variant?: 'standard' | 'filled' | 'outlined';
   type: string;
   autoFocus: boolean;

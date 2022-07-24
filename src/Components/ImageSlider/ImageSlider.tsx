@@ -1,15 +1,47 @@
-import React, { useState } from 'react';
-
+import React, { useState, useRef, useEffect } from 'react';
 import {
   KeyboardArrowLeftRounded,
   KeyboardArrowRightRounded
 } from '@mui/icons-material';
+import { Skeleton } from '@mui/material';
+import { SliderContainer, Images, SlideArrow } from './Style';
+import ImagePlaceholder from 'Assets/Images/image_placeholder.jpg';
 
-import { SlidersContainer, Images, SlideArrow } from './Style';
+interface ImageSliderProps {
+  altText?: string;
+  images?: string[];
+  arrowPosition?: string;
+  imageDimension?: {
+    width?: string;
+    height?: string;
+  };
+}
 
-const ImageSlider = ({ images }: any) => {
+const ImageSlider = ({
+  images,
+  imageDimension,
+  altText,
+  arrowPosition = '10px'
+}: ImageSliderProps) => {
   const [current, setCurrent] = useState(0);
-  const { length } = images;
+  // To handle image loading
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const placeholderRef = useRef(null);
+
+  useEffect(() => {
+    if (!shouldLoad && placeholderRef.current) {
+      const observer = new IntersectionObserver(([{ intersectionRatio }]) => {
+        if (intersectionRatio > 0) {
+          setShouldLoad(true);
+        }
+      });
+      observer.observe(placeholderRef.current);
+      return () => observer.disconnect();
+    }
+  }, [shouldLoad, placeholderRef]);
+  //
+
+  const length = images?.length;
 
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1);
@@ -19,24 +51,58 @@ const ImageSlider = ({ images }: any) => {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
 
-  // if (!Array.isArray(images) || images.length <= 0) {
-  // 	return null
-  // }
+  const showArrowsCondition = () => {
+    if (length > 1) {
+      return true;
+    }
+    return false;
+  };
+
   return (
-    // @ts-ignore
-    <SlidersContainer>
-      {/* @ts-ignore */}
-      <SlideArrow onClick={prevSlide} float="left" position="absolute">
-        <KeyboardArrowLeftRounded fontSize="large" />
-      </SlideArrow>
-      {images.map((image: { img: string }, index: number) => (
-        <div key={index}>{index === current && <Images src={image.img} />}</div>
-      ))}
-      {/* @ts-ignore */}
-      <SlideArrow onClick={nextSlide} float="right" position="relative">
-        <KeyboardArrowRightRounded fontSize="large" />
-      </SlideArrow>
-    </SlidersContainer>
+    <SliderContainer>
+      {shouldLoad ? (
+        images?.map((image: string, index: number) => (
+          <span key={index}>
+            {index === current && (
+              <Images
+                imageDimension={imageDimension}
+                src={
+                  `${process.env.REACT_APP_IMAGES_URL}/${image}` ||
+                  ImagePlaceholder
+                }
+                loading="lazy"
+                alt={altText || 'image'}
+              />
+            )}
+          </span>
+        ))
+      ) : (
+        <Skeleton
+          ref={placeholderRef}
+          sx={{ margin: '0 auto' }}
+          height={imageDimension?.height || '200px'}
+          width="90%"
+        />
+      )}
+      {showArrowsCondition() ? (
+        <>
+          <SlideArrow
+            onClick={prevSlide}
+            float="left"
+            // arrowPosition={arrowPosition}
+          >
+            <KeyboardArrowLeftRounded fontSize="large" />
+          </SlideArrow>
+          <SlideArrow
+            onClick={nextSlide}
+            float="right"
+            // arrowPosition={arrowPosition}
+          >
+            <KeyboardArrowRightRounded fontSize="large" />
+          </SlideArrow>
+        </>
+      ) : null}
+    </SliderContainer>
   );
 };
 

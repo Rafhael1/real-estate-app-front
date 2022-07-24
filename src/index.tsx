@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 
+import 'typeface-quicksand';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import { Provider } from 'react-redux';
-import theme from './Design/GlobalStyles';
+import theme from './Components/Design/GlobalStyles';
 import App from './App';
-import { store } from './Redux/Store';
+import { store } from 'Utils/Redux/Store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

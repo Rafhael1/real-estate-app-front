@@ -1,41 +1,47 @@
-import React, { useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, Suspense } from 'react';
+import { Route, Navigate, Routes } from 'react-router-dom';
+import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 import { isLogged } from 'Services/Auth/Auth.actions';
 import { IState } from 'Types/Auth/Auth.types';
+import Results from './Results/Results';
 // Pages
-import Home from './Home/Home';
-import Dashboard from './Dashboard/Dashboard';
+const Home = React.lazy(() => import('./Home/Home'));
+const Dashboard = React.lazy(() => import('./Dashboard/Dashboard'));
 
 interface Iselector {
   Auth: IState;
 }
 
-const Router = () => {
+const MainRouter = () => {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector(
-    (state: Iselector) => state.Auth.isAuthenticated
-  );
+  const Auth = useSelector((state: Iselector) => state.Auth);
 
   useEffect(() => {
-    if (localStorage.length || sessionStorage.length) {
+    if (localStorage.authToken?.length || sessionStorage.authToken?.length) {
       dispatch(isLogged());
     }
   }, []);
 
   return (
-    <Switch>
-      <Route path="/" exact component={Home} />
-      <Route
-        path="/dashboard"
-        exact
-        render={() => (isAuthenticated ? <Dashboard /> : <Redirect to="/" />)}
-      />
-      <Route path="/results" exact />
-      {/* The not found(404) page has to be the last one */}
-      <Route render={() => <div>Porn is bad dawg...</div>} />
-    </Switch>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/search" element={<Results />} />
+        <Route
+          path="/dashboard"
+          element={
+            Auth.isAuthenticated && Auth.user ? (
+              <Dashboard />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+        {/* The not found(404) page has to be the last one */}
+        <Route path="*" element={<div>Not found</div>} />
+      </Routes>
+    </Suspense>
   );
 };
 
-export default Router;
+export default MainRouter;
