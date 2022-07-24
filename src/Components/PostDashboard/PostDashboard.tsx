@@ -52,7 +52,7 @@ const PostDashboard = ({ content, handleOpenEditForm }: PostDashboardProps) => {
   };
 
   return (
-    <Card sx={{ width: isMobile ? 320 : 345 }}>
+    <Card sx={{ width: isMobile ? 320 : 340 }}>
       <DeleteDialog
         open={openDeleteDialog}
         handleClose={handleCloseDeleteDialog}
@@ -83,11 +83,11 @@ const PostDashboard = ({ content, handleOpenEditForm }: PostDashboardProps) => {
         }
       />
       <ImageSlider
-        imageDimension={{ width: '345px', height: '250px' }}
+        imageDimension={{ width: '350px', height: '250px' }}
         images={content?.images}
       />
       <Box
-        padding="0px 10px 5px 10px"
+        padding="5px 10px 5px 10px"
         display="flex"
         alignItems="center"
         justifyContent="space-between"

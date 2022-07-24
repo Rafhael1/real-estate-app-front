@@ -16,7 +16,7 @@ interface PostPublicProps {
 
 const PostPublic = ({ content }: PostPublicProps) => {
   return (
-    <Card sx={{ width: '75%', margin: '0 auto' }}>
+    <Card sx={{ width: '75%', height: '200px', margin: '0 auto' }}>
       <Box display="flex">
         <Box>
           <ImageSlider images={content?.images} />
