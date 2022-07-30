@@ -34,6 +34,10 @@ const Register = React.lazy(() => import('Components/Register/Register'));
 
 import { IState } from 'Types/Auth/Auth.types';
 
+interface INavbarProps {
+  transparent?: boolean;
+}
+
 const pages = [
   { value: 'Home', route: '/' },
   { value: 'Trending', route: '/search?search-type=trending' },
@@ -43,7 +47,7 @@ const pages = [
 
 const linkMenuStyle = { textDecoration: 'none', color: 'inherit' };
 
-const Navbar = () => {
+const Navbar = ({ transparent }: INavbarProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isMobile } = useMediaQuery();
@@ -92,7 +96,10 @@ const Navbar = () => {
   return (
     <AppBar
       position="relative"
-      sx={{ alignItems: 'center', backgroundColor: 'primary.dark' }}
+      sx={{
+        alignItems: 'center',
+        backgroundColor: transparent ? 'transparent' : 'primary.dark'
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>

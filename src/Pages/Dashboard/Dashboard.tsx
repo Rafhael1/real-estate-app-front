@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 
 import { Box, Button, Container, Grid } from '@mui/material';
@@ -15,7 +15,6 @@ const Dashboard = () => {
   const [openPropertyModal, setOpenPropertyModal] = useState(false);
   const dashboardSlice = useSelector((state) => state.Dashboard);
   const [editMode, setEditMode] = useState<boolean>(false);
-  const parent = useRef(null);
 
   const handleOpenEditModal = () => {
     setOpenPropertyModal(true);
@@ -70,17 +69,18 @@ const Dashboard = () => {
               </Grid>
             ) : (
               <>
-                {dashboardSlice?.realEstates?.map((item) => (
-                  <Grid key={item._id} item xs={4}>
-                    <PostDashboard
-                      handleOpenEditForm={handleOpenEditModal}
-                      content={{
-                        ...item,
-                        images: item.images.filter((i: string) => i !== null)
-                      }}
-                    />
-                  </Grid>
-                ))}
+                {!dashboardSlice.isLoading &&
+                  dashboardSlice?.realEstates?.map((item) => (
+                    <Grid key={item._id} item xs>
+                      <PostDashboard
+                        handleOpenEditForm={handleOpenEditModal}
+                        content={{
+                          ...item,
+                          images: item.images.filter((i: string) => i !== null)
+                        }}
+                      />
+                    </Grid>
+                  ))}
               </>
             )}
           </Grid>

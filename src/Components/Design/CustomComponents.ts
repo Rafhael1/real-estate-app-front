@@ -92,7 +92,8 @@ export default {
     },
     styleOverrides: {
       root: {
-        boxShadow: 'none'
+        boxShadow: 'none',
+        zIndex: '100'
         //backgroundColor: '#1B2738'
       }
     }
