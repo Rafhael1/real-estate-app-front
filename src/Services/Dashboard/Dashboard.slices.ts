@@ -44,11 +44,8 @@ const dashboardSlices = createSlice({
     builder.addCase(deleteRealEstate.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(deleteRealEstate.fulfilled, (state, action) => {
+    builder.addCase(deleteRealEstate.fulfilled, (state) => {
       state.isLoading = false;
-      state.realEstates = current(state.realEstates).filter(
-        (item) => item._id !== action.payload
-      );
     });
   },
   reducers: undefined

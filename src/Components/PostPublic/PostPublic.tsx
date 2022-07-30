@@ -9,34 +9,65 @@ import {
 } from '@mui/icons-material';
 
 import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
+import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 
 interface PostPublicProps {
   content: IrealEstates;
 }
 
 const PostPublic = ({ content }: PostPublicProps) => {
+  const { isMobile } = useMediaQuery();
   return (
-    <Card sx={{ width: '75%', height: '200px', margin: '0 auto' }}>
+    <>
+      {isMobile ? (
+        <PostPublicMobile content={content} />
+      ) : (
+        <PostPublicDesktop content={content} />
+      )}
+    </>
+  );
+};
+
+const PostPublicDesktop = ({ content }: PostPublicProps) => {
+  return (
+    <Card
+      sx={{
+        width: '65%',
+        height: '200px',
+        margin: '0 auto',
+        justifyContent: 'center'
+      }}
+    >
       <Box display="flex">
         <Box>
-          <ImageSlider images={content?.images} />
+          <ImageSlider
+            //imageDimension={{ width: '150px', height: '150px' }}
+            images={content?.images.filter((i: string) => i !== null)}
+          />
         </Box>
-        <Box>
+        <Box width="100%">
           <Stack>
-            <Typography variant="h2">{content?.title}</Typography>
-            <Typography variant="h6">{content?.address}</Typography>
-            <Typography variant="body2">{content?.description}</Typography>
-            <Box display={'flex'}>
-              <Grid container spacing={1} sx={{ textAlign: 'center' }}>
-                <Grid item xs={12} sx={{ display: 'flex' }}>
+            <Box marginLeft="20px">
+              <Typography variant="h5">{content?.title}</Typography>
+              <Typography variant="subtitle2">{content?.address}</Typography>
+              <Typography variant="body1">{content?.description}</Typography>
+            </Box>
+            <Box
+              textAlign="center"
+              marginTop="18%"
+              borderTop="1px solid grey"
+              display={'flex'}
+            >
+              <Grid container sx={{}}>
+                <>
                   <Grid item xs={4}>
                     <CustomTypography noWrap variant="subtitle2">
-                      <HotelRounded /> {content?.squareMeter}
+                      <HotelRounded /> {content?.bedrooms}
                     </CustomTypography>
                   </Grid>
                   <Grid item xs={4}>
                     <CustomTypography noWrap variant="subtitle2">
-                      <BathtubRounded /> {content?.squareMeter}
+                      <BathtubRounded /> {content?.bathrooms}
                     </CustomTypography>
                   </Grid>
                   <Grid item xs={4}>
@@ -48,11 +79,66 @@ const PostPublic = ({ content }: PostPublicProps) => {
                       <SquareFootRounded /> {content?.squareMeter}
                     </CustomTypography>
                   </Grid>
-                </Grid>
+                </>
               </Grid>
             </Box>
           </Stack>
         </Box>
+      </Box>
+    </Card>
+  );
+};
+
+const PostPublicMobile = ({ content }: PostPublicProps) => {
+  return (
+    <Card
+      sx={{
+        width: '85%',
+        height: '350px',
+        margin: '0 auto',
+        justifyContent: 'center'
+      }}
+    >
+      <Box>
+        <ImageSlider
+          imageDimension={{ height: '200px' }}
+          images={content?.images.filter((i: string) => i !== null)}
+        />
+      </Box>
+      <Box width="100%">
+        <Stack>
+          <Box marginLeft="10px">
+            <Typography variant="h5">{content?.title}</Typography>
+            <Typography variant="subtitle2">{content?.address}</Typography>
+            <Typography variant="body1">{content?.description}</Typography>
+          </Box>
+          <Box
+            textAlign="center"
+            marginTop="13%"
+            borderTop="1px solid grey"
+            display={'flex'}
+          >
+            <Grid container>
+              <>
+                <Grid item xs={4}>
+                  <CustomTypography noWrap variant="subtitle2">
+                    <HotelRounded /> {content?.bedrooms}
+                  </CustomTypography>
+                </Grid>
+                <Grid item xs={4}>
+                  <CustomTypography noWrap variant="subtitle2">
+                    <BathtubRounded /> {content?.bathrooms}
+                  </CustomTypography>
+                </Grid>
+                <Grid item xs={4}>
+                  <CustomTypography noWrap hideBorderRight variant="subtitle2">
+                    <SquareFootRounded /> {content?.squareMeter}
+                  </CustomTypography>
+                </Grid>
+              </>
+            </Grid>
+          </Box>
+        </Stack>
       </Box>
     </Card>
   );

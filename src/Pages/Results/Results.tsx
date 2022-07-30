@@ -24,10 +24,12 @@ const Results = () => {
         <Box marginTop={5} textAlign="center">
           <SearchBar />
         </Box>
-        <Grid container spacing={3} sx={{ margin: '5px auto' }}>
-          <Grid item xs={12}>
-            <PostPublic content={searchSlice.posts[0]} />
-          </Grid>
+        <Grid container spacing={0} sx={{ margin: '15px auto', gap: 2 }}>
+          {searchSlice.posts.map((post, index) => (
+            <Grid item xs={12} key={index}>
+              <PostPublic content={post} />
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </Box>

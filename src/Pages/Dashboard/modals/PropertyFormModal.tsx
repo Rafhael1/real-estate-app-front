@@ -99,9 +99,8 @@ const PropertyFormModal = ({
       })
     );
 
-    return await dispatch(
-      addNewRealEstate({ ...values, images } as IrealEstates)
-    );
+    await dispatch(addNewRealEstate({ ...values, images } as IrealEstates));
+    return handleClose();
   });
 
   const handleClose = () => {

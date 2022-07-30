@@ -48,7 +48,7 @@ export const SlideArrow = styled.button<IslideStyles>`
   color: #e9e9e9;
   border-radius: 25px;
   cursor: pointer;
-  margin: -40% 12%;
+  margin: -42% 12%;
   left: -15px;
   transition: 0.5s;
   z-index: 1;

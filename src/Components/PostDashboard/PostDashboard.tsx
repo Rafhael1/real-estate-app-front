@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
+import { useDispatch } from 'Utils/Hooks/Redux';
 import {
   Box,
   Card,
@@ -125,7 +125,7 @@ const PostDashboard = ({ content, handleOpenEditForm }: PostDashboardProps) => {
                 justifyContent: 'center'
               }}
             >
-              <HotelRounded /> {content?.squareMeter}
+              <HotelRounded /> {content?.bedrooms}
             </Typography>
           </Grid>
           <Grid item xs={4}>
@@ -142,7 +142,7 @@ const PostDashboard = ({ content, handleOpenEditForm }: PostDashboardProps) => {
                 justifyContent: 'center'
               }}
             >
-              <BathtubRounded /> {content?.squareMeter}
+              <BathtubRounded /> {content?.bathrooms}
             </Typography>
           </Grid>
           <Grid item xs={4}>
