@@ -99,7 +99,7 @@ const SearchComponent = () => {
       });
     }
   }, [user.country, countries]);
-
+  console.log('renderizou');
   useEffect(() => {
     const userCity = cities.length && cities.find((i) => i.city === user.city);
     if (userCity) {

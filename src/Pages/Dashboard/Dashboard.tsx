@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 
 import { Box, Button, Container, Grid } from '@mui/material';
@@ -8,15 +9,19 @@ import PropertyFormModal from './modals/PropertyFormModal';
 import NoData from 'Assets/Svg/no_data.svg';
 
 import { getRealEstates } from 'Services/Dashboard/Dashboard.actions';
+import { selectPost } from 'Services/Dashboard/Dashboard.slices';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [openPropertyModal, setOpenPropertyModal] = useState(false);
   const dashboardSlice = useSelector((state) => state.Dashboard);
+  const { isAuthenticated, isLoading } = useSelector((state) => state.Auth);
   const [editMode, setEditMode] = useState<boolean>(false);
 
-  const handleOpenEditModal = () => {
+  const handleOpenEditModal = (postId: string) => {
+    dispatch(selectPost(postId));
     setOpenPropertyModal(true);
     setEditMode(true);
   };
@@ -31,8 +36,10 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    dispatch(getRealEstates());
-  }, [openPropertyModal]);
+    if (isAuthenticated) {
+      dispatch(getRealEstates());
+    }
+  }, []);
 
   return (
     <>
@@ -70,10 +77,11 @@ const Dashboard = () => {
             ) : (
               <>
                 {!dashboardSlice.isLoading &&
+                  dashboardSlice.realEstates &&
                   dashboardSlice?.realEstates?.map((item) => (
                     <Grid key={item._id} item xs>
                       <PostDashboard
-                        handleOpenEditForm={handleOpenEditModal}
+                        handleOpenEditForm={() => handleOpenEditModal(item._id)}
                         content={{
                           ...item,
                           images: item.images.filter((i: string) => i !== null)

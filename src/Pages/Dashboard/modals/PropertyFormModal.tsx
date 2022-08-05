@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'Utils/Hooks/Redux';
+import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 import {
   Box,
   Button,
@@ -21,7 +21,10 @@ import {
   SaveRounded
 } from '@mui/icons-material';
 import convertToBase64 from 'Utils/convertFileToBase64';
-import { addNewRealEstate } from 'Services/Dashboard/Dashboard.actions';
+import {
+  addNewRealEstate,
+  editRealEstate
+} from 'Services/Dashboard/Dashboard.actions';
 import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
 import compressBase64Image from 'Utils/compressBase64Image';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
@@ -37,14 +40,24 @@ const PropertyFormModal = ({
   closeModal,
   edit
 }: PropertyFormModalProps) => {
+  const { selectedPost } = useSelector((state) => state.Dashboard);
+
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
+      ...selectedPost,
       images: [{}, {}, {}, {}, {}, {}]
     }
   });
   const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch();
   const { isMobile } = useMediaQuery();
+
+  useEffect(() => {
+    reset({
+      ...selectedPost,
+      images: selectedPost?.images || [{}, {}, {}, {}, {}, {}]
+    });
+  }, [selectedPost]);
 
   // Steps titles
   const steps: string[] = useMemo(() => {
@@ -64,7 +77,10 @@ const PropertyFormModal = ({
       case 1:
         return (
           <Box textAlign={'center'}>
-            <ImagesForm control={control} />
+            <ImagesForm
+              control={control}
+              images={selectedPost.images?.filter((i: string) => i !== null)}
+            />
           </Box>
         );
       default:
@@ -99,7 +115,16 @@ const PropertyFormModal = ({
       })
     );
 
-    await dispatch(addNewRealEstate({ ...values, images } as IrealEstates));
+    if (edit) {
+      await dispatch(
+        editRealEstate({
+          postId: selectedPost._id,
+          body: { ...values, images }
+        } as { postId: string; body: IrealEstates })
+      );
+    } else {
+      await dispatch(addNewRealEstate({ ...values, images } as IrealEstates));
+    }
     return handleClose();
   });
 

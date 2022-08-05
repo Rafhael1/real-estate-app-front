@@ -8,20 +8,24 @@ import {
   CardContent,
   Container,
   Grid,
+  Icon,
   Typography
 } from '@mui/material';
 import { InputFileField } from 'Components';
-import { CameraAltRounded } from '@mui/icons-material';
+import {
+  CameraAltRounded,
+  AddPhotoAlternateRounded
+} from '@mui/icons-material';
 import ImagePlaceHolder from 'Assets/Images/image_placeholder.jpg';
 
 import convertToBase64 from 'Utils/convertFileToBase64';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 
-const Image = ({ image }) => {
+const Image = ({ image, isEditing }) => {
   const [imageBase64, setImageBase64] = useState('');
 
   useEffect(() => {
-    if (image) {
+    if (image && !isEditing) {
       const getImage = async () => {
         const base64: any = await convertToBase64(image);
         setImageBase64(base64);
@@ -32,7 +36,11 @@ const Image = ({ image }) => {
 
   return (
     <img
-      src={imageBase64 || ImagePlaceHolder}
+      src={
+        isEditing
+          ? `${process.env.REACT_APP_IMAGES_URL}/${image}` || ImagePlaceHolder
+          : imageBase64 || ImagePlaceHolder
+      }
       style={{ borderRadius: '12px' }}
       height="200px"
       width="320px"
@@ -40,13 +48,13 @@ const Image = ({ image }) => {
   );
 };
 
-const ImagesForm = ({ control }) => {
-  const { fields } = useFieldArray({
+const ImagesForm = ({ control, images }) => {
+  const { isMobile } = useMediaQuery();
+  const { fields, append } = useFieldArray({
     control,
     name: 'images'
   });
   const watchImages = useWatch({ control, name: 'images' });
-  const { isMobile } = useMediaQuery();
 
   return (
     <Box display={'flex'} sx={{ margin: '0 auto' }}>
@@ -60,10 +68,12 @@ const ImagesForm = ({ control }) => {
               >
                 <Box marginTop={2}>
                   <Image
+                    isEditing={true}
                     image={
-                      watchImages &&
-                      watchImages[index]?.value &&
-                      watchImages[index]?.value[0]
+                      images
+                        ? images[index]
+                        : watchImages[index]?.value &&
+                          watchImages[index]?.value[0]
                     }
                   />
                 </Box>
@@ -85,6 +95,42 @@ const ImagesForm = ({ control }) => {
               </Card>
             </Grid>
           ))}
+          {fields.length < 6 && (
+            <Grid xs={isMobile ? 12 : 4} item>
+              <Card
+                sx={{
+                  width: 350,
+                  height: 360,
+                  background: 'background',
+                  alignItems: 'center'
+                }}
+                onClick={() => append({})}
+              >
+                <Box
+                  sx={{
+                    margin: '15px auto',
+                    border: '1px solid grey',
+                    borderStyle: 'dashed',
+                    borderRadius: '12px',
+                    width: 325,
+                    height: 330
+                  }}
+                >
+                  <Box marginTop={'35%'}>
+                    <>
+                      <AddPhotoAlternateRounded
+                        color="action"
+                        sx={{
+                          fontSize: '100px',
+                          padding: '-50px'
+                        }}
+                      />
+                    </>
+                  </Box>
+                </Box>
+              </Card>
+            </Grid>
+          )}
         </Grid>
       </Container>
     </Box>

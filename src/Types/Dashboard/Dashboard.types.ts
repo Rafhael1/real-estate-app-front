@@ -3,6 +3,7 @@ export interface IState {
   hasError: boolean;
   noData: boolean;
   realEstates?: IrealEstates[];
+  selectedPost?: IrealEstates;
 }
 
 export interface IrealEstates {

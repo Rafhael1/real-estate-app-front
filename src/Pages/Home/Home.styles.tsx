@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from '@mui/styles';
-import House from 'Assets/Images/house.jpg';
+import House from 'Assets/Images/house.webp';
 import { Container, Typography } from '@mui/material';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 

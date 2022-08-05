@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
 import { IState } from '../../Types/Dashboard/Dashboard.types';
 import {
   getRealEstates,
@@ -10,7 +10,8 @@ export const initialState: IState = {
   isLoading: false,
   hasError: false,
   noData: false,
-  realEstates: []
+  realEstates: [],
+  selectedPost: {}
 };
 
 const dashboardSlices = createSlice({
@@ -48,7 +49,15 @@ const dashboardSlices = createSlice({
       state.isLoading = false;
     });
   },
-  reducers: undefined
+  reducers: {
+    selectPost: (state: IState, action: PayloadAction<string>) => {
+      state.selectedPost = current(state.realEstates).find(
+        (el) => el._id === action.payload
+      );
+    }
+  }
 });
+
+export const { selectPost } = dashboardSlices.actions;
 
 export default dashboardSlices.reducer;

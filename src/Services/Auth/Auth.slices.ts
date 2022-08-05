@@ -12,7 +12,7 @@ export const initialState: IState = {
   isLoading: false,
   isLoadingLocation: false,
   hasError: false,
-  isAuthenticated: false,
+  isAuthenticated: null,
   user: {
     email: '',
     name: '',

@@ -28,6 +28,18 @@ export const addNewRealEstate = createAsyncThunk(
   }
 );
 
+export const editRealEstate = createAsyncThunk(
+  'editRealEstate',
+  async (data: { postId: string; body: IrealEstates }, { dispatch }) => {
+    try {
+      await axios.put(`dashboard/edit-user-post/${data.postId}`, data.body);
+      return dispatch(showSnackbar({ message: 'Post edited!' }));
+    } catch (error) {
+      return dispatch(showSnackbar(handleError(error)));
+    }
+  }
+);
+
 export const deleteRealEstate = createAsyncThunk(
   'deleteRealEstate',
   async (id: string, { dispatch }) => {
