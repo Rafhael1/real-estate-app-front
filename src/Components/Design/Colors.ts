@@ -38,6 +38,7 @@ export const palette = {
     dark: '#6d6f7c'
   },
   text: {
+    light: '#ffffff',
     primary: '#060c12',
     secondary: '#898989'
   }

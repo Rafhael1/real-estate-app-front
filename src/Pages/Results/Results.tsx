@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 
 import { Container, Box, Grid } from '@mui/material';
-import { Navbar, SearchBar, PostPublic } from 'Components';
+import { Navbar, SearchBar, PostPublic, Footer } from 'Components';
 import { getSearchResults } from 'Services/Search/Search.action';
 
 const Results = () => {
@@ -32,6 +32,7 @@ const Results = () => {
           ))}
         </Grid>
       </Container>
+      <Footer />
     </Box>
   );
 };
