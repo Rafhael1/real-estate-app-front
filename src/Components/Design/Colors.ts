@@ -19,6 +19,7 @@ export const palette = {
     contrastText: 'whitesmoke'
   },
   info: {
+    light: '#d6f3ff',
     main: '#64D0FF',
     contrastText: 'whitesmoke'
   },

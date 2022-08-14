@@ -1,20 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useFieldArray, useWatch } from 'react-hook-form';
-
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult
+} from 'react-beautiful-dnd';
+import Dropzone, { useDropzone } from 'react-dropzone';
 import {
   Box,
+  Button,
   Card,
   CardActions,
   CardContent,
+  CardMedia,
   Container,
   Grid,
-  Icon,
+  IconButton,
   Typography
 } from '@mui/material';
 import { InputFileField } from 'Components';
 import {
   CameraAltRounded,
-  AddPhotoAlternateRounded
+  AddPhotoAlternateRounded,
+  DeleteRounded
 } from '@mui/icons-material';
 import ImagePlaceHolder from 'Assets/Images/image_placeholder.jpg';
 
@@ -22,24 +31,12 @@ import convertToBase64 from 'Utils/convertFileToBase64';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 
 const Image = ({ image, isEditing }) => {
-  const [imageBase64, setImageBase64] = useState('');
-
-  useEffect(() => {
-    if (image && !isEditing) {
-      const getImage = async () => {
-        const base64: any = await convertToBase64(image);
-        setImageBase64(base64);
-      };
-      getImage();
-    }
-  }, [image]);
-
   return (
     <img
       src={
         isEditing
           ? `${process.env.REACT_APP_IMAGES_URL}/${image}` || ImagePlaceHolder
-          : imageBase64 || ImagePlaceHolder
+          : image || ImagePlaceHolder
       }
       style={{ borderRadius: '12px' }}
       height="200px"
@@ -49,91 +46,176 @@ const Image = ({ image, isEditing }) => {
 };
 
 const ImagesForm = ({ control, images }) => {
+  const [rejectedFiles, setRejectedFiles] = useState([]);
   const { isMobile } = useMediaQuery();
-  const { fields, append } = useFieldArray({
+  const { fields, append, move, remove } = useFieldArray({
     control,
     name: 'images'
   });
   const watchImages = useWatch({ control, name: 'images' });
 
+  const onDrop = useCallback(
+    (files: File[]) => {
+      // Fake upload with random fail/reject
+      const upload = (file: File) =>
+        new Promise((res, rej) =>
+          setTimeout(
+            Math.random() < 0.8
+              ? () => {
+                  res({
+                    slug: file.name,
+                    name: file.name,
+                    thumbnail: URL.createObjectURL(file)
+                  });
+                }
+              : rej,
+            Math.random() * 1000
+          )
+        );
+
+      files.reduce(
+        (promise: Promise<any>, file: File) =>
+          promise
+            .then(() => upload(file))
+            .then((image: any) => append(image))
+            .catch(() => {
+              setRejectedFiles((rejectedFiles) => [
+                ...rejectedFiles,
+                file.name
+              ]);
+            }),
+        Promise.resolve()
+      );
+    },
+    [append]
+  );
+
+  const onDragEnd = useCallback(
+    (result: DropResult) => {
+      if (!result.destination) {
+        return;
+      }
+      move(result.source.index, result.destination.index);
+    },
+    [move]
+  );
+
+  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
+    maxFiles: 5,
+    noClick: true,
+    maxSize: 10000000, // 10mb
+    onDropAccepted: onDrop,
+    onDropRejected: (fileRejections) => {
+      // console.log(...fileRejections.map(({ file }) => file));
+      // setRejectedFiles([
+      //   ...rejectedFiles,
+      // ]);
+    }
+  });
+
   return (
-    <Box display={'flex'} sx={{ margin: '0 auto' }}>
-      <Container>
-        <Grid container spacing={2}>
-          {fields.map((field, index) => (
-            <Grid xs={isMobile ? 12 : 4} item key={index}>
-              <Card
-                sx={{ width: 350, height: 360, background: 'background' }}
-                key={field.id}
-              >
-                <Box marginTop={2}>
-                  <Image
-                    isEditing={true}
-                    image={
-                      images
-                        ? images[index]
-                        : watchImages[index]?.value &&
-                          watchImages[index]?.value[0]
-                    }
-                  />
-                </Box>
-                <CardContent>
-                  <Typography variant="body1">
-                    {watchImages && watchImages[index]?.value
-                      ? watchImages[index]?.value[0].name.slice(0, 30).trim() +
-                        '...'
-                      : '-'}
-                  </Typography>
-                </CardContent>
-                <CardActions sx={{ gap: 0, justifyContent: 'center' }}>
-                  <InputFileField
-                    name={`images.${index}.value`}
-                    control={control}
-                    endIcon={<CameraAltRounded />}
-                  />
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-          {fields.length < 6 && (
-            <Grid xs={isMobile ? 12 : 4} item>
-              <Card
+    <Container>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable
+          droppableId="droppable"
+          direction={isMobile ? 'vertical' : 'horizontal'}
+        >
+          {(provided) => (
+            <>
+              <Grid
+                container
+                spacing={1}
+                ref={provided.innerRef}
+                {...provided.droppableProps}
                 sx={{
-                  width: 350,
-                  height: 360,
-                  background: 'background',
-                  alignItems: 'center'
+                  width: '100%',
+                  height: '100%',
+                  marginBottom: '10px'
                 }}
-                onClick={() => append({})}
               >
-                <Box
-                  sx={{
-                    margin: '15px auto',
-                    border: '1px solid grey',
-                    borderStyle: 'dashed',
-                    borderRadius: '12px',
-                    width: 325,
-                    height: 330
-                  }}
-                >
-                  <Box marginTop={'35%'}>
-                    <>
-                      <AddPhotoAlternateRounded
-                        color="action"
-                        sx={{
-                          fontSize: '100px',
-                          padding: '-50px'
-                        }}
-                      />
-                    </>
-                  </Box>
+                {fields.map((field, index) => (
+                  <Draggable
+                    key={field.id}
+                    draggableId={field.id}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <Grid
+                        item
+                        xs={isMobile ? 12 : 4}
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <Card
+                          sx={{
+                            backgroundColor: 'white',
+                            width: '350px'
+                          }}
+                        >
+                          <CardMedia
+                            component="img"
+                            height={'200px'}
+                            image={
+                              `${process.env.REACT_APP_IMAGES_URL}/${images[index]}` ||
+                              watchImages[index]?.thumbnail
+                            }
+                          />
+                          <CardActions sx={{ gap: 2 }}>
+                            <IconButton
+                              color="error"
+                              onClick={() => {
+                                return remove(index);
+                              }}
+                            >
+                              <DeleteRounded />
+                            </IconButton>
+                            <Typography>
+                              {watchImages[index]?.name || ''}
+                            </Typography>
+                          </CardActions>
+                        </Card>
+                      </Grid>
+                    )}
+                  </Draggable>
+                ))}
+              </Grid>
+              <Box
+                {...getRootProps({ className: 'dropzone' })}
+                sx={{
+                  border: `1px dashed`,
+                  borderColor: isDragActive ? 'info.main' : 'primary.dark',
+                  backgroundColor: isDragActive ? 'info.light' : 'white',
+                  borderRadius: '12px',
+                  width: '100%',
+                  height: '200px',
+                  transition: '0.5s',
+                  margin: '0 auto'
+                }}
+              >
+                <input {...getInputProps()} />
+                <Box marginTop={'50px'}>
+                  {!isMobile && (
+                    <Typography>
+                      {isDragActive
+                        ? 'Drop the files here ...'
+                        : 'Drag drop some files here, or click to select files'}
+                    </Typography>
+                  )}
+                  <Button
+                    type="button"
+                    onClick={open}
+                    endIcon={<AddPhotoAlternateRounded />}
+                  >
+                    Select File
+                  </Button>
                 </Box>
-              </Card>
-            </Grid>
+              </Box>
+            </>
           )}
-        </Grid>
-      </Container>
-    </Box>
+        </Droppable>
+      </DragDropContext>
+    </Container>
   );
 };
 

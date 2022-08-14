@@ -44,8 +44,7 @@ const PropertyFormModal = ({
 
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
-      ...selectedPost,
-      images: [{}, {}, {}, {}, {}, {}]
+      ...selectedPost
     }
   });
   const [activeStep, setActiveStep] = useState(0);
@@ -55,7 +54,7 @@ const PropertyFormModal = ({
   useEffect(() => {
     reset({
       ...selectedPost,
-      images: selectedPost?.images || [{}, {}, {}, {}, {}, {}]
+      images: selectedPost?.images || []
     });
   }, [selectedPost]);
 
@@ -103,9 +102,9 @@ const PropertyFormModal = ({
 
   const onSubmit = handleSubmit(async (values: IrealEstates) => {
     const images: string[] = await Promise.all(
-      values.images.map(async (image: { value: File }) => {
-        if (image?.value) {
-          const base64Image = await convertToBase64(image?.value[0]);
+      values.images.map(async (image: any) => {
+        if (image) {
+          const base64Image = await convertToBase64(image.thumbnail);
           const compressedImage = await compressBase64Image(
             base64Image as string
           );
@@ -114,7 +113,6 @@ const PropertyFormModal = ({
         return [];
       })
     );
-
     if (edit) {
       await dispatch(
         editRealEstate({
