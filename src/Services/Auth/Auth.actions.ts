@@ -85,7 +85,7 @@ export const getUserLocation = createAsyncThunk('getUserLocation', async () => {
     }
     const res = (
       await axiosDefault.get(
-        `https://ipinfo.io/json?token=${process.env.VITE_IPINFO_TOKEN}`
+        `https://ipinfo.io/json?token=${import.meta.env.VITE_IPINFO_TOKEN}`
       )
     ).data;
     const { ip, city, country } = res;

@@ -67,7 +67,7 @@ const ImageSlider = ({
               <Images
                 imageDimension={imageDimension}
                 src={
-                  `${process.env.VITE_IMAGES_URL}/${image}` ||
+                  `${import.meta.env.VITE_IMAGES_URL}/${image}` ||
                   ImagePlaceholder
                 }
                 loading="lazy"

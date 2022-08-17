@@ -26,7 +26,6 @@
     "@mui/styles": "^5.7.0",
     "@reduxjs/toolkit": "^1.8.1",
     "axios": "^0.27.2",
-    "framer-motion": "^6.5.1",
     "react": "18.1.0",
     "react-beautiful-dnd": "^13.1.0",
     "react-dom": "18.1.0",
@@ -85,6 +84,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-mock-store": "^1.5.4",
     "ts-node": "^10.7.0",
+    "vite-plugin-compression": "^0.5.1",
     "vite-plugin-env-compatible": "^1.1.1",
     "vite-plugin-svgr": "^2.2.1",
     "vite-tsconfig-paths": "^3.5.0"

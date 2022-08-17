@@ -36,7 +36,7 @@ const Image = ({ image, isEditing }) => {
     <img
       src={
         isEditing
-          ? `${process.env.VITE_IMAGES_URL}/${image}` || ImagePlaceHolder
+          ? `${import.meta.env.VITE_IMAGES_URL}/${image}` || ImagePlaceHolder
           : image || ImagePlaceHolder
       }
       style={{ borderRadius: '12px' }}
@@ -162,7 +162,7 @@ const ImagesForm = ({ control, images }) => {
                               (watchImages[index]?.thumbnail ||
                                 `${
                                   !checkIsBase64(images[index]) &&
-                                  process.env.VITE_IMAGES_URL
+                                  import.meta.env.VITE_IMAGES_URL
                                 }/${images[index]}`)
                             }
                           />
