@@ -5,7 +5,7 @@ declare module 'axios' {
 }
 
 const client = axios.create({
-  baseURL: `http://${process.env.REACT_APP_API}:8000/api`,
+  baseURL: `http://${process.env.VITE_API}:8000/api`,
   headers: {
     'Access-Control-Allow-Origin': '*',
     Authorization: `Bearer ${
