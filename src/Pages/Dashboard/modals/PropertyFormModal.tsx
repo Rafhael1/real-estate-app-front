@@ -13,7 +13,9 @@ import {
   Step,
   StepLabel
 } from '@mui/material';
-import { PropertyForm, ImagesForm, TransitionDialog } from 'Components';
+import { TransitionDialog } from 'Components';
+import PropertyForm from '../PropertyForms/PropertyForm';
+import ImagesForm from '../PropertyForms/ImagesForm';
 import {
   Close,
   ArrowBackIosNewRounded,

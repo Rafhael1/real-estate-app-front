@@ -28,6 +28,7 @@ import {
 import ImagePlaceHolder from 'Assets/Images/image_placeholder.jpg';
 
 import convertToBase64 from 'Utils/convertFileToBase64';
+import checkIsBase64 from 'Utils/checkIsBase64';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 
 const Image = ({ image, isEditing }) => {
@@ -157,8 +158,12 @@ const ImagesForm = ({ control, images }) => {
                             component="img"
                             height={'200px'}
                             image={
-                              `${process.env.REACT_APP_IMAGES_URL}/${images[index]}` ||
-                              watchImages[index]?.thumbnail
+                              watchImages[index] &&
+                              (watchImages[index]?.thumbnail ||
+                                `${
+                                  !checkIsBase64(images[index]) &&
+                                  process.env.REACT_APP_IMAGES_URL
+                                }/${images[index]}`)
                             }
                           />
                           <CardActions sx={{ gap: 2 }}>
