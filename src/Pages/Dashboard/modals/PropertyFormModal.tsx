@@ -30,6 +30,7 @@ import {
 import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
 import compressBase64Image from 'Utils/compressBase64Image';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
+import checkIsBase64 from 'Utils/checkIsBase64';
 
 interface PropertyFormModalProps {
   open: boolean;
@@ -105,14 +106,15 @@ const PropertyFormModal = ({
   const onSubmit = handleSubmit(async (values: IrealEstates) => {
     const images: string[] = await Promise.all(
       values.images.map(async (image: any) => {
-        if (image) {
+        // If image is a data url, we need to convert it to base64
+        if (image.thumbnail) {
           const base64Image = await convertToBase64(image.thumbnail);
           const compressedImage = await compressBase64Image(
             base64Image as string
           );
           return compressedImage;
         }
-        return [];
+        return image;
       })
     );
     if (edit) {
