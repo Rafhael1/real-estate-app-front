@@ -90,6 +90,7 @@ const PropertyFormModal = ({
     }
   };
 
+  // Handle next step
   const handleNext = () => {
     setActiveStep((prevActiveStep) =>
       // We do this so we don't have to set the last step to be completed
@@ -97,6 +98,7 @@ const PropertyFormModal = ({
     );
   };
 
+  // Handle previous step
   const handleBack = () => {
     setActiveStep((prevActiveStep) =>
       prevActiveStep > 0 ? prevActiveStep - 1 : prevActiveStep
