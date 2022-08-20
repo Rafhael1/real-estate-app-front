@@ -29,8 +29,8 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        position: 'relative',
-        bottom: '-10vh',
+        position: 'absolute',
+        top: '100vh',
         width: '100%',
         padding: '0.5rem',
         backgroundColor: 'primary.dark'

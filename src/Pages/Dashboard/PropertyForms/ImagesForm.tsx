@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useFieldArray, useWatch } from 'react-hook-form';
 import {
   DragDropContext,
@@ -6,28 +6,21 @@ import {
   Draggable,
   DropResult
 } from 'react-beautiful-dnd';
-import Dropzone, { useDropzone } from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 import {
   Box,
   Button,
   Card,
   CardActions,
-  CardContent,
   CardMedia,
   Container,
   Grid,
   IconButton,
   Typography
 } from '@mui/material';
-import { InputFileField } from 'Components';
-import {
-  CameraAltRounded,
-  AddPhotoAlternateRounded,
-  DeleteRounded
-} from '@mui/icons-material';
+import { AddPhotoAlternateRounded, DeleteRounded } from '@mui/icons-material';
 import ImagePlaceHolder from 'Assets/Images/image_placeholder.jpg';
 
-import convertToBase64 from 'Utils/convertFileToBase64';
 import checkIsBase64 from 'Utils/checkIsBase64';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 
@@ -105,13 +98,13 @@ const ImagesForm = ({ control, images }) => {
     maxFiles: 5,
     noClick: true,
     maxSize: 10000000, // 10mb
-    onDropAccepted: onDrop,
-    onDropRejected: (fileRejections) => {
-      // console.log(...fileRejections.map(({ file }) => file));
-      // setRejectedFiles([
-      //   ...rejectedFiles,
-      // ]);
-    }
+    onDropAccepted: onDrop
+    //onDropRejected: (fileRejections) => {
+    // console.log(...fileRejections.map(({ file }) => file));
+    // setRejectedFiles([
+    //   ...rejectedFiles,
+    // ]);
+    //}
   });
 
   return (
@@ -163,7 +156,7 @@ const ImagesForm = ({ control, images }) => {
                                 `${
                                   !checkIsBase64(images[index]) &&
                                   import.meta.env.VITE_IMAGES_URL
-                                }/${images[index]}`)
+                                }/${watchImages[index]}`)
                             }
                           />
                           <CardActions sx={{ gap: 2 }}>
