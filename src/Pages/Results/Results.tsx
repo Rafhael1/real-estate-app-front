@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 
-import { Container, Box, Grid } from '@mui/material';
+import { Container, Box, Grid, Pagination } from '@mui/material';
 import { Navbar, SearchBar, PostPublic, Footer } from 'Components';
 import { getSearchResults } from 'Services/Search/Search.action';
 
@@ -10,6 +10,15 @@ const Results = () => {
   // const navigate = useNavigate();
 
   const searchSlice = useSelector((state) => state.Search);
+
+  const handlePageChange = (event, page: number) => {
+    dispatch(
+      getSearchResults({
+        ...searchSlice.form,
+        page
+      })
+    );
+  };
 
   useEffect(() => {
     if (searchSlice.hasRequested) {
@@ -30,7 +39,17 @@ const Results = () => {
               <PostPublic content={post} />
             </Grid>
           ))}
+          <Grid item xs={12} sx={{ marginLeft: '50vh', width: '100%' }}>
+            <Pagination
+              count={searchSlice.pagination.totalPages}
+              shape="rounded"
+              size="large"
+              color="primary"
+              onChange={handlePageChange}
+            />
+          </Grid>
         </Grid>
+        <Box textAlign="center"></Box>
       </Container>
       <Footer />
     </Box>

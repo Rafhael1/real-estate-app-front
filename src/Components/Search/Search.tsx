@@ -40,7 +40,7 @@ const SearchComponent = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
 
-  const { handleSubmit, control, watch, setValue } = useForm({
+  const { handleSubmit, control, watch, setValue, getValues } = useForm({
     defaultValues: {
       country: { name: '', cod: '' },
       city: { city: '', country: '' },
@@ -99,7 +99,6 @@ const SearchComponent = () => {
       });
     }
   }, [user.country, countries]);
-  console.log('renderizou');
   useEffect(() => {
     const userCity = cities.length && cities.find((i) => i.city === user.city);
     if (userCity) {

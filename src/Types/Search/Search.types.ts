@@ -8,6 +8,7 @@ export interface IFormValues {
   country: string;
   minPrice?: number | string;
   maxPrice?: number | string;
+  page?: number;
 }
 
 export interface ICountries {
@@ -21,8 +22,14 @@ export interface ISearchSlices {
   hasRequested: boolean;
   isLoading: boolean;
   hasError: boolean;
+  form: IFormValues;
   posts: IrealEstates[];
   countries?: ICountries[];
+  pagination?: {
+    totalResults: number;
+    totalPages: number;
+    pageSize: number;
+  };
   cities?: {
     _id?: string;
     country?: string;

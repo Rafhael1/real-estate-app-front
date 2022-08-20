@@ -7,11 +7,9 @@ export const getSearchResults = createAsyncThunk(
   'getSearchResults',
   async (data: IFormValues) => {
     try {
-      const res: IrealEstates[] = (
-        await axios.get('/public/search-properties', {
-          params: { ...data }
-        })
-      ).data;
+      const res: IrealEstates[] = await axios.get('/public/search-properties', {
+        params: { ...data, pageSize: 5 }
+      });
 
       return res;
     } catch (error) {

@@ -9,9 +9,14 @@ const initialState = {
   hasRequested: false,
   isLoading: false,
   hasError: false,
+  form: {},
   countries: [],
   cities: [],
-  posts: []
+  posts: [],
+  pagination: {
+    totalResults: null,
+    totalPages: null
+  }
 } as ISearchSlices;
 
 const searchSlices = createSlice({
@@ -20,16 +25,19 @@ const searchSlices = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     // Search Results
-    builder.addCase(getSearchResults.pending, (state) => {
+    builder.addCase(getSearchResults.pending, (state, action) => {
       state.isLoading = true;
+      state.form = action.meta.arg;
+      state.posts = [];
     });
     builder.addCase(
       getSearchResults.fulfilled,
-      (state, action: PayloadAction<IrealEstates[]>) => {
+      (state, action: PayloadAction<{ meta: any; data: IrealEstates[] }>) => {
         state.isLoading = false;
         state.hasRequested = true;
-        state.hasResults = action.payload.length > 0;
-        state.posts = action.payload;
+        state.hasResults = action.payload.data.length > 0;
+        state.posts = action.payload.data;
+        state.pagination.totalPages = action.payload.meta.totalPages;
       }
     );
     builder.addCase(getSearchResults.rejected, (state) => {
