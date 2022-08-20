@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 import { Container, Box, Grid, Pagination } from '@mui/material';
 import { Navbar, SearchBar, PostPublic, Footer } from 'Components';
 import { getSearchResults } from 'Services/Search/Search.action';
+import useMediaQueryHook from 'Utils/Hooks/useMediaQuery';
 
 const Results = () => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
+  const { isMobile } = useMediaQueryHook();
 
   const searchSlice = useSelector((state) => state.Search);
 
@@ -39,17 +41,19 @@ const Results = () => {
               <PostPublic content={post} />
             </Grid>
           ))}
-          <Grid item xs={12} sx={{ marginLeft: '50vh', width: '100%' }}>
+        </Grid>
+        <Box>
+          {searchSlice.pagination.totalPages ? (
             <Pagination
               count={searchSlice.pagination.totalPages}
               shape="rounded"
               size="large"
               color="primary"
+              sx={{ marginLeft: isMobile ? '30%' : '50%' }}
               onChange={handlePageChange}
             />
-          </Grid>
-        </Grid>
-        <Box textAlign="center"></Box>
+          ) : null}
+        </Box>
       </Container>
       <Footer />
     </Box>

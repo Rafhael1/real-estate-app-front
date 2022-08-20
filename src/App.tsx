@@ -5,12 +5,12 @@ import Routes from './Pages/Router';
 import Snackbar from 'Components/Snackbar/Snackbar';
 
 const App = () => (
-  <>
-    <Router>
-      <Snackbar />
-      <Routes />
-    </Router>
-  </>
+	<>
+		<Router>
+			<Snackbar />
+			<Routes />
+		</Router>
+	</>
 );
 
 export default App;

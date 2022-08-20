@@ -4,8 +4,8 @@ import Search from 'Services/Search/Search.slices';
 import Dashboard from 'Services/Dashboard/Dashboard.slices';
 
 export default {
-  Auth,
-  Snackbar,
-  Search,
-  Dashboard
+	Auth,
+	Snackbar,
+	Search,
+	Dashboard
 };

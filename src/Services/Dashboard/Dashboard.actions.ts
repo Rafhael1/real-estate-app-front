@@ -5,52 +5,52 @@ import handleError from 'Utils/handleError';
 import { IrealEstates } from '../../Types/Dashboard/Dashboard.types';
 
 export const getRealEstates: any = createAsyncThunk(
-  'getRealEstates',
-  async () => {
-    try {
-      const res = (await axios.get('dashboard/all-user-posts')).data;
-      return res;
-    } catch (error) {
-      return error;
-    }
-  }
+	'getRealEstates',
+	async () => {
+		try {
+			const res = (await axios.get('dashboard/all-user-posts')).data;
+			return res;
+		} catch (error) {
+			return error;
+		}
+	}
 );
 
 export const addNewRealEstate = createAsyncThunk(
-  'addNewRealEstate',
-  async (values: IrealEstates, { dispatch }) => {
-    try {
-      await axios.post('dashboard/create-real-estate', values, {});
-      return dispatch(showSnackbar({ message: 'Post created!' }));
-    } catch (error) {
-      return dispatch(showSnackbar(handleError(error)));
-    }
-  }
+	'addNewRealEstate',
+	async (values: IrealEstates, { dispatch }) => {
+		try {
+			await axios.post('dashboard/create-real-estate', values, {});
+			return dispatch(showSnackbar({ message: 'Post created!' }));
+		} catch (error) {
+			return dispatch(showSnackbar(handleError(error)));
+		}
+	}
 );
 
 export const editRealEstate = createAsyncThunk(
-  'editRealEstate',
-  async (data: { postId: string; body: IrealEstates }, { dispatch }) => {
-    try {
-      await axios.put(`dashboard/edit-user-post/${data.postId}`, data.body);
-      return dispatch(showSnackbar({ message: 'Post edited!' }));
-    } catch (error) {
-      return dispatch(showSnackbar(handleError(error)));
-    }
-  }
+	'editRealEstate',
+	async (data: { postId: string; body: IrealEstates }, { dispatch }) => {
+		try {
+			await axios.put(`dashboard/edit-user-post/${data.postId}`, data.body);
+			return dispatch(showSnackbar({ message: 'Post edited!' }));
+		} catch (error) {
+			return dispatch(showSnackbar(handleError(error)));
+		}
+	}
 );
 
 export const deleteRealEstate = createAsyncThunk(
-  'deleteRealEstate',
-  async (id: string, { dispatch }) => {
-    try {
-      await axios.delete(`dashboard/delete-user-post/${id}`);
+	'deleteRealEstate',
+	async (id: string, { dispatch }) => {
+		try {
+			await axios.delete(`dashboard/delete-user-post/${id}`);
 
-      dispatch(showSnackbar({ message: 'Post deleted!' }));
+			dispatch(showSnackbar({ message: 'Post deleted!' }));
 
-      return id;
-    } catch (error) {
-      return dispatch(showSnackbar(handleError(error)));
-    }
-  }
+			return id;
+		} catch (error) {
+			return dispatch(showSnackbar(handleError(error)));
+		}
+	}
 );
