@@ -95,10 +95,14 @@
       "/cypress/*"
     ]
   },
+	
   "eslintConfig": {
     "extends": [
       "react-app"
     ]
+  },
+	"engines": {
+    "yarn": "^v1.22.18"
   },
   "browserslist": {
     "production": [
