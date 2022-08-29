@@ -27,10 +27,10 @@ import {
 	addNewRealEstate,
 	editRealEstate
 } from 'Services/Dashboard/Dashboard.actions';
+import { clearSelectedPost } from 'Services/Dashboard/Dashboard.slices';
 import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
 import compressBase64Image from 'Utils/compressBase64Image';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
-import checkIsBase64 from 'Utils/checkIsBase64';
 
 interface PropertyFormModalProps {
 	open: boolean;
@@ -46,9 +46,7 @@ const PropertyFormModal = ({
 	const { selectedPost } = useSelector((state) => state.Dashboard);
 
 	const { control, handleSubmit, reset } = useForm({
-		defaultValues: {
-			...selectedPost
-		}
+		defaultValues: {}
 	});
 	const [activeStep, setActiveStep] = useState(0);
 	const dispatch = useDispatch();
@@ -59,7 +57,7 @@ const PropertyFormModal = ({
 			...selectedPost,
 			images: selectedPost?.images || []
 		});
-	}, [selectedPost]);
+	}, [open]);
 
 	// Steps titles
 	const steps: string[] = useMemo(() => {
@@ -81,6 +79,7 @@ const PropertyFormModal = ({
 					<Box textAlign={'center'}>
 						<ImagesForm
 							control={control}
+							isEditing={edit}
 							images={selectedPost.images?.filter((i: string) => i !== null)}
 						/>
 					</Box>
@@ -133,6 +132,7 @@ const PropertyFormModal = ({
 	});
 
 	const handleClose = () => {
+		dispatch(clearSelectedPost());
 		reset();
 		closeModal();
 	};

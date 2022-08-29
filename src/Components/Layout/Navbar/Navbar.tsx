@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useMemo, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'Utils/Hooks/Redux';
 import { logout } from 'Services/Auth/Auth.actions';
 import {
@@ -34,23 +34,24 @@ const Register = React.lazy(() => import('Components/Register/Register'));
 
 import { IState } from 'Types/Auth/Auth.types';
 
-interface INavbarProps {
-	transparent?: boolean;
-}
-
 const pages = [
 	{ value: 'Home', route: '/' },
-	{ value: 'Trending', route: '/search?search-type=trending' },
-	{ value: 'New', route: '/search?search-type=newest' },
+	// { value: 'Trending', route: '/search?search-type=trending' },
+	// { value: 'New', route: '/search?search-type=newest' },
 	{ value: 'About', route: '/about' }
 ];
 
 const linkMenuStyle = { textDecoration: 'none', color: 'inherit' };
 
-const Navbar = ({ transparent }: INavbarProps) => {
+const Navbar = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { isMobile } = useMediaQuery();
+	const location = useLocation();
+
+	const isAtHome = useMemo(() => {
+		return location.pathname === '/';
+	}, [location.pathname]);
 
 	const authReducer: IState = useSelector((state) => state.Auth);
 	const [anchorDrawer, setAnchorDrawer] = useState(false);
@@ -98,7 +99,7 @@ const Navbar = ({ transparent }: INavbarProps) => {
 			position="relative"
 			sx={{
 				alignItems: 'center',
-				backgroundColor: transparent ? 'transparent' : 'primary.dark'
+				backgroundColor: isAtHome ? 'transparent' : 'primary.dark'
 			}}
 		>
 			<Container maxWidth="xl">

@@ -163,6 +163,7 @@ const SearchComponent = () => {
 					<MenuItem>
 						<CheckboxField
 							name="apartment"
+							disabled
 							type="checkbox"
 							label="Apartments"
 							control={control}
@@ -172,6 +173,7 @@ const SearchComponent = () => {
 						<CheckboxField
 							name="house"
 							type="checkbox"
+							disabled
 							label="Houses"
 							control={control}
 						/>
@@ -180,6 +182,7 @@ const SearchComponent = () => {
 						<CheckboxField
 							name="terrain"
 							type="checkbox"
+							disabled
 							label="Terrains"
 							control={control}
 						/>
@@ -255,7 +258,8 @@ const SearchComponent = () => {
 					label="City"
 					labelSelect="city"
 					options={cities}
-					disabled={!watchCountry.cod}
+					// disabled={!watchCountry.cod}
+					disabled
 					control={control}
 					sx={{ width: isTabletOrMobile ? null : '230px' }}
 				/>

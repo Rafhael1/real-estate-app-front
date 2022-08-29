@@ -5,7 +5,7 @@ export default {
 		styleOverrides: {
 			body: {
 				backgroundColor: background,
-				minHeight: '100vh',
+				height: '100vh',
 				fontFamily: 'Quicksand, sans-serif',
 				fontWeight: 600
 			}

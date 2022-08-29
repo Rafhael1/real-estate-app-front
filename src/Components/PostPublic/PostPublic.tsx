@@ -45,41 +45,35 @@ const PostPublicDesktop = ({ content }: PostPublicProps) => {
 						images={content?.images.filter((i: string) => i !== null)}
 					/>
 				</Box>
-				<Box width="100%">
+				<Box width="100%" height="100%">
 					<Stack>
-						<Box marginLeft="20px">
+						<Box marginLeft="20px" height="160px">
 							<Typography variant="h5">{content?.title}</Typography>
 							<Typography variant="subtitle2">{content?.address}</Typography>
 							<Typography variant="body1">{content?.description}</Typography>
 						</Box>
 						<Box
+							height="40px"
 							textAlign="center"
-							marginTop="18%"
 							borderTop="1px solid grey"
 							display={'flex'}
 						>
-							<Grid container sx={{}}>
-								<>
-									<Grid item xs={4}>
-										<CustomTypography noWrap variant="subtitle2">
-											<HotelRounded /> {content?.bedrooms}
-										</CustomTypography>
-									</Grid>
-									<Grid item xs={4}>
-										<CustomTypography noWrap variant="subtitle2">
-											<BathtubRounded /> {content?.bathrooms}
-										</CustomTypography>
-									</Grid>
-									<Grid item xs={4}>
-										<CustomTypography
-											noWrap
-											hideBorderRight
-											variant="subtitle2"
-										>
-											<SquareFootRounded /> {content?.squareMeter}
-										</CustomTypography>
-									</Grid>
-								</>
+							<Grid container>
+								<Grid item xs={4}>
+									<CustomTypography noWrap variant="subtitle2">
+										<HotelRounded /> {content?.bedrooms}
+									</CustomTypography>
+								</Grid>
+								<Grid item xs={4}>
+									<CustomTypography noWrap variant="subtitle2">
+										<BathtubRounded /> {content?.bathrooms}
+									</CustomTypography>
+								</Grid>
+								<Grid item xs={4}>
+									<CustomTypography noWrap hideBorderRight variant="subtitle2">
+										<SquareFootRounded /> {content?.squareMeter}
+									</CustomTypography>
+								</Grid>
 							</Grid>
 						</Box>
 					</Stack>
@@ -107,35 +101,32 @@ const PostPublicMobile = ({ content }: PostPublicProps) => {
 			</Box>
 			<Box width="100%">
 				<Stack>
-					<Box marginLeft="10px">
+					<Box marginLeft="10px" height="120px">
 						<Typography variant="h5">{content?.title}</Typography>
 						<Typography variant="subtitle2">{content?.address}</Typography>
-						<Typography variant="body1">{content?.description}</Typography>
 					</Box>
 					<Box
 						textAlign="center"
-						marginTop="13%"
+						height="50px"
 						borderTop="1px solid grey"
 						display={'flex'}
 					>
 						<Grid container>
-							<>
-								<Grid item xs={4}>
-									<CustomTypography noWrap variant="subtitle2">
-										<HotelRounded /> {content?.bedrooms}
-									</CustomTypography>
-								</Grid>
-								<Grid item xs={4}>
-									<CustomTypography noWrap variant="subtitle2">
-										<BathtubRounded /> {content?.bathrooms}
-									</CustomTypography>
-								</Grid>
-								<Grid item xs={4}>
-									<CustomTypography noWrap hideBorderRight variant="subtitle2">
-										<SquareFootRounded /> {content?.squareMeter}
-									</CustomTypography>
-								</Grid>
-							</>
+							<Grid item xs={4}>
+								<CustomTypography noWrap variant="subtitle2">
+									<HotelRounded /> {content?.bedrooms}
+								</CustomTypography>
+							</Grid>
+							<Grid item xs={4}>
+								<CustomTypography noWrap variant="subtitle2">
+									<BathtubRounded /> {content?.bathrooms}
+								</CustomTypography>
+							</Grid>
+							<Grid item xs={4}>
+								<CustomTypography noWrap hideBorderRight variant="subtitle2">
+									<SquareFootRounded /> {content?.squareMeter}
+								</CustomTypography>
+							</Grid>
 						</Grid>
 					</Box>
 				</Stack>
