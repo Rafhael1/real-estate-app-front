@@ -102,7 +102,8 @@
     ]
   },
 	"engines": {
-    "yarn": "^v1.22.18"
+    "npm": "^v8.15.0",
+		"node": "^v16.17.0"
   },
   "browserslist": {
     "production": [
