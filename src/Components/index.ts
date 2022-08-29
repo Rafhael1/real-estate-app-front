@@ -6,8 +6,6 @@ export { default as InputFileField } from './Fields/InputFileField';
 
 // Components
 export { default as ImageSlider } from './ImageSlider/ImageSlider';
-export { default as PropertyForm } from './PropertyForms/PropertyForm';
-export { default as ImagesForm } from './PropertyForms/ImagesForm';
 export { default as SearchBar } from './Search/Search';
 export { default as Snackbar } from './Snackbar/Snackbar';
 
