@@ -54,10 +54,13 @@ const dashboardSlices = createSlice({
 			state.selectedPost = current(state.realEstates).find(
 				(el) => el._id === action.payload
 			);
+		},
+		clearSelectedPost: (state: IState) => {
+			state.selectedPost = {};
 		}
 	}
 });
 
-export const { selectPost } = dashboardSlices.actions;
+export const { selectPost, clearSelectedPost } = dashboardSlices.actions;
 
 export default dashboardSlices.reducer;

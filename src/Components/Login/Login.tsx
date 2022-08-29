@@ -37,7 +37,7 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
 				<form
 					onSubmit={handleSubmit(async (body: UserLogin) => {
 						await dispatch(login(body));
-						handleModalOpen('login');
+						return handleModalOpen('login');
 					})}
 				>
 					<Stack direction="column" alignItems="center" spacing={0}>

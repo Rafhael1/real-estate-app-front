@@ -22,15 +22,14 @@ const Results = () => {
 		);
 	};
 
-	useEffect(() => {
-		if (searchSlice.hasRequested) {
-			dispatch(getSearchResults(null));
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (!searchSlice.hasRequested) {
+	// 		dispatch(getSearchResults(null));
+	// 	}
+	// }, []);
 
 	return (
-		<Box>
-			<Navbar />
+		<Box sx={{ minHeight: '60vh' }}>
 			<Container>
 				<Box marginTop={5} textAlign="center">
 					<SearchBar />
@@ -55,7 +54,6 @@ const Results = () => {
 					) : null}
 				</Box>
 			</Container>
-			<Footer />
 		</Box>
 	);
 };

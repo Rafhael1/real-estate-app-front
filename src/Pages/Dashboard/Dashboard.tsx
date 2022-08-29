@@ -42,8 +42,7 @@ const Dashboard = () => {
 	}, []);
 
 	return (
-		<>
-			<Navbar />
+		<Box height="100vh">
 			<Container>
 				<PropertyFormModal
 					open={openPropertyModal}
@@ -94,7 +93,7 @@ const Dashboard = () => {
 					</Grid>
 				</Box>
 			</Container>
-		</>
+		</Box>
 	);
 };
 

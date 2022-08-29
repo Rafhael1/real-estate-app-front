@@ -24,22 +24,7 @@ import ImagePlaceHolder from 'Assets/Images/image_placeholder.jpg';
 import checkIsBase64 from 'Utils/checkIsBase64';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 
-const Image = ({ image, isEditing }) => {
-	return (
-		<img
-			src={
-				isEditing
-					? `${import.meta.env.VITE_IMAGES_URL}/${image}` || ImagePlaceHolder
-					: image || ImagePlaceHolder
-			}
-			style={{ borderRadius: '12px' }}
-			height="200px"
-			width="320px"
-		/>
-	);
-};
-
-const ImagesForm = ({ control, images }) => {
+const ImagesForm = ({ control, images, isEditing }) => {
 	const [rejectedFiles, setRejectedFiles] = useState([]);
 	const { isMobile } = useMediaQuery();
 	const { fields, append, move, remove } = useFieldArray({
@@ -132,6 +117,7 @@ const ImagesForm = ({ control, images }) => {
 										key={field.id}
 										draggableId={field.id}
 										index={index}
+										isDragDisabled={isEditing}
 									>
 										{(provided) => (
 											<Grid
@@ -154,7 +140,7 @@ const ImagesForm = ({ control, images }) => {
 															watchImages[index] &&
 															(watchImages[index]?.thumbnail ||
 																`${
-																	!checkIsBase64(images[index]) &&
+																	!checkIsBase64(images?.[index]) &&
 																	import.meta.env.VITE_IMAGES_URL
 																}/${watchImages[index]}`)
 														}

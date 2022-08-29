@@ -38,7 +38,7 @@ export const Images = styled.img<IslideStyles>`
 
 export const SlideArrow = styled.button<IslideStyles>`
 	position: relative;
-	opacity: 0.3;
+	opacity: 0;
 	padding: 0;
 	width: 5px;
 	height: 10px;
@@ -50,7 +50,7 @@ export const SlideArrow = styled.button<IslideStyles>`
 	cursor: pointer;
 	margin: -42% 12%;
 	left: -15px;
-	transition: 0.5s;
+	transition: 0.8s;
 	z-index: 1;
 	${SliderContainer}:hover & {
 		filter: drop-shadow(0px 0px 6px #313131);

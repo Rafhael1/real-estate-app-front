@@ -28,9 +28,10 @@ const Footer = () => {
 
 	return (
 		<Box
+			marginTop={'15px'}
 			sx={{
-				position: 'absolute',
-				top: '100vh',
+				position: 'relative',
+				bottom: '0%',
 				width: '100%',
 				padding: '0.5rem',
 				backgroundColor: 'primary.dark'
