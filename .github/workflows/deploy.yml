@@ -13,7 +13,7 @@ jobs:
         node: [16]
 
     steps:
-    - run: echo 'hellow'
+    - uses: actions/checkout@v2
 
     - name: Use Node.js ${{ matrix.node }}
       uses: actions/setup-node@v3
@@ -24,7 +24,7 @@ jobs:
     - run: npm run build
 
     - name: Upload artifact in order to deploy
-      uses: actions/artifact@v2
+      uses: actions/upload-artifact@v2
       with:
        name: production-files
        path: ./build
@@ -41,8 +41,15 @@ jobs:
        name: production-files
        path: ./build
 
-    - name: Send to server
-      run: scp -i ${{ secrets.SSH_PRIVATE_KEY }} -r ./build/* root@${{ secrets.HOST }}:/var/www/realestateapi.rafhaelmarques.me/
+    - name: Send To Server
+      uses: appleboy/scp-action@master
+      with:
+       host: ${{ secrets.HOST }}
+       username: root
+       key: ${{ secrets.SSH_PRIVATE_KEY }}
+       source: ./build/*
+       target: /var/www/realestateapi.rafhaelmarques.me/
+       overwrite: true
 
     - name: Restart Nginx
       uses: appleboy/ssh-action@master
