@@ -126,7 +126,7 @@ const Navbar = () => {
 						<Drawer
 							open={anchorDrawer}
 							onClose={toggleDrawer(false)}
-							elevation={2}
+							elevation={1}
 							PaperProps={{
 								sx: { backgroundColor: 'background.default' }
 							}}
@@ -143,7 +143,7 @@ const Navbar = () => {
 										navigate(page.route);
 									}}
 									sx={{
-										width: '250px',
+										width: '200px',
 										justifyContent: 'center'
 									}}
 									divider
@@ -158,7 +158,7 @@ const Navbar = () => {
 								sx={{
 									position: 'fixed',
 									top: '93vh',
-									left: '200px'
+									left: '150px'
 								}}
 							>
 								<ArrowBackRounded />

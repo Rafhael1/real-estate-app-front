@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'Utils/Hooks/Redux';
 import { Box, Typography, Divider, Container, Button } from '@mui/material';
 import { BlueTypography } from './Footer.styles';
-import { Login } from 'Components';
+import useMediaQueryHook from 'Utils/Hooks/useMediaQuery';
+// import { Login } from 'Components';
 
 const Footer = () => {
 	const isAuth = useSelector((state) => state.Auth.isAuthenticated);
+	const { isMobile } = useMediaQueryHook();
 	const navigate = useNavigate();
 	const [isModalOpen, setIsModalOpen] = useState({
 		login: false
@@ -43,17 +45,20 @@ const Footer = () => {
 						<Typography
 							color="text.light"
 							sx={{ fontWeight: 800 }}
-							variant="h4"
+							variant={isMobile ? 'h5' : 'h4'}
 						>
 							Get your dream
 						</Typography>
-						<BlueTypography sx={{ fontWeight: 800 }} variant="h4">
+						<BlueTypography
+							sx={{ fontWeight: 800 }}
+							variant={isMobile ? 'h5' : 'h4'}
+						>
 							home
 						</BlueTypography>
 					</Box>
-					<Button color="secondary" onClick={handleModalOpen}>
+					{/* <Button color="secondary" onClick={handleModalOpen}>
 						Advertise with us
-					</Button>
+					</Button> */}
 				</Box>
 				<Divider
 					sx={{ backgroundColor: 'text.secondary', opacity: 0.3 }}
@@ -71,10 +76,10 @@ const Footer = () => {
 					</Box>
 				</Box>
 			</Container>
-			<Login
+			{/* <Login
 				isModalOpen={isModalOpen.login}
 				handleModalOpen={handleModalOpen}
-			/>
+			/> */}
 		</Box>
 	);
 };

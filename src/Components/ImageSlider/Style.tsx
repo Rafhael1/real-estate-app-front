@@ -22,15 +22,17 @@ const rotate = keyframes`
 
 export const SliderContainer = styled.div<IslideStyles>`
 	padding: 0;
+	margin: 0;
 `;
 
 export const Images = styled.img<IslideStyles>`
 	width: ${(props) => props.imageDimension?.width || '350px'};
 	height: ${(props) => props.imageDimension?.height || '250px'};
+	border-radius: 12px;
 	position: relative;
 	user-drag: none;
 	user-select: none;
-	margin: -8px;
+	margin: 0px;
 	padding: 0;
 	z-index: 0;
 	animation: ${rotate} 0.4s linear 1;
@@ -48,7 +50,12 @@ export const SlideArrow = styled.button<IslideStyles>`
 	color: #e9e9e9;
 	border-radius: 25px;
 	cursor: pointer;
-	margin: -42% 12%;
+	@media (max-width: 768px) {
+		margin: -40% 10%;
+	}
+	@media (min-width: 800px) {
+		margin: -40% 10%;
+	}
 	left: -15px;
 	transition: 0.8s;
 	z-index: 1;

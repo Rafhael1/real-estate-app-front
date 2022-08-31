@@ -10,25 +10,33 @@ import {
 
 import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
+import { useNavigate } from 'react-router';
 
 interface PostPublicProps {
 	content: IrealEstates;
+	handleNavigate?: () => void;
 }
 
 const PostPublic = ({ content }: PostPublicProps) => {
 	const { isMobile } = useMediaQuery();
+	const navigate = useNavigate();
+
+	const handleNavigate = () => {
+		navigate(`/search/${content?._id}`);
+	};
+
 	return (
 		<>
 			{isMobile ? (
-				<PostPublicMobile content={content} />
+				<PostPublicMobile content={content} handleNavigate={handleNavigate} />
 			) : (
-				<PostPublicDesktop content={content} />
+				<PostPublicDesktop content={content} handleNavigate={handleNavigate} />
 			)}
 		</>
 	);
 };
 
-const PostPublicDesktop = ({ content }: PostPublicProps) => {
+const PostPublicDesktop = ({ content, handleNavigate }: PostPublicProps) => {
 	return (
 		<Card
 			sx={{
@@ -48,7 +56,9 @@ const PostPublicDesktop = ({ content }: PostPublicProps) => {
 				<Box width="100%" height="100%">
 					<Stack>
 						<Box marginLeft="20px" height="160px">
-							<Typography variant="h5">{content?.title}</Typography>
+							<Typography variant="h5" onClick={handleNavigate}>
+								{content?.title}
+							</Typography>
 							<Typography variant="subtitle2">{content?.address}</Typography>
 							<Typography variant="body1">{content?.description}</Typography>
 						</Box>
@@ -83,7 +93,7 @@ const PostPublicDesktop = ({ content }: PostPublicProps) => {
 	);
 };
 
-const PostPublicMobile = ({ content }: PostPublicProps) => {
+const PostPublicMobile = ({ content, handleNavigate }: PostPublicProps) => {
 	return (
 		<Card
 			sx={{
@@ -102,7 +112,9 @@ const PostPublicMobile = ({ content }: PostPublicProps) => {
 			<Box width="100%">
 				<Stack>
 					<Box marginLeft="10px" height="120px">
-						<Typography variant="h5">{content?.title}</Typography>
+						<Typography variant="h5" onClick={handleNavigate}>
+							{content?.title}
+						</Typography>
 						<Typography variant="subtitle2">{content?.address}</Typography>
 					</Box>
 					<Box
