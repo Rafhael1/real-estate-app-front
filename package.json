@@ -13,9 +13,8 @@
     "docker:start": "docker run --rm -it --name real-estate-app-container -p 3000:3000 -v $(pwd):/app real-estate-app-image-dev",
     "docker:compose": "docker-compose up",
     "tsc": "tsc",
-    "lint": "eslint .",
-    "prepare": "husky install"
-  },
+    "lint": "eslint ."  
+	},
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -76,7 +75,6 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "expect": "^28.0.2",
     "file-loader": "^6.2.0",
-    "husky": "^7.0.4",
     "jest": "^28.1.0",
     "lint-staged": "^12.4.1",
     "prettier": "^2.6.2",
