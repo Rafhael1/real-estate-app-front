@@ -5,11 +5,13 @@ import { Container, Box, Grid, Pagination } from '@mui/material';
 import { Navbar, SearchBar, PostPublic, Footer } from 'Components';
 import { getSearchResults } from 'Services/Search/Search.action';
 import useMediaQueryHook from 'Utils/Hooks/useMediaQuery';
+import useQuery from 'Utils/Hooks/useQuery';
 
 const Results = () => {
 	const dispatch = useDispatch();
 	// const navigate = useNavigate();
 	const { isMobile } = useMediaQueryHook();
+	const query = useQuery();
 
 	const searchSlice = useSelector((state) => state.Search);
 
@@ -22,14 +24,19 @@ const Results = () => {
 		);
 	};
 
-	// useEffect(() => {
-	// 	if (!searchSlice.hasRequested) {
-	// 		dispatch(getSearchResults(null));
-	// 	}
-	// }, []);
+	useEffect(() => {
+		if (!searchSlice.hasRequested) {
+			dispatch(
+				getSearchResults({
+					country: query.get('country'),
+					searchType: query.get('postType')
+				})
+			);
+		}
+	}, []);
 
 	return (
-		<Box sx={{ minHeight: '60vh' }}>
+		<Box sx={{ minHeight: '70vh' }}>
 			<Container>
 				<Box marginTop={5} textAlign="center">
 					<SearchBar />

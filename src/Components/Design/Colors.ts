@@ -36,7 +36,7 @@ export const palette = {
 	neutral: {
 		light: '#e6e9ed',
 		main: '#979aa2',
-		dark: '#6d6f7c'
+		dark: '#1e2530'
 	},
 	text: {
 		light: '#ffffff',
