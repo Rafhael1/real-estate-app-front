@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'Utils/Hooks/Redux';
-import { Box, Typography, Divider, Container, Button } from '@mui/material';
+import React from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { useSelector } from 'Utils/Hooks/Redux';
+import { Box, Typography, Divider, Container } from '@mui/material';
 import { BlueTypography } from './Footer.styles';
 import useMediaQueryHook from 'Utils/Hooks/useMediaQuery';
 // import { Login } from 'Components';
 
 const Footer = () => {
-	const isAuth = useSelector((state) => state.Auth.isAuthenticated);
+	//const isAuth = useSelector((state) => state.Auth.isAuthenticated);
 	const { isMobile } = useMediaQueryHook();
-	const navigate = useNavigate();
-	const [isModalOpen, setIsModalOpen] = useState({
-		login: false
-	});
+	// const navigate = useNavigate();
+	// const [isModalOpen, setIsModalOpen] = useState({
+	// 	login: false
+	// });
 
-	const goToDashboard = () => {
-		navigate('/dashboard');
-	};
+	// const goToDashboard = () => {
+	// 	navigate('/dashboard');
+	// };
 
-	const handleModalOpen = () => {
-		if (!isAuth) {
-			return setIsModalOpen({
-				login: true
-			});
-		} else {
-			return goToDashboard();
-		}
-	};
+	// const handleModalOpen = () => {
+	// 	if (!isAuth) {
+	// 		return setIsModalOpen({
+	// 			login: true
+	// 		});
+	// 	} else {
+	// 		return goToDashboard();
+	// 	}
+	// };
 
 	return (
 		<Box

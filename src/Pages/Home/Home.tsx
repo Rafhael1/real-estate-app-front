@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Box } from '@mui/material';
-import { Footer, Navbar, SearchBar } from 'Components';
+import { SearchBar } from 'Components';
 import { StyledHouseImg } from './Home.styles';
 
 const Home = () => {

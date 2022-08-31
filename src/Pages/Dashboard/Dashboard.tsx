@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 
 import { Box, Button, Container, Grid } from '@mui/material';
-import { Navbar, PostDashboard, PostDashboardSkeleton } from 'Components';
+import { PostDashboard, PostDashboardSkeleton } from 'Components';
 import { AddBoxRounded } from '@mui/icons-material';
 import PropertyFormModal from './modals/PropertyFormModal';
 import NoData from 'Assets/Svg/no_data.svg';
@@ -13,11 +12,10 @@ import { selectPost } from 'Services/Dashboard/Dashboard.slices';
 
 const Dashboard = () => {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	const [openPropertyModal, setOpenPropertyModal] = useState(false);
 	const dashboardSlice = useSelector((state) => state.Dashboard);
-	const { isAuthenticated, isLoading } = useSelector((state) => state.Auth);
+	const { isAuthenticated } = useSelector((state) => state.Auth);
 	const [editMode, setEditMode] = useState<boolean>(false);
 
 	const handleOpenEditModal = (postId: string) => {

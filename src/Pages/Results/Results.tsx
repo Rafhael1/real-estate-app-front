@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 
 import { Container, Box, Grid, Pagination } from '@mui/material';
-import { Navbar, SearchBar, PostPublic, Footer } from 'Components';
+import { SearchBar, PostPublic } from 'Components';
 import { getSearchResults } from 'Services/Search/Search.action';
 import useMediaQueryHook from 'Utils/Hooks/useMediaQuery';
 import useQuery from 'Utils/Hooks/useQuery';

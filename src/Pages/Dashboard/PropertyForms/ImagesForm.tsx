@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useFieldArray, useWatch } from 'react-hook-form';
 import {
 	DragDropContext,
@@ -19,7 +19,6 @@ import {
 	Typography
 } from '@mui/material';
 import { AddPhotoAlternateRounded, DeleteRounded } from '@mui/icons-material';
-import ImagePlaceHolder from 'Assets/Images/image_placeholder.jpg';
 
 import checkIsBase64 from 'Utils/checkIsBase64';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';

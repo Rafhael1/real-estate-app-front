@@ -11,6 +11,7 @@ import {
 import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 import { useNavigate } from 'react-router';
+import maskMoney from 'Utils/masks/maskMoney';
 
 interface PostPublicProps {
 	content: IrealEstates;
@@ -111,11 +112,14 @@ const PostPublicMobile = ({ content, handleNavigate }: PostPublicProps) => {
 			</Box>
 			<Box width="100%">
 				<Stack>
-					<Box marginLeft="10px" height="120px">
+					<Box marginLeft="10px" height="100px">
 						<Typography variant="h5" onClick={handleNavigate}>
 							{content?.title}
 						</Typography>
 						<Typography variant="subtitle2">{content?.address}</Typography>
+						<Typography variant="subtitle1">
+							{maskMoney(content?.price.toString())}
+						</Typography>
 					</Box>
 					<Box
 						textAlign="center"

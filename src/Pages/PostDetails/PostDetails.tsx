@@ -48,15 +48,15 @@ const PostDetails = () => {
 						<Typography variant="h6" color="text.light">
 							{post?.title}
 						</Typography>
-						<Typography variant="caption" color="text.secondary">
+						<Typography variant="subtitle2" color="text.secondary">
 							{post?.address}
 						</Typography>
 					</Box>
 					<Box sx={{ padding: '10px 15px' }}>
 						<Typography variant="h6" color="text.light">
-							{maskMoney(post?.price?.toString() || '0')}
+							{maskMoney(post?.price?.toString())}
 						</Typography>
-						<Typography variant="caption" color="text.secondary">
+						<Typography variant="subtitle2" color="text.secondary">
 							{post?.status}
 						</Typography>
 					</Box>
@@ -81,7 +81,7 @@ const PostDetails = () => {
 								width: isMobile ? '100%' : '656px',
 								height: isMobile ? null : '520px'
 							}}
-							images={post?.images || []}
+							images={post?.images}
 						/>
 					</Box>
 					<Card>
