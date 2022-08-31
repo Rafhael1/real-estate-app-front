@@ -5,9 +5,6 @@ on:
     branches:
       - "prod"
 
-env:
-  NODE_ENV: "production"
-
 jobs:
   build:
     runs-on: ubuntu-latest
