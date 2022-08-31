@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import { UserType } from 'Types/Auth/Auth.types';
 import { useForm } from 'react-hook-form';
 
@@ -110,7 +110,9 @@ const SearchComponent = () => {
 	}, [user.city, cities]);
 
 	const handleOnSubmit = handleSubmit((data) => {
-		navigate('/search');
+		navigate(
+			`/search?postType=${searchType}&country=${data.country.cod}&city=${data.city.city}&apartment=${data.apartment}&house=${data.house}&terrain=${data.terrain}`
+		);
 		return dispatch(
 			getSearchResults({
 				...data,

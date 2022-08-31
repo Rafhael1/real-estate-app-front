@@ -18,6 +18,21 @@ export const getSearchResults = createAsyncThunk(
 	}
 );
 
+export const getPostById = createAsyncThunk(
+	'getPostById',
+	async (id: string) => {
+		try {
+			const res: IrealEstates = (
+				await axios.get(`/public/property-details/${id}`)
+			).data;
+
+			return res;
+		} catch (error) {
+			return error;
+		}
+	}
+);
+
 export const getCountries = createAsyncThunk('getCountries', async () => {
 	try {
 		const res: ICountries = (await axios.get('/public/countries')).data;

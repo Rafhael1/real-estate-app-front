@@ -7,6 +7,7 @@ import { IState } from 'Types/Auth/Auth.types';
 const Home = React.lazy(() => import('./Home/Home'));
 const Dashboard = React.lazy(() => import('./Dashboard/Dashboard'));
 const Results = React.lazy(() => import('./Results/Results'));
+const PostDetails = React.lazy(() => import('./PostDetails/PostDetails'));
 
 interface Iselector {
 	Auth: IState;
@@ -27,6 +28,7 @@ const MainRouter = () => {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/search" element={<Results />} />
+				<Route path="/search/:id" element={<PostDetails />} />
 				<Route
 					path="/dashboard"
 					element={!Auth?.isAuthenticated ? <Navigate to="/" /> : <Dashboard />}
