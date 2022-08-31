@@ -1,6 +1,6 @@
 import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
 import { ICountries } from './../../Types/Search/Search.types';
-import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ISearchSlices } from 'Types/Search/Search.types';
 import {
 	getSearchResults,

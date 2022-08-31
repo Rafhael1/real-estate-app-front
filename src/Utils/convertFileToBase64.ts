@@ -1,6 +1,6 @@
 /* eslint-disable no-async-promise-executor */
 const convertToBase64 = (url: any) => {
-	return new Promise(async (resolve, _) => {
+	return new Promise(async (resolve) => {
 		// do a request to the blob uri
 		const response = await fetch(url);
 

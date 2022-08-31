@@ -17,12 +17,7 @@ interface ImageSliderProps {
 	};
 }
 
-const ImageSlider = ({
-	images,
-	imageDimension,
-	altText,
-	arrowPosition = '10px'
-}: ImageSliderProps) => {
+const ImageSlider = ({ images, imageDimension, altText }: ImageSliderProps) => {
 	const [current, setCurrent] = useState(0);
 	// To handle image loading
 	const [shouldLoad, setShouldLoad] = useState(false);

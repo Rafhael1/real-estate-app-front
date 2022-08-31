@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
 import { UserType } from 'Types/Auth/Auth.types';
 import { useForm } from 'react-hook-form';
 
@@ -40,7 +40,7 @@ const SearchComponent = () => {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
 
-	const { handleSubmit, control, watch, setValue, getValues } = useForm({
+	const { handleSubmit, control, watch, setValue } = useForm({
 		defaultValues: {
 			country: { name: '', cod: '' },
 			city: { city: '', country: '' },

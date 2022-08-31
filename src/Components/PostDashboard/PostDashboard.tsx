@@ -66,7 +66,6 @@ const PostDashboard = ({ content, handleOpenEditForm }: PostDashboardProps) => {
 							color="info"
 							onClick={() => {
 								handleOpenEditForm();
-								console.log('edit');
 							}}
 						>
 							<EditRounded />
