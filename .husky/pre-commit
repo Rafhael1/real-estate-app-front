@@ -1,5 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-yarn lint-staged || echo "Something went wrong with lint-staged"
-echo "Commit successful"
