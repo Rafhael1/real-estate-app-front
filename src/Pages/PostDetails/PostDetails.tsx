@@ -81,7 +81,7 @@ const PostDetails = () => {
 								width: isMobile ? '100%' : '656px',
 								height: isMobile ? null : '520px'
 							}}
-							images={post.images}
+							images={post?.images || []}
 						/>
 					</Box>
 					<Card>
