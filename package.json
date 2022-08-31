@@ -38,10 +38,6 @@
     "typeface-quicksand": "^1.1.13",
     "typescript": "^4.6.4",
     "vite": "^3.0.8",
-		"vite-plugin-compression": "^0.5.1",
-    "vite-plugin-env-compatible": "^1.1.1",
-    "vite-plugin-svgr": "^2.2.1",
-    "vite-tsconfig-paths": "^3.5.0",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
@@ -85,7 +81,11 @@
     "react-error-overlay": "6.0.11",
     "redux-devtools-extension": "^2.13.9",
     "redux-mock-store": "^1.5.4",
-    "ts-node": "^10.7.0"
+    "ts-node": "^10.7.0",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-env-compatible": "^1.1.1",
+    "vite-plugin-svgr": "^2.2.1",
+    "vite-tsconfig-paths": "^3.5.0"
   },
   "jest": {
     "testPathIgnorePatterns": [
