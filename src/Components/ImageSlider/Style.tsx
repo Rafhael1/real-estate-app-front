@@ -52,16 +52,19 @@ export const SlideArrow = styled.button<IslideStyles>`
 	cursor: pointer;
 	@media (max-width: 768px) {
 		margin: -40% 10%;
-	}
-	@media (min-width: 800px) {
-		margin: -40% 10%;
-	}
-	left: -15px;
-	transition: 0.8s;
-	z-index: 1;
-	${SliderContainer}:hover & {
 		filter: drop-shadow(0px 0px 6px #313131);
 		color: #ffffff;
 		opacity: 1;
 	}
+	@media (min-width: 800px) {
+		margin: -40% 10%;
+		${SliderContainer}:hover & {
+			filter: drop-shadow(0px 0px 6px #313131);
+			color: #ffffff;
+			opacity: 1;
+		}
+	}
+	left: -15px;
+	transition: 0.8s;
+	z-index: 1;
 `;
