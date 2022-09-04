@@ -45,13 +45,11 @@ const PostSmall = ({ post }: PostSmallProps) => {
 			<Box width="100%">
 				<Stack>
 					<Box marginLeft="10px" height="100px">
-						<Typography variant="h5">{post?.title}</Typography>
-						<Typography variant="subtitle2">
+						<Typography variant="subtitle2">{post?.title}</Typography>
+						<Typography variant="subtitle1">
 							Country: {post?.country}
 						</Typography>
-						<Typography variant="subtitle1">
-							{maskMoney(post?.price.toString())}
-						</Typography>
+						<Typography variant="subtitle1">{post?.price}</Typography>
 					</Box>
 					<Box
 						textAlign="center"

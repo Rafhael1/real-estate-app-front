@@ -54,7 +54,7 @@ const PostDetails = () => {
 					</Box>
 					<Box sx={{ padding: '10px 15px' }}>
 						<Typography variant="h6" color="text.light">
-							{maskMoney(post?.price?.toString())}
+							{post?.price}
 						</Typography>
 						<Typography variant="subtitle2" color="text.secondary">
 							{post?.status}

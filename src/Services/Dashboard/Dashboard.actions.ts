@@ -20,6 +20,11 @@ export const addNewRealEstate = createAsyncThunk(
 	'addNewRealEstate',
 	async (values: IrealEstates, { dispatch }) => {
 		try {
+			values = {
+				...values,
+				// @ts-ignore
+				country: values.country.cod
+			};
 			await axios.post('dashboard/create-real-estate', values, {});
 			return dispatch(showSnackbar({ message: 'Post created!' }));
 		} catch (error) {
@@ -32,6 +37,11 @@ export const editRealEstate = createAsyncThunk(
 	'editRealEstate',
 	async (data: { postId: string; body: IrealEstates }, { dispatch }) => {
 		try {
+			data = {
+				...data,
+				// @ts-ignore
+				country: data.country.cod
+			};
 			await axios.put(`dashboard/edit-user-post/${data.postId}`, data.body);
 			return dispatch(showSnackbar({ message: 'Post edited!' }));
 		} catch (error) {

@@ -85,6 +85,22 @@ export default {
 			}
 		}
 	},
+	MuiSelect: {
+		styleOverrides: {
+			root: {
+				width: '300px',
+				margin: '5px',
+				height: '60px',
+				textAlign: 'left',
+				backgroundColor: '#ebeced',
+				borderRadius: '12px',
+				[`& fieldset`]: {
+					border: 0,
+					borderRadius: '12px'
+				}
+			}
+		}
+	},
 	// Layout
 	MuiAppBar: {
 		shape: {

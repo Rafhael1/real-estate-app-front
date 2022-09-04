@@ -73,8 +73,8 @@ const Dashboard = () => {
 							</Grid>
 						) : (
 							<>
-								{!dashboardSlice.isLoading &&
-									dashboardSlice.realEstates &&
+								{!dashboardSlice?.isLoading &&
+									dashboardSlice?.realEstates?.length &&
 									dashboardSlice?.realEstates?.map((item) => (
 										<Grid key={item._id} item xs>
 											<PostDashboard
