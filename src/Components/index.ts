@@ -12,6 +12,7 @@ export { default as Snackbar } from './Snackbar/Snackbar';
 // Feature components
 export { default as PostDashboard } from './PostDashboard/PostDashboard';
 export { default as PostPublic } from './PostPublic/PostPublic';
+export { default as PostSmall } from './PostSmall/PostSmall';
 export { default as PostDashboardSkeleton } from './PostDashboard/PostDashboardSkeleton';
 
 // Auth
@@ -22,3 +23,4 @@ export { default as Register } from './Register/Register';
 export { default as Navbar } from './Layout/Navbar/Navbar';
 export { default as Footer } from './Layout/Footer/Footer';
 export { default as TransitionDialog } from './TransitionDialog/TransitionDialog';
+export { default as GradientDash } from './Layout/GradientDash/GradientDash';

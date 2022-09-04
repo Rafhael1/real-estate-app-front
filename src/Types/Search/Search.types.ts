@@ -24,6 +24,7 @@ export interface ISearchSlices {
 	hasError: boolean;
 	form: IFormValues;
 	posts: IrealEstates[];
+	trendingPosts: IrealEstates[];
 	post: IrealEstates;
 	countries?: ICountries[];
 	pagination?: {

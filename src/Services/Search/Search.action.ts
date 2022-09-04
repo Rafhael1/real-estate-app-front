@@ -18,6 +18,32 @@ export const getSearchResults = createAsyncThunk(
 	}
 );
 
+export const getTrendingProperties = createAsyncThunk(
+	'getTrendingProperties',
+	async () => {
+		try {
+			const res: IrealEstates[] = (
+				await axios.get('/public/trending-properties')
+			).data;
+
+			return res;
+		} catch (error) {
+			return error;
+		}
+	}
+);
+
+export const increaseViews = createAsyncThunk(
+	'increaseViews',
+	async (id: string) => {
+		try {
+			return await axios.patch(`/public/increase-property-views-count/${id}`);
+		} catch (error) {
+			return error;
+		}
+	}
+);
+
 export const getPostById = createAsyncThunk(
 	'getPostById',
 	async (id: string) => {
