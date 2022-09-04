@@ -44,17 +44,26 @@ const PropertyFormModal = ({
 	edit
 }: PropertyFormModalProps) => {
 	const { selectedPost } = useSelector((state) => state.Dashboard);
+	const { countries } = useSelector((state) => state.Search);
 
-	const { control, handleSubmit, reset } = useForm({
-		defaultValues: {}
+	const { control, handleSubmit, reset, setValue } = useForm({
+		defaultValues: {
+			country: { name: '', cod: '' }
+		}
 	});
 	const [activeStep, setActiveStep] = useState(0);
 	const dispatch = useDispatch();
 	const { isMobile } = useMediaQuery();
 
 	useEffect(() => {
+		const countryName = countries?.find((i) => i.cod === selectedPost.country);
 		reset({
 			...selectedPost,
+			country: {
+				name: countryName?.name || 'Portugal',
+				cod: countryName?.cod || 'PT'
+			},
+			// @ts-ignore
 			images: selectedPost?.images || []
 		});
 	}, [open]);
@@ -104,6 +113,7 @@ const PropertyFormModal = ({
 		);
 	};
 
+	// @ts-ignore
 	const onSubmit = handleSubmit(async (values: IrealEstates) => {
 		const images: string[] = await Promise.all(
 			values.images.map(async (image: any) => {

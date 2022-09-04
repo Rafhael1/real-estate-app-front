@@ -99,6 +99,7 @@ const SearchComponent = () => {
 			});
 		}
 	}, [user.country, countries]);
+
 	useEffect(() => {
 		const userCity = cities.length && cities.find((i) => i.city === user.city);
 		if (userCity) {
@@ -254,7 +255,7 @@ const SearchComponent = () => {
 						/>
 					</MenuItem>
 				</Menu>
-				<AutocompleteField
+				{/* <AutocompleteField
 					keySelect="_id"
 					name="city"
 					label="City"
@@ -264,7 +265,7 @@ const SearchComponent = () => {
 					disabled
 					control={control}
 					sx={{ width: isTabletOrMobile ? null : '230px' }}
-				/>
+				/> */}
 				<AutocompleteField
 					required
 					keySelect="_id"
