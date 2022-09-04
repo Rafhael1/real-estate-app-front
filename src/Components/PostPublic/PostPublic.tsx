@@ -12,6 +12,8 @@ import { IrealEstates } from 'Types/Dashboard/Dashboard.types';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
 import { useNavigate } from 'react-router';
 import maskMoney from 'Utils/masks/maskMoney';
+import { useDispatch } from 'Utils/Hooks/Redux';
+import { increaseViews } from 'Services/Search/Search.action';
 
 interface PostPublicProps {
 	content: IrealEstates;
@@ -21,9 +23,11 @@ interface PostPublicProps {
 const PostPublic = ({ content }: PostPublicProps) => {
 	const { isMobile } = useMediaQuery();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const handleNavigate = () => {
-		navigate(`/search/${content?._id}`);
+		dispatch(increaseViews(content._id));
+		return navigate(`/search/${content?._id}`);
 	};
 
 	return (

@@ -6,7 +6,8 @@ import {
 	getSearchResults,
 	getPostById,
 	getCountries,
-	getCities
+	getCities,
+	getTrendingProperties
 } from './Search.action';
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
 	cities: [],
 	posts: [],
 	post: {},
+	trendingPosts: [],
 	pagination: {
 		totalResults: null,
 		totalPages: null
@@ -63,6 +65,19 @@ const searchSlices = createSlice({
 			}
 		);
 		builder.addCase(getPostById.rejected, (state) => {
+			state.isLoading = false;
+			state.hasError = true;
+		});
+		// Get Trending Properties
+		builder.addCase(getTrendingProperties.pending, (state) => {
+			state.isLoading = true;
+			state.trendingPosts = [];
+		});
+		builder.addCase(getTrendingProperties.fulfilled, (state, action) => {
+			state.isLoading = false;
+			state.trendingPosts = action.payload;
+		});
+		builder.addCase(getTrendingProperties.rejected, (state) => {
 			state.isLoading = false;
 			state.hasError = true;
 		});

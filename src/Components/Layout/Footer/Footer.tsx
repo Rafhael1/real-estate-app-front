@@ -66,9 +66,9 @@ const Footer = () => {
 					variant="middle"
 				/>
 				<Box margin={3}>
-					<Typography color="text.light" variant="h6">
+					{/* <Typography color="text.light" variant="h6">
 						Namei
-					</Typography>
+					</Typography> */}
 					<Box textAlign={'center'}>
 						<Typography variant="body2" color="text.secondary">
 							&copy; {new Date().getFullYear()} - All rights reserved.
