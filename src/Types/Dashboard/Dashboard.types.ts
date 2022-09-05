@@ -1,7 +1,7 @@
 export interface IState {
 	isLoading: boolean;
 	hasError: boolean;
-	noData: boolean;
+	noData: any | boolean;
 	realEstates?: IrealEstates[];
 	selectedPost?: IrealEstates;
 }
@@ -15,7 +15,7 @@ export interface IrealEstates {
 	squareMeter?: number;
 	address?: string;
 	city?: string;
-	country?: string;
+	country?: string | any;
 	price?: string;
 	status?: string;
 	images?: string[] | any;

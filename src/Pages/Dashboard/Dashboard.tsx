@@ -37,7 +37,7 @@ const Dashboard = () => {
 		if (isAuthenticated) {
 			dispatch(getRealEstates());
 		}
-	}, []);
+	}, [openPropertyModal]);
 
 	return (
 		<Box height="100vh">
