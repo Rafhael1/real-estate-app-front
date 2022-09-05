@@ -113,7 +113,6 @@ const PropertyFormModal = ({
 		);
 	};
 
-	// @ts-ignore
 	const onSubmit = handleSubmit(async (values: IrealEstates) => {
 		const images: string[] = await Promise.all(
 			values.images.map(async (image: any) => {

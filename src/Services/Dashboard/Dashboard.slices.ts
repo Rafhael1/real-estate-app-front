@@ -45,8 +45,20 @@ const dashboardSlices = createSlice({
 		builder.addCase(deleteRealEstate.pending, (state) => {
 			state.isLoading = true;
 		});
-		builder.addCase(deleteRealEstate.fulfilled, (state) => {
+		builder.addCase(deleteRealEstate.fulfilled, (state, action) => {
 			state.isLoading = false;
+			state.realEstates = current(state.realEstates).filter(
+				(el) => el._id !== action.payload
+			);
+			state.noData = () => {
+				if (current(state.realEstates).length === 0) {
+					return true;
+				}
+			};
+		});
+		builder.addCase(deleteRealEstate.rejected, (state) => {
+			state.isLoading = false;
+			state.hasError = true;
 		});
 	},
 	reducers: {

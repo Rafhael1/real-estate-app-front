@@ -37,10 +37,9 @@ export const editRealEstate = createAsyncThunk(
 	'editRealEstate',
 	async (data: { postId: string; body: IrealEstates }, { dispatch }) => {
 		try {
-			data = {
-				...data,
-				// @ts-ignore
-				country: data.country.cod
+			data.body = {
+				...data.body,
+				country: data.body.country.cod
 			};
 			await axios.put(`dashboard/edit-user-post/${data.postId}`, data.body);
 			return dispatch(showSnackbar({ message: 'Post edited!' }));
@@ -54,7 +53,7 @@ export const deleteRealEstate = createAsyncThunk(
 	'deleteRealEstate',
 	async (id: string, { dispatch }) => {
 		try {
-			await axios.delete(`dashboard/delete-user-post/${id}`);
+			// await axios.delete(`dashboard/delete-user-post/${id}`);
 
 			dispatch(showSnackbar({ message: 'Post deleted!' }));
 
