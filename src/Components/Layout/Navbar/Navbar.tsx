@@ -35,10 +35,10 @@ const Register = React.lazy(() => import('Components/Register/Register'));
 import { IState } from 'Types/Auth/Auth.types';
 
 const pages = [
-	{ value: 'Home', route: '/' },
+	{ value: 'Home', route: '/' }
 	// { value: 'Trending', route: '/search?search-type=trending' },
 	// { value: 'New', route: '/search?search-type=newest' },
-	{ value: 'About', route: '/about' }
+	// { value: 'About', route: '/about' }
 ];
 
 const linkMenuStyle = { textDecoration: 'none', color: 'inherit' };
