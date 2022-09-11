@@ -191,7 +191,7 @@ const SearchComponent = () => {
 						/>
 					</MenuItem>
 				</Menu>
-				<Button
+				{/* <Button
 					id="price-button"
 					aria-label="open-price-menu"
 					aria-controls={'price-menu'}
@@ -254,7 +254,7 @@ const SearchComponent = () => {
 							control={control}
 						/>
 					</MenuItem>
-				</Menu>
+				</Menu> */}
 				{/* <AutocompleteField
 					keySelect="_id"
 					name="city"
