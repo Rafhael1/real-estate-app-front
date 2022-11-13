@@ -61,7 +61,7 @@ const PostPublicDesktop = ({ content, handleNavigate }: PostPublicProps) => {
 				<Box width="100%" height="100%">
 					<Stack>
 						<Box marginLeft="20px" height="160px">
-							<Typography variant="h5" onClick={handleNavigate}>
+							<Typography variant="h5" onClick={handleNavigate} sx={{cursor: 'pointer'}}>
 								{content?.title}
 							</Typography>
 							<Typography variant="subtitle2">{content?.address}</Typography>
@@ -117,7 +117,7 @@ const PostPublicMobile = ({ content, handleNavigate }: PostPublicProps) => {
 			<Box width="100%">
 				<Stack>
 					<Box marginLeft="10px" height="100px">
-						<Typography variant="h5" onClick={handleNavigate}>
+						<Typography variant="h5" onClick={handleNavigate} sx={{cursor: 'pointer'}}>
 							{content?.title}
 						</Typography>
 						<Typography variant="subtitle2">{content?.address}</Typography>

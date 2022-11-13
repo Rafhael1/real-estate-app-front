@@ -45,7 +45,7 @@ const PostSmall = ({ post }: PostSmallProps) => {
 			<Box width="100%">
 				<Stack>
 					<Box marginLeft="10px" height="100px">
-						<Typography variant="subtitle2">{post?.title}</Typography>
+						<Typography variant="subtitle2" sx={{cursor: 'pointer'}}>{post?.title}</Typography>
 						<Typography variant="subtitle1">
 							Country: {post?.country}
 						</Typography>
