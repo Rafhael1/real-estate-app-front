@@ -9,7 +9,7 @@ const client = axios.create({
 	headers: {
 		'Access-Control-Allow-Origin': '*',
 		Authorization: `Bearer ${
-			localStorage.authToken || sessionStorage.authToken
+			localStorage.getItem('authToken') || sessionStorage.getItem('authToken')
 		}`
 	}
 });
