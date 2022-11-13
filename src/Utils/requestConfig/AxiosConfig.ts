@@ -9,13 +9,18 @@ const client = axios.create({
 	headers: {
 		'Access-Control-Allow-Origin': '*',
 		Authorization: `Bearer ${
-			localStorage.authToken || sessionStorage.authToken
+			localStorage.getItem('authToken') || sessionStorage.getItem('authToken')
 		}`
 	}
 });
 
 client.interceptors.response.use(
-	(response: AxiosResponse) => response.data,
+	(response: AxiosResponse) => {
+		if(response.data.authToken) {
+			sessionStorage.setItem('authToken', response.data.authToken);
+				}
+		return response.data
+	},
 	(error) => {
 		return Promise.reject(error);
 	}
