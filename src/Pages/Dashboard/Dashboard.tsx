@@ -37,7 +37,7 @@ const Dashboard = () => {
 		if (isAuthenticated) {
 			dispatch(getRealEstates());
 		}
-	}, [openPropertyModal]);
+	}, [openPropertyModal, isAuthenticated]);
 
 	return (
 		<Box height="100vh">
@@ -74,8 +74,7 @@ const Dashboard = () => {
 						) : (
 							<>
 								{!dashboardSlice?.isLoading &&
-									dashboardSlice?.realEstates?.length &&
-									dashboardSlice?.realEstates?.map((item) => (
+									dashboardSlice.realEstates?.map((item) => (
 										<Grid key={item._id} item xs>
 											<PostDashboard
 												handleOpenEditForm={() => handleOpenEditModal(item._id)}

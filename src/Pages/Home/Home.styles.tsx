@@ -10,7 +10,7 @@ interface HouseImgProps {
 
 export const HouseImg = styled('div')((props: HouseImgProps) => ({
 	width: '100%',
-	height: props.isMobile ? '30vh' : '75vh',
+	height: props.isMobile ? '30vh' : '45vh',
 	backgroundImage: `url(${House})`,
 	backgroundRepeat: 'no-repeat',
 	backgroundSize: 'cover',

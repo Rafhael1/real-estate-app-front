@@ -38,7 +38,7 @@ const authSlices = createSlice({
 					action: PayloadAction<{ isLogged: boolean; user: UserType }>
 				) => {
 					state.isLoading = false;
-					state.isAuthenticated = action.payload.isLogged;
+					state.isAuthenticated = action.payload.isLogged || false;
 					state.user = {
 						_id: action.payload.user?._id,
 						email: action.payload.user?.email,
@@ -58,7 +58,7 @@ const authSlices = createSlice({
 			register.fulfilled,
 			(state, action: PayloadAction<{ isLogged: boolean; user: UserType }>) => {
 				state.isLoading = false;
-				state.isAuthenticated = action.payload.isLogged;
+				state.isAuthenticated = action.payload.isLogged || false;
 				state.user = {
 					_id: action.payload.user?._id,
 					email: action.payload.user?.email,
@@ -78,7 +78,7 @@ const authSlices = createSlice({
 			isLogged.fulfilled,
 			(state, action: PayloadAction<{ isLogged: boolean; user: UserType }>) => {
 				state.isLoading = false;
-				state.isAuthenticated = action.payload.isLogged;
+				state.isAuthenticated = action.payload.isLogged || false;
 				state.user = {
 					_id: action.payload.user?._id,
 					email: action.payload.user?.email,
