@@ -42,9 +42,9 @@ const PostSmall = ({ post }: PostSmallProps) => {
 				image={`${import.meta.env.VITE_IMAGES_URL}/${post.images[0]}`}
 				height={'140px'}
 			/>
-			<Box width="100%">
+			<Box width="100%" marginTop="10px">
 				<Stack>
-					<Box marginLeft="10px" height="100px">
+					<Box marginLeft="10px" height="90px">
 						<Typography variant="subtitle2" sx={{cursor: 'pointer'}}>{post?.title}</Typography>
 						<Typography variant="subtitle1">
 							Country: {post?.country}

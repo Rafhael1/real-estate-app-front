@@ -16,10 +16,7 @@ const client = axios.create({
 
 client.interceptors.response.use(
 	(response: AxiosResponse) => {
-		if(response.data.authToken) {
-			sessionStorage.setItem('authToken', response.data.authToken);
-				}
-		return response.data
+	return response.data;
 	},
 	(error) => {
 		return Promise.reject(error);

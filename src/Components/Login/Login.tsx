@@ -8,12 +8,15 @@ import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 import { login } from 'Services/Auth/Auth.actions';
 import { UserType, AuthProps } from 'Types/Auth/Auth.types';
 import useMediaQuery from 'Utils/Hooks/useMediaQuery';
+import { useNavigate } from 'react-router';
 
 type UserLogin = Pick<UserType, 'email' | 'password' | 'rememberMe'>;
 
 const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const authState = useSelector((state) => state.Auth);
+	
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
 			email: '',
@@ -22,6 +25,13 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
 		}
 	});
 	const { isMobile } = useMediaQuery();
+
+	const handleOnSubmit = handleSubmit(async(data: UserLogin) => {
+		await dispatch(login(data));
+		handleModalOpen('login');
+		navigate('/', { replace: true })
+		window.location.reload()
+	});
 
 	return (
 		<Dialog
@@ -34,12 +44,7 @@ const Login = ({ isModalOpen, handleModalOpen }: AuthProps) => {
 				Login
 			</DialogTitle>
 			<DialogContent>
-				<form
-					onSubmit={handleSubmit(async (body: UserLogin) => {
-						await dispatch(login(body));
-						return handleModalOpen('login');
-					})}
-				>
+				<form onSubmit={handleOnSubmit}>
 					<Stack direction="column" alignItems="center" spacing={0}>
 						<TextField
 							required

@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense } from 'react';
-import { Route, Navigate, Routes } from 'react-router-dom';
+import { Route, Navigate, Routes, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'Utils/Hooks/Redux';
 import { isLogged } from 'Services/Auth/Auth.actions';
 import { IState } from 'Types/Auth/Auth.types';
@@ -16,13 +16,20 @@ interface Iselector {
 
 const MainRouter = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const location = useLocation();
+
 	const Auth = useSelector((state: Iselector) => state.Auth);
 
 	useEffect(() => {
-		if (localStorage.authToken?.length || sessionStorage.authToken?.length) {
-			dispatch(isLogged());
+		dispatch(isLogged());
+	}, [location.pathname]);
+	
+	useEffect(() => {
+		if (Auth.isAuthenticated == false) {
+			navigate('/');
 		}
-	}, []);
+	}, [Auth]);
 
 	return (
 		<Suspense fallback={<LoadingSuspense />}>
@@ -30,9 +37,7 @@ const MainRouter = () => {
 				<Route path="/" element={<Home />} />
 				<Route path="/search" element={<Results />} />
 				<Route path="/search/:id" element={<PostDetails />} />
-				<Route
-					path="/dashboard"
-					element={!Auth?.isAuthenticated ? <Navigate to="/" /> : <Dashboard />}
+				<Route path="/dashboard" element={<Dashboard />}
 				/>
 				{/* The not found(404) page has to be the last one */}
 				<Route path="*" element={<div>Not found</div>} />
