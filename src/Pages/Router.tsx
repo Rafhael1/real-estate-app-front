@@ -26,7 +26,7 @@ const MainRouter = () => {
 	}, [location.pathname]);
 	
 	useEffect(() => {
-		if (Auth.isAuthenticated == false) {
+		if (location.pathname === "/dashboard" && Auth.isAuthenticated == false) {
 			navigate('/');
 		}
 	}, [Auth]);
