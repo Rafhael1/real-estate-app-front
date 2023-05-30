@@ -33,7 +33,7 @@ const Footer = () => {
 			marginTop={'15px'}
 			sx={{
 				position: 'relative',
-				bottom: '0%',
+				bottom: '0vh',
 				width: '100%',
 				padding: '0.5rem',
 				backgroundColor: 'primary.dark'

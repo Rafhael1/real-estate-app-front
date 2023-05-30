@@ -40,7 +40,7 @@ const Dashboard = () => {
 	}, [openPropertyModal, isAuthenticated]);
 
 	return (
-		<Box height="100vh">
+		<Box height="100%" minHeight={"100vh"}>
 			<Container>
 				<PropertyFormModal
 					open={openPropertyModal}
