@@ -51,7 +51,7 @@ const dashboardSlices = createSlice({
 				(el) => el._id !== action.payload
 			);
 			state.noData = () => {
-				if (current(state.realEstates).length === 0) {
+				if (current(state.realEstates)?.length === 0) {
 					return true;
 				}
 			};

@@ -43,7 +43,7 @@ const searchSlices = createSlice({
 			(state, action: PayloadAction<{ meta: any; data: IrealEstates[] }>) => {
 				state.isLoading = false;
 				state.hasRequested = true;
-				state.hasResults = action.payload.data.length > 0;
+				state.hasResults = action.payload.data?.length > 0;
 				state.posts = action.payload.data;
 				state.pagination.totalPages = action.payload.meta.totalPages;
 			}

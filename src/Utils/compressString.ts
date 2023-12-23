@@ -1,7 +1,7 @@
 const compressString = (str: string) => {
 	let res = '';
 	let count = 1;
-	for (let i = 0; i < str.length; i++) {
+	for (let i = 0; i < str?.length; i++) {
 		const cur = str[i];
 		const next = str[i + 1];
 		if (cur === next) {
@@ -11,7 +11,7 @@ const compressString = (str: string) => {
 			count = 1;
 		}
 	}
-	return res.length < str.length ? res : str;
+	return res?.length < str?.length ? res : str;
 };
 
 export default compressString;

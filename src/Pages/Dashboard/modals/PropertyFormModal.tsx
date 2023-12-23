@@ -102,7 +102,7 @@ const PropertyFormModal = ({
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) =>
 			// We do this so we don't have to set the last step to be completed
-			prevActiveStep < steps.length - 1 ? prevActiveStep + 1 : prevActiveStep
+			prevActiveStep < steps?.length - 1 ? prevActiveStep + 1 : prevActiveStep
 		);
 	};
 
@@ -207,7 +207,7 @@ const PropertyFormModal = ({
 							sx={{ width: '120px' }}
 							endIcon={<ArrowForwardIosRounded />}
 							// We do this so we don't have to set the last step to be completed
-							disabled={activeStep === steps.length - 1}
+							disabled={activeStep === steps?.length - 1}
 						>
 							Next
 						</Button>

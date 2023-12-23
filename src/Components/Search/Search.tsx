@@ -76,7 +76,7 @@ const SearchComponent = () => {
 
 	useEffect(() => {
 		const country =
-			countries.length &&
+			countries?.length &&
 			countries.find((country) => country.cod === user.country);
 		if (country?.cod || watchCountry?.cod) {
 			dispatch(getCities(watchCountry?.cod || country?.cod));
@@ -84,14 +84,14 @@ const SearchComponent = () => {
 	}, [watchCountry.cod, user.country]);
 
 	useEffect(() => {
-		if (!countries.length) {
+		if (!countries?.length) {
 			dispatch(getCountries());
 			dispatch(getUserLocation());
 		}
 	}, []);
 
 	useEffect(() => {
-		if (countries.length) {
+		if (countries?.length) {
 			const countryName = countries?.find((i) => i.cod === user.country);
 			setValue('country', {
 				name: countryName?.name || '',
@@ -101,7 +101,7 @@ const SearchComponent = () => {
 	}, [user.country, countries]);
 
 	useEffect(() => {
-		const userCity = cities.length && cities.find((i) => i.city === user.city);
+		const userCity = cities?.length && cities.find((i) => i.city === user.city);
 		if (userCity) {
 			setValue('city', {
 				city: userCity?.city,

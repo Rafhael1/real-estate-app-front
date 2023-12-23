@@ -21,7 +21,7 @@ const AutocompleteField = ({
 					{...props.field}
 					{...rest}
 					key={name}
-					options={options.length ? options : []}
+					options={options?.length ? options : []}
 					autoComplete
 					isOptionEqualToValue={(option, value) =>
 						option[keySelect] === value[keySelect]

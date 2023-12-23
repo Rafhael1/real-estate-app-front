@@ -10,7 +10,7 @@ const PropertyForm = ({ control }) => {
 	const { countries } = useSelector((state) => state.Search);
 
 	useEffect(() => {
-		if (!countries.length) {
+		if (!countries?.length) {
 			dispatch(getCountries());
 		}
 	}, []);
