@@ -19,14 +19,14 @@ const MainRouter = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const Auth = useSelector((state: Iselector) => state.Auth);
+	const Auth = useSelector((state: Iselector) => state?.Auth);
 
 	useEffect(() => {
 		dispatch(isLogged());
 	}, [location.pathname]);
 	
 	useEffect(() => {
-		if (location.pathname === "/dashboard" && Auth.isAuthenticated == false) {
+		if (location.pathname === "/dashboard" && Auth?.isAuthenticated == false) {
 			navigate('/');
 		}
 	}, [Auth]);
